@@ -16,11 +16,12 @@
     padding: 0;
     border: 0;
     outline: none;
-    font-family: $mip-default-font-family, 'sans-serif';
+    font-family: $mip-default-font-family;
 }
 
-body{
-    font-size: $mip-root-font-size;
+html,
+body {
+    height: 100%;
 }
 
 li {

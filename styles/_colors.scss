@@ -1,0 +1,34 @@
+/**
+    (C) Duel srl 2021.
+
+    Stili usati per impostare i colori di sfondo e testo.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+.mip-bg-dark  {
+    background-color: $mip-dark-background;
+    color: $mip-light-color;
+    
+    a {
+        color: $mip-light-color;
+    }
+}
+
+.mip-bg-light  {
+    background-color: $mip-light-background;
+    color: $mip-dark-color;
+}
+
+.mip-bg-blue {
+    background-color: $mip-blue-background;
+    color: $mip-light-color;
+
+    a {
+        color: $mip-light-color;
+    }
+}

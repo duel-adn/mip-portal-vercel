@@ -1,0 +1,125 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+// Toolbar
+
+.toolbar {
+    display: flex;      
+    width: 100%;
+    height: $mip-toolbar-height;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+        height: 2rem;
+        width: 20rem;
+        padding-left: 2.7rem;
+        background-image: url('/icons/search.svg');
+        background-position: left;
+        background-repeat: no-repeat;
+        background-position-x: 1rem;
+        border-radius: 22px;
+        font-size: 1rem;
+    }
+
+    input::placeholder {
+        font-size: .75rem;
+        text-transform: uppercase;
+    }
+
+    .tools {
+        display: flex;
+        height: 100%;
+        width: 50%;
+        align-items: center;
+        justify-content: flex-end;
+
+        img {
+            width: 20px;
+            height: 20px;
+            margin: auto;
+            margin-left: .75rem;
+            background-color: $mip-light-background;
+            border-radius: 1rem;
+        }
+
+        a {
+            display: inline-flex;
+            flex-wrap: nowrap;
+            color: $mip-light-color;
+        }
+
+        button {
+            background-color: $mip-light-background;
+            color: black;
+            height: 1.75rem;
+            margin-left: .75rem;
+            padding: .2rem .5rem .2rem 3.5rem;
+            background-image: url('/icons/user.svg');
+            background-position: left;
+            background-repeat: no-repeat;
+            background-position-x: 1rem;
+            border-radius: .3rem;
+            text-transform: uppercase;
+        }
+
+        select {
+            height: 1.75rem;
+            width: max-content;
+            margin-left: .75rem;
+            padding: 0 .75rem;
+            border-radius: .3rem;
+        }
+    }
+}
+
+// Navigation bar
+
+.navbar {
+    display: flex;
+    width: 100%;
+    height: 5.2rem;
+    align-items: center;
+    justify-content: space-between;
+    
+    ul {
+        display: flex;
+        align-items: center;
+        justify-items: space-between;
+    }
+
+    a {
+        margin-left: .5rem;
+        color: $mip-dark-link-color;
+        text-transform: uppercase;
+        font-size: .875rem;
+        font-weight: bold;
+    }
+    
+    a:hover {
+        color: $mip-accent-background;
+    }
+
+    img:hover {
+        outline: 1px solid $mip-accent-background;
+    }
+
+    button {
+        @include mip-left-icon('notiziario', 1rem);
+        background-color: $mip-accent-background;
+        color: $mip-light-color;
+        height: (40/16) + rem;
+        padding-left: 3rem;
+        padding-right: 1rem;
+        background-position-x: 1rem;
+        border-radius: 3em;
+        font-size: .75rem;
+        transition: all .25s ease;
+    }
+    
+    button:hover {
+        filter: drop-shadow(0px 0px .5rem $mip-accent-background);
+        transform: scale(1.2);
+        transition: all .25s ease;
+    }
+}

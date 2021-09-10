@@ -1,0 +1,6 @@
+@mixin mip-left-icon($url, $padding) {
+    background-image: url('/icons/' + $url + '.svg');
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: $padding;
+}

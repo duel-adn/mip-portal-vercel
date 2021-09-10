@@ -1,0 +1,46 @@
+.page_footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 11.9rem;
+
+    .navbar {
+
+        padding-top: 2.5rem;
+        font-weight: bold;
+
+        ul {
+            display: flex;
+        }
+
+        a {
+            text-transform: uppercase;
+            font-size: (18/16) + rem;
+        }
+
+        a:hover {
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+        span {
+            padding: .25rem;
+        }
+    }
+
+    .credits {
+        display: flex;
+        padding-top: 2.5rem;
+        
+        .credit {
+            margin-left: 2.5rem;
+
+            p {
+                text-transform: uppercase;
+                font-size: (12/16) + rem;
+            }
+        }
+        
+    }
+}
+

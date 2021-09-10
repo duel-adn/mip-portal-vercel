@@ -10,3 +10,36 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+// Next.js usa un div intorno alla pagina con questo id
+// lo stile serve a spingere il footer in basso nella pagina anche 
+// quando è semi vuota
+//
+#__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+
+.mip-page-section,
+.mip-page-header,
+.mip-page-footer {
+    width: 100%;
+    min-height: 10px;
+    min-width: 64rem;
+
+    .mip-page-row {
+        margin: 0 auto;
+        padding: 0 3rem;
+        max-width: 90rem;
+    }
+}
+
+.mip-page-footer {
+    margin-top: auto;
+}
+
+// .mip-page-header {
+//     position: sticky;
+//     top: 0;
+// }

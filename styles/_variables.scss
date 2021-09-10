@@ -10,5 +10,26 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-$mip-root-font-size: 16px;
+@use "sass:math";
+
+// Fonts
+
+$mip-root-font-size: 16;
 $mip-default-font-family:  'Titillium Web';
+
+// Colors
+
+$mip-dark-background: #001729;
+$mip-light-color: #fff;
+
+$mip-light-background: #fff;
+$mip-dark-color: #222;
+
+$mip-blue-background: #368CF7;
+$mip-accent-background: #DA3463;
+
+$mip-dark-link-color: #081932;
+
+// Dimensioni
+
+$mip-toolbar-height: math.div(50, $mip-root-font-size) + rem;
