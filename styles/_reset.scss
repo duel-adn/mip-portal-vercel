@@ -1,0 +1,32 @@
+/**
+    Duel S.p.A.
+
+    Stili di reset dei valori di default per mergini e font.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    font-family: $mip-default-font-family, 'sans-serif';
+}
+
+body{
+    font-size: $mip-root-font-size;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
