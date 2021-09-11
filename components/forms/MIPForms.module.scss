@@ -1,0 +1,54 @@
+/**
+    Duel S.p.A.
+
+    Stili usati per i componenti delle form.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+@import '../../styles/variables';
+
+.checkbox {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+    .button {
+        display: flex;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 3rem;  
+
+        img {
+            margin: auto;
+        }  
+    }
+
+    .title {
+        margin-top: .375rem;
+        font-size: .625rem;
+        line-height: 1rem;
+        text-transform: uppercase;
+    }
+
+    .checked {
+        background-color: $mip-light-background;
+    }
+    
+    .normal {
+        background-color: transparent;
+        border: 1px solid $mip-light-background;
+
+        img {
+            filter: invert(1);
+        }
+    }
+    
+}
+
