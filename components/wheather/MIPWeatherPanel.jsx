@@ -15,7 +15,7 @@ const proviceMap = {
 
 export default function MIPWeatherPanel(props) {
     return (
-        <section className={`${props.className || ""} ${styles.weather_panel}`}>
+        <div className={`${props.className || ""} ${styles.weather_panel}`}>
             <div className={styles.title_container}>
                 <h4>Previsioni meteo</h4>
                 <p>In collaborazione</p>
@@ -28,7 +28,7 @@ export default function MIPWeatherPanel(props) {
                     )
                 }
             </div>
-        </section>
+        </div>
     )
 }
 
