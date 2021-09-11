@@ -1,3 +1,15 @@
+/**
+    Duel S.p.A.
+
+    Mixin per vari effetti usati nelle pagine.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
 @mixin mip-left-icon($url, $padding) {
     background-image: url('/icons/' + $url + '.svg');
     background-position: left;
