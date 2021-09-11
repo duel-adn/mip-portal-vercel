@@ -1,3 +1,15 @@
+/**
+    (C) Duel srl 2021.
+
+    Pannello per la visualizzazione dei dati meteo.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
 import styles from './MIPWeather.module.scss';
 import MIPWeatherCard from './MIPWeatherCard';
 

@@ -1,3 +1,14 @@
+/**
+    (C) Duel srl 2021.
+
+    Card per la visualizzaizione di dati meteo di una città.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
 import styles from './MIPWeather.module.scss';
 
 const styleMap = {
