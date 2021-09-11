@@ -4,7 +4,6 @@
 .path_data_dialog {
     display: flex;
     flex-direction: column;
-    padding: 1.25rem 2.125rem 1.5rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
 
@@ -74,5 +73,21 @@
 
     input:focus {
         outline: none;
+    }
+}
+
+// Path data panel
+
+.path_data_panel {
+    padding: 1.25rem 2.125rem 1.5rem;
+    max-width: 24rem;
+    background-color: $mip-blue-background;
+    color: $mip-light-color;
+
+    .title {
+        @include mip-left-icon('path-search', 1.5rem);
+
+        font-weight: bold;
+        margin-bottom: 2em;
     }
 }

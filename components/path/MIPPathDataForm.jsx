@@ -21,6 +21,7 @@ function InputWithIcon(props) {
     </div>
     )
 }
+
 export default function MIPPathDataForm(props) {
     return (
     <form className={`${props.className} ${styles.path_data_dialog}`}>
@@ -31,7 +32,7 @@ export default function MIPPathDataForm(props) {
             </div>
             <InputWithIcon icon='/icons/path-dest.svg' placeholder='Scegli il punto di partenza' />
         </div>
-        <div className={styles.button_bar_title} >Mostra percorso</div>
+        <div className={styles.button_bar_title}>Mostra percorso</div>
         <div className={styles.button_bar}>
             <MIPRoundedCheckbox title="auto" icon='/icons/car.svg' checked={true}/>
             <MIPRoundedCheckbox title="mezzi pubblici" icon='/icons/bus.svg' />
@@ -39,7 +40,7 @@ export default function MIPPathDataForm(props) {
             <MIPRoundedCheckbox title="a piedi" icon='/icons/walk.svg' />
         </div>
         <div className={styles.footer}>
-            <button className="large-button">Calcola percorso</button>
+            <button className="mip-large-button">Calcola percorso</button>
         </div>
     </form>
     )
