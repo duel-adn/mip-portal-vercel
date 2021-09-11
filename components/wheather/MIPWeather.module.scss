@@ -1,0 +1,55 @@
+@import '../../styles/variables';
+
+.weather_panel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 5.75rem;
+
+    .title_container {
+        flex-grow: 0;
+        padding: 1rem;
+        text-align: right;
+        width: max-content;
+
+        h4 {
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1rem;
+        }
+        p {
+            font-weight: normal;
+            font-size: .625rem;
+        }        
+    }
+}
+
+
+.card_list_container {
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    width: 100%;
+    border: 1px solid gray;
+    padding: 1rem;
+    border-radius: .625rem;
+
+    .card {
+        p {
+            background-position-x: .5rem;
+            background-repeat: no-repeat;
+            background-position: left;
+            padding-left: 1.5rem;
+            font-size: .75rem;
+            text-transform: capitalize;
+        }
+    }
+}
+
+.sunny {
+    background-image: url('/icons/sunny.svg');
+}
+
+.cloudy {
+    background-image: url('/icons/cloudy.svg');
+}
