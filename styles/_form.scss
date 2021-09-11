@@ -1,0 +1,25 @@
+/**
+    (C) Duel srl 2021.
+
+    Stili globali per gli elementi nelle form.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+.mip-large-button {
+    width: 18em;
+    height: 4em;
+    font-size: .813rem;
+    font-weight: bold;
+    line-height: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.mip-rounded-corners {
+    border-radius: 1.6rem;
+}
