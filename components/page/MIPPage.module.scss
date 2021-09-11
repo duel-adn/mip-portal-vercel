@@ -1,0 +1,45 @@
+/**
+    (C) Duel srl 2021.
+
+    Stili usati dai banner della pagine.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+.page_banner {
+    position: relative;
+    width: 100%;
+
+    .image {
+        width: 100%;
+    }
+}
+
+.real_time_alert {
+    position: absolute;
+    left: 4.5rem;
+    top: 2.7rem;
+    width: 25rem;
+    height: 13.2rem;
+    padding: 3rem 2rem;
+    border-radius: .625rem;
+    
+    .title {
+        font-size: 1.875rem;
+        line-height: 1.5em;
+        font-weight: 600; 
+        a:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    .tag {
+        position: absolute;
+        top: -1em;
+    }
+}
