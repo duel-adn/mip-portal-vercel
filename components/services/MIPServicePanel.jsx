@@ -10,6 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import styles from './MIPService.module.scss'
 import MIPServiceCard from './MIPServiceCard'
 
 const serviceData = [
@@ -45,7 +46,7 @@ const serviceData = [
 
 export default function MIPServicePanel(props) {
     return (
-    <div className={`${props.className}`}>
+    <div className={`${props.className} ${styles.service_panel}`}>
         {
             serviceData.map(service => 
                 <MIPServiceCard key={service.id} service={service} />
