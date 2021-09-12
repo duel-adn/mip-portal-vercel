@@ -52,3 +52,33 @@
     
 }
 
+// Pannello generico per informazioni in formato lista 
+
+.information_panel {
+    display: flex;
+    flex-direction: column;
+    height: 40rem;
+    .panel_header {
+        height: 3rem;
+        border-radius: 10px 10px 0px 0px;
+        padding: 0 1.25rem;
+
+        .title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            line-height: 3rem;
+            font-weight: bold;
+        }
+    }
+
+    .content {
+        height: 100%;
+        padding: .5rem 1.25rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        border-left: 1px solid $mip-dark-border-color;
+        border-right: 1px solid $mip-dark-border-color;
+        border-bottom: 1px solid $mip-dark-border-color;
+        border-radius: $mip-panel-border-radius 0 $mip-panel-border-radius $mip-panel-border-radius;
+    }
+}
