@@ -16,3 +16,10 @@
     background-repeat: no-repeat;
     padding-left: $padding;
 }
+
+@mixin mip-right-icon($url, $padding) {
+    background-image: url('/icons/' + $url + '.svg');
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: $padding;
+}

@@ -37,10 +37,19 @@
     }
 }
 
+.mip-bg-dark-blue {
+    background-color: $mip-dark-blue-background;
+    color: $mip-light-color;
+
+    a {
+        color: $mip-light-color;
+    }
+}
+
 .mip-bg-accent {
     background-color: $mip-accent-background;
     color: $mip-light-color;
-    
+
     a {
         color: $mip-light-color;
     }

@@ -1,0 +1,46 @@
+/**
+    (C) Duel srl 2021.
+
+    Stili per i pannello del trasporto pubblico.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.public_transport_card {
+    border-bottom: 1px solid $mip-light-border-color;
+    
+    .tag {
+        margin: .5rem 0;
+    }
+
+    .title {
+        font-size: .875rem;
+        font-weight: 600;
+    }
+
+    .content {
+        padding: .75rem 0;
+        font-size: .75rem;
+        line-height: 1rem;
+        color: $mip-gray-text-color;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: .5rem;
+        color: $mip-gray-text-color;
+        font-size: .75rem;
+
+        .expander {
+            @include mip-right-icon('chevron-down', 2rem);
+            text-transform: uppercase;
+        }
+    }
+}

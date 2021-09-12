@@ -28,9 +28,11 @@
 
 .mip-tag,
 .mip-large-tag {
+    width: fit-content;
     padding: .5em 1em;
     font-weight: bold;
     text-transform: uppercase;
+    border-radius: .32rem;
 }
 
 .mip-tag {
