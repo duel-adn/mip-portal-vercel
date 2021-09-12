@@ -11,14 +11,18 @@
 */
 import styles from './MIPService.module.scss'
 
+// TODO: Acccessibilità immagine
+
 export default function MIPServiceCard(props) {
     const service = props.service
+    const style = {
+        backgroundImage:`url(${service.icon})`
+    }
     return (
     <div className={styles.service_card}>
         <h2 className={styles.title}>{service.title}</h2>
         <p className={styles.description}>{service.subtitle}</p>
-        <div className={styles.toolbar}>
-            <img src={service.icon}/>
+        <div style={style} className={styles.toolbar}>
             <a href={service.url}>Scopri di più</a>
         </div>
     </div>
