@@ -37,14 +37,19 @@
         padding-bottom: .5rem;
         color: $mip-gray-text-color;
         font-size: .75rem;
+        font-weight: bold;
         text-transform: uppercase;
 
         .expander {
             @include mip-right-icon('chevron-down', 2rem);
+            font-size: .875rem;
+            font-weight: 600;
         }
 
         a {
             @include mip-right-icon('chevron-right', 2rem);
+            font-size: .875rem;
+            font-weight: 600;
             color: $mip-accent-color;
         }
 
