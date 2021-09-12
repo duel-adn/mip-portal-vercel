@@ -29,7 +29,10 @@ $mip-blue-background: #368CF7;
 $mip-accent-background: #DA3463;
 
 $mip-dark-link-color: #081932;
+$mip-dark-border-color: #BDBDBD;
+$mip-light-border-color: #D2D2D2;
 
 // Dimensioni
 
+$mip-panel-border-radius: .625rem;
 $mip-toolbar-height: math.div(50, $mip-root-font-size) + rem;

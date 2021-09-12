@@ -1,8 +1,9 @@
 # 5T
 
-[] favicon pack
-[] contenuti in inglese
+- [ ] favicon pack
+- [ ] contenuti in inglese
 
 # Duel 
 
-[] SEO in MIPPageHead
+- [ ] SEO in MIPPageHead
+- [ ] controllare colore icone calcolo percorso

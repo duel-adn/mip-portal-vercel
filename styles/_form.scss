@@ -10,6 +10,8 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+@import 'variables';
+
 .mip-large-button {
     width: 18em;
     height: 4em;
@@ -21,7 +23,7 @@
 }
 
 .mip-rounded-corners {
-    border-radius: .625rem;
+    border-radius: $mip-panel-border-radius;
 }
 
 .mip-tag,
