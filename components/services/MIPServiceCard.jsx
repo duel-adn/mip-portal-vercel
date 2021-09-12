@@ -15,8 +15,8 @@ export default function MIPServiceCard(props) {
     const service = props.service
     return (
     <div className={styles.service_card}>
-        <h2 className="panel-header">{service.title}</h2>
-        <p className="panel-subheader">{service.subtitle}</p>
+        <h2 className={styles.title}>{service.title}</h2>
+        <p className={styles.description}>{service.subtitle}</p>
         <div className={styles.toolbar}>
             <img src={service.icon}/>
             <a href={service.url}>Scopri di più</a>
