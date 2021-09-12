@@ -45,8 +45,9 @@ const serviceData = [
 ]
 
 export default function MIPServicePanel(props) {
+    const className = `${props.className || ''} ${styles.service_panel}`;
     return (
-    <div className={`${props.className} ${styles.service_panel}`}>
+    <div className={className}>
         {
             serviceData.map(service => 
                 <MIPServiceCard key={service.id} service={service} />
