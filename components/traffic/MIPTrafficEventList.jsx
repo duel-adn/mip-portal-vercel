@@ -1,3 +1,14 @@
+/**
+    (C) Duel srl 2021.
+
+    Lista eventi di traffico.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
 import styles from './MIPTraffic.module.scss';
 
 export default function MIPTrafficEventList(props) {

@@ -14,7 +14,7 @@ import styles from './MIPTraffic.module.scss';
 import MIPTrafficEventList from './MIPTrafficEventList';
 
 export default function MIPTrafficEventPanel(props) {
-    const className = `${props.className} || '' ${styles.traffic_event_panel}`;
+    const className = `${props.className || ''} ${styles.traffic_event_panel}`;
     
     return (
         <div className={className}>
