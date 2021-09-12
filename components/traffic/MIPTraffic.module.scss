@@ -1,0 +1,97 @@
+/**
+    (C) Duel srl 2021.
+
+    Stili usati per le informazioni di traffico.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.traffic_event_panel {
+//    padding: 1.25rem 2.125rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    max-height: 30em;
+    .panel_header {
+        padding: 1.25rem 1.25rem;
+        border-radius: $mip-panel-border-radius 0 0 0;
+
+        .title {
+            @include mip-left-icon('traffic', 1em);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    
+        .subtitle {
+            font-size: .75rem;
+            font-weight: bold;
+        }    
+    }
+
+    .list_container {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border-left: 1px solid $mip-dark-border-color;
+        border-right: 1px solid $mip-dark-border-color;
+    }
+
+    .panel_footer {
+        position: relative;
+        margin-top: auto;
+        display: flex;
+        padding-top: 1.4rem;
+        padding-bottom: 1.4rem;
+        border-left: 1px solid $mip-dark-border-color;
+        border-right: 1px solid $mip-dark-border-color;
+        border-bottom: 1px solid $mip-dark-border-color;
+        border-radius: 0 0 0 $mip-panel-border-radius;
+
+        button {
+            margin: 0 auto;
+        }
+    }
+
+    .panel_footer::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -5px;
+        left: 0;
+        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.25);
+        width: 100%;
+        height: 1px;
+        z-index: 10;
+      
+    }
+}
+
+.traffic_event_list {
+    height: 20rem;
+    padding: 1.25rem;
+    
+    .title {
+        padding-left: 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+
+    .text {
+        margin-left: 2rem;
+        font-size: .875rem;
+    }
+
+    .event {
+        margin-bottom: .25rem;
+        border-bottom: 1px solid $mip-light-border-color;
+    }
+}
