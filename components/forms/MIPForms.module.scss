@@ -57,7 +57,9 @@
 .information_panel {
     display: flex;
     flex-direction: column;
-    height: 40rem;
+    width: 100%;
+    margin-right: 2rem;
+    min-height: 40rem;
     .panel_header {
         height: 3rem;
         border-radius: 10px 10px 0px 0px;

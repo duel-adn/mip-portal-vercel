@@ -14,7 +14,7 @@ import MIPNavbar from "../header/MIPNavbar"
 
 export default function MIPPageHeader(props) {
     return (
-        <header className="mip-page-section">
+        <header className={props.className}>
             <div className="mip-bg-dark">
                 <MipToolbar className="mip-page-row" />
             </div>

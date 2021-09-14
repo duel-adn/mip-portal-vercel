@@ -1,8 +1,10 @@
+@import '../../styles/variables';
+
 .page_footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 11.9rem;
+    height: $mip-footer-height;
 
     .navbar {
 

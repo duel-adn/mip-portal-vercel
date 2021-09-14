@@ -13,15 +13,31 @@
 @import '../../styles/variables';
 @import '../../styles/mixin';
 
+.traffic_panel {
+    display: flex;
+    width: 100%;
+
+    .data_container{
+        min-width: 20rem;
+        max-width: 30%;
+    }
+    
+    .map_container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+    }
+}
+
 .traffic_event_panel {
-//    padding: 1.25rem 2.125rem 1.5rem;
     display: flex;
     flex-direction: column;
     min-height: 100%;
     max-height: 30em;
     
     .panel_header {
-        padding: 1.25rem 1.25rem;
+        padding: 1.25rem 2.125rem 1.5rem;
         border-radius: $mip-panel-border-radius 0 0 0;
 
         .title {
@@ -31,6 +47,7 @@
         }
     
         .subtitle {
+            margin-top: .5rem;
             font-size: .75rem;
             font-weight: bold;
         }    

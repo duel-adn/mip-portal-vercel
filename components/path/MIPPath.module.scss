@@ -45,34 +45,34 @@
             margin: auto;
         }    
     }
-}
 
-.input {
-    display: flex;
+    .input {
+        display: flex;
 
-    input {
-        width: 100%;
-        height: 1.625rem;
-        margin-right: 2em;
-        border-bottom: 1px solid $mip-light-color;
-        color: $mip-light-color;
-        background-color: transparent;
-        font-size: 1rem;
-        line-height: 1.5rem;
-    }
+        input {
+            width: 100%;
+            height: 1.625rem;
+            margin-right: 2em;
+            border-bottom: 1px solid $mip-light-color;
+            color: $mip-light-color;
+            background-color: transparent;
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
 
-    img {
-        width: 1rem;
-        margin-right: .75rem;
-    }
+        img {
+            width: 1rem;
+            margin-right: .75rem;
+        }
 
-    input::placeholder {
-        color: $mip-light-color;
-        font-weight: 300;
-    }
+        input::placeholder {
+            color: $mip-light-color;
+            font-weight: 300;
+        }
 
-    input:focus {
-        outline: none;
+        input:focus {
+            outline: none;
+        }
     }
 }
 
@@ -80,7 +80,6 @@
 
 .path_data_panel {
     padding: 1.25rem 2.125rem 1.5rem;
-    max-width: 24rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
 

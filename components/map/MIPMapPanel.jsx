@@ -9,5 +9,9 @@ const MIPMap = dynamic(
   )
 
   export default function MIPMapPanel(props) {
-      return <MIPMap trafficEvents={props.trafficEventData} />
+      return (
+        <div className={props.className}>
+          <MIPMap trafficEvents={props.trafficEventData} />
+        </div>
+      )
   }

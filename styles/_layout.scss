@@ -20,23 +20,25 @@
     min-height: 100%;
 }
 
-
-.mip-page-section,
 .mip-page-header,
+.mip-page-main,
+.mip-page-section,
 .mip-page-footer {
     width: 100%;
-    min-height: 10px;
-    min-width: 64rem;
-
+    
     .mip-page-row,
     .mip-page-flex-row {
+        min-width: 64rem;
+        max-width: 90rem;
         margin: 0 auto;
         padding: 0 3rem;
-        max-width: 90rem;
     }
 
     .mip-page-flex-row {
         display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 }
 
@@ -44,7 +46,23 @@
     margin-top: auto;
 }
 
-// .mip-page-header {
-//     position: sticky;
-//     top: 0;
-// }
+.mip-page-panel {
+    flex-grow: 1;
+    min-width: 24rem;
+}
+
+.mip-service-panel {
+    flex-grow: 0;
+    width: 24rem;
+}
+
+.mip-path-data-panel {
+    min-width: 20rem;
+    max-width: 30%;
+    height: 100%;
+}
+
+.mip-traffic-panel {
+    margin-left: 2rem;
+    height: 40rem;
+}
