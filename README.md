@@ -27,5 +27,6 @@
 ```npm install @fontsource/titillium-web```
 5. Installare `react-leaflet`
 ```npm install react-leaflet```
+```npm install leaflet```
 
 [source]:https://npm.io/package/fontsource-titillium-web
