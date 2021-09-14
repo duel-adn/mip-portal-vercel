@@ -30,7 +30,7 @@ export default function MIPPageFooter(props) {
                 </div>
                 <div className={styles.credit}>
                     <p>In collaborazione con</p>
-                    <img class={styles.l5t} src="/images/logo-5t.svg" alt="regione piemonte" />
+                    <img className={styles.l5t} src="/images/logo-5t.svg" alt="regione piemonte" />
                 </div>
             </div>
         </div>
