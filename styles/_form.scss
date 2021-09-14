@@ -12,6 +12,7 @@
 
 @import 'variables';
 
+.mip-cta-button,
 .mip-large-button {
     width: 18em;
     height: 4em;
@@ -20,6 +21,11 @@
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
+}
+
+.mip-cta-button {
+    background-color: $mip-light-background;
+    color: $mip-accent-color;
 }
 
 .mip-rounded-corners {

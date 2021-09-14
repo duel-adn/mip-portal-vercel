@@ -40,3 +40,20 @@ export function MIPRealTimeBanner(props) {
         </MIPPageBanner>
     )
 }
+
+export function MIPCTABanner(props) {
+    const className = `${props.className || ''} ${styles.cta_banner}`;
+    return (
+        <div className={className}>
+            <div className={`mip-bg-accent ${styles.text_container}`}>
+                <h2 className={styles.title}><a href="#">{props.title}</a></h2>
+                <div className={styles.footer}>
+                    <button className="mip-cta-button">{props.button_title}</button>
+                </div>
+            </div>
+            <div className={styles.img_container}>
+                <Image className={styles.image} src={props.image} layout='fill' objectFit="cover"/>
+            </div>
+        </div>
+    )
+}

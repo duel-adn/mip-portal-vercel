@@ -11,14 +11,14 @@
 */
 
 .page_banner {
-
+    
     .container {
         position: relative;
         width: 100%;
         height: 100%;
     }
     .image {
-        width: 100%;
+        z-index: -1;
     }
 }
 
@@ -44,5 +44,46 @@
     .tag {
         position: absolute;
         top: -1em;
+    }
+}
+
+.cta_banner {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+    height: 18rem;
+
+    .text_container {
+        padding: 2rem 2rem;
+        width: 30%;
+        min-width: 22rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;    
+    }
+
+    .img_container {
+        position: relative;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.875rem;
+        line-height: 1.5em;
+        font-weight: 600; 
+        a:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+    .image {
+        z-index: -1;
+    }
+    .footer {
+        margin: auto;
+        flex-direction: column;
     }
 }
