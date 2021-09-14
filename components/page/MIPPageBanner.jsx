@@ -14,14 +14,17 @@ import styles from './MIPPage.module.scss'
 import Image from 'next/image'
 
 export function MIPPageBanner(props) {
+    const className = `${props.className || ''} ${styles.page_banner}`;
+
     const style = {
         height: props.height || "300px"
     }
-
     return (
-        <div style={style} className={`${props.className} ${styles.page_banner}`}>
-            <Image className={styles.image} src={props.image} layout='fill' objectFit="cover"/>
-            {props.children}
+        <div style={style} className={className}>
+            <div className={styles.container}>
+                <Image className={styles.image} src={props.image} layout='fill' objectFit="cover"/>
+                {props.children}
+            </div>
         </div>
     )
 }
