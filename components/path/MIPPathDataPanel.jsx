@@ -17,7 +17,7 @@ export default function MIPPathDataPanel(props) {
     return (
     <div className={`${props.className} ${styles.path_data_panel}`}>
         <h3 className={`${styles.title}`}>{props.title}</h3>
-        <MIPPathDataForm className="mip-rounded-corners" title="Ricerca percorso" />
+        <MIPPathDataForm title="Ricerca percorso" />
     </div>
 
     )

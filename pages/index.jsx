@@ -41,12 +41,12 @@ export default function Home(props) {
           <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData}/>
         </section>
         <section className="mip-page-flex-row">
-          <MIPPublicTransportPanel title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData}/>
-          <MIPMobilityNewsPanel title="Avvisi mobilità" publicTransportData={props.publicTransportData}/>
+          <MIPPublicTransportPanel className="mip-information-panel" title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData}/>
+          <MIPMobilityNewsPanel className="mip-information-panel" title="Avvisi mobilità" publicTransportData={props.publicTransportData}/>
           <MIPServicePanel className="mip-service-panel"/>
         </section>
       </main>
-      <aside className="mip-page-section">
+      <aside className="mip-page-section mip-weather-panel">
         <MIPWeatherPanel className="mip-page-row" weatherData={props.weatherData}/>
       </aside>
       <footer className="mip-page-footer mip-bg-blue">

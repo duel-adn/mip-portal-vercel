@@ -19,7 +19,7 @@ function showDate(text) {
 }
 export default function MIPPublicTransportPanel(props) {
     return (
-        <MIPInformationPanel title={props.title}>
+        <MIPInformationPanel className={props.className} title={props.title}>
             {props.publicTransportData && props.publicTransportData.map(data =>
                 <div className={styles.public_transport_card} key={data.id}>
                     <div className={`mip-tag mip-bg-dark-blue ${styles.tag}`}>{data.type}</div>

@@ -2,57 +2,56 @@
 @import '../../styles/mixin';
 
 .service_panel {
-    min-width: 30em;
-}
 
-.service_card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-width: 24rem;
-    height: 8rem;
-    margin: .3rem;
-    margin-top: 0;
-    padding: 1rem;
-    padding-bottom: .5rem;
-    background: linear-gradient(-195deg, $mip-light-background 60%, $mip-blue-background 60%);
-    background-position-x: 5rem;
-    background-repeat: no-repeat;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-
-    .title,
-    .description {
-        font-weight: bold;
-        color: $mip-dark-color;
-    }
-
-    .title {
-        font-size: 1.25rem;
-    }
-    
-    .description {
-        font-size: .75rem;
-    }
-
-    .toolbar {
+    .service_card {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: flex-end;
-        height: 2.5rem;
-        background-position: left;
+        min-width: 24rem;
+        height: 8rem;
+        margin: .3rem;
+        margin-top: 0;
+        padding: 1rem;
+        padding-bottom: .5rem;
+        background: linear-gradient(-195deg, $mip-light-background 60%, $mip-blue-background 60%);
+        background-position-x: 5rem;
         background-repeat: no-repeat;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 
-        a {
-            @include mip-right-icon(right-arrow, 1.5rem);
-            margin-left: auto;
-            font-size: .875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: $mip-light-background;
+        .title,
+        .description {
+            font-weight: bold;
+            color: $mip-dark-color;
         }
-    
-        a:hover {
-            text-decoration: underline;
-        }        
+
+        .title {
+            font-size: 1.25rem;
+        }
+        
+        .description {
+            font-size: .75rem;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 2.5rem;
+            background-position: left;
+            background-repeat: no-repeat;
+
+            a {
+                @include mip-right-icon(right-arrow, 1.5rem);
+                margin-left: auto;
+                font-size: .875rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: $mip-light-background;
+            }
+        
+            a:hover {
+                text-decoration: underline;
+            }        
+        }
     }
 }
