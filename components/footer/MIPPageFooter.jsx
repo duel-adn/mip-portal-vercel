@@ -26,7 +26,7 @@ export default function MIPPageFooter(props) {
             <div className={styles.credits}>
                 <div className={styles.credit}>
                     <p>Un servizio di</p>
-                    <img class={styles.piemonte} src="/images/logo-piemonte.svg" alt="regione piemonte" />
+                    <img className={styles.piemonte} src="/images/logo-piemonte.svg" alt="regione piemonte" />
                 </div>
                 <div className={styles.credit}>
                     <p>In collaborazione con</p>
