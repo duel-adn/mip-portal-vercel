@@ -84,3 +84,31 @@
         border-radius: $mip-panel-border-radius 0 $mip-panel-border-radius $mip-panel-border-radius;
     }
 }
+
+
+.mip_pager {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    height: 2.75rem;
+    a + a {
+        margin: 0 1rem;
+    }
+
+    a {
+        padding: .6em;
+        font-size: 1rem;
+        font-weight: bold;
+        color: $mip-dark-blue-color;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .selected {
+        background-color: $mip-dark-blue-background;
+        color: $mip-light-color;
+        border-radius: .31rem;
+    }
+}
