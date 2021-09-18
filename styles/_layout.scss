@@ -73,3 +73,49 @@
 .mip-weather-panel {
     margin-bottom: 2rem;
 }
+
+.mip-article-body {
+    width: 100%;
+    padding-right: 1rem;
+    border-right: 1px solid $mip-light-border-color;
+    
+    h2 {
+        font-size: 1.9375rem;
+        font-size: bold;
+        margin-bottom: 1rem;
+    }
+    p {
+        margin: 1em 0;
+    }
+
+    a {
+        display: block;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+.mip-page-aside {
+    flex-grow: 0;
+    flex-wrap: nowrap;
+    width: 30%;
+    margin-left: 1rem;
+    margin-top: 7rem;
+}
+
+.mip-page-flex-aside {
+    display: flex;
+    width: 100%;
+    margin-left: 1rem;
+    margin-top: 7rem;
+}
+
+.mip-share-cta {
+    @include mip-right-icon('share', 1.5rem);
+    color: $mip-blue-color;
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-left: 1em;
+}

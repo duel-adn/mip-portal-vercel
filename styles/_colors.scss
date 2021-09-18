@@ -37,6 +37,15 @@
     }
 }
 
+.mip-bg-light-blue {
+    background-color: #008BFF;
+    color: $mip-light-color;
+
+    a {
+        color: $mip-light-color;
+    }
+}
+
 .mip-bg-dark-blue {
     background-color: $mip-dark-blue-background;
     color: $mip-light-color;
@@ -53,4 +62,10 @@
     a {
         color: $mip-light-color;
     }
+}
+
+.mip-bd-gray {
+    background-color: $mip-gray-background;
+    color: $mip-dark-blue-color;
+
 }
