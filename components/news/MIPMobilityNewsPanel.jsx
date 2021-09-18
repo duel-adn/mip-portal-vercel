@@ -27,7 +27,7 @@ export default function MIPMobilityNewsPanel(props) {
                     <p className={styles.content}>{data.description.length > 200 ? data.description.substring(0, 197) + "..." : data.description}</p>
                     <div className={styles.footer}>
                         <div>{showDate(data.validitystart)}</div>
-                        <a>Leggi tutto</a>
+                        <a href="/article">Leggi tutto</a>
                     </div>
                 </div>
             )}
