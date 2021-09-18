@@ -11,7 +11,7 @@
 */
 
 import MIPPageHead from '../components/page/MIPPageHead'
-import MIPPageHeader from '../components/page/MIPPageHeader'
+import MIPPageHeader from '../components/header/MIPPageHeader'
 import MIPPageFooter from '../components/footer/MIPPageFooter'
 import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
 import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
@@ -26,7 +26,7 @@ export default function Home(props) {
   return (
     <>
       <MIPPageHead title="Muoversi in Piemonte" />
-      <MIPPageHeader className="mip-page-header" />
+      <MIPPageHeader className="mip-page-header"/>
       <header className="mip-page-header">
         <MIPRealTimeBanner className="mip-page-row"
           title="Allerta meteo Cuneo:
