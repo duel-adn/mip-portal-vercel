@@ -1,7 +1,7 @@
 /**
     (C) Duel srl 2021.
 
-    Pagina delle news.
+    Pagina traffico su gomma in tempo reale.
 
     Revision history
 
@@ -13,27 +13,31 @@
 import MIPPageHead from '../components/page/MIPPageHead'
 import MIPPageHeader from '../components/header/MIPPageHeader'
 import MIPPageFooter from '../components/footer/MIPPageFooter'
-import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
-import MIPPager from '../components/forms/MIPPager'
+import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
+import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
+import MIPTrafficPanel from '../components/traffic/MIPTrafficPanel'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
+import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
 
 export default function Home(props) {
   return (
     <>
-      <MIPPageHead title="News" />
-      <MIPPageHeader className="mip-page-header" title="Articoli su: News" titleClassName="mip-bd-gray"/>
+      <MIPPageHead title="Traffico in tempo reale" />
+      <MIPPageHeader className="mip-page-header" 
+        title="Traffico in tempo reale"
+        titleClassName="mip-bg-accent"/>
       <main className="mip-bg-light mip-page-main">
-        <section className="mip-page-flex-row-">
-        <MIPNewsCardGrid className="mip-page-flex-row" />
+        <section className="mip-page-flex-row">
+          <aside className="mip-path-data-panel">
+            <MIPPathDataPanel className="mip-rounded-corners" title="Ricerca percorso" />
+          </aside>
+          <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData}/>
         </section>
-        <nav className="mip-page-flex-row">
-          <MIPPager />
-        </nav>
+        <legend className="mip-page-row">
+          <MIPTrafficLegend className="mip-rounded-corners" />
+        </legend>
       </main>
-      <aside className="mip-page-section mip-weather-panel">
-        <MIPWeatherPanel className="mip-page-row" weatherData={props.weatherData}/>
-      </aside>
       <footer className="mip-page-footer mip-bg-blue">
         <MIPPageFooter className="mip-page-row" />
       </footer>

@@ -7,3 +7,4 @@
 
 - [ ] SEO in MIPPageHead
 - [ ] controllare colore icone calcolo percorso
+

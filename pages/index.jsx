@@ -19,7 +19,7 @@ import MIPTrafficPanel from '../components/traffic/MIPTrafficPanel'
 import MIPPublicTransportPanel, {fetchPublicTransportData} from '../components/news/MIPPublicTransportPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/wheather/MIPWeatherPanel'
+import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 
 export default function Home(props) {

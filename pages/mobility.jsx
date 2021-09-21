@@ -14,7 +14,7 @@ import MIPPageHead from '../components/page/MIPPageHead'
 import MIPPageHeader from '../components/header/MIPPageHeader'
 import MIPPageFooter from '../components/footer/MIPPageFooter'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/wheather/MIPWeatherPanel'
+import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import { MIPPageBanner } from '../components/page/MIPPageBanner'
 

@@ -14,7 +14,7 @@ import MIPPageHead from '../components/page/MIPPageHead'
 import MIPPageHeader from '../components/header/MIPPageHeader'
 import MIPPageFooter from '../components/footer/MIPPageFooter'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/wheather/MIPWeatherPanel'
+import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import { MIPPageBanner } from '../components/page/MIPPageBanner'
 
@@ -36,7 +36,7 @@ Alcune modifiche viabili nella zona est della città.</h2>
           <span className="mip-tag mip-bg-light-blue">news</span>
           <span className="mip-share-cta">Condividi articolo</span>
         </div>
-        <p>La manifestazione sportiva si svolgerà interamente all'interno del territorio comunale, con una “cronometro individuale”, e interesserà gran parte della zona centro e la zona est della città (precollina), comprese entrambe le aree limitrofe le sponde del fiume Po, da Ponte Regina Margherita fino al Ponte Balbis.</p>
+        <p>La manifestazione sportiva si svolgerà interamente all&apos;interno del territorio comunale, con una “cronometro individuale”, e interesserà gran parte della zona centro e la zona est della città (precollina), comprese entrambe le aree limitrofe le sponde del fiume Po, da Ponte Regina Margherita fino al Ponte Balbis.</p>
 
 <p>La partenza della tappa sarà in piazza Castello, mentre l’arrivo è posizionato a ridosso di piazza Gran Madre di Dio, in Corso Moncalieri angolo via Gioannetti.
 L’intera area sarà soggetta a modifiche viabili e divieti di sosta.</p>
