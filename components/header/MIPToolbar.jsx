@@ -5,7 +5,7 @@ export default function MipToolbar(props) {
         <nav className={`${props.className} ${styles.toolbar}`}>
             <input type="text" placeholder="Cerca sul sito" />
             <div className={styles.tools}>
-                <a href="https://twitter.com/MIPiemonte" target="_blank" rel="noopener">
+                <a href="https://twitter.com/MIPiemonte" target="_blank" rel="noreferrer noopener">
                     Seguici su
                     <img src="/icons/twitter.svg" alt="twitter" />
                 </a>

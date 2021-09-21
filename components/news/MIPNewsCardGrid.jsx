@@ -10,6 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import Link from 'next/link'
 import styles from './MIPNews.module.scss'
 
 const newsList = [
@@ -119,7 +120,7 @@ function MIPSimpleNewsCard({news}) {
             <p className={styles.content}>{news.content}</p>
             <div className={styles.toolbar}>
                 <p>{news.date}</p>
-                <a href="/article">Leggi di più</a>
+                <Link href="/article"><a>Leggi di più</a></Link>
             </div>
         </div>
     )
@@ -137,7 +138,7 @@ function MIPNewsCard({news, hideImages}) {
             <p className={styles.content}>{news.content}</p>
             <div className={styles.toolbar}>
                 <p>{news.date}</p>
-                <a href="/article">Leggi di più</a>
+                <Link href="/article"><a>Leggi di più</a></Link>
             </div>
         </div>
     )

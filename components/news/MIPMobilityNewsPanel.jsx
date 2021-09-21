@@ -10,6 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import Link from 'next/link'
 import styles from './MIPNews.module.scss'
 import MIPInformationPanel from "../forms/MIPInformationPanel"
 
@@ -27,7 +28,7 @@ export default function MIPMobilityNewsPanel(props) {
                     <p className={styles.content}>{data.description.length > 200 ? data.description.substring(0, 197) + "..." : data.description}</p>
                     <div className={styles.footer}>
                         <div>{showDate(data.validitystart)}</div>
-                        <a href="/article">Leggi tutto</a>
+                        <Link href="/article"><a>Leggi tutto</a></Link>
                     </div>
                 </div>
             )}

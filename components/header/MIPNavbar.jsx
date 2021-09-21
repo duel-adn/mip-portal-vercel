@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './MIPHeader.module.scss'
 
 // TODO: Move outside
@@ -36,7 +37,7 @@ function displayProgress() {
 export default function MIPNavbar(props) {
     return (
         <nav className={`${props.className} ${styles.navbar}`}>
-            <a href="/"><img src='/images/logo.svg' alt='Muoversi in piemonte' /></a>
+            <Link href="/"><img src='/images/logo.svg' alt='Muoversi in piemonte' /></Link>
             <ul>
                 {
                     navbarData.map(entry => 
