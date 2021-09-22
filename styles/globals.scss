@@ -10,10 +10,11 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-@import 'variables.scss';
-@import 'reset.scss';
-@import 'typography.scss';
-@import 'colors.scss';
-@import 'mixin.scss';
-@import 'form.scss';
-@import 'layout.scss';
+@import 'variables';
+@import 'reset';
+@import 'typography';
+@import 'colors';
+@import 'mixin';
+@import 'form';
+@import 'layout';
+@import 'utility';

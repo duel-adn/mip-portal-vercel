@@ -19,6 +19,7 @@ import MIPTrafficPanel from '../components/traffic/MIPTrafficPanel'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
+import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
 
 export default function Home(props) {
   return (
@@ -28,12 +29,7 @@ export default function Home(props) {
         title="Traffico in tempo reale"
         titleClassName="mip-bg-accent"/>
       <main className="mip-bg-light mip-page-main">
-        <section className="mip-page-flex-row">
-          <aside className="mip-path-data-panel">
-            <MIPPathDataPanel className="mip-rounded-corners" title="Ricerca percorso" />
-          </aside>
-          <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData}/>
-        </section>
+        <MIPTrafficTabPanel className="mip-page-flex-row" eventData={props.eventData}/>
         <legend className="mip-page-row">
           <MIPTrafficLegend className="mip-rounded-corners" />
         </legend>

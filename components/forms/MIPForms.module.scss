@@ -60,6 +60,7 @@
     width: 100%;
     margin-right: 2rem;
     min-height: 40rem;
+
     .panel_header {
         height: 3rem;
         border-radius: 10px 10px 0px 0px;
@@ -81,7 +82,7 @@
         border-left: 1px solid $mip-dark-border-color;
         border-right: 1px solid $mip-dark-border-color;
         border-bottom: 1px solid $mip-dark-border-color;
-        border-radius: $mip-panel-border-radius 0 $mip-panel-border-radius $mip-panel-border-radius;
+        border-radius: 0 0 $mip-panel-border-radius $mip-panel-border-radius;
     }
 }
 
@@ -110,5 +111,50 @@
         background-color: $mip-dark-blue-background;
         color: $mip-light-color;
         border-radius: .31rem;
+    }
+}
+
+.tab_panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .tab_bar {
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .tab_header {
+        width: 100%;
+        padding: 0 2rem;
+        cursor: pointer;
+        h2 {
+            height: 3em;
+            font-size: 1.125rem;
+            font-weight: bold;
+            line-height: 3em;
+        }
+    }
+
+    .tab_container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        
+        .visible {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+
+        }
+
+        .hidden {
+            display: none;
+        }
     }
 }
