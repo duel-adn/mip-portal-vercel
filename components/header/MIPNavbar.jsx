@@ -45,9 +45,12 @@ export default function MIPNavbar(props) {
                     )
                 }
             </ul>
+            <div>
             <button id="playbtn" onClick={() => togglePlay()} className="bg-magenta">Ascolta il notiziario</button>
             <audio id="notiziario" src="https://www.muoversinpiemonte.it/notiziario/notiziario.mp3"
                 onTimeUpdate={() => displayProgress()}>No audio</audio>
+            <input type="text" placeholder="Cerca sul sito" />
+            </div>
         </nav>
     )
 }

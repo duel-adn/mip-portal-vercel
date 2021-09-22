@@ -122,6 +122,22 @@
         transform: scale(1.2);
         transition: all .25s ease;
     }
+
+    input {
+        @include mip-left-icon('search', 2.7rem);
+        height: 2rem;
+        width: 10rem;
+        margin-left: 1.3rem;
+        background-position-x: 1rem;
+        font-size: 1rem;
+        border: 1px solid $mip-dark-border-color;
+        border-radius: 22px;
+    }
+
+    input::placeholder {
+        font-size: .75rem;
+        text-transform: uppercase;
+    }
 }
 
 .page_title {
