@@ -10,6 +10,9 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
 .page_banner {
     
     .container {
@@ -86,5 +89,49 @@
     .footer {
         margin: auto;
         flex-direction: column;
+    }
+}
+
+.page_404 {
+    width: 100%;
+    height: 30rem;
+    background-image: url('/images/not-found.svg');
+    background-repeat: no-repeat;
+    background-size: 30rem;
+    background-position-x: 3rem;
+    margin-top: 2rem;
+
+    .container {
+        margin-left: 32rem;
+    }
+
+    h2 {
+        font-size: 1.5625rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    li {
+        margin-bottom: 1rem;
+    }
+
+    .link {
+        @include mip-right-icon('right-arrow-accent', 1.5rem);
+        color: $mip-accent-color;
+        font-weight: 600;
+    }
+
+    .home_link {
+        display: inline-block;
+        padding: 1em 3em;
+        background-color: $mip-accent-background;
+        color: $mip-light-color;
+        font-size: 0.875;
+        font-weight: bold;
     }
 }
