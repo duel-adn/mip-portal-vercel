@@ -30,6 +30,9 @@ export default function MIPTrafficTabPanel(props) {
                     title="Traffico" 
                     headerClassName={`${styles.traffic_tab_title} mip-bg-accent`}
                     labelClassName={styles.traffic_label}>
+                    <div className={styles.search_panel}>
+                        <input type="text" placeholder="Cerca tra gli eventi di traffico"/>
+                    </div>
                     <MIPTrafficEventList eventData={props.eventData} compact={false}/>
                 </div>
             </MIPTabPanel>

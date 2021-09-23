@@ -10,6 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import Link from 'next/link';
 import styles from './MIPTraffic.module.scss';
 import MIPTrafficEventList from './MIPTrafficEventList';
 
@@ -26,7 +27,7 @@ export default function MIPTrafficEventPanel(props) {
                 <MIPTrafficEventList eventData={props.eventData} compact={props.compact} />
             </div>
             <div className={`mip-bg-light ${styles.panel_footer}`}>
-                <button className="mip-large-button mip-bg-accent">Vai al traffico in tempo reale</button>
+                <Link href="/traffic"><a className="mip-bg-accent mip-large-button">Vai al traffico in tempo reale</a></Link>
             </div>
         </div>
     )
