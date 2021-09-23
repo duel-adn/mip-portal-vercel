@@ -120,6 +120,10 @@
         margin-bottom: 1rem;
     }
 
+    a:hover {
+        text-decoration: underline
+    }
+
     .link {
         @include mip-right-icon('right-arrow-accent', 1.5rem);
         color: $mip-accent-color;
