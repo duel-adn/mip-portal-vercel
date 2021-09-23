@@ -106,8 +106,27 @@
     }
 
     .text {
+        font-size: 1rem;
+        line-height: 1.375rem;
+    }
+
+    .container {
         margin-left: 2rem;
-        font-size: .875rem;
+    }
+
+    .where {
+        @include mip-left-icon('location-pin', 1.5rem);
+        font-size: .75rem;
+        line-height: 1.125rem;
+        text-transform: uppercase;
+    }
+
+    .when {
+        @include mip-left-icon('calendar', 1.5rem);
+        font-size: .75rem;
+        //line-height: 1.125rem;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .event {
@@ -155,7 +174,6 @@
     max-width: 30%;
 
     .container {
-        background-color: yellowgreen;
         height: 100%;
     }
 

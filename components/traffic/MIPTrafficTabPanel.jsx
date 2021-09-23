@@ -30,7 +30,7 @@ export default function MIPTrafficTabPanel(props) {
                     title="Traffico" 
                     headerClassName={`${styles.traffic_tab_title} mip-bg-accent`}
                     labelClassName={styles.traffic_label}>
-                    <MIPTrafficEventList eventData={props.eventData}/>
+                    <MIPTrafficEventList eventData={props.eventData} compact={false}/>
                 </div>
             </MIPTabPanel>
             <MIPMapPanel className={styles.map_container2} trafficEventData={props.eventData}/>

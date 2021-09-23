@@ -23,7 +23,7 @@ export default function MIPTrafficEventPanel(props) {
                 <h4 className={styles.subtitle}>Scopri le news sul traffico in tempo reale</h4>
             </div>
             <div className={`mip-bg-light ${styles.list_container}`}>
-                <MIPTrafficEventList eventData={props.eventData} />
+                <MIPTrafficEventList eventData={props.eventData} compact={props.compact} />
             </div>
             <div className={`mip-bg-light ${styles.panel_footer}`}>
                 <button className="mip-large-button mip-bg-accent">Vai al traffico in tempo reale</button>

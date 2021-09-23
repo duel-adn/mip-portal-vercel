@@ -12,16 +12,30 @@
 import styles from './MIPTraffic.module.scss';
 
 export default function MIPTrafficEventList(props) {
+    const compact = props.compact === undefined ? true : props.compact
     return (
         <div className={`${props.className} ${styles.traffic_event_list}`}>
             <div className={`${props.className} ${styles.traffic_event_panel}`}>
             {props.eventData && props.eventData.map(event => 
-            <div key={event.id} className={styles.event}>
-                <p className={styles.title}
-                style={{'backgroundImage': 'url("/icons/car.svg")'}}>{event.road}</p>
-                <p className={styles.text}>{event.what}</p>
-                <p className={styles.text}>{event.where}</p>
-            </div>
+            compact ?
+                <div key={event.id} className={styles.event}>
+                    <p className={styles.title}
+                    style={{'backgroundImage': 'url("/icons/car.svg")'}}>{event.road}</p>
+                    <p className={styles.text}>{event.what}</p>
+                    <p className={styles.text}>{event.where}</p>
+                </div>
+            :
+                <div key={event.id} className={styles.event}>
+                    <p className={styles.title} style={{'backgroundImage': 'url("/icons/car.svg")'}}>{event.road}</p>
+                    <div className={styles.container}>
+                        <p className={styles.where}>{event.where}</p>
+                        <p className={styles.text}>{event.what}</p>
+                        {
+                            event.when && 
+                            <div className={styles.when}>{event.when}</div>
+                        }
+                    </div>
+                </div>
             )}
             </div>
         </div>

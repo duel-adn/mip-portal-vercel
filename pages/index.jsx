@@ -38,7 +38,7 @@ export default function Home(props) {
           <aside className="mip-path-data-panel">
             <MIPPathDataPanel className="mip-rounded-corners" title="Ricerca percorso" />
           </aside>
-          <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData}/>
+          <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData} compact={true}/>
         </section>
         <section className="mip-page-flex-row">
           <MIPPublicTransportPanel className="mip-information-panel" title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData}/>
