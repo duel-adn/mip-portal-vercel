@@ -29,7 +29,7 @@ export default function Home(props) {
         title="Traffico in tempo reale"
         titleClassName="mip-bg-accent"/>
       <main className="mip-bg-light mip-page-main">
-        <MIPTrafficTabPanel className="mip-page-flex-row" eventData={props.eventData}/>
+        <MIPTrafficTabPanel className="mip-page-flex-row" eventData={props.eventData} selected={1}/>
         <legend className="mip-page-row">
           <MIPTrafficLegend className="mip-rounded-corners" />
         </legend>

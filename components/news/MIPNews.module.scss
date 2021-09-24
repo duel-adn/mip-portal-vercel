@@ -14,7 +14,7 @@
 
 .public_transport_card {
     border-bottom: 1px solid $mip-light-border-color;
-    
+
     .tag {
         margin: .5rem 0;
     }
@@ -25,6 +25,7 @@
     }
 
     .content {
+        word-break: break-all;
         padding: .75rem 0;
         font-size: .75rem;
         line-height: 1.125rem;

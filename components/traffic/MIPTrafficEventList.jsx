@@ -21,8 +21,10 @@ export default function MIPTrafficEventList(props) {
                 <div key={event.id} className={styles.event}>
                     <p className={styles.title}
                     style={{'backgroundImage': 'url("/icons/car.svg")'}}>{event.road}</p>
+                    <div className={styles.container}>
                     <p className={styles.text}>{event.what}</p>
                     <p className={styles.text}>{event.where}</p>
+                    </div>
                 </div>
             :
                 <div key={event.id} className={styles.event}>

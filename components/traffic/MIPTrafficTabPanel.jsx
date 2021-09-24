@@ -20,7 +20,7 @@ export default function MIPTrafficTabPanel(props) {
     const className = `${props.className || ''} ${styles.traffic_tab_panel}`
     return (
         <div className={className}>
-            <MIPTabPanel className = {styles.traffic_tab_panel}>
+            <MIPTabPanel className = {styles.traffic_tab_panel} selected={props.selected || 0}>
                 <MIPPathDataForm 
                     className = {styles.path_data_form}
                     title="Percorso" 
