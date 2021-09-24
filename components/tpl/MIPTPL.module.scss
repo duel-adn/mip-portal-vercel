@@ -1,0 +1,113 @@
+/**
+    Duel S.p.A.
+
+    Formattazione informazioni TPL.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.tpl_service_list {
+
+    .container {
+        display: grid;
+        width: 100%;
+        padding-bottom: 2rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+    }
+
+    .toolbar {
+        display: flex;
+        width: 100%;
+        height: max-content;
+        margin-bottom: 2rem;
+    }
+
+    .input_container {
+        @include mip-left-icon('funnel', 1rem);
+        margin-left: auto;
+        padding-left: 3rem;
+        padding-right: 1rem;
+        background-position-x: 1rem;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .dropdown {
+        appearance: none;
+        width: 15rem;
+        height: 2.75rem;
+        font-size: 1rem;
+    }
+
+    .dropdown::placeholder {
+
+        
+    }
+    .tpl_service_card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 23rem;
+        height: 12rem;
+        padding: 1rem 1.25rem;
+        border-radius: .375rem;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+
+        .category {
+            color: #00B431;
+            font-size: .625rem;
+            line-height: 1rem;
+            font-weight: bold;
+        }
+
+        .company {
+            width:80%;
+            font-weight: bold;
+            font-size: 1.5625rem;
+            line-height: 2.375rem;
+            border-bottom: 1px solid $mip-light-border-color;
+        }
+
+        .subtitle,
+        .provinces {
+            margin-top: .375rem;
+            font-size: .75rem;
+            line-height: 1.125rem;
+        }
+
+        .subtitle {
+            color: $mip-gray-text-color;
+            text-transform: uppercase;
+        }
+
+        .provinces {
+            color: $mip-dark-color;
+            font-weight: bold;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .link {
+            @include mip-right-icon('right-arrow-accent', 1.5rem);
+            color: $mip-accent-color;
+            text-transform: uppercase;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -35,8 +35,8 @@ export default function MIPWeatherPanel(props) {
             </div>
             <div className={styles.card_list_container}>
                 {
-                    props.weatherData && props.weatherData.map((data) =>
-                        <MIPWeatherCard key={data.prov} province={data.prov} data={data.data} />
+                    props.weatherData && props.weatherData.map((data, idx) =>
+                        <MIPWeatherCard key={idx} province={data.prov} data={data.data} />
                     )
                 }
             </div>

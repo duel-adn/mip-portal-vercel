@@ -7,7 +7,7 @@ const navbarData = [
     { title: 'Traffico', url: '/traffic'},
     { title: 'Trasporto pubblico', url: '/tpl' },
     { title: 'Mobilità alternativa', url: '/mobility' },
-    { title: 'Il servizio', url: '#' },
+    { title: 'Il servizio', url: '/news' },
     { title: 'Contatti', url: '#' },
 ]
 
