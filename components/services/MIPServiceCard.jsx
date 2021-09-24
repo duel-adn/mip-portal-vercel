@@ -10,8 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 import styles from './MIPService.module.scss'
-
-// TODO: Acccessibilità immagine
+import Link from 'next/link'
 
 export default function MIPServiceCard(props) {
     const service = props.service
@@ -23,7 +22,11 @@ export default function MIPServiceCard(props) {
         <h2 className={styles.title}>{service.title}</h2>
         <p className={styles.description}>{service.subtitle}</p>
         <div style={style} className={styles.toolbar}>
-            <a href={service.url}>Scopri di più</a>
+            {service.external ?
+                <a href={service.url} target="_blank" rel="noopener noreferrer">Scopri di più</a>
+                :
+                <Link href={service.url}><a>Scopri di più</a></Link>
+            }
         </div>
     </div>
     )

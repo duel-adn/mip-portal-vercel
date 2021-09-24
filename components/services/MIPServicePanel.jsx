@@ -19,28 +19,32 @@ const serviceData = [
         title: "I colli alpini in Piemonte",
         subtitle: "L’apertura dei principali colli alpini piemontesi",
         icon: "/icons/colli-alpini.svg",
-        url: "#"
+        url: "#",
+        external: false
     },
     {
         id: 2,
         title: "Visita il Piemonte",
         subtitle: "Piemonte. L’esperienza che non ti aspetti",
         icon: "/icons/visita-piemonte.svg",
-        url: "#"
+        url: "https://www.visitpiemonte.com/it",
+        external: true
     },
     {
         id: 3,
         title: "Orari dei treni",
         subtitle: "Controlla gli orari della rete ferroviaria del Piemonte",
         icon: "/icons/train-timetable.svg",
-        url: "#"
+        url: "https://www.sfmtorino.it/orari/",
+        external: true
     },
     {
         id: 4,
         title: "Orario dei voli",
         subtitle: "Controlla l'orario dei voli dagli aeroporti piemontesi",
         icon: "/icons/flight-timetable.svg",
-        url: "#"
+        url: "https://www.aeroportoditorino.it/it",
+        external: true
     }
 ]
 
