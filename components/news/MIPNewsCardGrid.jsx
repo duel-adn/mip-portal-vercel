@@ -115,7 +115,7 @@ const newsList = [
 function MIPSimpleNewsCard({news}) {
     return (
         <div className={styles.simple_news_card}>
-            <div className="mip-tag mip-bg-light-blue">{news.tag}</div>
+            <div className="mip-tag mip-bg-light-blue mip-mt-1">{news.tag}</div>
             <h3 className={styles.title}>{news.title}</h3>
             <p className={styles.content}>{news.content}</p>
             <div className={styles.toolbar}>
@@ -133,7 +133,7 @@ function MIPNewsCard({news, hideImages}) {
                 hideImages ||
                 <img className={styles.thumbnail} src={news.thumbnail} alt={news.thumbnail_alt}/>
             }
-            <div className="mip-tag mip-bg-dark-blue">{news.tag}</div>
+            <div className="mip-tag mip-bg-dark-blue mip-mt-1">{news.tag}</div>
             <h3 className={styles.title}>{news.title}</h3>
             <p className={styles.content}>{news.content}</p>
             <div className={styles.toolbar}>
