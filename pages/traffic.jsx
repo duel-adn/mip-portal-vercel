@@ -13,13 +13,10 @@
 import MIPPageHead from '../components/page/MIPPageHead'
 import MIPPageHeader from '../components/header/MIPPageHeader'
 import MIPPageFooter from '../components/footer/MIPPageFooter'
-import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
-import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
-import MIPTrafficPanel from '../components/traffic/MIPTrafficPanel'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
 import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
+import { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
 
 export default function Home(props) {
   return (

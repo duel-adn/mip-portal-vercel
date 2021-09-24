@@ -1,22 +1,33 @@
-import styles from './TrafficPanels.module.scss'
+import styles from './MIPTraffic.module.scss'
 
-export default function TrafficEventCard(props) {
-    const evt = props.event
-    const compact = props.compact || false
+export default function MIPTrafficEventCard(props) {
+    const className = `${props.className || ''} ${styles.traffic_event_card}`
+    const compact = props.compact === undefined ? false : props.compact
+    const event = props.event
     return (
-        compact ? 
-            <div className={`${props.className} ${styles.traffic_event_card}`}>
-                <h4>{evt.road}</h4>
-                <p className={styles.where}>{evt.where}</p>
-                <p className={styles.what}>{evt.what}</p>
-                {evt.when && <p className={styles.when}>{evt.when}</p>}
+        <div className={className}>
+        {compact ?
+            <div>
+                <p className={styles.title}
+                    style={{ 'backgroundImage': 'url("/icons/car.svg")' }}>{event.road}</p>
+                <div className={styles.container}>
+                    <p className={styles.text}>{event.what}</p>
+                    <p className={styles.text}>{event.where}</p>
+                </div>
             </div>
             :
-            <div className={`${props.className} ${styles.traffic_event_card}`}>
-                <h4>{evt.road}</h4>
-                <p className={styles.where}>{evt.where}</p>
-                <p className={styles.what}>{evt.what}</p>
-                {evt.when && <p className={styles.when}>{evt.when}</p>}
+            <div>
+                <p className={styles.title} style={{ 'backgroundImage': 'url("/icons/car.svg")' }}>{event.road}</p>
+                <div className={styles.container}>
+                    <p className={styles.where}>{event.where}</p>
+                    <p className={styles.text}>{event.what}</p>
+                    {
+                        event.when &&
+                        <div className={styles.when}>{event.when}</div>
+                    }
+                </div>
             </div>
+        }
+        </div>
     )
 }

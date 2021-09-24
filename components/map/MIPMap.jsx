@@ -1,6 +1,6 @@
-import { MapContainer, Marker, Popup, TileLayer, Icon } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-//import TrafficEventCard from './TrafficEventCard';
+import MIPTrafficEventCard from '../traffic/MIPTrafficEventCard';
 
 export default function Map(props) {
   const icon =
@@ -25,7 +25,7 @@ export default function Map(props) {
       shadowAnchor: [22, 94]
   });
   return (
-    <MapContainer center={[45.052237, 7.515388]} zoom={8} scrollWheelZoom={false} 
+    <MapContainer center={[45.052237, 7.515388]} zoom={9} scrollWheelZoom={false} 
     style={{width: "100%", height: "100%"}}
     >
       <TileLayer
@@ -35,12 +35,17 @@ export default function Map(props) {
       {
         props.trafficEvents && props.trafficEvents.map(evt => 
           <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={icon}>
-          {/* <Popup>
-            <TrafficEventCard event={evt} />
-          </Popup> */}
+          <Popup>
+            <MIPTrafficEventCard event={evt} />
+          </Popup>
         </Marker>
         )
       }
+      <WMSTileLayer
+        layers='optima:rlin_tre_fore0_cache'
+        url="https://map.muoversinpiemonte.it/traffic-layer"
+        opacity={0.6}
+      />
     </MapContainer>
   )
 }
