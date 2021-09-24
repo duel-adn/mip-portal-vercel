@@ -31,7 +31,7 @@ export default function Home(props) {
         <MIPRealTimeBanner className="mip-page-row"
           title="Allerta meteo Cuneo:
               ANAS al lavoro per rimozione neve."
-          tag="Ultim'ora" image="/images/home-hero.png" />
+          tag="Ultim'ora" image="/images/home-hero.jpg" />
       </header>
       <main className="mip-bg-light mip-page-main">
         <section className="mip-page-flex-row">
