@@ -25,7 +25,7 @@ export default function Home(props) {
       <MIPPageHeader className="mip-page-header" breadcrumb='Indietro'/>
       <header className="mip-page-header">
         <MIPPageBanner className="mip-page-row"
-          image="/news-images/article-full.png" />
+          image="/news-images/article-full.jpg" />
       </header>
       <main className="mip-bg-light mip-page-main">
         <div className="mip-page-flex-row">
