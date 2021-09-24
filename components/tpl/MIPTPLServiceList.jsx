@@ -138,11 +138,3 @@ export default function MIPTPLServiceList(props) {
         </div>
     )
 }
-
-{/* <div className={styles.toolbar}>
-<select className={styles.dropdown} name="province" id="province" placeholder="Filtra per provincia">
-{provinces.map(prov =>
-    <option key={prov} value={prov}>{prov}</option>
-)}
-</select>
-</div> */}
