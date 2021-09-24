@@ -21,9 +21,9 @@ function showDate(text) {
 export default function MIPMobilityNewsPanel(props) {
     return (
         <MIPInformationPanel className={props.className} title={props.title}>
-            {props.publicTransportData && props.publicTransportData.map(data =>
+            {props.newsData && props.newsData.map(data =>
                 <div className={styles.public_transport_card} key={data.id}>
-                    <div className={`mip-tag mip-bg-blue ${styles.tag}`}>{data.type}</div>
+                    <div className={`mip-tag mip-bg-blue ${styles.tag}`}>News</div>
                     <h3 className={styles.title}>{data.title}</h3>
                     <p className={styles.content}>{data.description.length > 200 ? data.description.substring(0, 197) + "..." : data.description}</p>
                     <div className={styles.footer}>
@@ -36,8 +36,8 @@ export default function MIPMobilityNewsPanel(props) {
     )
 }
 
-export async function fetchPublicTransportData(context) {
-    const res = await fetch(process.env.MIP_TPL_URL)
+export async function fetchMobilityNewsData(context) {
+    const res = await fetch(process.env.MIP_NEWS_URL)
     const news = await res.json()
     console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
     return news

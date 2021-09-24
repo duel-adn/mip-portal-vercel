@@ -21,6 +21,7 @@ import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
+import { fetchMobilityNewsData } from '../components/news/MIPMobilityNewsPanel'
 
 export default function Home(props) {
   return (
@@ -42,7 +43,7 @@ export default function Home(props) {
         </section>
         <section className="mip-page-flex-row">
           <MIPPublicTransportPanel className="mip-information-panel" title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData}/>
-          <MIPMobilityNewsPanel className="mip-information-panel" title="Avvisi mobilità" publicTransportData={props.publicTransportData}/>
+          <MIPMobilityNewsPanel className="mip-information-panel" title="Avvisi mobilità" newsData={props.newsData}/>
           <MIPServicePanel className="mip-service-panel"/>
         </section>
       </main>
@@ -60,12 +61,14 @@ export async function getStaticProps(context) {
   const eventData = await fetchTrafficEventData(context)
   const weatherData = await fetchWeatherData(context)
   const publicTransportData = await fetchPublicTransportData(context)
-  
+  const newsData = await fetchMobilityNewsData(context)
+
   return {
     props: {
       eventData,
       weatherData,
-      publicTransportData
+      publicTransportData,
+      newsData
     },
   }
 }
