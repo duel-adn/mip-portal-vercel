@@ -119,3 +119,25 @@
     font-size: 0.875rem;
     margin-left: 1em;
 }
+
+.mip-page-mobility-news- {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 1rem;
+
+    h2 {
+        margin-bottom: 4rem;
+    }
+    div + div {
+        width: 30%;
+    }
+}
+
+.mip-page-mobility-news {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+}

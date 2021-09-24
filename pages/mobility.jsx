@@ -22,27 +22,30 @@ export default function Home(props) {
   return (
     <>
       <MIPPageHead title="Mobilità alternativa" />
-      <MIPPageHeader className="mip-page-header" breadcrumb='Indietro'/>
+      <MIPPageHeader className="mip-page-header" 
+        title="Mobilità alternativa" 
+        titleClassName="mip-bg-accent"
+        breadcrumb='Indietro'/>
       <header className="mip-page-header">
-        <MIPPageBanner className="mip-page-row"
-          image="/news-images/mobility-full.png" />
+        <div className="mip-page-row">
+        <img src="/news-images/mobility-full.png" width="100%" height="auto" alt="bicicletta"/>
+        </div>
       </header>
       <main className="mip-bg-light mip-page-main">
         <div className="mip-page-row">
         <article className="mip-article-body">
-        <h2>Giro d’Italia. 8 Maggio  Torino ospita la prima tappa.
-Alcune modifiche viabili nella zona est della città.</h2>
-        <div>
-          <span className="mip-tag mip-bg-light-blue">news</span>
-          <span className="mip-share-cta">Condividi articolo</span>
-        </div>
         <p><b>Lorem ipsum dolor sit amet</b></p>
         <p>Lorem ipsum dolor sit amet. Ad doloribus commodi et repellat At doloribus expedita. Et debitis veniam sit magni veritatis et aperiam quae eum cumque unde qui magni vero ea enim tempora ut ullam fugiat.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, porro animi. Quaerat cupiditate, voluptate delectus totam nam magni ullam sed cum, suscipit vel ducimus consectetur impedit eaque enim? Reiciendis, consequuntur!</p>
+        <p>Magni asperiores rem hic, tempora ad optio. Itaque ea maxime quis quas fugit earum iste nostrum incidunt aperiam tempora dolores facilis eaque neque minima, consequuntur saepe est similique accusantium sit.</p>
         <p><b>Lorem ipsum dolor sit amet</b></p>
         <p>Lorem ipsum dolor sit amet. Ad doloribus commodi et repellat At doloribus expedita. Et debitis veniam sit magni veritatis et aperiam quae eum cumque unde qui magni vero ea enim tempora ut ullam fugiat.</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, nobis modi temporibus quos omnis, blanditiis voluptate doloremque atque similique perspiciatis sit ad sapiente qui aspernatur deleniti non! Amet, voluptatum at.</p>
+        <p>Facere id iure, quo mollitia quam eius fuga error esse deserunt eos consequuntur vel rem qui fugit? Ratione, nisi eveniet. Sit fuga perspiciatis eveniet beatae facere iure officia? Dolore, ab.</p>
         </article>
-        <section className="mip-page-row">
-        <MIPNewsCardGrid className="mip-page-flex-aside" maxNews={6} simple/>
+        <section>
+        <h2 className="mip-my-2">Notizie in tempo reale su Mobilità Alternativa</h2>
+        <MIPNewsCardGrid className="mip-page-mobility-news" maxNews={6} simple/>
         </section>
         </div>
       </main>
