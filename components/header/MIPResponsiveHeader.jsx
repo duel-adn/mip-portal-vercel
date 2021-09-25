@@ -82,9 +82,9 @@ function MIPMainToolbar(props) {
             <div className={styles.logo}>
                 <Link href="/"><a><img src='/images/logo.svg' height="48" alt='Muoversi in piemonte' /></a></Link>
             </div>
-            <MIPMainMenubar className={!menuOpen && "mip-mobile-hidden"} links={navbarData} />
+            <MIPMainMenubar className={!menuOpen && "mip-dm-none"} links={navbarData} />
             <MIPSearchBar />
-            <MIPMobileButtonBar open={menuOpen} 
+            <MIPMobileButtonBar className="mip-dm-flex" open={menuOpen} 
                 onChange={() => setMenuOpen(!menuOpen)} />
         </div>
     )

@@ -72,12 +72,27 @@
     }
 }
 
+@media (min-width: $mip-tablet-break) {
+    .menubar {
+        position: static;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        nav,
+        ul {
+            display: flex;
+            margin: 0 auto;
+        }
+        .nav_link {
+            display: initial;
+            width: max-content;
+            border: none;
+        }
+    }
+}
 ///-------
 
 .toolbar_btn {
     padding: 1.5rem;
 }
 
-.search {
-    @extend .mip-mobile-hidden;
-}
