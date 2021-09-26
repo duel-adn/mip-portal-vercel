@@ -1,11 +1,26 @@
+/**
+    (C) Duel srl 2021.
+
+    Header della pagina
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
 import Link from 'next/link'
 import { useState } from 'react'
 import styles from './MIPPageHeader.module.scss'
 import MIPSecondaryHeader from './MIPSecondaryHeader'
 import MIPSearchBar from './MIPSearchBar'
+import MIPTrafficNewsPlayback from '../forms/MIPTrafficNewsPlayback'
 
-// TODO: Move outside
-const navbarData = [
+/**
+ * Link da inserire nella navigation bar
+ */
+const navbarLinks = [
     { title: 'Home', url: '/' },
     { title: 'Traffico', url: '/traffic' },
     { title: 'Trasporto pubblico', url: '/tpl' },
@@ -14,24 +29,34 @@ const navbarData = [
     { title: 'Contatti', url: '#' },
 ]
 
+/**
+ * La barra dei pulsanti che compare su dispositivi mobile
+ * 
+ * @param {*} props le property dell'elemento
+ * @param props.className classe da aggiungere all'elemento html esterno
+ * @param props.open true se il menu è aperto
+ * @param props.onChange funzione da chiamare quando il pulsante di apertura menu viene premuto
+ * 
+ * @returns il template dell'elemento che contiene i pulsanti
+ */
 function MIPMobileButtonBar(props) {
     const className = `${props.className || ''} ${styles.mobile_button_bar}`
     return (
-    <div className={className}>
-        <button className={styles.toolbar_btn}>
-            <img src="/icons/toolbar-search.svg" alt="" />
-        </button>
-        <button className={styles.toolbar_btn}>
-            <img src="/icons/toolbar-user.svg" alt="" />
-        </button>
-        <button className={styles.toolbar_btn} onClick={() => props.onChange()}>
-            {props.open ? 
-                <img src="/icons/menu-button-open.svg" alt="" />
-                :
-                <img src="/icons/menu-button-closed.svg" alt="" />
-            }
-        </button>
-    </div>
+        <div className={className}>
+            <button className={styles.toolbar_btn}>
+                <img src="/icons/toolbar-search.svg" alt="" />
+            </button>
+            <button className={styles.toolbar_btn}>
+                <img src="/icons/toolbar-user.svg" alt="" />
+            </button>
+            <button className={styles.toolbar_btn} onClick={() => props.onChange()}>
+                {props.open ?
+                    <img src="/icons/menu-button-open.svg" alt="" />
+                    :
+                    <img src="/icons/menu-button-closed.svg" alt="" />
+                }
+            </button>
+        </div>
     )
 }
 
@@ -39,9 +64,10 @@ function MIPMobileButtonBar(props) {
  * L'elemento responsive che racchiude la navbar e 
  * il pulsante per il bollettino
  * 
- * @param props.className classe da aggiungere all'elemento esterno
- * 
- * @returns l'elemento con il menu principale
+ * @param {*} props le property dell'elemento
+ * @param props.className classe da aggiungere all'elemento html esterno
+ * @param props.links link da inserire nella navbar
+ * @returns il template dell'elemento con il menu principale
  */
 function MIPMainMenubar(props) {
     const className = `${props.className || ''} ${styles.menubar}`
@@ -50,12 +76,12 @@ function MIPMainMenubar(props) {
             <nav>
                 <ul>
                     {props.links.map(item =>
-                        <li><Link href={item.url}><a className={styles.nav_link}>{item.title}</a></Link></li>
+                        <li key={item.title} ><Link href={item.url}><a className={styles.nav_link}>{item.title}</a></Link></li>
                     )}
                 </ul>
             </nav>
             <div className={styles.toolbar}>
-                <button className={styles.traffic_news_btn}>Ascolta il notiziario sul traffico</button>
+                <MIPTrafficNewsPlayback audioUrl={process.env.MIP_TRAFFIC_NEWS_URL} />
             </div>
             <div className="mip-md-block">
                 <MIPSecondaryHeader className="mip-md-block mip-bg-dark " />
@@ -67,9 +93,10 @@ function MIPMainMenubar(props) {
 /**
  * La toolbar principale, con logo, navigazione e altri elementi
  * 
- * @param props.className classe da aggiungere all'elemento esterno
+ * @param {*} props le property dell'elemento
+ * @param props.className classe da aggiungere all'elemento html esterno
  * 
- * @returns l'elemento che racchiude la toolbar principale della pagina
+ * @returns il template dell'elemento che racchiude la toolbar principale
  */
 function MIPMainToolbar(props) {
     const [menuOpen, setMenuOpen] = useState(false)
@@ -79,9 +106,9 @@ function MIPMainToolbar(props) {
             <div className={styles.logo}>
                 <Link href="/"><a><img src='/images/logo.svg' height="48" alt='Muoversi in piemonte' /></a></Link>
             </div>
-            <MIPMainMenubar className={!menuOpen && "mip-md-none"} links={navbarData} />
-            <MIPSearchBar className="mip-dd-block"/>
-            <MIPMobileButtonBar open={menuOpen} 
+            <MIPMainMenubar className={!menuOpen && "mip-md-none"} links={navbarLinks} />
+            <MIPSearchBar className="mip-dd-block" />
+            <MIPMobileButtonBar open={menuOpen}
                 onChange={() => setMenuOpen(!menuOpen)} />
         </div>
     )
@@ -90,18 +117,41 @@ function MIPMainToolbar(props) {
 /**
  * L'intero header della pagina
  * 
- * @param props.className classe da aggiungere all'elemento esterno
- * 
- * @returns l'header della pagina di MIP
+ * @param {*} props le property dell'elemento
+ * @param props.className classe da aggiungere all'elemento html esterno
+ * @param {string} props.titleClassName il titolo della pagina
+ * @param {string} props.titleClass la classe da assegnare al titolo delle pagine 
+ * @param {string} props.breadcrumb il testo del breadcrumb (undefinde -> nascosto)
+ * @returns il template dell'header della pagina di MIP
  */
 export default function MIPPageHeader(props) {
+    const titleClass = `${props.titleClassName || ''} ${styles.page_title}`
+    const breadcrumbClass = `mip-bg-light ${styles.breadcrumb}`
     const className = `${props.className || ''} ${styles.page_header}`
     return (
-        <header className={className}>
-            <div className="mip-md-none">
-                <MIPSecondaryHeader className="mip-bg-dark " />
+        <header className={className} title="Page title">
+            <div className="mip-md-none mip-bg-dark">
+                <div className="mip-page-section ">
+                    <MIPSecondaryHeader className="mip-bg-dark" />
+                </div>
             </div>
-            <MIPMainToolbar className="mip-bg-light"/>
+            <div className="mip-bg-light mip-w-100">
+                <div className="mip-page-section">
+                   <MIPMainToolbar className="mip-bg-light" />
+                </div>
+                { props.title &&
+                    <div className={titleClass}>
+                        <h1 className="mip-page-section">{props.title}</h1>
+                    </div>
+                }
+                <div className="mip-page-section">
+                    { props.breadcrumb &&
+                        <div className={breadcrumbClass}>
+                            <a>{props.breadcrumb}</a>
+                        </div>
+                    }
+                </div>
+            </div>
         </header>
     )
 }
