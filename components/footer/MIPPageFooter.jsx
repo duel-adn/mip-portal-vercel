@@ -1,6 +1,25 @@
+/**
+    (C) Duel srl 2021.
+
+    Footer delle pagine del portale
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
 import Link from 'next/link'
 import styles from './MIPPageFooter.module.scss';
 
+/**
+ * Footer delle pagine del portale.
+ * 
+ * @param {*} props property dell'elemento
+ * @param {props.className} classe da aggiungere all'elemento esterno
+ * @returns 
+ */
 export default function MIPPageFooter(props) {
     return (
         <div className={`${props.className} ${styles.page_footer}`}>

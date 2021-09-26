@@ -3,21 +3,21 @@
 .page_footer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    height: $mip-footer-height;
+    flex-wrap: wrap;
+    min-width: 22rem;
 
     .navbar {
-
-        padding-top: 2.5rem;
+        margin-top: 2.5rem;
         font-weight: bold;
 
         ul {
             display: flex;
+            flex-wrap: wrap;
         }
 
         a {
             text-transform: uppercase;
-            font-size: (18/16) + rem;
+            font-size: 1.125rem;
         }
 
         span {
@@ -26,11 +26,15 @@
     }
 
     .credits {
+
         display: flex;
-        padding-top: 2.5rem;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
         
         .credit {
-            margin-left: 2.5rem;
+            margin-top: 2.5rem;
+            margin-right: 3rem;
 
             .piemonte {
                 width: 12rem;
@@ -50,10 +54,8 @@
 
             p {
                 text-transform: uppercase;
-                font-size: (12/16) + rem;
+                font-size: .75rem;
             }
         }
-        
     }
 }
-
