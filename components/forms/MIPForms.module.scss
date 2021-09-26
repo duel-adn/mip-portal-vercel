@@ -58,7 +58,7 @@
 .information_panel {
     display: flex;
     flex-direction: column;
-    min-height: 40rem;
+    min-height: 20rem;
 
     .panel_header {
         height: 3rem;
@@ -74,7 +74,6 @@
     }
 
     .content {
-        height: 100%;
         padding: .5rem 1.25rem;
         overflow-x: hidden;
         overflow-y: auto;
@@ -156,7 +155,6 @@
 
 // Playback bollettino
 
-// Bottone ascolta notiziario
 .traffic_news_btn {
     @include mip-left-icon('notiziario', 3rem, 1rem);
     padding: .65rem 1rem .65rem 3rem;
