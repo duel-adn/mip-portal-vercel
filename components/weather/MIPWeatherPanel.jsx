@@ -30,8 +30,7 @@ export default function MIPWeatherPanel(props) {
         <div className={`${props.className || ""} ${styles.weather_panel}`}>
             <div className={styles.title_container}>
                 <h4>Previsioni meteo</h4>
-                <p>In collaborazione</p>
-                <p>Arpa Piemonte</p>
+                <p>In collaborazione con Arpa Piemonte</p>
             </div>
             <div className={styles.card_list_container}>
                 {
