@@ -10,8 +10,6 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-@use "sass:math";
-
 // Fonts
 
 $mip-root-font-size: 16;
@@ -42,5 +40,10 @@ $mip-dark-border-color: #BDBDBD;
 // Dimensioni
 
 $mip-panel-border-radius: .625rem;
-$mip-toolbar-height: math.div(50, $mip-root-font-size) + rem;
-$mip-footer-height: math.div(190, $mip-root-font-size) + rem;
+$mip-toolbar-height: 3.2rem;
+$mip-navbar-height: 5rem;
+$mip-footer-height: 11.8rem;
+
+// Stop
+
+$mip-tablet-break: 1200px;

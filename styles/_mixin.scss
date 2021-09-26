@@ -10,9 +10,9 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-@mixin mip-left-icon($url, $padding) {
+@mixin mip-left-icon($url, $padding, $xpos: 0) {
     background-image: url('/icons/' + $url + '.svg');
-    background-position: left;
+    background-position: $xpos 50%;
     background-repeat: no-repeat;
     padding-left: $padding;
 }

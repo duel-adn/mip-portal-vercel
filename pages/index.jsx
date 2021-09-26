@@ -1,7 +1,7 @@
 /**
-    (C) Duel srl 2021.
+    Duel S.p.A.
 
-    Home page.
+    Home page portale
 
     Revision history
 
@@ -10,50 +10,31 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import MIPPageHead from '../components/page/MIPPageHead'
-import MIPPageHeader from '../components/header/MIPPageHeader'
-import MIPPageFooter from '../components/footer/MIPPageFooter'
-import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
+import MIPPage from '../components/page/MIPPage';
 import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
 import MIPTrafficPanel from '../components/traffic/MIPTrafficPanel'
-import MIPPublicTransportPanel, {fetchPublicTransportData} from '../components/news/MIPPublicTransportPanel'
+import MIPPublicTransportPanel, { fetchPublicTransportData } from '../components/news/MIPPublicTransportPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
+import MIPWeatherPanel, { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
+import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import { fetchMobilityNewsData } from '../components/news/MIPMobilityNewsPanel'
 
 export default function Home(props) {
   return (
-    <>
-      <MIPPageHead title="Muoversi in Piemonte" />
-      <MIPPageHeader className="mip-page-header"/>
-      <header className="mip-page-header">
-        <MIPRealTimeBanner className="mip-page-row"
-          title="Allerta meteo Cuneo:
-              ANAS al lavoro per rimozione neve."
-          tag="Ultim'ora" image="/images/home-hero.jpg" />
-      </header>
-      <main className="mip-bg-light mip-page-main">
-        <section className="mip-page-flex-row">
-          <aside className="mip-path-data-panel">
-            <MIPPathDataPanel className="mip-rounded-corners" title="Ricerca percorso" />
-          </aside>
-          <MIPTrafficPanel className="mip-traffic-panel" eventData={props.eventData} compact={true}/>
-        </section>
-        <section className="mip-page-flex-row">
-          <MIPPublicTransportPanel className="mip-information-panel" title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData}/>
-          <MIPMobilityNewsPanel className="mip-information-panel" title="Avvisi mobilità" newsData={props.newsData}/>
-          <MIPServicePanel className="mip-service-panel"/>
-        </section>
-      </main>
-      <aside className="mip-page-section mip-weather-panel">
-        <MIPWeatherPanel className="mip-page-row" weatherData={props.weatherData}/>
-      </aside>
-      <footer className="mip-page-footer mip-bg-blue">
-        <MIPPageFooter className="mip-page-row" />
-      </footer>
-    </>
+    <MIPPage className="mip-home-page">
+      <MIPRealTimeBanner className="banner"
+        title="Allerta meteo Cuneo:
+            ANAS al lavoro per rimozione neve."
+        tag="Ultim'ora" image="/images/home-hero.jpg" />
+      <MIPPathDataPanel className="mip-rounded-corners path" title="Ricerca percorso" />
+      <MIPTrafficPanel className="traff mip-wh-100" eventData={props.eventData} compact={true} />
+      <MIPPublicTransportPanel className="tpl mip-wh-100" title="Avvisi di trasporto pubblico locale" publicTransportData={props.publicTransportData} />
+      <MIPMobilityNewsPanel className="mob mip-wh-100" title="Avvisi mobilità" newsData={props.newsData} />
+      <MIPServicePanel className="colli" />
+      <MIPWeatherPanel className="meteo mip-mb-4" weatherData={props.weatherData} />
+    </MIPPage>
   )
 }
 

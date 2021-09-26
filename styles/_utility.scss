@@ -10,6 +10,36 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+// Dimensioni
+
+.mip-w-100 {
+    width: 100%;
+}
+
+.mip-h-100 {
+    height: 100%;
+}
+.mip-wh-100 {
+    @extend .mip-w-100;
+    @extend .mip-h-100;
+}
+
+// Margini e padding 
+
+.mip-mt-auto {
+    margin-top: auto;
+}
+
+.mip-mb-4 {
+    margin-bottom: 2rem;
+}
+
+.mip-mt-4 {
+    margin-top: 2rem;
+}
+
+//__
+
 .mip-50vh {
     height: 80vh;
 }
@@ -39,10 +69,6 @@
     margin-bottom: 2rem;
 }
 
-.mip-mt-auto {
-    margin-top: auto;
-}
-
 .mip-mt-1 {
     margin-top: .5rem;
 }
@@ -50,3 +76,54 @@
 .mip-mt-2 {
     margin-top: 1rem;
 }
+
+.mip-mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mip-mt-4 {
+    margin-top: 2rem;
+}
+
+// Display 
+
+.mip-d-none {
+    display: none;
+}
+
+.mip-md-none {
+    display: none;
+}
+
+.mip-md-flex {
+    display: flex;
+}
+
+.mip-dd-flex {
+    display: none;
+}
+
+.mip-dd-block {
+    display: none;
+}
+
+.mip-md-block {
+    display: block;
+}
+
+@media (min-width: $mip-tablet-break) {
+    .mip-md-none {
+        display: initial;
+    }
+    .mip-md-block,
+    .mip-md-flex {
+        display: none;
+    }
+    .mip-dd-flex {
+        display: flex;
+    }
+    .mip-dd-block {
+        display: block;
+    }    
+}
+
