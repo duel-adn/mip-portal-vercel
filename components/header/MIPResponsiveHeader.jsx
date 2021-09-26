@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import styles from './MIPPageHeader.module.scss'
+import MIPSecondaryHeader from './MIPSecondaryHeader'
+import MIPSearchBar from './MIPSearchBar'
 
 // TODO: Move outside
 const navbarData = [
@@ -13,16 +15,16 @@ const navbarData = [
 ]
 
 function MIPMobileButtonBar(props) {
-    const className = `${props.className || ''} ${styles.button_mobile_bar}`
+    const className = `${props.className || ''} ${styles.mobile_button_bar}`
     return (
     <div className={className}>
-        <button class={styles.toolbar_btn}>
+        <button className={styles.toolbar_btn}>
             <img src="/icons/toolbar-search.svg" alt="" />
         </button>
-        <button class={styles.toolbar_btn}>
+        <button className={styles.toolbar_btn}>
             <img src="/icons/toolbar-user.svg" alt="" />
         </button>
-        <button class={styles.toolbar_btn} onClick={() => props.onChange()}>
+        <button className={styles.toolbar_btn} onClick={() => props.onChange()}>
             {props.open ? 
                 <img src="/icons/menu-button-open.svg" alt="" />
                 :
@@ -30,14 +32,6 @@ function MIPMobileButtonBar(props) {
             }
         </button>
     </div>
-    )
-}
-
-function MIPSearchBar(props) {
-    const className = `${props.className || ''} ${styles.search_bar}`
-    return (
-        <>
-        </>
     )
 }
 
@@ -61,7 +55,10 @@ function MIPMainMenubar(props) {
                 </ul>
             </nav>
             <div className={styles.toolbar}>
-                <button class={styles.traffic_news_btn}>Ascolta il notiziario sul traffico</button>
+                <button className={styles.traffic_news_btn}>Ascolta il notiziario sul traffico</button>
+            </div>
+            <div className="mip-md-block">
+                <MIPSecondaryHeader className="mip-md-block mip-bg-dark " />
             </div>
         </div>
     )
@@ -76,15 +73,15 @@ function MIPMainMenubar(props) {
  */
 function MIPMainToolbar(props) {
     const [menuOpen, setMenuOpen] = useState(false)
-    const className = `${props.className || ''} ${menuOpen && styles.closed}} ${styles.main_toolbar}`
+    const className = `${props.className || ''} ${styles.main_toolbar}`
     return (
         <div className={className}>
             <div className={styles.logo}>
                 <Link href="/"><a><img src='/images/logo.svg' height="48" alt='Muoversi in piemonte' /></a></Link>
             </div>
-            <MIPMainMenubar className={!menuOpen && "mip-dm-none"} links={navbarData} />
-            <MIPSearchBar />
-            <MIPMobileButtonBar className="mip-dm-flex" open={menuOpen} 
+            <MIPMainMenubar className={!menuOpen && "mip-md-none"} links={navbarData} />
+            <MIPSearchBar className="mip-dd-block"/>
+            <MIPMobileButtonBar open={menuOpen} 
                 onChange={() => setMenuOpen(!menuOpen)} />
         </div>
     )
@@ -101,7 +98,10 @@ export default function MIPPageHeader(props) {
     const className = `${props.className || ''} ${styles.page_header}`
     return (
         <header className={className}>
-            <MIPMainToolbar className="mip-bg-light mip-section"/>
+            <div className="mip-md-none">
+                <MIPSecondaryHeader className="mip-bg-dark " />
+            </div>
+            <MIPMainToolbar className="mip-bg-light"/>
         </header>
     )
 }
