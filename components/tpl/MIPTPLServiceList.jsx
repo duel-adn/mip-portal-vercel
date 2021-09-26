@@ -132,7 +132,7 @@ export default function MIPTPLServiceList(props) {
             </div>
             <div className={styles.container}>
                 {services.map(service =>
-                    <MIPTPLServiceCard key={service.key} service={service} />
+                    <MIPTPLServiceCard key={service.id} service={service} />
                 )}
             </div>
         </div>
