@@ -10,47 +10,30 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import MIPPageHead from '../components/page/MIPPageHead'
-import MIPPageHeader from '../components/header/MIPPageHeader'
-import MIPPageFooter from '../components/footer/MIPPageFooter'
+import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPPager from '../components/forms/MIPPager'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 
-export default function Home(props) {
+export default function News(props) {
   return (
-    <>
-      <MIPPageHead title="News" />
-      <MIPPageHeader className="mip-page-header" title="Articoli su: News" titleClassName="mip-bd-gray"/>
-      <main className="mip-bg-light mip-page-main">
-        <section className="mip-page-flex-row-">
-        <MIPNewsCardGrid className="mip-page-flex-row" />
-        </section>
-        <nav className="mip-page-flex-row">
-          <MIPPager />
-        </nav>
-      </main>
-      <aside className="mip-page-section mip-weather-panel">
-        <MIPWeatherPanel className="mip-page-row" weatherData={props.weatherData}/>
-      </aside>
-      <footer className="mip-page-footer mip-bg-blue">
-        <MIPPageFooter className="mip-page-row" />
-      </footer>
-    </>
+    <MIPPage className="mip-flex-row" title="News" 
+      pageTitle="News"
+      titleClassName="mip-bg-gray"
+      breadcrumb="Indietro" >
+      <MIPNewsCardGrid className="mip-3col-page" />
+      <MIPPager />
+      <MIPWeatherPanel className="mip-my-2" weatherData={props.weatherData}/>
+    </MIPPage>
   )
 }
 
 export async function getStaticProps(context) {
-  const eventData = await fetchTrafficEventData(context)
   const weatherData = await fetchWeatherData(context)
-  const publicTransportData = null; //await fetchPublicTransportData(context)
   
   return {
     props: {
-      eventData,
       weatherData,
-      publicTransportData
     },
   }
 }
