@@ -16,6 +16,27 @@
 .tpl_service_list {
 
     .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-bottom: 2rem;
+    }
+
+@media (min-width: 780px) {
+
+    .container {
+        display: grid;
+        width: 100%;
+        padding-bottom: 2rem;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .container {
         display: grid;
         width: 100%;
         padding-bottom: 2rem;
@@ -24,6 +45,7 @@
         row-gap: 2rem;
     }
 
+}
     .toolbar {
         display: flex;
         width: 100%;
@@ -49,6 +71,7 @@
 
     .tpl_service_card {
         display: flex;
+        flex-grow: 1;
         flex-direction: column;
         justify-content: space-between;
         min-width: 23rem;
