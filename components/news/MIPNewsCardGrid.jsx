@@ -151,8 +151,8 @@ export default function MIPNewsCardGrid(props) {
         <div className={className}>
             { newsList.map((news, index) => 
                 index < maxNews &&
-                (props.simple ? <MIPSimpleNewsCard news={news}/> :
-                <MIPNewsCard news={news}/>)
+                (props.simple ? <MIPSimpleNewsCard key={index} news={news}/> :
+                <MIPNewsCard key={index} news={news}/>)
                 )
             }
         </div>

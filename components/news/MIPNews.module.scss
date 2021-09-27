@@ -57,20 +57,17 @@
 }
 
 .news_card_grid {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
     width: 100%;
-
-    .news_card + .news_card {
-        margin-left: .5rem;
-        margin-right: .5rem;
-    }
 
     .simple_news_card,
     .news_card {
         display: flex;
         flex-direction: column;
         margin-bottom: 2.5rem;
-
+        margin-right: 1rem;
         .thumbnail {
             width: 20rem;
         }
@@ -110,12 +107,11 @@
     }
 
     .news_card {
-        width: 20rem;
         height: 22.6rem;
     }
 
     .simple_news_card {
-        height: auto;
+        flex: 1 1 25rem;
 
         .content {
             margin-bottom: 1em;
