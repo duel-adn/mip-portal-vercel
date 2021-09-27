@@ -111,7 +111,7 @@
     display: block;
 }
 
-@media (min-width: $mip-tablet-break) {
+@media (min-width: $mip-break-tablet) {
     .mip-md-none {
         display: initial;
     }

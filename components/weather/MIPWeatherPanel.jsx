@@ -44,9 +44,9 @@ export default function MIPWeatherPanel(props) {
 }
 
 export async function fetchWeatherData() {
-    console.log(process.env.MIP_WEATHER_URL)
     const res = await fetch(process.env.MIP_WEATHER_URL)
     const rawData = await res.json()
+    console.log(`${process.env.MIP_WEATHER_URL} ${rawData.length}`)
     const today = new Date()
     let tomorrow =  new Date()
     tomorrow.setDate(today.getDate() + 1)

@@ -19,8 +19,8 @@ export default function MIPTrafficPanel(props) {
 
     return (
         <div className={className}>
-            <MIPTrafficEventPanel className={styles.data_container} eventData={props.eventData} compact={props.compact}/>
-            <MIPMapPanel className={styles.map_container} trafficEventData={props.eventData}/>
+            <MIPTrafficEventPanel className={styles.data_container} trafficEventData={props.trafficEventData} compact={props.compact}/>
+            <MIPMapPanel className={styles.map_container} trafficEventData={props.trafficEventData}/>
         </div>
     )
 }

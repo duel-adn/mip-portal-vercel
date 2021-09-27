@@ -28,7 +28,7 @@
     top: 100%;
     width: 100%;
     background-color: $mip-light-background;
-    z-index: 1000;
+    z-index: 2000;
     // Contenitore del pulsante bollettino
     .toolbar {
         display: flex;
@@ -55,7 +55,7 @@
 
 // Stili per desktop
 
-@media (min-width: $mip-tablet-break) {
+@media (min-width: $mip-break-tablet) {
     .menubar {
         position: static;
         display: flex;
@@ -93,7 +93,7 @@
 .secondary_header {
 
     height: 3.2rem;
-
+    padding: 0 1rem;
     .tools {
         height: 100%;
         display: flex;
@@ -142,7 +142,7 @@
     }
 }
 
-@media (min-width: $mip-tablet-break) {
+@media (min-width: $mip-break-tablet) {
     .secondary_header {
         .tools {
             justify-content: flex-end;

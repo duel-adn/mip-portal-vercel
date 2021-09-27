@@ -2,15 +2,14 @@
 @import '../../styles/mixin';
 
 .service_panel {
+    min-width: 24rem;
 
     .service_card {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-width: 24rem;
         height: 8rem;
         margin: .3rem;
-        margin-top: 0;
         padding: 1rem;
         padding-bottom: .5rem;
         background: linear-gradient(-195deg, $mip-light-background 60%, $mip-blue-background 60%);

@@ -40,60 +40,6 @@
     }
 }
 
-.mip-home-page {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 32rem;
-    row-gap: 2rem;
-    .mob
-    .tpl {
-        height: 32rem;
-    }
-}
-
-@media (min-width: 1100px) {
-    .mip-home-page {
-        display: grid;
-        max-width: 100%;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto 35rem 35rem auto;
-        grid-template-areas: 
-            "banner banner banner"
-            "path traff traff"
-            "tpl mob colli"
-            "meteo meteo meteo"
-            ;
-        row-gap: 2rem;
-        column-gap: 2rem;
-        .path {
-            grid-area: path;
-        }
-
-        .traff {
-            grid-area: traff;
-        }
-
-        .tpl {
-            grid-area: tpl;
-        }
-
-        .mob {
-            grid-area: mob;
-        }
-
-        .colli {
-            grid-area: colli;
-        }
-
-        .meteo {
-            grid-area: meteo;
-        }
-
-        .banner {
-            grid-area: banner;
-        }
-    }
-}
 
 .mip-traffic-page {
 

@@ -58,10 +58,10 @@
 .information_panel {
     display: flex;
     flex-direction: column;
-    min-height: 20rem;
-
+    min-height: 10rem;
+    max-height: 90vh;
     .panel_header {
-        height: 3rem;
+        flex: 0 0 3rem;
         border-radius: 10px 10px 0px 0px;
         padding: 0 1.25rem;
 
@@ -74,6 +74,7 @@
     }
 
     .content {
+        flex: 1 1 100%;
         padding: .5rem 1.25rem;
         overflow-x: hidden;
         overflow-y: auto;

@@ -1,0 +1,127 @@
+/**
+    Duel S.p.A.
+
+    Stili usati per il layout di tutte le pagine.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+// Home page - mobile
+
+.mip-home-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 
+        auto // percorso
+        repeat(4, 20rem) // pannelli
+        auto;   // meteo
+    row-gap: 2rem;
+}
+
+.mip-home-page1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 
+        auto // banner
+        auto // percorso
+        repeat(4, 30rem) // pannelli
+        auto;   // meteo
+    row-gap: 1rem;
+    margin-bottom: 1rem;
+    .banner { grid-column: 1/-1;}
+}
+
+@media (min-width: 780px) {
+    .mip-home-page1 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 
+        auto // banner
+        auto // percorso + tempo reale
+        repeat(2, 20rem) // mappa + pannelli
+        auto   // meteo
+        auto;   // meteo
+        row-gap: 2rem;
+        column-gap: 1rem;
+
+        // .service-panel,
+        // .weather-panel,
+        .map-panel {
+            grid-column: 1/-1;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .mip-home-page1 {
+        grid-template-columns: 1fr 1rem 1fr 1rem 1fr;
+        grid-template-rows: 
+            auto auto 35rem auto;
+        row-gap: 2rem;
+        column-gap: 0rem;
+        .map-panel {
+            grid-column: 4/-1;
+        }
+        .news-panel,
+        .event-panel {
+            grid-column: 3/4;
+        }
+        .tpl-panel {
+            grid-column: 1/2;
+        }
+        .service-panel {
+            grid-column: 5/-1;
+        }
+        .weather-panel {
+            grid-column: 1/-1;
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .mip-home-page {
+        display: grid;
+        max-width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto 35rem 35rem auto;
+        grid-template-areas: 
+            "banner banner banner"
+            "path traff traff"
+            "tpl mob colli"
+            "meteo meteo meteo"
+            ;
+        row-gap: 2rem;
+        column-gap: 2rem;
+        .path {
+            grid-area: path;
+        }
+
+        .traff {
+            grid-area: traff;
+        }
+
+        .tpl {
+            grid-area: tpl;
+        }
+
+        .mob {
+            grid-area: mob;
+        }
+
+        .colli {
+            grid-area: colli;
+        }
+
+        .meteo {
+            grid-area: meteo;
+        }
+
+        .banner {
+            grid-area: banner;
+        }
+    }
+}
+

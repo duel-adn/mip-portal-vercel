@@ -17,7 +17,7 @@ export default function MIPTrafficEventList(props) {
     return (
         <div className={`${props.className} ${styles.traffic_event_list}`}>
             <div className={`${props.className} ${styles.traffic_event_panel}`}>
-            {props.eventData && props.eventData.map(event => 
+            {props.trafficEventData && props.trafficEventData.map(event => 
                 <MIPTrafficEventCard className={styles.event} key={event.id} event={event} compact={compact} />
             )}
             </div>
