@@ -1,9 +1,12 @@
+import MIPPageHead from './MIPPageHead'
 import MIPPageFooter from '../footer/MIPPageFooter'
 import MIPPageHeader from '../header/MIPResponsiveHeader'
 
 export default function MIPPage(props) {
     const className = `${props.className || ''} mip-page-section`
     return (
+        <>
+        <MIPPageHead title={props.pageTitle} />
         <div className="mip-page-container">
             <MIPPageHeader className="mip-w-100" breadcrumb={props.breadcrumb}
                 title={props.title} titleClassName={props.titleClassName}/>
@@ -12,5 +15,6 @@ export default function MIPPage(props) {
             </main>
             <MIPPageFooter className="mip-mt-auto mip-w-100"/>
         </div>
+        </>
     )
 }
