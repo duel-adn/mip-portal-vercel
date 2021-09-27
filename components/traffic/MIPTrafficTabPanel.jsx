@@ -13,7 +13,6 @@
 import styles from './MIPTraffic.module.scss'
 import MIPTabPanel from "../forms/MIPTabPanel"
 import MIPPathDataForm from "../path/MIPPathDataForm"
-import MIPMapPanel from '../map/MIPMapPanel'
 import MIPTrafficEventList from './MIPTrafficEventList'
 
 export default function MIPTrafficTabPanel(props) {
@@ -32,10 +31,9 @@ export default function MIPTrafficTabPanel(props) {
                     <div className={styles.search_panel}>
                         <input type="text" placeholder="Cerca tra gli eventi di traffico"/>
                     </div>
-                    <MIPTrafficEventList eventData={props.eventData} compact={false} />
+                    <MIPTrafficEventList trafficEventData={props.trafficEventData} compact={false} />
                 </div>
             </MIPTabPanel>
-            <MIPMapPanel className={styles.map_container2} trafficEventData={props.eventData}/>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 /**
-    (C) Duel srl 2021.
+    Duel S.p.A.
 
-    Pagina traffico su gomma in tempo reale.
+    Pagina traffico in tempo reale
 
     Revision history
 
@@ -10,44 +10,31 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import MIPPageHead from '../components/page/MIPPageHead'
-import MIPPageHeader from '../components/header/MIPPageHeader'
-import MIPPageFooter from '../components/footer/MIPPageFooter'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
+import MIPPage from '../components/page/MIPPage';
 import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
 import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
-import { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
+import MIPMapPanel from '../components/map/MIPMapPanel'
+import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 
-export default function Home(props) {
+export default function Traffic(props) {
   return (
-    <>
-      <MIPPageHead title="Traffico in tempo reale" />
-      <MIPPageHeader className="mip-page-header" 
+    <MIPPage className="mip-traffic-page"
         title="Traffico in tempo reale"
-        titleClassName="mip-bg-accent"/>
-      <main className="mip-bg-light mip-page-main">
-        <MIPTrafficTabPanel className="mip-page-flex-row" eventData={props.eventData} selected={1}/>
-        <legend className="mip-page-row">
-          <MIPTrafficLegend className="mip-rounded-corners" />
-        </legend>
-      </main>
-      <footer className="mip-page-footer mip-bg-blue">
-        <MIPPageFooter className="mip-page-row" />
-      </footer>
-    </>
+        titleClassName="mip-bg-accent"
+        breadcrumb='Indietro'>
+      <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>
+      <MIPMapPanel className="map-panel" trafficEventData={props.eventData}/>
+      <MIPTrafficLegend className="legend-panel mip-rounded-corners" />
+    </MIPPage>
   )
 }
 
 export async function getStaticProps(context) {
   const eventData = await fetchTrafficEventData(context)
-  const weatherData = await fetchWeatherData(context)
-  const publicTransportData = null; //await fetchPublicTransportData(context)
-  
+
   return {
     props: {
       eventData,
-      weatherData,
-      publicTransportData
     },
   }
 }

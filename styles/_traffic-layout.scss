@@ -1,0 +1,66 @@
+/**
+    Duel S.p.A.
+
+    Stili usati per il layout di tutte le pagine.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+// traffic page - mobile
+
+.mip-traffic-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 
+        30rem   // tab panel
+        30rem   // mappa
+        auto;   // legenda
+    row-gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 780px) {
+    .mip-traffic-page {
+        grid-template-columns: min-content 1fr;
+        grid-template-rows: 
+        minmax(30rem, 70vh)   // tab panel + mappa
+        auto;   // legenda
+
+        // .service-panel,
+        // .weather-panel,
+        .legend-panel {
+            grid-column: 1/-1;
+        }
+    }
+}
+
+// @media (min-width: 1024px) {
+//     .mip-traffic-page {
+//         grid-template-columns: 1fr 1rem 1fr 1rem 1fr;
+//         grid-template-rows: 
+//             auto auto 35rem auto;
+//         row-gap: 2rem;
+//         column-gap: 0rem;
+//         .map-panel {
+//             grid-column: 4/-1;
+//         }
+//         .news-panel,
+//         .event-panel {
+//             grid-column: 3/4;
+//         }
+//         .tpl-panel {
+//             grid-column: 1/2;
+//         }
+//         .service-panel {
+//             grid-column: 5/-1;
+//         }
+//         .weather-panel {
+//             grid-column: 1/-1;
+//         }
+//     }
+// }
+
