@@ -10,9 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import MIPPageHead from '../components/page/MIPPageHead'
-import MIPPageHeader from '../components/header/MIPPageHeader'
-import MIPPageFooter from '../components/footer/MIPPageFooter'
+import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
@@ -20,22 +18,19 @@ import { MIPPageBanner } from '../components/page/MIPPageBanner'
 
 export default function Home(props) {
   return (
-    <>
-      <MIPPageHead title="News" />
-      <MIPPageHeader className="mip-page-header" breadcrumb='Indietro'/>
-      <header className="mip-page-header">
-        <MIPPageBanner className="mip-page-row"
+      <MIPPage className="mip-article-page" 
+        breadcrumb='Indietro'>
+      <MIPPageBanner className="banner"
           image="/news-images/article-full.jpg" />
-      </header>
-      <main className="mip-bg-light mip-page-main">
-        <div className="mip-page-flex-row">
-        <article className="mip-article-body">
-        <h2>Giro d’Italia. 8 Maggio  Torino ospita la prima tappa.
+      <header className="article-title">
+      <h2>Giro d’Italia. 8 Maggio  Torino ospita la prima tappa.
 Alcune modifiche viabili nella zona est della città.</h2>
         <div>
           <span className="mip-tag mip-bg-light-blue">news</span>
           <span className="mip-share-cta">Condividi articolo</span>
         </div>
+      </header>
+      <article className="article-body">
         <p>La manifestazione sportiva si svolgerà interamente all&apos;interno del territorio comunale, con una “cronometro individuale”, e interesserà gran parte della zona centro e la zona est della città (precollina), comprese entrambe le aree limitrofe le sponde del fiume Po, da Ponte Regina Margherita fino al Ponte Balbis.</p>
 
 <p>La partenza della tappa sarà in piazza Castello, mentre l’arrivo è posizionato a ridosso di piazza Gran Madre di Dio, in Corso Moncalieri angolo via Gioannetti.
@@ -58,18 +53,13 @@ Dalle ore 8.00 dell’8 maggio e fino all’ultimazione della gara, indicativame
 <a href="https://www.comune.torino.it">www.comune.torino.it</a>
 <a href="https://www.comune.torino.it/vigiliurbani/">www.comune.torino.it/vigiliurbani/</a>
         </article>
-        <section className="mip-page-aside">
+      <section className="page-aside">
         <MIPNewsCardGrid className="mip-page-flex-row-" maxNews={6} simple/>
-        </section>
-        </div>
-      </main>
-      <aside className="mip-page-section mip-weather-panel">
-        <MIPWeatherPanel className="mip-page-row" weatherData={props.weatherData}/>
+      </section>
+      <aside className="weather-panel">
+        <MIPWeatherPanel weatherData={props.weatherData}/>
       </aside>
-      <footer className="mip-page-footer mip-bg-blue">
-        <MIPPageFooter className="mip-page-row" />
-      </footer>
-    </>
+    </MIPPage>
   )
 }
 

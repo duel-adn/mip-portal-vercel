@@ -13,6 +13,66 @@
 // article page - mobile
 
 .mip-article-page {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 
+        auto // banner
+        auto // title
+        1fr // articolo 
+        auto; // meteo;
+    row-gap: 1rem;
+
+    .banner {
+
+    }
+    
+    .article-body {
+
+    }
+
+    .page-aside {
+    }
+}
+
+@media (min-width: 780px) {
+    .mip-article-page {
+        grid-template-columns: 1fr 25rem;
+        grid-template-rows: 
+            auto // banner
+            auto // title
+            1fr // articolo 
+            auto // spalla
+            auto; // meteo;
+        row-gap: 1rem;
+        column-gap: 2rem;
+        .banner {
+            grid-column: 1 / -1;
+        }
+
+        .article-title,
+        .article-body {
+            grid-column: 1 / 2;
+        }
+
+        .article-title {
+            grid-column: 1 / 2;
+            margin: 1rem 0;
+
+            h2 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .article-body {
+            padding-right: 1rem;
+            border-right: 1px solid lightgrey;
+        }
+        .page-aside {
+            grid-column: 2 / -1;
+        }
+
+        .weather-panel {
+            grid-column: 1 / -1;
+        }
+    }
 }
