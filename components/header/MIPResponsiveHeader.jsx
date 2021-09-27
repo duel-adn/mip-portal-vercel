@@ -17,6 +17,12 @@ import MIPSecondaryHeader from './MIPSecondaryHeader'
 import MIPSearchBar from './MIPSearchBar'
 import MIPTrafficNewsPlayback from '../forms/MIPTrafficNewsPlayback'
 
+function history_back() {
+    if (window && window.history) {
+        window.history.back()
+    }
+}
+
 /**
  * Link da inserire nella navigation bar
  */
@@ -147,7 +153,7 @@ export default function MIPPageHeader(props) {
                 <div className="mip-page-section">
                     { props.breadcrumb &&
                         <div className={breadcrumbClass}>
-                            <a>{props.breadcrumb}</a>
+                            <a onClick={() => history_back()}>{props.breadcrumb}</a>
                         </div>
                     }
                 </div>
