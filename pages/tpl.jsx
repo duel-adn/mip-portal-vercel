@@ -16,25 +16,11 @@ import MIPTPLServiceList from '../components/tpl/MIPTPLServiceList'
 export default function Tpl(props) {
   return (
     <MIPPage
+      pageTitle="Trasporto pubblico"
       title="Trasporto pubblico" 
       titleClassName="mip-bg-blue"
       breadcrumb='Indietro'>
         <MIPTPLServiceList />
     </MIPPage>
   )
-}
-
-export async function getStaticProps(context) {
-  // const eventData = null //await fetchTrafficEventData(context)
-  // const weatherData = await fetchWeatherData(context)
-  // const publicTransportData = null //await fetchPublicTransportData(context)
-  
-  // return {
-  //   props: {
-  //     eventData,
-  //     weatherData,
-  //     publicTransportData
-  //   },
-  // }
-  return {props: {}}
 }
