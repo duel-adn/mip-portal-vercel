@@ -19,6 +19,7 @@ export default function MIP404Panel(props) {
 
     return (
         <div className={className}>
+            <img src='/images/not-found.svg' alt="donna con binocolo"/>
             <div className={styles.container}>
                 <h2>Ci dispiace, non abbiamo trovato quello che cercavi.</h2>
                 <p>Puoi provare queste pagine:</p>
