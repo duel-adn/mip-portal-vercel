@@ -34,7 +34,7 @@ territorio regionale.</p>
     <li className="none">il sabato, domenica e festivi: 8.10 – 9.10 – 10.10 – 13.10 – 16.10 – 17.10 – 18.10 – 19.10 – 20.10 – 21.10</li>
     <li>il portale <Link href="/"><a>www.muoversinpiemonte.it</a></Link>aggiornato tutti i giorni dalle 7.00 alle 21.30</li>
     <li>il Numero Verde Unico della Regione Piemonte <b>800 333 444</b> attivo dal lunedì al venerdì dalle ore 8 alle 18 con orario continuato, festivi esclusi, gratuito da telefono fisso e mobile.</li>
-    <li>l'account Twitter <a href="https://twitter.com/MIPiemonte" target="_blank" rel="noopener noreferrer">@MIPiemonte</a></li>
+    <li>l&apos;account Twitter <a href="https://twitter.com/MIPiemonte" target="_blank" rel="noopener noreferrer">@MIPiemonte</a></li>
   </ul>
   <li className="mip-mt-2 square">
   un servizio di calcolo percorso che permette di ricercare e pianificare gli spostamenti sul territorio regionale utilizzando i servizi di trasporto pubblico in tutte le sue declinazioni (bus e tram urbani, servizi extraurbani e treno) o tramite percorsi pedonali o con l’utilizzo dell’auto personale. 

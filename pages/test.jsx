@@ -75,7 +75,7 @@ const links = [
 
 export default function Home(props) {
   return (
-    <MIPPage breadcrumb="indietro"
+    <MIPPage 
       pageTitle="Pagina di test"
       title="Pagina di test" 
         titleClassName="mip-bg-accent"
@@ -83,7 +83,7 @@ export default function Home(props) {
         <h2>Link alle pagine del portale</h2>
         <ol className="mip-ml-4 mip-mt-2">
         {links.map(l =>
-          <li><Link key={l.title} href={l.url}><a>{l.title}</a></Link></li>
+          <li key={l.title}><Link href={l.url}><a>{l.title}</a></Link></li>
         )}
         </ol>
     </MIPPage>
