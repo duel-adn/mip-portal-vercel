@@ -16,6 +16,7 @@ import MIP404Panel from '../components/page/MIP404Panel'
 export default function Tpl(props) {
   return (
     <MIPPage
+      pageTitle="Pagina non trovata"
       breadcrumb='Indietro'>
         <MIP404Panel />
     </MIPPage>

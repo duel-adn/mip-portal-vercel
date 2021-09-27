@@ -25,7 +25,7 @@
 
 @media (min-width: 780px) {
     .mip-traffic-page {
-        grid-template-columns: min-content 1fr;
+        grid-template-columns: 25rem 1fr;
         grid-template-rows: 
         minmax(30rem, 70vh)   // tab panel + mappa
         auto;   // legenda

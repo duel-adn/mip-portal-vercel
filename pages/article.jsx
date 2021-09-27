@@ -19,7 +19,8 @@ import { MIPPageBanner } from '../components/page/MIPPageBanner'
 export default function Home(props) {
   return (
       <MIPPage className="mip-article-page" 
-        breadcrumb='Indietro'>
+      pageTitle="Giro d'Italia"
+      breadcrumb='Indietro'>
       <MIPPageBanner className="banner"
           image="/news-images/article-full.jpg" />
       <header className="article-title">

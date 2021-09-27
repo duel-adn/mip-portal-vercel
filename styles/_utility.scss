@@ -68,13 +68,13 @@
 }
 
 .mip-my-2 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .mip-py-2 {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .mip-mt-1 {
@@ -91,6 +91,14 @@
 
 .mip-mt-4 {
     margin-top: 2rem;
+}
+
+.mit-ml-2 {
+    margin-left: 1rem;
+}
+
+.mit-mr-2 {
+    margin-right: 1rem;
 }
 
 // Display 
@@ -119,6 +127,7 @@
     display: block;
 }
 
+
 @media (min-width: $mip-break-tablet) {
     .mip-md-none {
         display: initial;
@@ -133,5 +142,21 @@
     .mip-dd-block {
         display: block;
     }    
+}
+
+.mip-attachment-link {
+    @include mip-left-icon('download-accent', 3rem, 1rem);
+    color: $mip-accent-color;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    margin-top: .75rem;
+}
+
+.mip-share-cta {
+    @include mip-right-icon('share', 2rem);
+    color: $mip-blue-color;
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-left: 1em;
 }
 

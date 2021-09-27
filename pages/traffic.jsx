@@ -19,7 +19,8 @@ import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList
 export default function Traffic(props) {
   return (
     <MIPPage className="mip-traffic-page"
-        title="Traffico in tempo reale"
+      pageTitle="Traffico in tempo reale"
+      title="Traffico in tempo reale"
         titleClassName="mip-bg-accent"
         breadcrumb='Indietro'>
       <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>

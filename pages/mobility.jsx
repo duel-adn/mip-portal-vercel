@@ -17,7 +17,8 @@ import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeathe
 export default function MobilityNews(props) {
   return (
       <MIPPage className="mip-flex-row" 
-        title="Mobilità alternativa" 
+      pageTitle="Mobilità alternativa"
+      title="Mobilità alternativa" 
         titleClassName="mip-bg-accent"
         breadcrumb='Indietro'>
         <img src="/news-images/mobility-full.png" width="100%" height="auto" alt="bicicletta"/>
@@ -33,7 +34,7 @@ export default function MobilityNews(props) {
         </article>
         <section className="mip-mt-auto">
           <h2 className="mip-my-2">Notizie in tempo reale su Mobilità Alternativa</h2>
-          <MIPNewsCardGrid maxNews={6} simple/>
+          <MIPNewsCardGrid className="mip-3col-page" maxNews={6} simple/>
         </section>
         <aside className="mip-mt-auto mip-mb-2">
           <MIPWeatherPanel 

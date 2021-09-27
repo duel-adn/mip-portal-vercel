@@ -23,7 +23,8 @@ import { fetchMobilityNewsData } from '../components/news/MIPMobilityNewsPanel'
 
 export default function Home(props) {
   return (
-      <MIPPage className="mip-home-page">
+      <MIPPage className="mip-home-page"
+        pageTitle="Muoversi in Piemonte">
           <MIPRealTimeBanner className="banner"
               title="Allerta meteo Cuneo:
                   ANAS al lavoro per rimozione neve."
