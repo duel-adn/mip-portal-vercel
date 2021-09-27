@@ -57,8 +57,9 @@ export default function Map(props) {
       }
       <WMSTileLayer
         layers='optima:rlin_tre_fore0_cache'
+        format='image/png'
+        transparent={true}
         url="https://map.muoversinpiemonte.it/traffic-layer"
-        opacity={0.6}
       />
     </MapContainer>
   )
