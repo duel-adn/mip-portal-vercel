@@ -13,11 +13,10 @@
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-article-page" 
+      <MIPPage className="mip-flex-row" 
         title="Mobilità alternativa" 
         titleClassName="mip-bg-accent"
         breadcrumb='Indietro'>
@@ -36,20 +35,20 @@ export default function MobilityNews(props) {
           <h2 className="mip-my-2">Notizie in tempo reale su Mobilità Alternativa</h2>
           <MIPNewsCardGrid maxNews={6} simple/>
         </section>
+        <aside className="mip-mt-auto mip-mb-2">
+          <MIPWeatherPanel 
+            weatherData={props.weatherData} />
+      </aside>
       </MIPPage>
   )
 }
 
 export async function getStaticProps(context) {
-  const eventData = await fetchTrafficEventData(context)
   const weatherData = await fetchWeatherData(context)
-  const publicTransportData = null; //await fetchPublicTransportData(context)
   
   return {
     props: {
-      eventData,
       weatherData,
-      publicTransportData
     },
   }
 }
