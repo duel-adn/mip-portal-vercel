@@ -2,11 +2,6 @@
 @import '../../styles/mixin';
 
 .path_data_dialog {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    height: 100%;
     background-color: $mip-blue-background;
     color: $mip-light-color;
 
@@ -14,6 +9,7 @@
         display: flex;
         justify-content: space-between;
         margin-right: 2em;
+        margin-bottom: 2.8rem;
     }
 
     .path_input {
@@ -21,7 +17,7 @@
     }
 
     .button_bar_title {
-        margin-top: 2.2rem;
+        margin-top: 3.5rem;
         margin-bottom: 1rem;
         text-transform: uppercase;
         font-weight: bold;
@@ -70,7 +66,7 @@
 
     .footer {
         display: flex;
-        margin-top: auto;
+        margin-top: 3.1rem;
         button {
             margin: 0 auto;
             color: $mip-blue-background;
@@ -82,10 +78,8 @@
 // Path data panel
 
 .path_data_panel {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    min-width: 20rem;
+    height: 30rem;
     padding: 1.25rem 2.125rem 1.5rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
