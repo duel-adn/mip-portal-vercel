@@ -25,8 +25,8 @@ const navbarLinks = [
     { title: 'Traffico', url: '/traffic' },
     { title: 'Trasporto pubblico', url: '/tpl' },
     { title: 'Mobilità alternativa', url: '/mobility' },
-    { title: 'Il servizio', url: '/news' },
-    { title: 'Contatti', url: '#' },
+    { title: 'Il servizio', url: '/service' },
+    { title: 'Contatti', url: '/contacts' },
 ]
 
 /**
