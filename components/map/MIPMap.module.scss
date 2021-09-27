@@ -1,0 +1,8 @@
+@import '../../styles/variables';
+
+.map_container {
+    //position: relative !important;
+    display: flex;
+    min-height: 10rem;
+    background-color: $mip-gray-background;
+}
