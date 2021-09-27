@@ -31,16 +31,16 @@ export default function MIPPageFooter(props) {
                             <Link href="#"><a>Mappa del sito</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="#"><a>Disclaimer</a></Link><span>|</span>
+                            <Link href="/disclaimer"><a>Disclaimer</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="#"><a>Cookies</a></Link><span>|</span>
+                            <Link href="/cookies"><a>Cookies</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="#"><a>Radio</a></Link><span>|</span>
+                            <Link href="/radio"><a>Radio</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="#"><a>Contatti</a></Link>
+                            <Link href="/contacts"><a>Contatti</a></Link>
                         </li>
                     </ul>
                 </nav>
