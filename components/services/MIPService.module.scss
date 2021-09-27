@@ -50,3 +50,59 @@
         }
     }
 }
+
+.radio_list {
+
+    .card {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 20rem;
+        height: 12rem;
+        margin-bottom: 1rem;
+        padding: 1rem 1.25rem;
+        border-radius: .375rem;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .title {
+        width:80%;
+        font-weight: bold;
+        font-size: 1.5625rem;
+        line-height: 2.375rem;
+        border-bottom: 1px solid $mip-light-border-color;
+    }
+
+    .subtitle,
+    .provinces {
+        margin-top: .375rem;
+        font-size: .75rem;
+        line-height: 1.125rem;
+    }
+
+    .subtitle {
+        color: $mip-gray-text-color;
+        text-transform: uppercase;
+    }
+
+    .provinces {
+        color: $mip-dark-color;
+        font-weight: bold;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: .5rem;
+    }
+
+    .link {
+        @include mip-right-icon('right-arrow-accent', 1.5rem);
+        color: $mip-accent-color;
+        text-transform: uppercase;
+    }
+
+}
