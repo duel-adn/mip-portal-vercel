@@ -44,6 +44,10 @@ const links = [
     url: '/tpl'
   },
   {
+    title: 'Colli alpini',
+    url: '/passes'
+  },
+  {
     title: 'Radio',
     url: '/radio'
   },
