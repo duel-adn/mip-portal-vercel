@@ -13,6 +13,7 @@
 import styles from './MIPTraffic.module.scss';
 import MIPTrafficEventPanel from './MIPTrafficEventPanel';
 import MIPMapPanel from '../map/MIPMapPanel';
+import MIPTrafficMapPanel from './MIPTrafficMapPanel';
 
 export default function MIPTrafficPanel(props) {
     const className = `${props.className || ''} ${styles.traffic_panel}`
@@ -20,7 +21,7 @@ export default function MIPTrafficPanel(props) {
     return (
         <div className={className}>
             <MIPTrafficEventPanel className={styles.data_container} trafficEventData={props.trafficEventData} compact={props.compact}/>
-            <MIPMapPanel className={styles.map_container} trafficEventData={props.trafficEventData}/>
+            <MIPTrafficMapPanel className={styles.map_container} trafficEventData={props.trafficEventData}/>
         </div>
     )
 }

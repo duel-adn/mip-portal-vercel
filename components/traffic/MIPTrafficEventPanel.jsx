@@ -16,7 +16,6 @@ import MIPTrafficEventList from './MIPTrafficEventList';
 
 export default function MIPTrafficEventPanel(props) {
     const className = `${props.className || ''} ${styles.traffic_event_panel}`;
-    //console.log(`received ${props.trafficEventData.length} events`)
     return (
         <div className={className}>
             <div className={`mip-bg-accent ${styles.panel_header}`}>
