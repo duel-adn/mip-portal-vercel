@@ -14,7 +14,7 @@ import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaf
 import 'leaflet/dist/leaflet.css'
 import MIPTrafficEventCard from '../traffic/MIPTrafficEventCard';
 
-export default function Map(props) {
+export default function MIPMap(props) {
   const icon =
   L.icon({
   //       iconUrl: '/traffic-icons/accident.svg',
@@ -45,21 +45,6 @@ export default function Map(props) {
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}map.5t.torino.it/light-new/{z}/{x}/{y}"
-      />
-      {
-        props.trafficEvents && props.trafficEvents.map(evt => 
-          <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={icon}>
-          <Popup>
-            <MIPTrafficEventCard event={evt} />
-          </Popup>
-        </Marker>
-        )
-      }
-      <WMSTileLayer
-        layers='optima:rlin_tre_fore0_cache'
-        format='image/png'
-        transparent={true}
-        url="https://map.muoversinpiemonte.it/traffic-layer"
       />
     </MapContainer>
   )
