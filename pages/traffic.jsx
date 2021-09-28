@@ -11,11 +11,45 @@
 */
 
 import MIPPage from '../components/page/MIPPage';
-import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
 import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
-//import MIPMapPanel from '../components/map/MIPMapPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
+import MIPLegend from '../components/forms/MIPLegend';
+
+const items = [
+  {
+      title: 'Traffico scorrevole',
+      icon: 'no-traffic'
+  },
+  {
+      title: 'Traffico intenso',
+      icon: 'light-traffic'
+  },
+  {
+      title: 'Rallentamenti',
+      icon: 'heavy-traffic'
+  },
+  {
+      title: 'Code',
+      icon: 'queued-traffic'
+  },
+  {
+      title: 'Allerta meteo',
+      icon: 'weather-event'
+  },
+  {
+      title: 'Incidente',
+      icon: 'accident-event'
+  },
+  {
+      title: 'Videocamera',
+      icon: 'traffic-camera'
+  },
+  {
+      title: 'Chiusure',
+      icon: 'closure-event'
+  },
+]
 
 export default function Traffic(props) {
   return (
@@ -26,7 +60,7 @@ export default function Traffic(props) {
         breadcrumb='Indietro'>
       <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>
       <MIPTrafficMapPanel className="map-panel" trafficEventData={props.eventData}/>
-      <MIPTrafficLegend className="legend-panel mip-rounded-corners" />
+      <MIPLegend className="legend-panel mip-rounded-corners" items={items}/>
     </MIPPage>
   )
 }
