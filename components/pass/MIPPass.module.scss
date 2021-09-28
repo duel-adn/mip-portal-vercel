@@ -1,0 +1,126 @@
+@import '../../styles/variables';
+@import '../../styles/mixin';
+
+.external_panel {
+
+    display: flex;
+    flex-direction: column;
+
+    .panel_header {
+        padding: 1.25rem 2.125rem 1.5rem;
+
+        .title {
+            @include mip-left-icon('traffic', 1em);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    
+        .subtitle {
+            margin-top: .5rem;
+            font-size: .75rem;
+            font-weight: bold;
+        }    
+    }
+
+    .list_container {
+        min-height: 10rem;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border: 1px solid $mip-dark-border-color;
+    }
+}
+
+.list_frame {
+
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    margin: .5rem;
+    padding: 0 0 1rem 2rem;
+    border-bottom: 1px solid $mip-dark-border-color;
+}
+
+.list_frame.open {
+    background-image: url('/map-icons/pass-open.svg');
+}
+
+.list_frame.closed {
+    background-image: url('/map-icons/pass-closed.svg');
+}
+
+.data_card {
+    
+    .name {
+        margin-bottom: .5em;
+        font-size: 1rem;
+        background-size: 1.5rem;
+    }
+
+    .state {
+        margin-bottom: .3em;
+        padding-left: 1.2rem;
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 1rem;
+        font-size: .875rem;
+        line-height: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .state.open {
+        color: $mip-light-green-color;
+        background-image: url('/map-icons/pass-open.svg');
+    }
+    .state.closed {
+        color: $mip-dark-red-color;
+        background-image: url('/map-icons/pass-closed.svg');
+    }
+
+    .open_hours {
+        @include mip-left-icon('calendar', 2rem);
+        margin-bottom: .3em;
+        color: $mip-gray-text-color;
+        font-size: .875rem;
+        line-height: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .next_closure {
+        font-size: .875rem;
+        line-height: 1.5rem;
+    }
+}
+
+.search_panel {
+    display: flex;
+    width: 100%;
+    height: 5.325rem;
+    background-color: $mip-accent-background;
+    color: $mip-light-color;
+
+    input {
+        @include mip-left-icon('pass', 1.5rem);
+        appearance: none;
+
+        padding-left: 3rem !important;
+        background-position-x: 1rem;
+        height: 44px;
+        margin: auto;
+        width: 100%;
+        border-radius: .25rem;
+        border: 1px solid $mip-light-border-color;
+        padding-left: 2.5rem;
+        background-position-x: 1rem;
+        color: $mip-dark-blue-color;
+        font-size: 1rem;
+    }
+
+    input::placeholder {
+        color: $mip-dark-blue-color;
+        font-size: 1rem;
+        font-weight: 300;
+    }
+}

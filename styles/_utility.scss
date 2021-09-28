@@ -51,6 +51,29 @@
     margin-top: 2rem;
 }
 
+// Bordi
+
+.mip-rounded-corners {
+    border-radius: $mip-panel-border-radius;
+}
+
+.mip-tl-rounded-corners {
+    border-radius: $mip-panel-border-radius 0 0 0;
+}
+
+.mip-bl-rounded-corners {
+    border-radius: 0 0 0 $mip-panel-border-radius;
+}
+
+.mip-tr-rounded-corners {
+    border-radius: 0 $mip-panel-border-radius 0 0;
+}
+
+.mip-br-rounded-corners {
+    border-radius: 0 0 $mip-panel-border-radius 0;
+}
+
+
 // Display 
 
 .mip-flex-row {
