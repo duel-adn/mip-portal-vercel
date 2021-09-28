@@ -19,7 +19,7 @@ const serviceData = [
         title: "I colli alpini in Piemonte",
         subtitle: "L’apertura dei principali colli alpini piemontesi",
         icon: "/icons/colli-alpini.svg",
-        url: "#",
+        url: "/passes",
         external: false
     },
     {
