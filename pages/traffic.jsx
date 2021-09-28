@@ -13,8 +13,9 @@
 import MIPPage from '../components/page/MIPPage';
 import MIPTrafficLegend from '../components/traffic/MIPTrafficLegend'
 import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
-import MIPMapPanel from '../components/map/MIPMapPanel'
+//import MIPMapPanel from '../components/map/MIPMapPanel'
 import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
+import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
 
 export default function Traffic(props) {
   return (
@@ -24,7 +25,7 @@ export default function Traffic(props) {
         titleClassName="mip-bg-accent"
         breadcrumb='Indietro'>
       <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>
-      <MIPMapPanel className="map-panel" trafficEventData={props.eventData}/>
+      <MIPTrafficMapPanel className="map-panel" trafficEventData={props.eventData}/>
       <MIPTrafficLegend className="legend-panel mip-rounded-corners" />
     </MIPPage>
   )

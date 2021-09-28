@@ -14,7 +14,7 @@ import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
 import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
 import MIPTrafficEventPanel from '../components/traffic/MIPTrafficEventPanel'
 import MIPPublicTransportPanel, { fetchPublicTransportData } from '../components/news/MIPPublicTransportPanel'
-import MIPMapPanel from '../components/map/MIPMapPanel'
+import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
 import MIPWeatherPanel, { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
@@ -32,7 +32,7 @@ export default function Home(props) {
           <MIPPathDataPanel className="mip-rounded-corners" title="Percorso"/>
           <MIPTrafficEventPanel className="event-panel"
               trafficEventData={props.trafficEventData} compact={true} />
-          <MIPMapPanel className="map-panel" 
+          <MIPTrafficMapPanel className="map-panel" 
               trafficEventData={props.trafficEventData}/>
           <MIPPublicTransportPanel className="tpl-panel"
               title="Avvisi di trasporto pubblico locale" 
