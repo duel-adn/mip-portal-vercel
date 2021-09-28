@@ -39,6 +39,6 @@ export default function MIPMobilityNewsPanel(props) {
 export async function fetchMobilityNewsData(context) {
     const res = await fetch(process.env.MIP_NEWS_URL)
     const news = await res.json()
-    console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
+    console.log(`${process.env.MIP_NEWS_URL} (${news.length})`)
     return news
 }
