@@ -12,10 +12,16 @@
 
 import styles from './MIPForms.module.scss'
 
-function togglePlay() {
+function togglePlay(src) {
     const player = document.getElementById('notiziario')
     if (player) {
+        if (player.src === undefined) {
+            console.log("Setting source to" + src)
+            player.src = src;
+        }
         if (player.paused || player.ended) {
+            console.log(player)
+            player.load()
             player.play()
         } else {
             player.pause()
@@ -34,8 +40,12 @@ function displayProgress() {
         } else {
             progress.classList.remove("mip-d-none")
         }
-        let pct= 1 - ((player.duration - player.currentTime) / player.duration)
-        progress.value = pct
+        if (player.duration > 0) { 
+            let pct= 1 - ((player.duration - player.currentTime) / player.duration)
+            progress.value = pct
+        } else {
+            progress.value = 0;
+        }
     }
 }
 
@@ -47,11 +57,13 @@ function displayProgress() {
 export default function MIPTrafficNewsPlayback(props) {
     return (
         <div className={styles.playback_container}>
-        <button className={styles.traffic_news_btn} onClick={() => togglePlay()}>
+        <button className={styles.traffic_news_btn} onClick={() => togglePlay(props.audioUrl)}>
             Ascolta il notiziario sul traffico
         </button>
-        <audio id="notiziario" src={props.audioUrl}
-            onTimeUpdate={() => displayProgress()}>No audio</audio>   
+        <audio id="notiziario" 
+            onTimeUpdate={() => displayProgress()}>No audio
+            <source src="https://www.muoversinpiemonte.it/notiziario/notiziario.mp3"></source>
+            </audio>   
         <progress id="progress" className={`${styles.progress} mip-d-none`} />
         </div>
     )
