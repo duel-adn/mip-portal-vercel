@@ -1,7 +1,7 @@
 /**
     (C) Duel srl 2021.
 
-    Pannello informazioni trasporto pubblico.
+    Pannello informazioni su mobilità.
 
     Revision history
 
@@ -34,11 +34,4 @@ export default function MIPMobilityNewsPanel(props) {
             )}
         </MIPInformationPanel>
     )
-}
-
-export async function fetchMobilityNewsData(context) {
-    const res = await fetch(process.env.MIP_NEWS_URL)
-    const news = await res.json()
-    console.log(`${process.env.MIP_NEWS_URL} (${news.length})`)
-    return news
 }

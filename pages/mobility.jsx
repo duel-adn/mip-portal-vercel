@@ -12,7 +12,8 @@
 
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
+import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
+import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function MobilityNews(props) {
   return (
@@ -45,7 +46,7 @@ export default function MobilityNews(props) {
 }
 
 export async function getStaticProps(context) {
-  const weatherData = await fetchWeatherData(context)
+  const weatherData = await mipFetchWeatherData(context)
   
   return {
     props: {

@@ -13,7 +13,8 @@
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPPager from '../components/forms/MIPPager'
-import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
+import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
+import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function News(props) {
   return (
@@ -29,7 +30,7 @@ export default function News(props) {
 }
 
 export async function getStaticProps(context) {
-  const weatherData = await fetchWeatherData(context)
+  const weatherData = await mipFetchWeatherData(context)
   
   return {
     props: {

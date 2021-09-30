@@ -13,10 +13,6 @@
 import styles from './MIPNews.module.scss'
 import MIPInformationPanel from "../forms/MIPInformationPanel"
 
-function showDate(text) {
-    const theDate = new Date(text)
-    return theDate.toLocaleDateString('it') || ''
-}
 export default function MIPPublicTransportPanel(props) {
     return (
         <MIPInformationPanel className={props.className} title={props.title}>
@@ -26,7 +22,7 @@ export default function MIPPublicTransportPanel(props) {
                     <h3 className={styles.title}>{data.title}</h3>
                     <p className={styles.content}>{data.description.length > 200 ? data.description.substring(0, 197) + "..." : data.description}</p>
                     <div className={styles.footer}>
-                        <div>{showDate(data.validitystart)}</div>
+                        <div>{data.validitystart}</div>
                         <div className={styles.expander}>Espandi</div>
                     </div>
                 </div>
@@ -35,9 +31,3 @@ export default function MIPPublicTransportPanel(props) {
     )
 }
 
-export async function fetchPublicTransportData(context) {
-    const res = await fetch(process.env.MIP_TPL_URL)
-    const news = await res.json()
-    console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
-    return news
-}
