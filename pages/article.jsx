@@ -13,8 +13,8 @@
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel, {fetchWeatherData} from '../components/weather/MIPWeatherPanel'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import { MIPPageBanner } from '../components/page/MIPPageBanner'
+import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 
 export default function Home(props) {
   return (
@@ -65,15 +65,13 @@ Dalle ore 8.00 dell’8 maggio e fino all’ultimazione della gara, indicativame
 }
 
 export async function getStaticProps(context) {
-  const eventData = await fetchTrafficEventData(context)
-  const weatherData = await fetchWeatherData(context)
-  const publicTransportData = null; //await fetchPublicTransportData(context)
+  const eventData = await mipFetchTrafficEventData(context)
+  const weatherData = await mipFetchWeatherData(context)
   
   return {
     props: {
       eventData,
       weatherData,
-      publicTransportData
     },
   }
 }

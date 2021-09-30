@@ -13,13 +13,15 @@ import MIPPage from '../components/page/MIPPage'
 import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
 import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
 import MIPTrafficEventPanel from '../components/traffic/MIPTrafficEventPanel'
-import MIPPublicTransportPanel, { fetchPublicTransportData } from '../components/news/MIPPublicTransportPanel'
+import MIPPublicTransportPanel from '../components/news/MIPPublicTransportPanel'
 import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
-import MIPWeatherPanel, { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
+import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
+import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
-import { fetchMobilityNewsData } from '../components/news/MIPMobilityNewsPanel'
+import { mipFetchPublicTransportData } from '../components/tpl/MIPTPLAPI'
+import { mipFetchMobilityNewsData } from '../components/news/MIPMobilityNewsAPI'
 
 export default function Home(props) {
   return (
@@ -48,10 +50,10 @@ export default function Home(props) {
 }
 
 export async function getStaticProps(context) {
-  const trafficEventData = await mioFetchTrafficEventData(context)
-  const weatherData = await fetchWeatherData(context)
-  const publicTransportData = await fetchPublicTransportData(context)
-  const newsData = await fetchMobilityNewsData(context)
+  const trafficEventData = await mipFetchTrafficEventData(context)
+  const weatherData = await mipFetchWeatherData(context)
+  const publicTransportData = await mipFetchPublicTransportData(context)
+  const newsData = await mipFetchMobilityNewsData(context)
   
   return {
     props: {
