@@ -18,7 +18,7 @@ import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
 import MIPServicePanel from '../components/services/MIPServicePanel'
 import MIPWeatherPanel, { fetchWeatherData } from '../components/weather/MIPWeatherPanel'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
+import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import { fetchMobilityNewsData } from '../components/news/MIPMobilityNewsPanel'
 
 export default function Home(props) {
@@ -48,7 +48,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps(context) {
-  const trafficEventData = await fetchTrafficEventData(context)
+  const trafficEventData = await mioFetchTrafficEventData(context)
   const weatherData = await fetchWeatherData(context)
   const publicTransportData = await fetchPublicTransportData(context)
   const newsData = await fetchMobilityNewsData(context)

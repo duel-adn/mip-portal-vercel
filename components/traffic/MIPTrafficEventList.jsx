@@ -24,10 +24,3 @@ export default function MIPTrafficEventList(props) {
         </div>
     )
 }
-
-export async function fetchTrafficEventData(context) {
-    const res = await fetch(process.env.MIP_TRAFFIC_EVENT_URL)
-    const events = await res.json()
-    console.log(process.env.MIP_TRAFFIC_EVENT_URL + ' ' + events.length)
-    return events
-}

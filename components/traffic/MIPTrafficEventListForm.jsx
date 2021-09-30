@@ -15,10 +15,7 @@ import MIPTrafficEventList from './MIPTrafficEventList'
 
 export default function MIPTrafficEventListForm({className, trafficEventData}) {
     return (
-        <div className={className}
-            headerClassName={`${styles.traffic_tab_title} mip-bg-accent`}
-            labelClassName={styles.path_label}
-            title="Traffico">
+        <div className={className}>
             <div className={styles.search_panel}>
                 <input type="text" placeholder="Cerca tra gli eventi di traffico" />
             </div>

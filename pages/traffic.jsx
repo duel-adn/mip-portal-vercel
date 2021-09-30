@@ -12,9 +12,9 @@
 
 import MIPPage from '../components/page/MIPPage';
 import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
-import { fetchTrafficEventData } from '../components/traffic/MIPTrafficEventList'
 import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
 import MIPLegend from '../components/forms/MIPLegend';
+import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 
 const items = [
   {
@@ -66,7 +66,7 @@ export default function Traffic(props) {
 }
 
 export async function getStaticProps(context) {
-  const eventData = await fetchTrafficEventData(context)
+  const eventData = await mipFetchTrafficEventData(context)
 
   return {
     props: {
