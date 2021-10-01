@@ -38,6 +38,7 @@ export default function MIPTrafficMap(props) {
   });
   return (
     <MapContainer 
+      tap={false}
       center={[45.052237, 7.515388]} zoom={9} 
       scrollWheelZoom={false} 
       style={{flex: "1 1 100%"}}
