@@ -63,6 +63,7 @@ export default function MIPPassMap({passData}) {
       center={[45.052237, 7.515388]} zoom={8} 
       scrollWheelZoom={false} 
       style={{flex: "1 1 100%"}}
+      tap={false}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
