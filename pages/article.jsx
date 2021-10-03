@@ -15,7 +15,7 @@ import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
 import { MIPPageBanner } from '../components/page/MIPPageBanner'
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
-import mipFetchWeatherData from '../components/weather/MIPWeatherAPI'
+import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function Home(props) {
   return (
