@@ -53,7 +53,7 @@ export default function Passes({passData}) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const passData = await fetchPassData(context)
 
   return {

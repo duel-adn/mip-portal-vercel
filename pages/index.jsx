@@ -49,7 +49,7 @@ export default function Home(props) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const trafficEventData = await mipFetchTrafficEventData(context)
   const weatherData = await mipFetchWeatherData(context)
   const publicTransportData = await mipFetchPublicTransportData(context)

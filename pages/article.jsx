@@ -65,7 +65,7 @@ Dalle ore 8.00 dell’8 maggio e fino all’ultimazione della gara, indicativame
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const eventData = await mipFetchTrafficEventData(context)
   const weatherData = await mipFetchWeatherData(context)
   

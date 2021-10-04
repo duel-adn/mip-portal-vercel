@@ -65,7 +65,7 @@ export default function Traffic(props) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const eventData = await mipFetchTrafficEventData(context)
 
   return {

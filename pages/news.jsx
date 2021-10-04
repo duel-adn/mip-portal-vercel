@@ -29,7 +29,7 @@ export default function News(props) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const weatherData = await mipFetchWeatherData(context)
   
   return {

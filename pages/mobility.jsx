@@ -45,7 +45,7 @@ export default function MobilityNews(props) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const weatherData = await mipFetchWeatherData(context)
   
   return {
