@@ -24,14 +24,6 @@ const serviceData = [
     },
     {
         id: 2,
-        title: "Visita il Piemonte",
-        subtitle: "Piemonte. L’esperienza che non ti aspetti",
-        icon: "/icons/visita-piemonte.svg",
-        url: "https://www.visitpiemonte.com/it",
-        external: true
-    },
-    {
-        id: 3,
         title: "Orari dei treni",
         subtitle: "Controlla gli orari della rete ferroviaria del Piemonte",
         icon: "/icons/train-timetable.svg",
@@ -39,13 +31,21 @@ const serviceData = [
         external: true
     },
     {
-        id: 4,
+        id: 3,
         title: "Orario dei voli",
         subtitle: "Controlla l'orario dei voli dagli aeroporti piemontesi",
         icon: "/icons/flight-timetable.svg",
         url: "https://www.aeroportoditorino.it/it",
         external: true
-    }
+    },
+    {
+        id: 4,
+        title: "Visita il Piemonte",
+        subtitle: "Piemonte. L’esperienza che non ti aspetti",
+        icon: "/icons/visita-piemonte.svg",
+        url: "https://www.visitpiemonte.com/it",
+        external: true
+    },
 ]
 
 export default function MIPServicePanel(props) {
