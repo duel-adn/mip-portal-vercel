@@ -60,7 +60,7 @@ export default function MIPPathDataForm(props) {
       return (
         <form className={`${props.className} ${styles.path_data_dialog}`}>
             <div className={styles.path_input}>
-                <InputWithIcon id='start' icon='/icons/path-start.svg' id='start' placeholder='Punto di partenza' />
+                <InputWithIcon id='start' icon='/icons/path-start.svg' placeholder='Punto di partenza' />
                 <div className={styles.divisor}>
                     <img src="/icons/path-swap.svg" id='destination' alt="inverti partenza e destinazione" />
                 </div>
