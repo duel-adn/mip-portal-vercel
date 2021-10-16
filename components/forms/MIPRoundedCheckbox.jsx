@@ -23,13 +23,18 @@ export default function MIPRoundedCheckbox(props) {
     };
 
     return (
+
         <div className={styles.checkbox}>
             <div
                 onClick={handleChange}
-                className={`${styles.button} ${checked ? styles.checked : styles.normal}`}>
+                className={`${styles.button} ${checked ? styles.checked : styles.normal}`} role="checkbox"
+                tabIndex={0}
+                aria-checked={checked ? true : false}
+                aria-labelledby={`${props.id}-label`}
+            >
                 <img src={props.icon} />
             </div>
-            <p className={styles.title}>{props.title}</p>
+            <label id={`${props.id}-label`} className={styles.title}>{props.title}</label>
         </div>
     )
 }

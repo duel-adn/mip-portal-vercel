@@ -160,10 +160,10 @@ export default function MIPPathDataForm(props) {
             </div>
             <div className={styles.button_bar_title}>Mostra percorso</div>
             <div className={styles.button_bar}>
-                <MIPRoundedCheckbox title="auto" icon='/icons/car.svg' checked={true} />
-                <MIPRoundedCheckbox title="mezzi pubblici" icon='/icons/bus.svg' />
-                <MIPRoundedCheckbox title="bicicletta" icon='/icons/bike.svg' />
-                <MIPRoundedCheckbox title="a piedi" icon='/icons/walk.svg' />
+                <MIPRoundedCheckbox id="auto" title="auto" icon='/icons/car.svg' checked={true} />
+                <MIPRoundedCheckbox id="tpl" title="mezzi pubblici" icon='/icons/bus.svg' />
+                <MIPRoundedCheckbox id="bike" title="bicicletta" icon='/icons/bike.svg' />
+                <MIPRoundedCheckbox id="pedestrian" title="a piedi" icon='/icons/walk.svg' />
             </div>
             <div className={styles.footer}>
                 <button className="mip-large-button">Calcola percorso</button>
