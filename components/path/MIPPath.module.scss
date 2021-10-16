@@ -37,33 +37,33 @@
 
     .input {
         display: flex;
-
-        input {
-            width: 100%;
-            height: 1.625rem;
-            margin-right: 2em;
-            border: none;
-            border-bottom: 1px solid $mip-light-color;
-            border-radius: 0;
-            color: $mip-light-color;
-            background-color: transparent;
-            font-size: 1rem;
-            line-height: 1.5rem;
-        }
+        // width: 100%;
+        // input {
+        //     width: 100%;
+        //     height: 1.625rem;
+        //     margin-right: 2em;
+        //     border: none;
+        //     border-bottom: 1px solid $mip-light-color;
+        //     border-radius: 0;
+        //     color: $mip-light-color;
+        //     background-color: transparent;
+        //     font-size: 1rem;
+        //     line-height: 1.5rem;
+        // }
 
         img {
             width: 1rem;
             margin-right: .75rem;
         }
 
-        input::placeholder {
-            color: $mip-light-color;
-            font-weight: 300;
-        }
+        // input::placeholder {
+        //     color: $mip-light-color;
+        //     font-weight: 300;
+        // }
 
-        input:focus {
-            outline: none;
-        }
+        // input:focus {
+        //     outline: none;
+        // }
     }
 
     .footer {

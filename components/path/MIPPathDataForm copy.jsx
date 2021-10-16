@@ -14,8 +14,9 @@ import styles from './MIPPath.module.scss';
 import { useMemo, useState } from 'react'
 import { debounce } from '../../lib/MIPUtility'
 import MIPRoundedCheckbox from '../forms/MIPRoundedCheckbox';
+import Autosuggest from 'react-autosuggest';
+import Select from 'react-select'
 import AsyncSelect from 'react-select/async';
-import { mipPathAutocomplete } from './MIPPathAPI';
 
 const url = "https://map.muoversinpiemonte.it/autocomplete?lang=it&text="
 async function autocomplete(input) {
@@ -60,103 +61,87 @@ function InputWithIcon({ id, placeholder, icon }) {
     )
 }
 
-const customStyles = {
-    option: (provided, state) => ({
-        ...provided,
-        color: '#222',
-        //backgroundColor: state.isFocused ? '#368CF7' : 'white',
-    }),
-    container: (provided) => ({
-        ...provided,
-        width: '100%'
-    }),
-    control: (provided) => ({
-        // none of react-select's styles are passed to <Control />
-        ...provided,
-        backgroundColor: 'transparent',
-        color: 'white',
-        border: 'none',
-        borderBottom: '1px solid white',
-        borderRadius: 0,
-    }),
-    placeholder: (provided) => ({
-        ...provided,
-        color: 'white',
-        fontWeight: 300
-    }),
-    input: (provided) => ({
-        ...provided,
-        color: 'white',
-    }),
-    clearIndicator: (provided) => ({
-        ...provided,
-        color: 'lightgray',
-        ':hover': {
-            color: 'white'
-        }
-    }),
-    dropdownIndicator: (provided) => ({
-        ...provided,
-        color: 'lightgray',
-        ':hover': {
-            color: 'white'
-        }
-    }),
-    indicatorSeparator: (provided) => ({
-        ...provided,
-        backgroundColor: 'transparent'
-    }),
-    singleValue: (provided, state) => {
-        const opacity = state.isDisabled ? 0.5 : 1;
-        const transition = 'opacity 300ms';
+const loadOptions = async (inputValue, callback) => {
+    const rawData = await autocomplete(inputValue)
+    console.log(rawData)
+    const data = rawData.map(d => {
+        return { value: d.name, label: d.name, isFixed: true }
+    })
+    console.log({options: data})
+    callback(data)
+};
 
-        return { ...provided, color: 'white', opacity, transition };
-    }
-}
-
-const baseUrl = process.env.NEXT_PUBLIC_MIP_AUTOCOMPLETE_URL
-function AutocompleteAddressInput({id, placeholder, icon}) {
+const InputWithAutoselect = (props) => {
     const [location, setLocation] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const handleInputChange = (newValue) => {
-        setLocation(newValue);
-        return newValue;
-    }
-    const loadOptions = async (inputValue, callback) => {
-        const rawData = await mipPathAutocomplete(baseUrl, 'it', inputValue)
-        console.log(rawData)
-        if (rawData instanceof Error) {
-            console.log('error' + rawData)
-            return
-        }
-        console.log({ options: rawData })
-        callback(rawData)
-    }
-    return  (
-        <div id={id} className={styles.input}>
-        <img src={icon} />
-        <AsyncSelect 
-            styles={customStyles}
-            placeholder={placeholder}
-            loadOptions={loadOptions}
-            defaultOptions
-            isClearable
-            onInputChange={handleInputChange}
-            noOptionsMessage={() => location.length < 3 ? "Digitare un indirizzo" : "Località non trovata"}
-        />
+        const inputValue = newValue.replace(/\W/g, '');
+        setLocation({ inputValue });
+        return inputValue;
+    };
+    return <AsyncSelect 
+        placeholder="Inserisci indirizzo"
+        loadOptions={loadOptions}
+        defaultOptions
+        isClearable
+        onInputChange={handleInputChange}
+    />
+}
+
+const getSuggestionValue = suggestion => suggestion.name;
+
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => (
+    <div>
+      {suggestion.name}
     </div>
-    )
+  );
+  
+function AutocompleteInput() {
+    const [location, setLocation] = useState("")
+    const [suggestions, setSuggestions] = useState([])
+    const onSuggestionsFetchRequested = async ({ value }) => {
+        const items = await autocomplete(value)
+        
+        setSuggestions(items)
+    };
+    // Autosuggest will call this function every time you need to clear suggestions.
+    const onSuggestionsClearRequested = () => {
+        setSuggestions([])
+    };
+
+    const onChange = (event, { newValue }) => {
+        console.log("setting location " + newValue);
+        setLocation(newValue)
+    }
+
+    const inputProps = {
+        placeholder: 'Type a programming language',
+        value: location,
+        onChange: onChange
+      };
+    return (
+        <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+        />
+    );
 }
 
 export default function MIPPathDataForm(props) {
     return (
         <form className={`${props.className} ${styles.path_data_dialog}`}>
             <div className={styles.path_input}>
-                <AutocompleteAddressInput id='path_start' icon='/icons/path-start.svg' placeholder='Punto di partenza' />
+                <AutocompleteInput value="" id='start' icon='/icons/path-start.svg' placeholder='Punto di partenza' />
                 <div className={styles.divisor}>
                     <img src="/icons/path-swap.svg" id='destination' alt="inverti partenza e destinazione" />
                 </div>
-                <AutocompleteAddressInput id='path_end' icon='/icons/path-dest.svg' placeholder='Punto di arrivo' />
+                {/* <InputWithIcon id='path_end' icon='/icons/path-dest.svg' placeholder='Punto di arrivo' /> */}
+                <InputWithAutoselect />
             </div>
             <div className={styles.button_bar_title}>Mostra percorso</div>
             <div className={styles.button_bar}>
