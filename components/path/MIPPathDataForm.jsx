@@ -114,22 +114,25 @@ const customStyles = {
     }
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_MIP_AUTOCOMPLETE_URL
-function AutocompleteAddressInput({id, placeholder, icon}) {
-    const [location, setLocation] = useState("")
-    const [suggestions, setSuggestions] = useState([])
-    const handleInputChange = (newValue) => {
-        setLocation(newValue);
-        return newValue;
+function AutocompleteAddressInput({id, placeholder, icon, onChange}) {
+    const [searchString, setSearchString] = useState("")
+    const [location, setLocation] = useState(null)
+
+    const handleInputChange = (value) => setSearchString(value)
+    const handleSelect = (location) => {
+        if (onChange) {
+            onChange(id, location)
+        }
+        setLocation(location)
+        console.log(location)
     }
+
     const loadOptions = async (inputValue, callback) => {
-        const rawData = await mipPathAutocomplete(baseUrl, 'it', inputValue)
-        console.log(rawData)
+        const rawData = await mipPathAutocomplete('it', inputValue)
         if (rawData instanceof Error) {
             console.log('error' + rawData)
             return
         }
-        console.log({ options: rawData })
         callback(rawData)
     }
     return  (
@@ -142,31 +145,98 @@ function AutocompleteAddressInput({id, placeholder, icon}) {
             defaultOptions
             isClearable
             onInputChange={handleInputChange}
-            noOptionsMessage={() => location.length < 3 ? "Digitare un indirizzo" : "Località non trovata"}
+            onChange={handleSelect}
+            noOptionsMessage={() => searchString.length < 3 ? "Digitare un indirizzo" : "Località non trovata"}
+            menuShouldScrollIntoView={true}
         />
     </div>
     )
 }
 
+const PATH_ORIGIN_ID = 'path_origin'
+const PATH_DEST_ID = 'path_dest'
+const optionData = [
+    {
+        id: 'pedestrian',
+        title: 'a piedi',
+        icon: '/icons/walk.svg',
+        initialState: false
+    },
+    {
+        id: 'vehicle',
+        title: 'auto',
+        icon: '/icons/car.svg',
+        initialState: true
+    },
+    {
+        id: 'public_transport',
+        title: 'mezzi pubblici',
+        icon: '/icons/bus.svg',
+        initialState: false
+    },
+    {
+        id: 'bike',
+        title: 'bicicletta',
+        icon: '/icons/bike.svg',
+        initialState: false
+    },
+]
+
+
 export default function MIPPathDataForm(props) {
+    const [startLocation, setStartLocation] = useState(null)
+    const [endLocation, setEndLocation] = useState(null)
+    const optionStates = optionData.map(option => ({
+        ...option,
+        stateData: useState(option.initialState)
+    }))
+
+    const onChangeLocation = (id, location) => {
+        switch (id) {
+            case PATH_ORIGIN_ID:
+                setStartLocation(location)
+                break
+
+            case PATH_DEST_ID:
+                setEndLocation(location)
+                break
+            
+            default:
+                console.log(`Invalid id for path endpoint: ${id}`)
+        }
+    }
+    const onChangeOption = (id, newState) => {
+        optionStates.forEach(state => state.stateData[1](state.id == id ? newState : false))
+    }
+    const pathSearch = (event) =>{
+        if (!startLocation) {
+            alert("No start location")
+        } else if (!endLocation) {
+            alert("No end location")
+        }
+        event.preventDefault()
+    }
     return (
         <form className={`${props.className} ${styles.path_data_dialog}`}>
             <div className={styles.path_input}>
-                <AutocompleteAddressInput id='path_start' icon='/icons/path-start.svg' placeholder='Punto di partenza' />
+                <AutocompleteAddressInput id={PATH_ORIGIN_ID} icon='/icons/path-start.svg' placeholder='Punto di partenza' 
+                    onChange={onChangeLocation} />
                 <div className={styles.divisor}>
                     <img src="/icons/path-swap.svg" id='destination' alt="inverti partenza e destinazione" />
                 </div>
-                <AutocompleteAddressInput id='path_end' icon='/icons/path-dest.svg' placeholder='Punto di arrivo' />
+                <AutocompleteAddressInput id={PATH_DEST_ID} icon='/icons/path-dest.svg' placeholder='Punto di arrivo' 
+                    onChange={onChangeLocation} />
             </div>
             <div className={styles.button_bar_title}>Mostra percorso</div>
             <div className={styles.button_bar}>
-                <MIPRoundedCheckbox id="auto" title="auto" icon='/icons/car.svg' checked={true} />
-                <MIPRoundedCheckbox id="tpl" title="mezzi pubblici" icon='/icons/bus.svg' />
-                <MIPRoundedCheckbox id="bike" title="bicicletta" icon='/icons/bike.svg' />
-                <MIPRoundedCheckbox id="pedestrian" title="a piedi" icon='/icons/walk.svg' />
+                { optionStates.map(opt => 
+                    <MIPRoundedCheckbox id={opt.id} title={opt.title} icon={opt.icon} checked={opt.stateData[0]}
+                        onChange={onChangeOption}/>
+                    )
+                }
             </div>
             <div className={styles.footer}>
-                <button className="mip-large-button">Calcola percorso</button>
+                <button className="mip-large-button" onClick={pathSearch}>Calcola percorso</button>
             </div>
         </form>
     )
