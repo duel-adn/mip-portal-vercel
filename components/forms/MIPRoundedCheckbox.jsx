@@ -22,13 +22,24 @@ export default function MIPRoundedCheckbox(props) {
         setChecked(!checked);
     };
 
+    const handleKey = (key) => {
+        console.log('key = ' + key)
+        if (key.code === 'Space') { 
+            handleChange()
+            key.preventDefault()
+            key.stopPropagation()
+        }
+    }
     return (
 
         <div className={styles.checkbox}>
             <div
                 onClick={handleChange}
-                className={`${styles.button} ${checked ? styles.checked : styles.normal}`} role="checkbox"
+                onKeyDown={handleKey}
+                className={`${styles.button} ${checked ? styles.checked : styles.normal}`} 
                 tabIndex={0}
+                // ARIA
+                role="checkbox"
                 aria-checked={checked ? true : false}
                 aria-labelledby={`${props.id}-label`}
             >

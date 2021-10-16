@@ -29,7 +29,12 @@
         img {
             margin: auto;
         }  
+
+        &:focus {
+            background-color: lightcoral;
+        }
     }
+
 
     .title {
         margin-top: .375rem;
