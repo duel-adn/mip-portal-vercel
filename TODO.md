@@ -7,4 +7,5 @@
 
 - [ ] SEO in MIPPageHead
 - [ ] controllare colore icone calcolo percorso
+- [ ] evidenziare focus nelle form per accessibilità
 
