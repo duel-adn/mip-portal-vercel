@@ -15,15 +15,17 @@ import styles from './MIPForms.module.scss';
 
 import { useState } from 'react';
 
-export default function MIPRoundedCheckbox(props) {
-    const [checked, setChecked] = useState(props.checked);
+export default function MIPRoundedCheckbox({id, title, checked, icon, onChange}) {
+    const [isChecked, setChecked] = useState(checked);
 
     const handleChange = () => {
-        setChecked(!checked);
-    };
+        //setChecked(!isChecked);
+        if (onChange) {
+            onChange(id, !checked)
+        }
+    }
 
     const handleKey = (key) => {
-        console.log('key = ' + key)
         if (key.code === 'Space') { 
             handleChange()
             key.preventDefault()
@@ -34,6 +36,7 @@ export default function MIPRoundedCheckbox(props) {
 
         <div className={styles.checkbox}>
             <div
+                id={id}
                 onClick={handleChange}
                 onKeyDown={handleKey}
                 className={`${styles.button} ${checked ? styles.checked : styles.normal}`} 
@@ -41,11 +44,11 @@ export default function MIPRoundedCheckbox(props) {
                 // ARIA
                 role="checkbox"
                 aria-checked={checked ? true : false}
-                aria-labelledby={`${props.id}-label`}
+                aria-labelledby={`${id}-label`}
             >
-                <img src={props.icon} />
+                <img src={icon} />
             </div>
-            <label id={`${props.id}-label`} className={styles.title}>{props.title}</label>
+            <label id={`${id}-label`} className={styles.title}>{title}</label>
         </div>
     )
 }
