@@ -20,7 +20,6 @@ function togglePlay(src) {
             player.src = src;
         }
         if (player.paused || player.ended) {
-            console.log(player)
             player.load()
             player.play()
         } else {
