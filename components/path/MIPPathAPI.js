@@ -45,3 +45,19 @@ export async function mipPathAutocomplete(lang, searchString) {
     }
     return []
 }
+
+export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocation, toCoordinates, options) {
+    const fromLocationString = fromLocation.toLowerCase().replace(' ', '+')
+    const fromPlace = `${fromLocationString}::${fromCoordinates[1]},${fromCoordinates[0]}`
+    const toLocationString = toLocation.toLowerCase().replace(' ', '+')
+    const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
+    const response = await mipFetch(
+        process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL, {
+        'fromPlace': fromPlace,
+        'toPlace': toPlace,
+        'mode': 'CAR',
+        'maxWalkDistance': 2000,
+        'locale': lang,
+    })
+    return response
+}

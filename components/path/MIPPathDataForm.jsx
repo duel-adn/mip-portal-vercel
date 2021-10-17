@@ -15,7 +15,7 @@ import { useMemo, useState } from 'react'
 import { debounce } from '../../lib/MIPUtility'
 import MIPRoundedCheckbox from '../forms/MIPRoundedCheckbox';
 import AsyncSelect from 'react-select/async';
-import { mipPathAutocomplete } from './MIPPathAPI';
+import { mipPathAutocomplete, mipPathSearch } from './MIPPathAPI';
 
 const url = "https://map.muoversinpiemonte.it/autocomplete?lang=it&text="
 async function autocomplete(input) {
@@ -208,13 +208,15 @@ export default function MIPPathDataForm(props) {
     const onChangeOption = (id, newState) => {
         optionStates.forEach(state => state.stateData[1](state.id == id ? newState : false))
     }
-    const pathSearch = (event) =>{
+    const pathSearch = async (event) =>{
         if (!startLocation) {
             alert("No start location")
         } else if (!endLocation) {
             alert("No end location")
         }
         event.preventDefault()
+        const response = await mipPathSearch('it', startLocation.name, startLocation.coordinates, endLocation.name, endLocation.coordinates)
+        console.log(response)
     }
     return (
         <form className={`${props.className} ${styles.path_data_dialog}`}>
