@@ -20,13 +20,6 @@ const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
 const optionData = [
     {
-        id: 'pedestrian',
-        title: 'a piedi',
-        icon: styles.walk,
-        value: "WALK",
-        initialState: false
-    },
-    {
         id: 'vehicle',
         title: 'auto',
         icon: styles.car,
@@ -45,6 +38,13 @@ const optionData = [
         title: 'bicicletta',
         value: "BIKE",
         icon: styles.bike,
+        initialState: false
+    },
+    {
+        id: 'pedestrian',
+        title: 'a piedi',
+        icon: styles.walk,
+        value: "WALK",
         initialState: false
     },
 ]
@@ -105,7 +105,7 @@ export default function MIPPathDataForm({ className, onSubmit }) {
                 <div className={styles.radio_group}>
                     {optionData.map(opt => 
                         <RadioGroup.Option key={opt.id}
-                            value={opt.value} 
+                            value={opt} 
                             className={({ active, checked }) => mipConcatenate(styles.option, opt.icon,
                                 active ? styles.active : '',
                                 checked ?  styles.checked : '')}>

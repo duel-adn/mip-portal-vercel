@@ -12,7 +12,7 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
 import MIPPage from '../components/page/MIPPage'
-import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
+import MIPPathDataForm from '../components/path/MIPPathDataForm'
 import MIPTrafficEventListForm from '../components/traffic/MIPTrafficEventListForm'
 
 function classNames(...classes) {
@@ -35,7 +35,7 @@ export default function Layout({ passData }) {
             </Tab>
         </Tab.List>
         <Tab.Panel>
-              <MIPPathDataPanel />
+              <MIPPathDataForm />
           </Tab.Panel>
           <Tab.Panel>
               <MIPTrafficEventListForm />
