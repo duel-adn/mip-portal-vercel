@@ -114,7 +114,7 @@ export default function MIPAddressAutocompleteInput({ className, id, placeholder
                 defaultOptions
                 isClearable
                 onInputChange={handleInputChange}
-                onChange={(handleSelect)}
+                onChange={handleSelect}
                 noOptionsMessage={() => searchString.length < 3 ? "Digitare un indirizzo" : "Località non trovata"}
                 menuShouldScrollIntoView={true}
             />
