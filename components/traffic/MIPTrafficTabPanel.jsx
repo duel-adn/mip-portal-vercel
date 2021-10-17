@@ -11,11 +11,11 @@
 */
 import { Tab } from '@headlessui/react'
 
+import styles from './MIPTraffic.module.scss'
 import MIPPathDataForm from "../path/MIPPathDataForm"
 import MIPTrafficEventListForm from './MIPTrafficEventListForm'
 
 export default function MIPTrafficTabPanel({ className, selected, trafficEventData }) {
-    //const className = `${props.className || ''} ${styles.traffic_tab_panel}`
     return (
         <div className={className}>
             <Tab.Group defaultIndex={selected} as="div" className="mip-tab-group">
@@ -33,7 +33,7 @@ export default function MIPTrafficTabPanel({ className, selected, trafficEventDa
                     <Tab.Panel>
                         <MIPPathDataForm />
                     </Tab.Panel>
-                    <Tab.Panel className="mip-vertical-scroll">
+                    <Tab.Panel className={styles.list_container}>
                         <MIPTrafficEventListForm className="mip-wh-100" trafficEventData={trafficEventData} />
                     </Tab.Panel>
                 </Tab.Panels>

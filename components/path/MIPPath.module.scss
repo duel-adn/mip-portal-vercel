@@ -125,16 +125,16 @@
 
 .path_data_panel {
     min-width: 20rem;
-    height: 30rem;
-    padding: 1.25rem 2.125rem 1.5rem;
+    height: min-content;
+    //padding: 1.25rem 2.125rem 1.5rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
-
+    
     .title {
         @include mip-left-icon('path-search', 1.5rem);
-
+        margin-top: 2rem;
+        margin-left: 2rem;
         font-weight: bold;
-        margin-bottom: 2em;
     }
 }
 

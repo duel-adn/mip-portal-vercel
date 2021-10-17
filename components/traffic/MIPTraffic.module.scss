@@ -255,3 +255,13 @@
         font-weight: 300;
     }
 }
+
+.list_container {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-left: 1px solid $mip-dark-border-color;
+    border-right: 1px solid $mip-dark-border-color;
+    border-bottom: 1px solid $mip-dark-border-color;
+    border-radius: 0 0 0 1rem;
+}
