@@ -9,7 +9,7 @@ export default function MIPTrafficEventCard(props) {
         {compact ?
             <div>
                 <p className={styles.title}
-                    style={{ 'backgroundImage': 'url("/icons/car.svg")' }}>{event.road}</p>
+                    style={{ 'backgroundImage': 'url("/icons/car-black.svg")' }}>{event.road}</p>
                 <div className={styles.container}>
                     <p className={styles.text}>{event.what}</p>
                     <p className={styles.text}>{event.where}</p>
@@ -17,7 +17,7 @@ export default function MIPTrafficEventCard(props) {
             </div>
             :
             <div>
-                <p className={styles.title} style={{ 'backgroundImage': 'url("/icons/car.svg")' }}>{event.road}</p>
+                <p className={styles.title} style={{ 'backgroundImage': 'url("/icons/car-black.svg")' }}>{event.road}</p>
                 <div className={styles.container}>
                     <p className={styles.where}>{event.where}</p>
                     <p className={styles.text}>{event.what}</p>
