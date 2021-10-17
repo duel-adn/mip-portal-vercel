@@ -1,31 +1,48 @@
+/**
+    (C) Duel srl 2021.
+
+    Pagina di test del layout.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+import { useState } from 'react'
+import { Tab } from '@headlessui/react'
 import MIPPage from '../components/page/MIPPage'
-import { fetchPassData } from '../components/pass/MIPPassDataList'
-import MIPPassDataPanel from '../components/pass/MIPPassDataPanel'
+import MIPPathDataPanel from '../components/path/MIPPathDataPanel'
+import MIPTrafficEventListForm from '../components/traffic/MIPTrafficEventListForm'
 
-export default function Home({passData}) {
-    return (
-        <MIPPage className="mip-home-page1" 
-          pageTitle="Layout test">
-          <MIPPassDataPanel 
-            headerClassName="mip-tl-rounded-corners mip-bg-accent"
-            contentClassName="mip-bl-rounded-corners mip-bg-light"
-            title="Colli alpini"
-            titleIcon="traffic"
-            subtitle="Scopri informazioni su colli e trafori"
-            enableSearch={true}
-            searchPlaceholder="Seleziona un colle" 
-            passData={passData}/>
-        </MIPPage>
-    )
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
 }
 
-export async function getStaticProps(context) {
-  const passData = await fetchPassData(context)
-
-  return {
-      props: {
-        passData
-    }
-  }
+export default function Layout({ passData }) {
+  return (
+    <MIPPage className="mip-home-page1"
+      pageTitle="Layout test">
+      <Tab.Group>
+        <Tab.List className="mip-tab-list">
+          <Tab key="path" as="h4"
+                className="mip-bg-blue mip-tab-header mip-tl-rounded-corners mip-path-icon">
+                Percorso
+            </Tab>
+            <Tab key="traffic" as="h4"
+                className="mip-bg-accent mip-tab-header mip-traffic-icon">
+                Traffico
+            </Tab>
+        </Tab.List>
+        <Tab.Panel>
+              <MIPPathDataPanel />
+          </Tab.Panel>
+          <Tab.Panel>
+              <MIPTrafficEventListForm />
+          </Tab.Panel>
+        <Tab.Panels>
+        </Tab.Panels>
+      </Tab.Group>
+    </MIPPage>
+  )
 }
-  

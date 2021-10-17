@@ -21,6 +21,10 @@
         auto;   // legenda
     row-gap: 1rem;
     margin-bottom: 1rem;
+
+    .event-panel {
+        height: 100%;
+    }
 }
 
 @media (min-width: 780px) {

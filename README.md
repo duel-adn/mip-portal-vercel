@@ -7,6 +7,7 @@
 | [NPM.js] | v6.14.14 | Node package manager |
 | [Next.js] | 11.1.0 | React framework |
 | [Leaflet] | Leaflet map library |
+| [Headless UI] | Libreria di componenti headless |
 | [React-select] | WAI-ARIA Compliant select component | 
 
 ## Installazione ubuntu
@@ -23,6 +24,8 @@
 1. Installare `react-leaflet` e `leaflet`
 ```npm install react-leaflet```
 ```npm install leaflet```
+1. Installare `headlessui/react`
+```npm install @headlessui/react```
 1. Installare `react-select`
 ```npm i --save react-select```
 
@@ -33,4 +36,5 @@
 [Next.js]:https://nextjs.org/
 [Headless UI]:https://headlessui.dev/
 [Leaflet]:https://leafletjs.com/
+[Headless UI]:https://headlessui.dev/
 [React-select]:https://react-select.com/
