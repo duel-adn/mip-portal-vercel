@@ -14,6 +14,7 @@
 
 .path_data_dialog {
     padding: 2rem;
+    overflow: hidden;
     background-color: $mip-blue-background;
     color: $mip-light-color;
 }
@@ -125,8 +126,7 @@
 
 .path_data_panel {
     min-width: 20rem;
-    height: min-content;
-    //padding: 1.25rem 2.125rem 1.5rem;
+    height: max-content;
     background-color: $mip-blue-background;
     color: $mip-light-color;
     
