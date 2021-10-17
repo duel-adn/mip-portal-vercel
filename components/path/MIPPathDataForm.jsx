@@ -1,5 +1,5 @@
 /**
-    Duel S.p.A.
+    Duel srl
 
     Form per l'input dei dati per la ricerca del percorso.
 
@@ -14,7 +14,7 @@ import { useState } from 'react';
 import styles from './MIPPath.module.scss'
 import MIPRoundedCheckbox from '../forms/MIPRoundedCheckbox'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
-import { mipPathSearch } from './MIPPathAPI'
+import { mipConcatenate } from '../../lib/MIPUtility';
 
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
@@ -45,8 +45,14 @@ const optionData = [
     },
 ]
 
-
-export default function MIPPathDataForm(props) {
+/**
+ * Form per l'inserimento dei dati relativi al percorso da calcolare
+ * 
+ * @param {string} className nome da aggiungere all'elemento esterno
+ * @param {(location, location) => void} callback per il calcolo del percorso
+ * @returns il componente per l'inserimento dati
+ */
+export default function MIPPathDataForm({className, onSubmit}) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const optionStates = optionData.map(option => ({
@@ -74,15 +80,19 @@ export default function MIPPathDataForm(props) {
     const pathSearch = async (event) =>{
         if (!startLocation) {
             alert("No start location")
+            return
         } else if (!endLocation) {
             alert("No end location")
+            return
         }
+        event.stopPropagation()
         event.preventDefault()
-        const response = await mipPathSearch('it', startLocation.name, startLocation.coordinates, endLocation.name, endLocation.coordinates)
-        console.log(response)
+        if (onSubmit) {
+            onSubmit(startLocation, endLocation)
+        }
     }
     return (
-        <form className={`${props.className} ${styles.path_data_dialog}`}>
+        <form className={mipConcatenate(className, styles.path_data_dialog)} onSubmit={pathSearch}>
             <div className={styles.path_input}>
                 <MIPAddressAutocompleteInput id={PATH_ORIGIN_ID} icon='/icons/path-start.svg' placeholder='Punto di partenza' 
                     onChange={onChangeLocation} />
@@ -101,7 +111,7 @@ export default function MIPPathDataForm(props) {
                 }
             </div>
             <div className={styles.footer}>
-                <button className="mip-large-button" onClick={pathSearch}>Calcola percorso</button>
+                <input type="submit" className="mip-large-button" value="Calcola percorso"/>
             </div>
         </form>
     )

@@ -1,3 +1,14 @@
+/**
+    Duel srl
+
+    Stili per gli elementi della UI per il calcolo del percorso.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
 @import '../../styles/variables';
 @import '../../styles/mixin';
 
@@ -69,7 +80,7 @@
     .footer {
         display: flex;
         margin-top: 3.1rem;
-        button {
+        input {
             margin: 0 auto;
             color: $mip-blue-background;
             background-color: $mip-light-color;
