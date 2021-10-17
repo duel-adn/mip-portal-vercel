@@ -13,51 +13,6 @@
 @import '../../styles/variables';
 @import '../../styles/mixin';
 
-.checkbox {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: center;
-
-    .button {
-        display: flex;
-        width: 2.4rem;
-        height: 2.4rem;
-        border-radius: 3rem;  
-
-        img {
-            margin: auto;
-        }  
-
-        &:focus {
-            border: 1px solid $mip-dark-blue-color;
-        }
-    }
-
-
-    .title {
-        margin-top: .375rem;
-        font-size: .625rem;
-        line-height: 1rem;
-        text-transform: uppercase;
-    }
-
-    .checked {
-        background-color: $mip-light-background;
-    }
-    
-    .normal {
-        background-color: transparent;
-        border: 1px solid $mip-light-background;
-
-        img {
-            filter: invert(1);
-        }
-    }
-    
-}
-
 // Pannello generico per informazioni in formato lista 
 
 .information_panel {

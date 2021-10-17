@@ -13,80 +13,113 @@
 @import '../../styles/mixin';
 
 .path_data_dialog {
+    padding: 2rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
+}
 
-    .button_bar {
-        display: flex;
-        justify-content: space-between;
-        margin-right: 2em;
-        margin-bottom: 2.8rem;
-    }
+// Container per input partenza e destinazione
 
-    .path_input {
-        width: 100%;
-    }
-
-    .button_bar_title {
-        margin-top: 3.5rem;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 18px;
-    }
-
-    .divisor {
-        display: flex;
-        height: 3.125rem;
-        border-left: 1px dashed $mip-light-color;
-        img {
-            margin-top: auto;
-            margin-left: auto;
-        }
-    }
+.path_input_container {
+    
+    margin-bottom: 2rem;
 
     .input {
-        display: flex;
-        // width: 100%;
-        // input {
-        //     width: 100%;
-        //     height: 1.625rem;
-        //     margin-right: 2em;
-        //     border: none;
-        //     border-bottom: 1px solid $mip-light-color;
-        //     border-radius: 0;
-        //     color: $mip-light-color;
-        //     background-color: transparent;
-        //     font-size: 1rem;
-        //     line-height: 1.5rem;
-        // }
-
-        img {
-            width: 1rem;
-            margin-right: .75rem;
-        }
-
-        // input::placeholder {
-        //     color: $mip-light-color;
-        //     font-weight: 300;
-        // }
-
-        // input:focus {
-        //     outline: none;
-        // }
+        margin-right: 2.5rem;
     }
-
-    .footer {
+    .divisor {
         display: flex;
-        margin-top: 3.1rem;
-        input {
-            margin: 0 auto;
-            color: $mip-blue-background;
-            background-color: $mip-light-color;
-        }    
+        height: 3rem;
+        border-left: 1px dashed $mip-light-color;
+        
+        .swap_button {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            background-image: url(/icons/path-swap.svg);background-repeat: no-repeat;
+            background-position: center;
+            margin-left: auto;
+            margin-top: 1rem;
+        }
     }
 }
+
+.radio_group_container {
+    
+    .label {
+        text-transform: uppercase;
+        font-size: .875rem;
+        font-weight: bold;
+    }
+
+    .radio_group {
+
+        display: flex;
+        justify-content: space-between;
+        margin-right: 2.5rem;
+        margin-top: 1rem;
+
+        .option::before {
+            content: '';
+            width: 2.4rem;
+            height: 2.4rem;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid white;
+            border-radius: 50%;
+        }
+    
+        .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .car::before {
+            background-image: url(/icons/car.svg);
+        }
+
+        .bus::before {
+            background-image: url(/icons/bus.svg);
+    
+        }
+        .walk::before {
+            background-image: url(/icons/walk.svg);
+        }
+
+        .bike::before {
+            background-image: url(/icons/bike.svg);
+        }
+
+        .checked::before {
+            border-color: black;
+            background-color: black;
+            filter: invert(1);
+        }
+        
+        .active::before {
+            border: 1px solid $mip-light-color;
+        }
+
+        .radio_label {
+            margin-top: .4rem;
+            text-transform: uppercase;
+            font-size: .625rem;
+            font-weight: bold;
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    margin-top: 3.1rem;
+    input {
+        margin: 0 auto;
+        color: $mip-blue-background;
+        background-color: $mip-light-color;
+    }    
+}
+
 
 // Path data panel
 
@@ -104,3 +137,4 @@
         margin-bottom: 2em;
     }
 }
+

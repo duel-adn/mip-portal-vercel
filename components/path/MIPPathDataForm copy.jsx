@@ -13,6 +13,7 @@
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import styles from './MIPPath.module.scss'
+import MIPRoundedCheckbox from '../forms/MIPRoundedCheckbox'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
 
@@ -22,29 +23,25 @@ const optionData = [
     {
         id: 'pedestrian',
         title: 'a piedi',
-        icon: styles.walk,
-        value: "WALK",
+        icon: '/icons/walk.svg',
         initialState: false
     },
     {
         id: 'vehicle',
         title: 'auto',
-        icon: styles.car,
-        value: "CAR",
+        icon: '/icons/car.svg',
         initialState: true
     },
     {
         id: 'public_transport',
         title: 'mezzi pubblici',
-        value: "PUBLIC",
-        icon: styles.bus,
+        icon: '/icons/bus.svg',
         initialState: false
     },
     {
         id: 'bike',
         title: 'bicicletta',
-        value: "BIKE",
-        icon: styles.bike,
+        icon: '/icons/bike.svg',
         initialState: false
     },
 ]
@@ -59,7 +56,10 @@ const optionData = [
 export default function MIPPathDataForm({ className, onSubmit }) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
-    const [selectedOption, setSelectedOption] = useState(optionData[0])
+    const optionStates = optionData.map(option => ({
+        ...option,
+        stateData: useState(option.initialState)
+    }))
 
     const onChangeLocation = (id, location) => {
         switch (id) {
@@ -74,6 +74,9 @@ export default function MIPPathDataForm({ className, onSubmit }) {
             default:
                 console.log(`Invalid id for path endpoint: ${id}`)
         }
+    }
+    const onChangeOption = (id, newState) => {
+        optionStates.forEach(state => state.stateData[1](state.id == id ? newState : false))
     }
     const pathSearch = async (event) => {
         if (!startLocation) {
@@ -91,30 +94,40 @@ export default function MIPPathDataForm({ className, onSubmit }) {
     }
     return (
         <form className={mipConcatenate(className, styles.path_data_dialog)} onSubmit={pathSearch}>
-            <div className={styles.path_input_container}>
-                <MIPAddressAutocompleteInput id={PATH_ORIGIN_ID} className={styles.input} icon='/icons/path-start.svg' placeholder='Punto di partenza'
+            <div className={styles.path_input}>
+                <MIPAddressAutocompleteInput id={PATH_ORIGIN_ID} icon='/icons/path-start.svg' placeholder='Punto di partenza'
                     onChange={onChangeLocation} />
                 <div className={styles.divisor}>
-                    <input type="button" className={styles.swap_button} />
+                    <img src="/icons/path-swap.svg" id='destination' alt="inverti partenza e destinazione" />
                 </div>
-                <MIPAddressAutocompleteInput id={PATH_DEST_ID} className={styles.input} icon='/icons/path-dest.svg' placeholder='Punto di arrivo'
+                <MIPAddressAutocompleteInput id={PATH_DEST_ID} icon='/icons/path-dest.svg' placeholder='Punto di arrivo'
                     onChange={onChangeLocation} />
             </div>
-            <RadioGroup className={styles.radio_group_container} value={selectedOption} onChange={setSelectedOption} >
-                <RadioGroup.Label className={styles.label}>Mostra percorso</RadioGroup.Label>
-                <div className={styles.radio_group}>
-                    {optionData.map(opt => 
-                        <RadioGroup.Option key={opt.id}
-                            value={opt.value} 
-                            className={({ active, checked }) => mipConcatenate(styles.option, opt.icon,
-                                active ? styles.active : '',
-                                checked ?  styles.checked : '')}>
-                            <RadioGroup.Label className={styles.radio_label}>{opt.title}</RadioGroup.Label>
-                        </RadioGroup.Option>
+            <div className={styles.button_bar_title}>Mostra percorso</div>
+            <div className={styles.button_bar}>
+                {optionStates.map(opt =>
+                    <MIPRoundedCheckbox id={opt.id} title={opt.title} icon={opt.icon} checked={opt.stateData[0]}
+                        onChange={onChangeOption} />
+                )
+                }
+            </div>
+            <RadioGroup className={styles.radio_group} value="on" onChange={onChangeOption} >
+                <RadioGroup.Label className={styles.radio_group_label}>Mostra percorso</RadioGroup.Label>
+                <div className={styles.button_bar}>
+                <RadioGroup.Option value="startup" className={styles.radio_group_option + ' ' + styles.select}>
+                    <RadioGroup.Label className={styles.radio_label}>a piedi</RadioGroup.Label>
+                </RadioGroup.Option>
+                <RadioGroup.Option className={styles.radio_group_option} value="enterprise">
+                    <RadioGroup.Label className={styles.radio_label}>in bus</RadioGroup.Label>
+                </RadioGroup.Option>
+                <RadioGroup.Option value="business" className={styles.radio_group_option1}>
+                    <img src="/icons/bus.svg"/>
+                    {({ checked }) => (
+                        <span className={checked ? 'bg-blue-200' : ''}>Business</span>
                     )}
+                </RadioGroup.Option>
                 </div>
-            </RadioGroup>            
-            <div className={styles.footer}>
+            </RadioGroup>            <div className={styles.footer}>
                 <input type="submit" className="mip-large-button" value="Calcola percorso" />
             </div>
         </form>

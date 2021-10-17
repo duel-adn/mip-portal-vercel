@@ -11,7 +11,7 @@
 */
 import { Tab } from '@headlessui/react'
 
-import MIPPathDataPanel from "../path/MIPPathDataPanel"
+import MIPPathDataForm from "../path/MIPPathDataForm"
 import MIPTrafficEventListForm from './MIPTrafficEventListForm'
 
 export default function MIPTrafficTabPanel({ className, selected, trafficEventData }) {
@@ -31,7 +31,7 @@ export default function MIPTrafficTabPanel({ className, selected, trafficEventDa
                 </Tab.List>
                 <Tab.Panels className="mip-tab-panel">
                     <Tab.Panel>
-                        <MIPPathDataPanel />
+                        <MIPPathDataForm />
                     </Tab.Panel>
                     <Tab.Panel className="mip-vertical-scroll">
                         <MIPTrafficEventListForm className="mip-wh-100" trafficEventData={trafficEventData} />

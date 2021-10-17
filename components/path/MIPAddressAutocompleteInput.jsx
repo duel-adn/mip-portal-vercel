@@ -15,6 +15,7 @@ import { useState } from 'react';
 import styles from './MIPPath.module.scss'
 import AsyncSelect from 'react-select/async';
 import { mipPathAutocomplete } from './MIPPathAPI';
+import { mipConcatenate } from '../../lib/MIPUtility';
 
 /**
  * Styling per il box di input e il dropdown
@@ -84,7 +85,7 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ id, placeholder, icon, onChange }) {
+export default function MIPAddressAutocompleteInput({ className, id, placeholder, icon, onChange }) {
     const [searchString, setSearchString] = useState("")
 
     const handleInputChange = (value) => setSearchString(value)
@@ -104,7 +105,7 @@ export default function MIPAddressAutocompleteInput({ id, placeholder, icon, onC
         callback(rawData)
     }
     return (
-        <div id={id} className={styles.input}>
+        <div id={id} className={mipConcatenate(className, "mip-flex-col")}>
             <img src={icon} aria-hidden="true" alt="icona" />
             <AsyncSelect
                 styles={customStyles}
