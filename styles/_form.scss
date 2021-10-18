@@ -28,6 +28,13 @@
     color: $mip-accent-color;
 }
 
+.mip-cta-button:hover,
+.mip-large-button:hover,
+.mip-cta-button:focus,
+.mip-large-button:focus {
+    text-decoration: underline;
+}
+
 .mip-tag,
 .mip-large-tag {
     width: fit-content;
