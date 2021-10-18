@@ -1,3 +1,6 @@
+# Prototipo del portale Muoversi in Piemonte
+
+Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ## Stack tecnologico
 
 | Componente | Versione | Descrizione | 
@@ -29,6 +32,8 @@
 1. Installare `react-select`
 ```npm i --save react-select```
 
+[5T]:https://www.5t.torino.it
+[Muoversi in piemonte]:https://www.muoversinpiemonte.it
 [source]:https://npm.io/package/fontsource-titillium-web
 [NVM.js]:https://github.com/nvm-sh
 [Node.js]:https://nodejs.org/
