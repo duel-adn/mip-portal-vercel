@@ -67,7 +67,7 @@ function MIPPathDataDialog({className, title, responsive, onChangeLocation, onSu
                 icon='/icons/path-dest.svg' placeholder='Punto di arrivo'
                 onChange={onChangeLocation} />
             <div class={styles.input_separator}/>
-            <button class={styles.swap_button} />
+            <button className={styles.swap_button} />
         </div>
         <MIPPathOptions selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
         <input className={styles.submit_button} type="submit" value="Calcola" />
