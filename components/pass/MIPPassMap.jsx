@@ -12,7 +12,6 @@
 
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import MIPTrafficEventCard from '../traffic/MIPTrafficEventCard';
 import { MIPPassDataCard } from './MIPPassDataList';
 
 export default function MIPPassMap({passData}) {

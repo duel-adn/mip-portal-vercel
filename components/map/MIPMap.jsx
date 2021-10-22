@@ -12,8 +12,6 @@
 
 import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import MIPTrafficEventCard from '../traffic/MIPTrafficEventCard';
-
 export default function MIPMap(props) {
   const icon =
   L.icon({
