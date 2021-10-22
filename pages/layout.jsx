@@ -9,40 +9,14 @@
     | ---------- | ------ | ----------------------------------- |
     | 2021/08/10 | Duel   | Prima versione                      |
 */
-import { useState } from 'react'
-import { Tab } from '@headlessui/react'
 import MIPPage from '../components/page/MIPPage'
-import MIPPathDataForm from '../components/path/MIPPathDataForm'
-import MIPTrafficEventListForm from '../components/traffic/MIPTrafficEventListForm'
+import MIPPath from '../components/path/MIPPath'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Layout({ passData }) {
+export default function Layout({ eventData }) {
   return (
     <MIPPage className="mip-home-page1"
       pageTitle="Layout test">
-      <Tab.Group>
-        <Tab.List className="mip-tab-list">
-          <Tab key="path" as="h4"
-                className="mip-bg-blue mip-tab-header mip-tl-rounded-corners mip-path-icon">
-                Percorso
-            </Tab>
-            <Tab key="traffic" as="h4"
-                className="mip-bg-accent mip-tab-header mip-traffic-icon">
-                Traffico
-            </Tab>
-        </Tab.List>
-        <Tab.Panel>
-              <MIPPathDataForm />
-          </Tab.Panel>
-          <Tab.Panel>
-              <MIPTrafficEventListForm />
-          </Tab.Panel>
-        <Tab.Panels>
-        </Tab.Panels>
-      </Tab.Group>
+        <MIPPath.Controller className="mip-rounded-corners" responsive title="Calcola il percorso"/>
     </MIPPage>
   )
 }

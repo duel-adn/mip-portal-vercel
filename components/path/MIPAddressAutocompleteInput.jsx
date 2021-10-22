@@ -106,7 +106,7 @@ export default function MIPAddressAutocompleteInput({ className, id, placeholder
     }
     return (
         <div id={id} className={mipConcatenate(className, "mip-flex-col")}>
-            <img src={icon} aria-hidden="true" alt="icona" />
+            <img src={icon} with="15" aria-hidden="true" alt="icona" />
             <AsyncSelect
                 styles={customStyles}
                 placeholder={placeholder}

@@ -65,13 +65,13 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-
 }
 
 .mip-tab-panel {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 .mip-tab-header {
@@ -85,10 +85,4 @@
     background-position: 1.5em 50%;
     background-repeat: no-repeat;
     text-align: left;
-}
-
-.mip-vertical-scroll {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
