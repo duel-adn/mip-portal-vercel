@@ -66,7 +66,7 @@ function MIPPathDataDialog({className, title, responsive, onChangeLocation, onSu
             <MIPAddressAutocompleteInput id={PATH_DEST_ID} className={styles.input}
                 icon='/icons/path-dest.svg' placeholder='Punto di arrivo'
                 onChange={onChangeLocation} />
-            <div class={styles.input_separator}/>
+            <div className={styles.input_separator}/>
             <button className={styles.swap_button} />
         </div>
         <MIPPathOptions selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
