@@ -13,7 +13,7 @@
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
-import { MIPPageBanner } from '../components/page/MIPPageBanner'
+import MIPBanner from '../components/page/MIPBanner'
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
@@ -22,8 +22,8 @@ export default function Home(props) {
       <MIPPage className="mip-article-page" 
       pageTitle="Giro d'Italia"
       breadcrumb='Indietro'>
-      <MIPPageBanner className="banner"
-          image="/news-images/article-full.jpg" />
+      <MIPBanner.Banner className="banner"
+          height="300px" imageUrl="/news-images/article-full.jpg" />
       <header className="article-title">
       <h2>Giro d’Italia. 8 Maggio  Torino ospita la prima tappa.
 Alcune modifiche viabili nella zona est della città.</h2>

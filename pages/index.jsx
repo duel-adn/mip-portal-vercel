@@ -10,7 +10,7 @@
   | 2021/08/10 | Duel   | Prima versione                      |
 */
 import MIPPage from '../components/page/MIPPage'
-import { MIPRealTimeBanner } from '../components/page/MIPPageBanner'
+import MIPBanner from '../components/page/MIPBanner'
 import MIPPath from '../components/path/MIPPath'
 import MIPTrafficEventPanel from '../components/traffic/MIPTrafficEventPanel'
 import MIPPublicTransportPanel from '../components/news/MIPPublicTransportPanel'
@@ -27,10 +27,10 @@ export default function Home(props) {
   return (
       <MIPPage className="mip-home-page"
         pageTitle="Muoversi in Piemonte">
-          <MIPRealTimeBanner className="banner"
+          <MIPBanner.RTBanner className="banner"
               title="Allerta meteo Cuneo:
                   ANAS al lavoro per rimozione neve."
-              tag="Ultim'ora" image="/images/home-hero.jpg" />
+              tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" />
           <MIPPath.Controller className="mip-rounded-corners" title="Calcola il percorso" />
           <MIPTrafficEventPanel className="event-panel"
               trafficEventData={props.trafficEventData} compact={true} />
