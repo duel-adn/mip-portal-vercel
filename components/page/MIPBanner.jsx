@@ -150,12 +150,16 @@ function MIPEmergencyBanner({className, title, subtitle, iconUrl, linkUrl}) {
     const iconStyle = iconUrl && { backgroundImage: `url(${iconUrl})` }
     return (
         <div className={finalClassName} style={iconStyle}>
-            <h4 class={styles.title}>{title}</h4>
-            {subtitle && 
-            <p class={styles.subtitle}>{subtitle}</p>
-            }
+            <div>
+                <h4 class={styles.title}>{title}</h4>
+                {subtitle && 
+                <p class={styles.subtitle}>{subtitle}</p>
+                }
+            </div>
             {linkUrl && 
+            <div className={styles.link_container}>
                 <Link href={linkUrl}><a className={styles.link}>{"leggi di più"}</a></Link>
+            </div>
             }
         </div>
     )
