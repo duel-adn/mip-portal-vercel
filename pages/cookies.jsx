@@ -15,7 +15,7 @@ import MIPPage from '../components/page/MIPPage'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Cookies"
       title="Disclaimer" 
         titleClassName="mip-bg-blue"
@@ -56,6 +56,6 @@ Dal menu di impostazione a tendina nell’angolo in alto a destra selezionare �
 
 Per disabilitare i cookie analitici e impedire a Google Analytics di raccogliere dati sulla propria navigazione, si può scaricare il <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">componente aggiuntivo del browser</a> per la disattivazione di Google Analytics.
         </article>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }

@@ -17,7 +17,7 @@ import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Mobilità alternativa"
       title="Mobilità alternativa" 
         titleClassName="mip-bg-accent"
@@ -41,7 +41,7 @@ export default function MobilityNews(props) {
           <MIPWeatherPanel 
             weatherData={props.weatherData} />
       </aside>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }
 

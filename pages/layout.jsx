@@ -15,7 +15,7 @@ import MIPPath from '../components/path/MIPPath'
 
 export default function Layout({ eventData }) {
   return (
-    <MIPPage className="mip-home-page1"
+    <MIPPage.Page className="mip-home-MIPPage"
       pageTitle="Layout test">
         <main className="">
         <MIPBanner.CTABanner title="Nuovo bando mobilità sostenibile"
@@ -26,6 +26,6 @@ export default function Layout({ eventData }) {
           subtitle="Esenzione pagamento pedaggio per personale sanitario e associazioni di volontariato"
           iconUrl="/icons/ambulance.svg" linkUrl="#" />
         </main>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }

@@ -15,7 +15,7 @@ import MIPPage from '../components/page/MIPPage'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Contatti"
       title="Contatti" 
         titleClassName="mip-bg-blue"
@@ -28,6 +28,6 @@ export default function MobilityNews(props) {
 dalle ore 8 alle 18 con orario continuato, festivi esclusi, gratuito da telefono fisso e mobile.</p></li>
 </ul>
         </article>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }

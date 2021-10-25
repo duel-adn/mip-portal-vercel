@@ -15,7 +15,7 @@ import MIPPage from '../components/page/MIPPage'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Disclaimer"
       title="Disclaimer" 
         titleClassName="mip-bg-blue"
@@ -52,6 +52,6 @@ export default function MobilityNews(props) {
 <p>Verranno inoltre moderati i commenti che risultano fuori argomento rispetto alla discussione di un determinato post (off topic), i commenti o i post che presentano dati sensibili in violazione della Legge sulla Privacy, gli interventi inseriti ripetutamente, i commenti e i post scritti per disturbare la discussione o offendere chi gestisce e modera i canali social, i commenti contenenti pubblicità, lo spam.</p>
 <p>Per chi dovesse violare ripetutamente queste condizioni, lo staff si riserva il diritto di usare il ban o il blocco per impedire ulteriori interventi e di segnalare l’utente ai responsabili della piattaforma e, in ultima istanza e in presenza di violazioni particolarmente gravi o continuate, alle forze dell’ordine preposte.</p>
         </article>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }

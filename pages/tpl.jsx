@@ -15,12 +15,12 @@ import MIPTPLServiceList from '../components/tpl/MIPTPLServiceList'
 
 export default function Tpl(props) {
   return (
-    <MIPPage
+    <MIPPage.Page
       pageTitle="Trasporto pubblico"
       title="Trasporto pubblico" 
       titleClassName="mip-bg-blue"
       breadcrumb='Indietro'>
         <MIPTPLServiceList />
-    </MIPPage>
+    </MIPPage.Page>
   )
 }

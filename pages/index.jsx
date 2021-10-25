@@ -25,7 +25,7 @@ import { mipFetchMobilityNewsData } from '../components/news/MIPMobilityNewsAPI'
 
 export default function Home(props) {
   return (
-      <MIPPage className="mip-home-page"
+      <MIPPage.Page className="mip-home-page"
         pageTitle="Muoversi in Piemonte">
           <MIPBanner.RTBanner className="banner"
               title="Allerta meteo Cuneo:
@@ -45,7 +45,7 @@ export default function Home(props) {
             <MIPWeatherPanel 
               className="weather-panel"
               weatherData={props.weatherData} />
-      </MIPPage>
+      </MIPPage.Page>
   )
 }
 

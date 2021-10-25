@@ -15,7 +15,7 @@ import MIPPage from '../components/page/MIPPage'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Bando di gara"
       title="Bando" 
         titleClassName="mip-bg-blue"
@@ -42,6 +42,6 @@ export default function MobilityNews(props) {
           <li><Link href="#"><a className="mip-attachment-link">Graduatoria</a></Link></li>
           </ul>
         </section>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }

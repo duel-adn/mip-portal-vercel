@@ -19,7 +19,7 @@ import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function Home(props) {
   return (
-      <MIPPage className="mip-article-page" 
+      <MIPPage.Page className="mip-article-page" 
       pageTitle="Giro d'Italia"
       breadcrumb='Indietro'>
       <MIPBanner.Banner className="banner"
@@ -61,7 +61,7 @@ Dalle ore 8.00 dell’8 maggio e fino all’ultimazione della gara, indicativame
       <aside className="weather-panel">
         <MIPWeatherPanel weatherData={props.weatherData}/>
       </aside>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }
 

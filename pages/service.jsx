@@ -15,7 +15,7 @@ import MIPPage from '../components/page/MIPPage'
 
 export default function MobilityNews(props) {
   return (
-      <MIPPage className="mip-flex-row" 
+      <MIPPage.Page className="mip-flex-row" 
       pageTitle="Servizio"
       title="Il servizio" 
         titleClassName="mip-bg-blue"
@@ -45,6 +45,6 @@ territorio regionale.</p>
 </ul>
 <p className="mip-my-2"><Link href="/"><a>Muoversi in Piemonte</a></Link> è un servizio promosso da <a href="http://www.regione.piemonte.it/trasporti/" target="_blank" rel="noopener noreferrer">Regione Piemonte</a> in collaborazione con <a href="http://www.5t.torino.it/" target="_blank" rel="noopener noreferrer">5T.</a></p>
         </article>
-      </MIPPage>
+      </MIPPage.Page>
   )
 }

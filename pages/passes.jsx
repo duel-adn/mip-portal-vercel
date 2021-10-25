@@ -33,7 +33,7 @@ const items = [
 
 export default function Passes({passData}) {
   return (
-    <MIPPage className="mip-traffic-page"
+    <MIPPage.Page className="mip-traffic-page"
       pageTitle="Colli alpini"
       title="Colli alpini"
         titleClassName="mip-bg-accent"
@@ -49,7 +49,7 @@ export default function Passes({passData}) {
             passData={passData}/>
       <MIPPassMapPanel className="map-panel" passData={passData}/>
       <MIPLegend className="legend-panel mip-rounded-corners" items={items}/>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }
 

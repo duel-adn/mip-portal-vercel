@@ -53,7 +53,7 @@ const items = [
 
 export default function Traffic(props) {
   return (
-    <MIPPage className="mip-traffic-page"
+    <MIPPage.Page className="mip-traffic-page"
       pageTitle="Traffico in tempo reale"
       title="Traffico in tempo reale"
         titleClassName="mip-bg-accent"
@@ -61,7 +61,7 @@ export default function Traffic(props) {
       <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>
       <MIPTrafficMapPanel className="map-panel" trafficEventData={props.eventData}/>
       <MIPLegend className="legend-panel mip-rounded-corners" items={items}/>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }
 

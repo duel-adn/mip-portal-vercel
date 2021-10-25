@@ -1,8 +1,20 @@
-import MIPPageHead from './MIPPageHead'
+/**
+    (C) Duel srl 2021.
+
+    Componenti per la gestione delle pagine
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+import Head from "next/head"
 import MIPPageFooter from '../footer/MIPPageFooter'
 import MIPPageHeader from '../header/MIPResponsiveHeader'
 
-export default function MIPPage(props) {
+function MIPPage(props) {
     const className = `${props.className || ''} mip-page-section`
     return (
         <>
@@ -17,4 +29,18 @@ export default function MIPPage(props) {
         </div>
         </>
     )
+}
+
+function MIPPageHead(props) {
+    return (
+    <Head>
+        <title>{props.title || 'Muoversi in Piemonte'}</title>
+        <link rel="icon" href="/favicon.ico" />
+    </Head>
+    )
+}
+
+export default {
+    Page: MIPPage,
+    Head: MIPPageHead
 }

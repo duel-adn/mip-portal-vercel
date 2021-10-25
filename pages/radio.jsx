@@ -167,13 +167,13 @@ const radioList = [
 ]
 export default function Radio(props) {
   return (
-    <MIPPage
+    <MIPPage.Page
       pageTitle="Radio"
       title="Radio"
       titleClassName="mip-bg-blue"
       breadcrumb='Indietro'>
       <p className="mip-my-2">Il notiziario del traffico può essere ascoltato anche sulle radio:</p>
       <MIPRadioList className="mip-3col-page" radioList={radioList}/>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }

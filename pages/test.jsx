@@ -79,7 +79,7 @@ const links = [
 
 export default function Home(props) {
   return (
-    <MIPPage 
+    <MIPPage.Page 
       pageTitle="Pagina di test"
       title="Pagina di test" 
         titleClassName="mip-bg-accent"
@@ -90,6 +90,6 @@ export default function Home(props) {
           <li key={l.title}><Link href={l.url}><a>{l.title}</a></Link></li>
         )}
         </ol>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }

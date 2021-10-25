@@ -18,14 +18,14 @@ import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
 export default function News(props) {
   return (
-    <MIPPage className="mip-flex-row" title="News" 
+    <MIPPage.Page className="mip-flex-row" title="News" 
       pageTitle="News"
       titleClassName="mip-bg-gray"
       breadcrumb="Indietro" >
       <MIPNewsCardGrid className="mip-3col-page" />
       <MIPPager />
       <MIPWeatherPanel className="mip-my-2" weatherData={props.weatherData}/>
-    </MIPPage>
+    </MIPPage.Page>
   )
 }
 
