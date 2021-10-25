@@ -138,6 +138,30 @@ function MIPCTABanner({className, imageUrl, title, linkTitle, url}) {
 }
 
 /**
+ * Banner di emergenza
+ * @param {string} className nome della classe dell'elemento esterno
+ * @param {string} title titolo del banner
+ * @param {string} subtitle sottotitolo del banner (facoltativo)
+ * @param {string} iconUrl url dell'icona (facoltativo)
+ * @returns l'elemento REACT
+ */
+function MIPEmergencyBanner({className, title, subtitle, iconUrl, linkUrl}) {
+    const finalClassName = mipConcatenate(className, styles.emergency_banner)
+    const iconStyle = iconUrl && { backgroundImage: `url(${iconUrl})` }
+    return (
+        <div className={finalClassName} style={iconStyle}>
+            <h4 class={styles.title}>{title}</h4>
+            {subtitle && 
+            <p class={styles.subtitle}>{subtitle}</p>
+            }
+            {linkUrl && 
+                <Link href={linkUrl}><a className={styles.link}>{"leggi di più"}</a></Link>
+            }
+        </div>
+    )
+}
+
+/**
  * Oggetto esportato
  */
 const MIPBanner = {
@@ -145,7 +169,8 @@ const MIPBanner = {
     CTAAlert: MIPCTACard,
     Banner: MIPPageBanner,
     RTBanner: MIPRealTimeBanner,
-    CTABanner: MIPCTABanner
+    CTABanner: MIPCTABanner,
+    EmergencyBanner: MIPEmergencyBanner
 }
 
 export default MIPBanner

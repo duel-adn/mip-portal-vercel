@@ -124,3 +124,43 @@
     }
 
 }
+
+// Banner emergenza
+
+.emergency_banner {
+    position: relative;
+    padding: .5rem .5rem 1rem 4rem;
+    background-repeat: no-repeat;
+    background-position: 1rem center;
+    color: $mip-light-color;
+    background-color: $mip-error-background;
+    border-radius: 5px;
+
+    .title {
+        font-weight: bold;
+        font-size: 1.25rem;
+        line-height: 1.9rem;
+        text-transform: uppercase;
+    }
+
+    .subtitle {
+        font-weight: 400;
+        font-size: .875rem;
+        line-height: .94rem;
+    }
+
+    .link {
+        position: absolute;
+        right: 1rem;
+        bottom: .5rem;
+        font-weight: 600;
+        font-size: .875rem;
+        color: $mip-light-color;
+        text-transform: uppercase;
+    }
+
+    .link:hover,
+    .link:focus {
+        text-decoration: underline;
+    }
+}
