@@ -10,10 +10,9 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 import { Tab } from '@headlessui/react'
+import MIPPath from '../path/MIPPath'
 
-import styles from './MIPTraffic.module.scss'
-import MIPPathDataForm from "../path/MIPPathDataForm"
-import MIPTrafficEventListForm from './MIPTrafficEventListForm'
+import MIPTraffic from './MIPTraffic'
 
 export default function MIPTrafficTabPanel({ className, selected, trafficEventData }) {
     return (
@@ -22,7 +21,7 @@ export default function MIPTrafficTabPanel({ className, selected, trafficEventDa
                 <Tab.List className="mip-tab-list">
                     <Tab key="path" as="h4"
                         className="mip-bg-blue mip-tab-header mip-tl-rounded-corners mip-path-icon">
-                        Percorso
+                        Calcola percorso
                     </Tab>
                     <Tab key="traffic" as="h4"
                         className="mip-bg-accent mip-tab-header mip-traffic-icon">
@@ -31,10 +30,10 @@ export default function MIPTrafficTabPanel({ className, selected, trafficEventDa
                 </Tab.List>
                 <Tab.Panels className="mip-tab-panel">
                     <Tab.Panel>
-                        <MIPPathDataForm />
+                        <MIPPath.Controller />
                     </Tab.Panel>
-                    <Tab.Panel className={styles.list_container}>
-                        <MIPTrafficEventListForm className="mip-wh-100" trafficEventData={trafficEventData} />
+                    <Tab.Panel className="mip-h-100">
+                        <MIPTraffic.EventCardList className="mip-wh-100-" searchable trafficEventData={trafficEventData} />
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>

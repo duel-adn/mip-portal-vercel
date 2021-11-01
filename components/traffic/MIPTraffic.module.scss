@@ -18,7 +18,7 @@
 .traffic_event_card {
 
     .title {
-        padding-left: 2rem;
+        padding-left: 2.3rem;
         font-size: 1rem;
         font-weight: bold;
         background-position: left;
@@ -26,7 +26,14 @@
     }
 
     .container {
-        margin-left: 2rem;
+        margin-left: 2.5rem;
+        margin-bottom: .4rem;
+    }
+
+    .text {
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.25rem;
     }
 
     .what {
@@ -35,17 +42,17 @@
     }
 
     .where {
-        @include mip-left-icon('location-pin', 1.5rem);
+        @include mip-left-icon('location-pin', 1.8rem);
         font-size: .75rem;
+        font-weight: 400;
         line-height: 1.125rem;
         text-transform: uppercase;
     }
 
     .when {
-        @include mip-left-icon('calendar', 1.5rem);
+        @include mip-left-icon('calendar', 1.8rem);
         font-size: .75rem;
         margin-top: .32rem;
-        margin-bottom: .32rem;
     }
 }
 
@@ -112,7 +119,6 @@
 
     .list_item {
         padding: 0 1rem;
-        border-bottom: 1px solid $mip-light-border-color;
     }
 
     .list_item:hover {
@@ -142,7 +148,7 @@
 
     .subtitle {
         margin-top: .5rem;
-        font-size: .75rem;
+        font-size: .8125rem;
         font-weight: bold;
     }    
 

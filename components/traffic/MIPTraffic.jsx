@@ -38,7 +38,7 @@ export function MIPTrafficEventCard({className, compact, event}) {
                     :
                     <>
                     <p className={styles.where}>{event.where}</p>
-                    <p className={styles.text}>{event.what}</p>
+                    <p className={styles.what}>{event.what}</p>
                     {
                         event.when &&
                         <div className={styles.when}>{event.when}</div>
