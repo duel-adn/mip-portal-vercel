@@ -28,7 +28,7 @@ export async function mipPathAutocomplete(lang, searchString) {
             const response = await mipFetch(
                 process.env.NEXT_PUBLIC_MIP_AUTOCOMPLETE_URL, {
                 'lang': lang,
-                'text': reqString
+                'text': encodeURIComponent(searchString)
             })
             return response instanceof Error ? response :
                 response.features.map(feature => {
