@@ -17,7 +17,7 @@
 
 .traffic_event_card {
 
-    .title {
+    .card_title {
         padding-left: 2.3rem;
         font-size: 1rem;
         font-weight: bold;
@@ -63,6 +63,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    cursor: pointer;
     color: $mip-text-color;
     background-color: $mip-light-background;
 

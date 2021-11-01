@@ -27,7 +27,7 @@ function MIPTrafficEventCard({className, compact, event}) {
     const isCompact = compact === undefined ? false : compact
     return ((typeof event === undefined) || (event === null) ? null :
         <div className={finalClassName}>
-            <h5 className={styles.title}
+            <h5 className={styles.card_title}
                 style={{ 'backgroundImage': `url(${mipGetTrafficEventIconUrl(event.style)})` }}>{event.road}</h5>
             <div className={styles.container}>
             {isCompact ?
