@@ -50,6 +50,14 @@ $mip-footer-height: 11.8rem;
 
 // Stop
 
+$mip-min-page-width: 30rem;
 $mip-page-max-width: 80rem;
-$mip-break-tablet: 1200px;
-$mip-break-mobile: 600px;
+$mip-break-menu: 1180px;
+$mip-break-tablet: 1024px;
+$mip-break-mobile: 768px;
+$mip-traffic-height-small: 50vh;
+$mip-info-height-small: 70vh;
+$mip-traffic-height-medium: 90vh;
+$mip-info-height-medium: 90vh;
+$mip-traffic-height-large: 50vh;
+$mip-info-height-large: 50vh;

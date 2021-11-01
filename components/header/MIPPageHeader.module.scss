@@ -55,7 +55,7 @@
 
 // Stili per desktop
 
-@media (min-width: $mip-break-tablet) {
+@media (min-width: $mip-break-menu) {
     .menubar {
         position: static;
         display: flex;
@@ -142,7 +142,7 @@
     }
 }
 
-@media (min-width: $mip-break-tablet) {
+@media (min-width: $mip-break-menu) {
     .secondary_header {
         .tools {
             justify-content: flex-end;
