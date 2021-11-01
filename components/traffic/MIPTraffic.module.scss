@@ -60,8 +60,8 @@
 
 .traffic_event_card_list {
 
-    display: grid;
-    grid-template-rows: max-content;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     color: $mip-text-color;
     background-color: $mip-light-background;
