@@ -21,3 +21,7 @@ export async function mipFetchTrafficEventData(context) {
     console.log(process.env.MIP_TRAFFIC_EVENT_URL + ' ' + events.length)
     return events
 }
+
+export function mipGetTrafficEventIconUrl(style) {
+    return '/icons/car-black.svg'
+}

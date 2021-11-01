@@ -13,94 +13,7 @@
 @import '../../styles/variables';
 @import '../../styles/mixin';
 
-.traffic_tab_panel,
-.traffic_panel {
-    display: flex;
-
-    .data_container{
-        min-width: 20rem;
-        max-width: 30%;
-    }
-    
-    .map_container {
-        position: relative;
-        flex-grow: 1;
-    }
-}
-
-.traffic_panel {
-    width: 100%;
-}
-
-.traffic_event_panel {
-    display: flex;
-    flex-direction: column;
-    
-    .panel_header {
-        padding: 1.25rem 2.125rem 1.5rem;
-        border-radius: $mip-panel-border-radius 0 0 0;
-
-        .title {
-            @include mip-left-icon('traffic', 1em);
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-    
-        .subtitle {
-            margin-top: .5rem;
-            font-size: .75rem;
-            font-weight: bold;
-        }    
-    }
-
-    .list_container {
-        height: 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        border-left: 1px solid $mip-dark-border-color;
-        border-right: 1px solid $mip-dark-border-color;
-    }
-
-    .panel_footer {
-        position: relative;
-        margin-top: auto;
-        display: flex;
-        padding-top: 1.4rem;
-        padding-bottom: 1.4rem;
-        border-left: 1px solid $mip-dark-border-color;
-        border-right: 1px solid $mip-dark-border-color;
-        border-bottom: 1px solid $mip-dark-border-color;
-        border-radius: 0 0 0 $mip-panel-border-radius;
-
-        a {
-            margin: 0 auto;
-            color: $mip-light-color;
-        }
-    }
-
-    .panel_footer::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: -5px;
-        left: 0;
-        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.25);
-        width: 100%;
-        height: 1px;
-        z-index: 10;
-      
-    }
-}
-
-.traffic_event_list {
-    height: 20rem;
-    padding: 1.25rem;
-    
-    .event {
-        margin-bottom: .25rem;
-        border-bottom: 1px solid $mip-light-border-color;
-    }
-}
+// Stile per MIPTraffic.EventCard ------------------------------
 
 .traffic_event_card {
 
@@ -112,13 +25,13 @@
         background-repeat: no-repeat;
     }
 
-    .text {
-        font-size: 1rem;
-        line-height: 1.375rem;
-    }
-
     .container {
         margin-left: 2rem;
+    }
+
+    .what {
+        font-size: 1rem;
+        line-height: 1.375rem;
     }
 
     .where {
@@ -131,137 +44,110 @@
     .when {
         @include mip-left-icon('calendar', 1.5rem);
         font-size: .75rem;
-        //line-height: 1.125rem;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .event {
-        margin-bottom: .25rem;
-        border-bottom: 1px solid $mip-light-border-color;
+        margin-top: .32rem;
+        margin-bottom: .32rem;
     }
 }
 
-.traffic_legend {
-    margin-bottom: 2rem;
-    border: 1px solid $mip-dark-border-color;
+// Stili per la lista di event card MIPTraffic.EventCardList
 
-    .title {
-        height: 2rem;
-        padding: 0 1rem;
-        border-bottom: 1px solid $mip-dark-border-color;
-        font-size: .875rem;
-        line-height: 2rem;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+.traffic_event_card_list {
 
-    .container {
+    display: grid;
+    grid-template-rows: max-content;
+    height: 100%;
+    color: $mip-text-color;
+    background-color: $mip-light-background;
+
+    .search_panel {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
         width: 100%;
-        min-height: 3.6rem;
-        padding: 0 1rem;
+        height: 5.325rem;
+        padding: 1rem;
+        background-color: $mip-accent-background;
+        color: $mip-light-color;
+    
+        .input {
+            @include mip-left-icon('search', 2rem, 1rem);
+            height: 2.75rem;
+            width: 100%;
+            margin: auto 0 auto 2rem;
+            padding-left: 2.5rem;
+            color: $mip-dark-blue-color;
+            border-radius: .25rem 0 0 .25rem;
+            border: 1px solid $mip-light-border-color;
+            font-size: 1rem;
+        }
+    
+        input::placeholder {
+            color: $mip-dark-blue-color;
+            font-size: 1rem;
+            font-weight: 300;
+        }
 
-        .item {
-            padding-left: 1.5rem;
-            background-position: left;
-            background-repeat: no-repeat;
-            font-size: .75rem;
-            line-height: 1.5rem;
-            font-weight: bold;
+        .clearButton {
+            width: 3em;
+            height: 2.75rem;
+            padding: 0;
+            border: 0;
+            margin: auto 2rem auto 0;
+            color: $mip-dark-blue-color;
+            background-color: $mip-light-background;
+            border-radius: 0 .25rem .25rem 0;
+            border: 1px solid $mip-light-border-color;
+            font-size: 1rem;
+        }
+
+        .clearButton:hover,
+        .clearButton:focus {
+            color: $mip-accent-color;
         }
     }
-}
-
-.traffic_tab_panel {
-    display: flex;
-
-    .container {
-        height: 100%;
-    }
-
-    .path_data_form {
-       padding: 2rem;
-       height: 25rem;
-    }
-
+    
     .list_container {
-        height: 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        border-left: 1px solid $mip-dark-border-color;
-        border-right: 1px solid $mip-dark-border-color;
-        border-bottom: 1px solid $mip-dark-border-color;
-        border-radius: 0 0 0 1rem;
+        padding: .5rem 0;
+        overflow-y: auto;
+        border: 1px solid $mip-dark-border-color;
     }
 
-    .map_container {
-        position: relative;
-        flex-grow: 1;
+    .list_item {
+        padding: 0 1rem;
+        border-bottom: 1px solid $mip-light-border-color;
+    }
 
+    .list_item:hover {
+        background-color: $mip-gray-background;
     }
 }
 
-.map_space {
-    width: 100%;
-    height: 100%;
-    background-color: aqua;
-}
+ // Stili pannello MIPTraffic.Panel
 
-.traffic_tab_title {
-    border-radius: 0 1rem 0 0;
-    border-radius: 0 0rem 0 0;
-}
-
-.path_tab_title {
-    border-radius: 1rem 0 0 0;
-}
-
-.traffic_label {
-    @include mip-left-icon('traffic', 1.5rem);
-}
-
-.path_label {
-    @include mip-left-icon('path-search', 1.5rem);
-}
-
-.search_panel {
+.traffic_panel {
+    
     display: flex;
-    width: 100%;
-    height: 5.325rem;
-    background-color: $mip-accent-background;
-    color: $mip-light-color;
+    flex-direction: column;
+    overflow: hidden;
 
-    input {
-        height: 44px;
-        margin: auto;
-        width: 90%;
-        border-radius: .25rem;
-        border: 1px solid $mip-light-border-color;
-        padding-left: 2.5rem;
-        background-position-x: 1rem;
-        color: $mip-dark-blue-color;
-        font-size: 1rem;
+    .header  {
+        flex: 0 0 auto;
+        width: 100%;
+        padding: 1.25rem 2.125rem 1.5rem;
     }
 
-    input::placeholder {
-        @include mip-left-icon('search', 2.7rem);
-        background-position-x: 1rem;
-        color: $mip-dark-blue-color;
-        font-size: 1rem;
-        font-weight: 300;
+    .title {
+        @include mip-left-icon('traffic', 1.5rem);
+        font-size: 1.25rem;
+        font-weight: bold;
     }
-}
 
-.list_container {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    border-left: 1px solid $mip-dark-border-color;
-    border-right: 1px solid $mip-dark-border-color;
-    border-bottom: 1px solid $mip-dark-border-color;
-    //border-radius: 0 0 0 1rem;
+    .subtitle {
+        margin-top: .5rem;
+        font-size: .75rem;
+        font-weight: bold;
+    }    
+
+    .event_list {
+        flex: 1 1 100%;
+        overflow: hidden;
+    }
 }
