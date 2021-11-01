@@ -10,15 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-// Next.js usa un div intorno alla pagina con questo id
-// lo stile serve a spingere il footer in basso nella pagina anche 
-// quando è semi vuota
-//
-// #__next {
-//     display: flex;
-//     flex-direction: column;
-//     min-height: 100%;
-// }
+@import 'variables';
 
 // Contenitore dell'intera pagina
 
@@ -48,7 +40,7 @@
     column-gap: 2rem;
 }
 
-@media (min-width: 780px) {
+@media (min-width: $mip-break-mobile) {
     .mip-3col-page {
         grid-template-columns: 1fr 1fr;
     }
@@ -104,4 +96,28 @@
     b {
         font-weight: 600;
     }
+}
+
+.mip-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    overflow: scroll;
+}
+
+// test
+
+.mip1-home-page {
+    display: grid;
+    grid-template-columns: minmax($mip-min-page-width, 1fr);
+   grid-template-rows: 
+    auto // banner
+    auto // percorso
+    repeat(4, 80vh) // pannelli
+    auto;   // meteo
+    row-gap: 1rem;
+}
+
+.mip1-full-width {
+    grid-column: 1 / -1;
 }

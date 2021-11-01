@@ -12,7 +12,6 @@
 import MIPPage from '../components/page/MIPPage'
 import MIPBanner from '../components/page/MIPBanner'
 import MIPPath from '../components/path/MIPPath'
-import MIPTrafficEventPanel from '../components/traffic/MIPTrafficEventPanel'
 import MIPPublicTransportPanel from '../components/news/MIPPublicTransportPanel'
 import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel'
 import MIPMobilityNewsPanel from '../components/news/MIPMobilityNewsPanel'
@@ -22,6 +21,7 @@ import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import { mipFetchPublicTransportData } from '../components/tpl/MIPTPLAPI'
 import { mipFetchMobilityNewsData } from '../components/news/MIPMobilityNewsAPI'
+import MIPTraffic from '../components/traffic/MIPTraffic'
 
 export default function Home(props) {
   return (
@@ -31,9 +31,11 @@ export default function Home(props) {
               title="Allerta meteo Cuneo:
                   ANAS al lavoro per rimozione neve."
               tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" />
-          <MIPPath.Controller className="mip-rounded-corners" title="Calcola il percorso" />
-          <MIPTrafficEventPanel className="event-panel"
-              trafficEventData={props.trafficEventData} compact={true} />
+          <MIPPath.Controller className="mip-rounded-corners path-panel" title="Calcola il percorso" responsive />
+          <MIPTraffic.Panel className="event-panel" headerClass="mip-bg-accent"
+            title="Tempo reale"
+            subtitle="Scopri le news sul traffico in tempo reale"
+            trafficEventData={props.trafficEventData} compact={true} />
           <MIPTrafficMapPanel className="map-panel" 
               trafficEventData={props.trafficEventData}/>
           <MIPPublicTransportPanel className="tpl-panel"

@@ -10,64 +10,185 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+@import './variables';
+
 // Home page - mobile
 
 .mip-home-page {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 
-        auto // banner
-        auto // percorso
-        repeat(4, 30rem) // pannelli
-        auto;   // meteo
     row-gap: 1rem;
-    margin-bottom: 1rem;
-    .banner { grid-column: 1/-1;}
-}
+    min-width: $mip-min-page-width;
 
-@media (min-width: 780px) {
-    .mip-home-page {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 
-        auto // banner
-        auto // percorso + tempo reale
-        repeat(2, 20rem) // mappa + pannelli
-        auto   // meteo
-        auto;   // meteo
-        row-gap: 2rem;
-        column-gap: 1rem;
+    .path-panel,
+    .banner {
+        grid-column: 1 / -1;            
+    }
 
-        // .service-panel,
-        // .weather-panel,
-        .map-panel {
-            grid-column: 1/-1;
-        }
+    .event-panel {
+        height: max($mip-traffic-height-small, 15rem);
+    }
+
+    .map-panel {
+        height: max($mip-traffic-height-small, 15rem);
+    }
+
+    .tpl-panel {
+        height: max($mip-info-height-small, 15rem);
+    }
+
+    .news-panel {
+        height: max($mip-info-height-small, 15rem);
+    }
+
+    .weather-panel {
+        margin-bottom: 1rem;
     }
 }
 
-@media (min-width: 1024px) {
+// Layout per tablet
+
+@media screen and (min-width: $mip-break-mobile) {
+
     .mip-home-page {
-        grid-template-columns: 1fr 1rem 1fr 1rem 1fr;
-        grid-template-rows: 
-            auto auto 35rem auto;
-        row-gap: 2rem;
-        column-gap: 0rem;
-        .map-panel {
-            grid-column: 4/-1;
-        }
-        .news-panel,
+        
+        grid-template-columns: 1fr 1fr;
+
         .event-panel {
-            grid-column: 3/4;
+            height: max($mip-traffic-height-medium, 15rem);
         }
+    
+        .map-panel {
+            height: max($mip-traffic-height-medium, 15rem);
+        }
+    
         .tpl-panel {
-            grid-column: 1/2;
+            margin-right: .5rem;
+            height: max($mip-info-height-medium, 15rem);
         }
+
+        .news-panel {
+            margin-left: .5rem;
+            height: max($mip-info-height-medium, 15rem);
+        }
+        
         .service-panel {
-            grid-column: 5/-1;
+            margin-left: .5rem;
+            margin-bottom: 1rem;
         }
         .weather-panel {
-            grid-column: 1/-1;
+            margin-left: 1rem;
         }
     }
 }
+
+// Layout per schermo
+
+@media only screen and (min-width: $mip-break-tablet) {
+
+    .mip-home-page {
+        
+        grid-template-columns: repeat(3, 1fr);
+
+        .path-panel {
+            grid-column: 1 / 2;
+            margin-right: .5rem;
+        }
+        .event-panel {
+            height: max($mip-traffic-height-large, 15rem);
+            margin-left: .5rem;
+        }
+    
+        .map-panel {
+            height: max($mip-traffic-height-large, 15rem);
+        }
+    
+        .tpl-panel {
+            margin-right: .5rem;
+            height: max($mip-info-height-large, 15rem);
+        }
+        
+        .news-panel {
+            margin-left: .5rem;
+            height: max($mip-info-height-large, 15rem);
+        }
+        
+        .service-panel {
+            margin-left: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .weather-panel {
+            margin-left: 1rem;
+            grid-column: 1 / -1;
+        }
+    }
+}
+
+
+// .mip-home-page {
+//     display: grid;
+//     min-width: 0;
+//     min-height: 0;
+//     grid-template-columns: 1fr;
+//     grid-template-rows: 
+//         auto // banner
+//         auto // percorso
+//         repeat(4, 30rem) // pannelli
+//         auto;   // meteo
+//     row-gap: 1rem;
+//     margin-bottom: 1rem;
+//     .banner { grid-column: 1/-1;}
+
+//     .event-panel{
+//         overflow: hidden;
+//     }
+// }
+
+
+// @media (min-width: 780px) {
+//     .mip-home-page {
+//         grid-template-columns: 1fr 1fr;
+//         grid-template-rows: 
+//         auto // banner
+//         auto // percorso + tempo reale
+//         repeat(2, 20rem) // mappa + pannelli
+//         auto   // meteo
+//         auto;   // meteo
+//         row-gap: 2rem;
+//         column-gap: 1rem;
+
+//         // .service-panel,
+//         // .weather-panel,
+//         .map-panel {
+//             grid-column: 1/-1;
+//         }
+//     }
+// }
+
+// @media (min-width: 1024px) {
+//     .mip-home-page {
+//         grid-template-columns: 1fr 1rem 1fr 1rem 1fr;
+//         grid-template-rows: 
+//              auto 35rem auto;
+//         row-gap: 2rem;
+//         column-gap: 0rem;
+//         .map-panel {
+//             grid-column: 4/-1;
+//         }
+//         .news-panel,
+//         .event-panel {
+//             grid-column: 3/4;
+//             overflow: hidden;
+//         }
+//         .tpl-panel {
+//             grid-column: 1/2;
+//         }
+//         .service-panel {
+//             grid-column: 5/-1;
+//         }
+//         .weather-panel {
+//             grid-column: 1/-1;
+//         }
+//     }
+// }
 
