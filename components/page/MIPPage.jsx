@@ -11,19 +11,31 @@
 */
 
 import Head from "next/head"
+import { mipConcatenate } from "../../lib/MIPUtility"
 import MIPPageFooter from '../footer/MIPPageFooter'
 import MIPPageHeader from '../header/MIPResponsiveHeader'
 
-function MIPPage(props) {
-    const className = `${props.className || ''} mip-page-section`
+/**
+ * Il template base di un pagina MIP
+ * 
+ * @param {String} className classe da aggiungere all'elemento esterno 
+ * @param {String} pageTitle titolo della pagina
+ * @param {String} breadcrumb testo del breadcrumb (se null, il breadcrumb non viene visualizzato)
+ * @param {String} title testo del titolo nell'header
+ * @param {String} breadcrumb testo del breadcrumb (se null, il breadcrumb non viene visualizzato)
+ * @param {*} children elementi interni, da visualizzare nel main
+ * @returns 
+ */
+function MIPPageTemplate({className, pageTitle, title, titleClassName, breadcrumb, children}) {
+    const finalClassName = mipConcatenate(className, "mip-page-section")
     return (
         <>
-        <MIPPageHead title={props.pageTitle} />
+        <MIPPageHead title={pageTitle} />
         <div className="mip-page-container">
-            <MIPPageHeader className="mip-w-100" breadcrumb={props.breadcrumb}
-                title={props.title} titleClassName={props.titleClassName}/>
-            <main className={className}>
-                {props.children}
+            <MIPPageHeader className="mip-w-100" breadcrumb={breadcrumb}
+                title={title} titleClassName={titleClassName}/>
+            <main className={finalClassName}>
+                {children}
             </main>
             <MIPPageFooter className="mip-mt-auto mip-w-100"/>
         </div>
@@ -31,16 +43,23 @@ function MIPPage(props) {
     )
 }
 
-function MIPPageHead(props) {
+/**
+ * Elementi aggiuntivi da inserire nella sezione <head>
+ * @param {String} title titolo della pagina
+ * @returns 
+ */
+function MIPPageHead({title}) {
     return (
     <Head>
-        <title>{props.title || 'Muoversi in Piemonte'}</title>
+        <title>{title || 'Muoversi in Piemonte'}</title>
         <link rel="icon" href="/favicon.ico" />
     </Head>
     )
 }
 
-export default {
-    Page: MIPPage,
+const MIPage = {
+    Page: MIPPageTemplate,
     Head: MIPPageHead
 }
+
+export default MIPage;
