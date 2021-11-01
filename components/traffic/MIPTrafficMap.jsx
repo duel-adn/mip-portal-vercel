@@ -12,8 +12,7 @@
 
 import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import MIPTrafficEventCard from '../traffic/MIPTrafficEventCard';
-
+import MIPTraffic from './MIPTraffic';
 export default function MIPTrafficMap(props) {
   const icon =
   L.icon({
@@ -51,7 +50,7 @@ export default function MIPTrafficMap(props) {
         props.trafficEventData && props.trafficEventData.map(evt => 
           <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={icon}>
           <Popup>
-            <MIPTrafficEventCard event={evt} />
+            <MIPTraffic.EventCard event={evt} />
           </Popup>
         </Marker>
         )

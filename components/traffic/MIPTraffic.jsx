@@ -22,7 +22,7 @@ import { mipGetTrafficEventIconUrl } from "./MIPTrafficAPI"
  * @param {Object} un oggetto con i dati dell'evento
  * @returns 
  */
-export function MIPTrafficEventCard({className, compact, event}) {
+function MIPTrafficEventCard({className, compact, event}) {
     const finalClassName = mipConcatenate(className, styles.traffic_event_card)
     const isCompact = compact === undefined ? false : compact
     return ((typeof event === undefined) || (event === null) ? null :
