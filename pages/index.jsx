@@ -32,7 +32,7 @@ export default function Home(props) {
                   ANAS al lavoro per rimozione neve."
               tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" />
           <MIPPath.Controller className="mip-rounded-corners path-panel" title="Calcola il percorso" responsive />
-          <MIPTraffic.Panel className="event-panel" headerClass="mip-bg-accent"
+          <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
             title="Tempo reale"
             subtitle="Scopri le news sul traffico in tempo reale"
             trafficEventData={props.trafficEventData} compact={true} />
