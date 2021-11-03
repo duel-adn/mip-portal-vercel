@@ -3,6 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import styles from './MIPPath.module.scss'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
+import { mipPathSearch } from './MIPPathAPI';
 
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
@@ -11,14 +12,18 @@ function MIPPathController({className, title, responsive}) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const [selectedOption, setSelectedOption] = useState(optionData[0])
+    const [plans, setPlans] = useState(null)
+
     const onChangeLocation = (id, location) => {
         switch (id) {
             case PATH_ORIGIN_ID:
                 setStartLocation(location)
+                setPlans(null)
                 break
 
             case PATH_DEST_ID:
                 setEndLocation(location)
+                setPlans(null)
                 break
 
             default:
@@ -30,7 +35,7 @@ function MIPPathController({className, title, responsive}) {
             onSubmit(startLocation, endLocation)
         }
     }
-    function onPathSearch(event) {
+    async function onPathSearch(event) {
         event.preventDefault()
         event.stopPropagation()
         if (!startLocation) {
@@ -38,17 +43,23 @@ function MIPPathController({className, title, responsive}) {
         } else if (!endLocation) {
             alert("No end location")
         } else {
-
+            const response = await mipPathSearch('IT', startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, 'CAR')
+            setPlans(response)
         }
         return false
     }
     return (
-        <MIPPathDataDialog className={className} 
-            title={title}
-            responsive={responsive}
-            onChangeLocation={onChangeLocation} 
-            onSubmit={onPathSearch}
-        />
+        <div>
+            <MIPPathDataDialog className={className} 
+                title={title}
+                responsive={responsive}
+                onChangeLocation={onChangeLocation} 
+                onSubmit={onPathSearch}
+            />
+            {plans && 
+                <MIPPathResults plans={plans}/>
+            }
+        </div>
     )
 }
 
@@ -123,6 +134,33 @@ function MIPPathOptions({selectedOption, setSelectedOption}) {
     </RadioGroup>            
     )
 }
+
+function MIPPathResultCard({step}) {
+
+}
+
+function MIPPathResults({plans}) {
+    return (
+        <div className={styles.path_plans_container}>
+        { plans.itineraries.map((itinerary, idx) => 
+            <div key={idx} className={styles.itinerary_container}>
+                <div>Iinerary</div>
+                { itinerary.legs.map((leg, idx) =>
+                    <div key={idx}>
+                        {leg.steps.map((step, idx) => 
+                            <div key={idx} className={styles.instruction}>
+                                <img src={`/path-icons/${step.icon}.svg`}/>
+                                <div>{step.instructions}</div>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        )}
+        </div>
+    )
+}
+
 const MIPPath = {
     Controller: MIPPathController,
     DataDialog: MIPPathDataDialog

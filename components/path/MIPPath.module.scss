@@ -227,3 +227,18 @@ $input-row: 2;
         }
     }
 }
+
+// istruzioni
+
+.path_plans_container {
+    overflow: hidden;
+
+    .itinerary_container {
+        overflow-y: scroll;
+    }
+    .instruction {
+        display: flex;
+        justify-content: space-between;
+        text-align: start;
+    }
+}
