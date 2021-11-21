@@ -161,15 +161,15 @@ function MIPPPlanContainer({plan}) {
             <Tab.Group>
                 <Tab.List>
                 {plan.itineraries && plan.itineraries.map(itinerary => 
-                    <Tab as="div">
+                    <Tab key={itinerary.id} as="div">
                         <MIPItineraryHeader key={itinerary.id} itinerary={itinerary} />
                     </Tab>
                 )}
                 </Tab.List>
                 <Tab.Panels>
                     {plan.itineraries && plan.itineraries.map(itinerary => 
-                        <Tab.Panel>
-                            <MIPItineraryContainer key={itinerary.id} itinerary={itinerary} />
+                        <Tab.Panel key={itinerary.id}>
+                            <MIPItineraryContainer  itinerary={itinerary} />
                         </Tab.Panel>
                     )}
                 </Tab.Panels>
