@@ -12,6 +12,7 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 | [Leaflet] | Leaflet map library |
 | [Headless UI] | Libreria di componenti headless |
 | [React-select] | WAI-ARIA Compliant select component | 
+| [Moment.js] | Libreria per la gestione e la traduzione di date |
 
 ## Installazione ubuntu
 
@@ -31,6 +32,8 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ```npm install @headlessui/react```
 1. Installare `react-select`
 ```npm i --save react-select```
+1. Installare `moment`
+```npm install moment --save```
 
 [5T]:https://www.5t.torino.it
 [Muoversi in piemonte]:https://www.muoversinpiemonte.it
@@ -43,3 +46,4 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 [Leaflet]:https://leafletjs.com/
 [Headless UI]:https://headlessui.dev/
 [React-select]:https://react-select.com/
+[Moment.js]:https://momentjs.com/
