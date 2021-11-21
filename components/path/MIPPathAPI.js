@@ -51,11 +51,11 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
     const fromPlace = `${fromLocationString}::${fromCoordinates[1]},${fromCoordinates[0]}`
     const toLocationString = toLocation.toLowerCase()
     const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
-
+    const dateTime = new Date(Date.now() + 5*60000)
     const response = await mipFetch(
         process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL, {
-        'fromPlace': encodeURI(fromPlace),
-        'toPlace': encodeURI(toPlace),
+        'fromPlace': encodeURI(fromPlace.replace(' ', '+')),
+        'toPlace': encodeURI(toPlace.replace(' ', '+')),
         'mode': encodeURI(mode || 'CAR'),
         'maxWalkDistance': 2000,
         'locale': lang,
@@ -65,7 +65,6 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
 }
 
 function translateOTPResponse(response) {
-    console.log(response)
     // Check the error
     if (response.error) {
         return translateOTPError(response.error)
@@ -73,12 +72,14 @@ function translateOTPResponse(response) {
     return translateOTPPlan(response.plan)
 }
 
-const INVALID_LEG_RESPONSE = "Risposta non valida dal server - Tratta non valida"
-const NO_PLAN_RESPONSE = "Risposta non valida dal server - Nessun piano"
-const INVALID_PLACE_RESPONSE = "Risposta non valida dal server - località non valida"
-const INVALID_ERROR_RESPONSE = "Risposta non valida dal server - formato del messaggio di errore"
-const INVALID_ITINERARY_RESPONSE = "Risposta non valida dal server - itinerario non valido"
-const INVALID_ITINERARIES_RESPONSE = "Risposta non valida dal server - itinerari non validi"
+const NO_PLAN_RESPONSE = { id: 10000, message: "DL_NO_PLAN_RESPONSE" }
+const INVALID_PLACE_RESPONSE = { id: 1001, message: "DL_INVALID_PLACE_RESPONSE" }
+const INVALID_ITINERARY_RESPONSE = { id: 1002, message: "DL_INVALID_ITINERARY_RESPONSE" }
+const INVALID_ITINERARIES_RESPONSE = { id: 1003, message: "DL_INVALID_ITINERARIES_RESPONSE" }
+const INVALID_LEGS_RESPONSE = { id: 1004, message: "DL_INVALID_LEGS_RESPONSE" }
+const INVALID_LEG_RESPONSE = { id: 1005, message: "DL_INVALID_LEG_RESPONSE" }
+const INVALID_STEPS_RESPONSE = { id: 1006, message: "DL_INVALID_STEPS_RESPONSE" }
+const INVALID_STEP_RESPONSE = { id: 1007, message: "DL_INVALID_STEP_RESPONSE" }
 
 function translateOTPPlan(plan) {
     try {
@@ -89,32 +90,27 @@ function translateOTPPlan(plan) {
         const toPlace = translateOTPPlace(plan.to);
         const itineraries = translateOTPItineraries(plan.itineraries)
         return {
-            from: fromPlace,
-            to: toPlace,
-            itineraries: itineraries
+            plan: {
+                from: fromPlace,
+                to: toPlace,
+                itineraries: itineraries
+            }
         }
     } catch (error) {
         console.log(error)
-        return {
+        return translateOTPError({
             error: {
                 message: error
             }
-        }
+        })
     }
 }
 
 function translateOTPPlace(place) {
     if (!place) {
-        //throw INVALID_PLACE_RESPONSE
+        throw INVALID_PLACE_RESPONSE
     }
     return place
-}
-function translateOTPError(error) {
-    if (!error) {
-        throw INVALID_ERROR_RESPONSE;
-    }
-
-    return { error }
 }
 
 function translateOTPItineraries(itineraries) {
@@ -124,17 +120,18 @@ function translateOTPItineraries(itineraries) {
     return itineraries.map(translateOTPItinerary)
 }
 
-function translateOTPItinerary(itinerary) {
+function translateOTPItinerary(itinerary, idx) {
     if (!itinerary) {
         throw INVALID_ITINERARY_RESPONSE;
     }
     return {
+        id: idx,
         duration_s: itinerary.duration || 0,            // 	Duration of the trip on this itinerary, in seconds.
         startTime: new Date(itinerary.startTime),       // Time that the trip departs.
         endTime: new Date(itinerary.endTime),           // Time that the trip arrives.
-        walkTime: itinerary.walkTime,	                // How much time is spent walking, in seconds.
+        walkTime_s: itinerary.walkTime,	                // How much time is spent walking, in seconds.
         walkLimitExceeded: itinerary.walkLimitExceeded, // Indicates that the walk limit distance has been exceeded
-        walkDistance: itinerary.walkDistance,           // How far the user has to walk, in meters.
+        walkDistance_m: itinerary.walkDistance,           // How far the user has to walk, in meters.
         transitTime: itinerary.transitTime,             // How much time is spent on transit, in seconds.
         waitingTime: itinerary.waitingTime,             // How much time is spent waiting for transit to arrive, in seconds.
         elevationLost: itinerary.elevationLost,         // How much elevation is lost, over the course of the trip, in meters.
@@ -148,17 +145,47 @@ function translateOTPItinerary(itinerary) {
 
 function translateOTPLegs(legs) {
     if (!legs) {
-        throw INVALID_LEG_RESPONSE;
+        throw INVALID_LEGS_RESPONSE;
     }
     return legs.map(translateOTPLeg)
 }
 
 // see: http://dev.opentripplanner.org/apidoc/1.0.0/json_Leg.html
-function translateOTPLeg(leg) {
+function translateOTPLeg(leg, idx) {
+    if (!leg) {
+        throw INVALID_LEG_RESPONSE;
+    }
+    switch (leg.mode) {
+        case 'RAIL':
+        case 'BUS':
+            return translateTransitLeg(leg)
+        case 'WALK':
+        case 'CAR':
+            break
+        default:
+            console.log('Unknown transport mode: ' + leg.mode)
+    }
+    return {
+        id: idx,
+        startTime: new Date(leg.startTime),             // The date and time this leg begins.
+        endTime: new Date(leg.endTime),                 // The date and time this leg ends.
+        duration_s: leg.duration,	                    // The leg's duration in seconds
+        distance_m: leg.distance,                       // The distance traveled while traversing the leg in meters.
+        mode: leg.mode,                                 // The mode (e.g., Walk) used when traversing this leg.
+        route: leg.route,	                            // For transit legs, the route of the bus or train being used. For non-transit legs, the name of the street being traversed.
+        routeType: translateRouteType(leg.routeType),   
+        from: translateOTPPlace(leg.from),              // The Place where the leg originates.
+        to: translateOTPPlace(leg.to),                  // The Place where the leg begins.
+        steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
+    }
+}
+
+function translateTransitLeg(leg, idx) {
     if (!leg) {
         throw INVALID_LEG_RESPONSE;
     }
     return {
+        id: idx,
         startTime: new Date(leg.startTime),             // The date and time this leg begins.
         endTime: new Date(leg.endTime),                 // The date and time this leg ends.
         duration_s: leg.duration,	                    // The leg's duration in seconds
@@ -174,17 +201,18 @@ function translateOTPLeg(leg) {
 
 function translateOTPSteps(steps) {
     if (!steps) {
-        throw INVALID_STEP_RESPONSE;
+        throw INVALID_STEPS_RESPONSE;
     }
     return steps.map(translateOTPStep)
 }
 
 // http://dev.opentripplanner.org/apidoc/1.0.0/json_WalkStep.html
-function translateOTPStep(step) {
+function translateOTPStep(step, idx) {
     if (!step) {
         throw INVALID_STEP_RESPONSE;
     }
     return {
+        id: idx,
         distance_m: step.distance,                      // The distance in meters that this step takes.
         relativeDirection: translateOTPRelativeDirection(step.relativeDirection),      // The relative direction of this step.
         absoluteDirection: translateOTPAbsoluteDirection(step.absoluteDirection),   // The absolute direction of this step.
@@ -261,7 +289,7 @@ function generateOTPIcon(direction) {
         case "SLIGHTLY_RIGHT": return "slightly-right"
         case "RIGHT": return "right"
         case "HARD_RIGHT": return "hard-right"
-        case "CIRCLE_CLOCKWISE": return "circel-cw"
+        case "CIRCLE_CLOCKWISE": return "circle-cw"
         case "CIRCLE_COUNTERCLOCKWISE": return "circle-ccw"
         case "ELEVATOR": return "elevator"
         case "UTURN_LEFT": return "left-uturn"
@@ -304,4 +332,45 @@ function translateRouteType(type) {
     }
 
     return null
+}
+
+// http://dev.opentripplanner.org/apidoc/1.3.0/json_Message.html
+const Errors = {
+    "PLAN_OK": "Nessun errore",
+    "SYSTEM_ERROR": "Errore di sistema",
+    "GRAPH_UNAVAILABLE": "I dati per la ricerca non sono disponibili",
+    "OUTSIDE_BOUNDS": "Le località si trovano al di fuori dell'area coperta dal servizio",
+    "PATH_NOT_FOUND": "Non è stato possibile trovare un percorso con le caratteristiche selezionate",
+    "NO_TRANSIT_TIMES": "Le informazioni sugli orari dei servizi di trasporto non sono disponibili",
+    "REQUEST_TIMEOUT": "Il server non ha risposto",
+    "BOGUS_PARAMETER": "Uno dei parametri inviati non è valido",
+    "GEOCODE_FROM_NOT_FOUND": "La località di partenza non è stata trovata",
+    "GEOCODE_TO_NOT_FOUND": "La località di arrivo non è stata trovata",
+    "TOO_CLOSE": "Le località richieste sono troppo vicine",
+    "LOCATION_NOT_ACCESSIBLE": "Una o entrambe le località non sono accessibili",
+    "GEOCODE_FROM_AMBIGUOUS": "La località di partenza è specificata in modo ambiguo",
+    "GEOCODE_TO_AMBIGUOUS": "La località di arrivo è specificata in modo ambiguo",
+    "UNDERSPECIFIED_TRIANGLE": "Errore interno: triangolo non specificato",
+    "TRIANGLE_NOT_AFFINE": "Errore interno: il triangolo specificato non è affine",
+    "TRIANGLE_OPTIMIZE_TYPE_NOT_SET": "Errore interno: il tipo di ottimizzazione del triangolo non è impostata",
+    "TRIANGLE_VALUES_NOT_SET": "Errore interno: i valori del triangolo non sono impostati",
+    "DL_INVALID_LEGS_RESPONSE": "Risposta non valida dal server - Non sono presenti tratte nel percorso",
+    "DL_INVALID_LEG_RESPONSE": "Risposta non valida dal server - Tratta non valida",
+    "DL_INVALID_STEPS_RESPONSE": "Risposta non valida dal server - Istruzioni non valide",
+    "DL_INVALID_STEP_RESPONSE": "Risposta non valida dal server - Istruzione non valida",
+    "DL_NO_PLAN_RESPONSE =": "Risposta non valida dal server - Nessun piano",
+    "DL_INVALID_PLACE_RESPONSE": "Risposta non valida dal server - località non valida",
+    "DL_INVALID_ERROR_RESPONSE": "Risposta non valida dal server - formato del messaggio di errore",
+    "DL_INVALID_ITINERARY_RESPONSE": "Risposta non valida dal server - itinerario non valido",
+    "DL_INVALID_ITINERARIES_RESPONSE": "Risposta non valida dal server - itinerari non validi",
+}
+
+function translateOTPError(error) {
+    let errorMsg = Errors[error.message] || "Il server ha risposto con un codice di errore sconosciuto"
+    return {
+        error: {
+            id: error.id || 99999,
+            message: errorMsg
+        }
+    }
 }

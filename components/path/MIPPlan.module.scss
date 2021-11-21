@@ -1,0 +1,77 @@
+/**
+    (C) Duel srl 2021.
+
+    API per il calcolo del percorso.
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
+
+@import '../../styles/variables';
+
+// Contenitore di un piano
+
+.plan_panel {
+
+    .error_plan {
+        color: red;
+    }
+
+    .empty_plan {
+
+    }
+
+}
+
+.plan_header {
+    background-color: lightgrey;
+    .departure {
+        color: green;
+    }
+
+    .arrival {
+        color: blue;
+    }
+}
+
+.plan_container {
+
+    background-color: lightyellow;
+}
+
+.itinerary_container {
+
+    background-color: lightsteelblue;
+
+    .itinerary_header{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.leg_container {
+
+    background-color: lightseagreen;
+    .leg_header {
+        display: flex;
+        width: 100%;
+        background-color: palegreen;
+    }
+
+    .leg_panel {
+
+    }
+}
+
+.step_container {
+    background-color: lightgreen;
+    display: flex;
+    padding: .5rem;;
+    .step_content {
+        margin: 0 1em;
+    }
+
+}

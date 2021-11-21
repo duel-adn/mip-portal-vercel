@@ -4,6 +4,7 @@ import styles from './MIPPath.module.scss'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
 import { mipPathSearch } from './MIPPathAPI';
+import MIPPlan from './MIPPlan';
 
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
@@ -11,28 +12,23 @@ const PATH_DEST_ID = 'path_dest'
 function MIPPathController({className, title, responsive}) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
-    const [selectedOption, setSelectedOption] = useState(optionData[0])
-    const [plans, setPlans] = useState(null)
+    const [selectedOption, setSelectedOption] = useState(optionData[1])
+    const [plan, setPlan] = useState(null)
 
     const onChangeLocation = (id, location) => {
         switch (id) {
             case PATH_ORIGIN_ID:
                 setStartLocation(location)
-                setPlans(null)
+                setPlan(null)
                 break
 
             case PATH_DEST_ID:
                 setEndLocation(location)
-                setPlans(null)
+                setPlan(null)
                 break
 
             default:
                 console.log(`Invalid id for path endpoint: ${id}`)
-        }
-    }
-    const pathSearch = async (event) => {
-        if (onSubmit) {
-            onSubmit(startLocation, endLocation)
         }
     }
     async function onPathSearch(event) {
@@ -43,28 +39,28 @@ function MIPPathController({className, title, responsive}) {
         } else if (!endLocation) {
             alert("No end location")
         } else {
-            const response = await mipPathSearch('IT', startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, 'CAR')
-            setPlans(response)
+            const response = await mipPathSearch('IT', startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption.value)
+            console.log("response")
+            setPlan(response)
+            console.log(plan)
         }
         return false
     }
     return (
-        <div>
+        <>
             <MIPPathDataDialog className={className} 
                 title={title}
                 responsive={responsive}
                 onChangeLocation={onChangeLocation} 
+                selectedOption={selectedOption}
+                onChangeOption={setSelectedOption}
                 onSubmit={onPathSearch}
             />
-            {plans && 
-                <MIPPathResults plans={plans}/>
-            }
-        </div>
+        </>
     )
 }
 
-function MIPPathDataDialog({className, title, responsive, onChangeLocation, onSubmit}) {
-    const [selectedOption, setSelectedOption] = useState(optionData[0])
+function MIPPathDataDialog({className, title, responsive, onChangeLocation, selectedOption, onChangeOption, onSubmit}) {
     return (
     <form className={mipConcatenate(className, styles.path_data_dialog, responsive ? styles.responsive : undefined)} onSubmit={onSubmit}>
         { title && 
@@ -80,7 +76,7 @@ function MIPPathDataDialog({className, title, responsive, onChangeLocation, onSu
             <div className={styles.input_separator}/>
             <button className={styles.swap_button} />
         </div>
-        <MIPPathOptions selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+        <MIPPathOptions selectedOption={selectedOption} setSelectedOption={onChangeOption}/>
         <input className={styles.submit_button} type="submit" value="Calcola" />
     </form>
     )
@@ -97,14 +93,14 @@ const optionData = [
     {
         id: 'public_transport',
         title: 'mezzi pubblici',
-        value: "PUBLIC",
+        value: "TRANSIT,WALK",
         icon: styles.bus,
         initialState: false
     },
     {
         id: 'bike',
         title: 'bicicletta',
-        value: "BIKE",
+        value: "BICYCLE",
         icon: styles.bike,
         initialState: false
     },
@@ -142,7 +138,11 @@ function MIPPathResultCard({step}) {
 function MIPPathResults({plans}) {
     return (
         <div className={styles.path_plans_container}>
-        { plans.itineraries.map((itinerary, idx) => 
+        {plans.error &&
+            <div className={styles.error_container}>
+            </div>
+        }
+        { plans.itineraries && plans.itineraries.map((itinerary, idx) => 
             <div key={idx} className={styles.itinerary_container}>
                 <div>Iinerary</div>
                 { itinerary.legs.map((leg, idx) =>

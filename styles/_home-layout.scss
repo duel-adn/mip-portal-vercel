@@ -53,6 +53,10 @@
         
         grid-template-columns: 1fr 1fr;
 
+        .path-panel {
+            grid-column: 1/ -1;
+        }
+        
         .event-panel {
             height: max($mip-traffic-height-medium, 15rem);
         }
