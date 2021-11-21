@@ -13,7 +13,10 @@
 import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import MIPTraffic from './MIPTraffic';
-export default function MIPTrafficMap(props) {
+import { useEffect, useMemo } from 'react';
+import { useIconMap } from '../../lib/MIPHooks'
+
+function createIcon(path) {
   const icon =
   L.icon({
   //       iconUrl: '/traffic-icons/accident.svg',
@@ -27,14 +30,19 @@ export default function MIPTrafficMap(props) {
   //       className: 'leaflet-div-icon'
   //   });
   //   var myIcon = L.icon({
-      iconUrl: '/map-icons/accident.svg',
-      iconSize: [38, 95],
-      iconAnchor: [22, 94],
-      popupAnchor: [-3, -76],
+      iconUrl: path,
+      iconSize: [46, 47],
+      iconAnchor: [23, 47],
+      popupAnchor: [0, -47],
       shadowUrl: null,
       shadowSize: [68, 95],
       shadowAnchor: [22, 94]
-  });
+  })
+  return icon
+}
+
+export default function MIPTrafficMap(props) {
+  const getMapIcon = useIconMap('/traffic-icons/pin', createIcon)
   return (
     <MapContainer 
       tap={false}
@@ -48,7 +56,7 @@ export default function MIPTrafficMap(props) {
       />
       {
         props.trafficEventData && props.trafficEventData.map(evt => 
-          <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={icon}>
+          <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={getMapIcon(evt.style)}>
           <Popup>
             <MIPTraffic.EventCard event={evt} />
           </Popup>

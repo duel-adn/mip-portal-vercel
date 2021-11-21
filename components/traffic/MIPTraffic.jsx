@@ -28,7 +28,7 @@ function MIPTrafficEventCard({className, compact, event}) {
     return ((typeof event === undefined) || (event === null) ? null :
         <div className={finalClassName}>
             <h5 className={styles.card_title}
-                style={{ 'backgroundImage': `url(${mipGetTrafficEventIconUrl(event.style)})` }}>{event.road}</h5>
+                style={{ 'backgroundImage': `url(/traffic-icons/ico_${event.style}.png)` }}>{event.road}</h5>
             <div className={styles.container}>
             {isCompact ?
                     <>
@@ -71,7 +71,7 @@ function filterEvents(eventData, text) {
 }
 
 /**
- * Costruisce un componente fatto da un ox di ricerca opzionale seguito da un pannello
+ * Costruisce un componente fatto da un box di ricerca opzionale seguito da un pannello
  * scrollabile con una lista di card.
  * 
  * @param {string} className classe aggiuntiva per l'elemento esterno
