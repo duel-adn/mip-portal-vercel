@@ -1,0 +1,148 @@
+.path-page {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    width: 50%;
+    min-width: 20rem;
+    overflow: hidden;
+    background-color: lightyellow;
+}
+
+.path-dialog {
+    height: 10rem;
+    background-color: blue;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mip-plan-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: lightyellow;
+}
+
+.mip-itinerary-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    width: 100%;
+    text-align: start;
+    padding: 1em;
+    font-size: 1rem;
+
+    img {
+        margin: auto;
+        margin-right: 1rem;
+    }
+}
+
+.mip-itinerary-data {
+    color: $mip-text-color;
+}
+
+.mip-itinerary-time {
+    color: red;
+}
+
+.mip-itinerary-panel {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    width: 100%;
+    background-color: linen;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &.open {
+        left: 1%;
+    }
+}
+//----
+.mip-alernative-details {
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    background-color: mediumaquamarine;
+}
+
+// .path-data {
+//     position: relative;
+//     height: 100%;
+//     overflow: hidden;
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     background-color: limegreen;
+// }
+
+// .alternative-panel {
+//     position: absolute;
+//     top: 0;
+//     left: 5%;
+//     width: 100%;
+//     height: 100%;
+//     background-color: lime;
+//     z-index: 100;
+// }
+
+// .path-header {
+//     background-color: navy;
+//     color: whitesmoke;
+//     width: 100%;
+//     height: 4rem;
+// }
+// .path-alternatives {
+//     display: flex;
+//     flex-direction: column;
+//     height: 100%;
+//     background-color: chartreuse;
+// }    
+
+
+// .leg-panel {
+//     background-color: silver;
+//     min-height: 5rem;
+// }
+
+// .path-panel {
+//     //position: absolute;
+//     top: 3rem;
+//     background-color: sandybrown;
+//     min-height: 20rem;
+//     width: 100%;
+
+//     .hidden {
+//         display: hidden;
+//     }
+// }
+
+// .open-animation {
+
+// }
+// .transition {
+//     transition: 500ms ease-out;
+// }
+
+// .transform {
+
+//     .duration-100 {
+//         animation-duration: 100ms;
+//     }
+
+//     .scale-95 {
+//         scale: 95%;
+//     }
+
+//     .opacity-0 {
+//         opacity: 0;
+//     }
+
+//     .scale-100 {
+//         scale: 100%;
+//     }
+// }
