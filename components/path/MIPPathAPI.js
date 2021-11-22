@@ -65,11 +65,15 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
 }
 
 function translateOTPResponse(response) {
-    // Check the error
-    if (response.error) {
-        return translateOTPError(response.error)
+    try {
+        // Check the error
+        if (response.error) {
+            return translateOTPError(response.error)
+        }
+        return translateOTPPlan(response.plan)
+    } catch (exception) {
+        console.log(exception)
     }
-    return translateOTPPlan(response.plan)
 }
 
 const NO_PLAN_RESPONSE = { id: 10000, message: "DL_NO_PLAN_RESPONSE" }
@@ -86,14 +90,12 @@ function translateOTPPlan(plan) {
         if (!plan) {
             throw NO_PLAN_RESPONSE
         }
-        const fromPlace = translateOTPPlace(plan.from);
-        const toPlace = translateOTPPlace(plan.to);
-        const itineraries = translateOTPItineraries(plan.itineraries)
         return {
             plan: {
-                from: fromPlace,
-                to: toPlace,
-                itineraries: itineraries
+                mode: translatePlanMode(plan),
+                from: translateOTPPlace(plan.from),
+                to: translateOTPPlace(plan.from),
+                itineraries: translateOTPItineraries(plan.itineraries)
             }
         }
     } catch (error) {
@@ -106,11 +108,20 @@ function translateOTPPlan(plan) {
     }
 }
 
+function translatePlanMode(plan) {
+    const mode = plan?.requestParameters?.mode ?? 'CAR'
+    // TODO: controllo del valode ritornato
+    return mode
+}
+
 function translateOTPPlace(place) {
     if (!place) {
         throw INVALID_PLACE_RESPONSE
     }
-    return place
+    return {
+        name: place.name,
+        coords: [place.lon, place.lat],
+    }
 }
 
 function translateOTPItineraries(itineraries) {
@@ -124,25 +135,53 @@ function translateOTPItinerary(itinerary, idx) {
     if (!itinerary) {
         throw INVALID_ITINERARY_RESPONSE;
     }
+    console.log(itinerary)
     return {
         id: idx,
-        duration_s: itinerary.duration || 0,            // 	Duration of the trip on this itinerary, in seconds.
-        startTime: new Date(itinerary.startTime),       // Time that the trip departs.
-        endTime: new Date(itinerary.endTime),           // Time that the trip arrives.
+        startLocation: getStartLocation(itinerary),
+        endLocation: getEndLocation(itinerary),
+        duration_s: itinerary.duration ?? 0,            // 	Duration of the trip on this itinerary, in seconds.
+        startTime: itinerary.startTime,       // Time that the trip departs.
+        endTime: itinerary.endTime,           // Time that the trip arrives.
         walkTime_s: itinerary.walkTime,	                // How much time is spent walking, in seconds.
         walkLimitExceeded: itinerary.walkLimitExceeded, // Indicates that the walk limit distance has been exceeded
         walkDistance_m: itinerary.walkDistance,           // How far the user has to walk, in meters.
+        totalDistance_m: getItineraryLength(itinerary.legs),
         transitTime: itinerary.transitTime,             // How much time is spent on transit, in seconds.
         waitingTime: itinerary.waitingTime,             // How much time is spent waiting for transit to arrive, in seconds.
         elevationLost: itinerary.elevationLost,         // How much elevation is lost, over the course of the trip, in meters.
         elevationGained: itinerary.elevationGained,     // How much elevation is gained, in total, over the course of the trip, in meters.
         tooSloped: itinerary.tooSloped,	                // This itinerary has a greater slope than the user requested
         transfers: itinerary.transfers,                 // The number of transfers this trip has.
-        //fare: itinerary.fare,                         // The cost of this trip
         legs: translateOTPLegs(itinerary.legs),          // A list of Legs.
     }
 }
+function getItineraryLength(legs) {
+    let length = 0;
+    console.log('legs')
+    console.log(legs)
+    switch (legs?.length ?? 0) {
+        case 0:
+            break
 
+        case 1:
+            length = legs[0].distance
+            break
+
+        default:
+            length = legs?.reduce((a, b) => (a?.distance ?? 0) + (b?.distance ?? 0), 0)
+    }
+    
+    console.log(length)
+    return length
+}
+
+function getStartLocation(itinerary) {
+    return translateOTPPlace(itinerary.legs[0].from)
+}
+function getEndLocation(itinerary) {
+    return translateOTPPlace(itinerary.legs[itinerary.legs.length - 1].to)
+}
 function translateOTPLegs(legs) {
     if (!legs) {
         throw INVALID_LEGS_RESPONSE;
@@ -167,8 +206,8 @@ function translateOTPLeg(leg, idx) {
     }
     return {
         id: idx,
-        startTime: new Date(leg.startTime),             // The date and time this leg begins.
-        endTime: new Date(leg.endTime),                 // The date and time this leg ends.
+        // startTime: new Date(leg.startTime),             // The date and time this leg begins.
+        // endTime: new Date(leg.endTime),                 // The date and time this leg ends.
         duration_s: leg.duration,	                    // The leg's duration in seconds
         distance_m: leg.distance,                       // The distance traveled while traversing the leg in meters.
         mode: leg.mode,                                 // The mode (e.g., Walk) used when traversing this leg.
@@ -176,7 +215,7 @@ function translateOTPLeg(leg, idx) {
         routeType: translateRouteType(leg.routeType),   
         from: translateOTPPlace(leg.from),              // The Place where the leg originates.
         to: translateOTPPlace(leg.to),                  // The Place where the leg begins.
-        steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
+        //steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
     }
 }
 
@@ -186,8 +225,8 @@ function translateTransitLeg(leg, idx) {
     }
     return {
         id: idx,
-        startTime: new Date(leg.startTime),             // The date and time this leg begins.
-        endTime: new Date(leg.endTime),                 // The date and time this leg ends.
+        // startTime: new Date(leg.startTime),             // The date and time this leg begins.
+        // endTime: new Date(leg.endTime),                 // The date and time this leg ends.
         duration_s: leg.duration,	                    // The leg's duration in seconds
         distance_m: leg.distance,                       // The distance traveled while traversing the leg in meters.
         mode: leg.mode,                                 // The mode (e.g., Walk) used when traversing this leg.

@@ -60,7 +60,7 @@ function MIPPathController({className, title, responsive}) {
     )
 }
 
-function MIPPathDataDialog({className, title, responsive, onChangeLocation, selectedOption, onChangeOption, onSubmit}) {
+function MIPPathDataDialog({className, title, responsive, compact, onChangeLocation, selectedOption, onChangeOption, onSubmit}) {
     return (
     <form className={mipConcatenate(className, styles.path_data_dialog, responsive ? styles.responsive : undefined)} onSubmit={onSubmit}>
         { title && 
