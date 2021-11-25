@@ -11,6 +11,7 @@
 */
 
 import { mipFetch } from "../../lib/MIPUtility"
+import {convertPlanResponse} from "../../lib/MIPOTPPlanConverter"
 
 /**
  * Interroga la API per l'auto completion degli indirizzi e ritorna 
@@ -51,7 +52,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
     const fromPlace = `${fromLocationString}::${fromCoordinates[1]},${fromCoordinates[0]}`
     const toLocationString = toLocation.toLowerCase()
     const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
-    const dateTime = new Date(Date.now() + 5*60000)
+    const dateTime = new Date(Date.now() + 5 * 60000)
     const response = await mipFetch(
         process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL, {
         'fromPlace': encodeURI(fromPlace.replace(' ', '+')),
@@ -61,19 +62,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
         'locale': lang,
     })
 
-    return translateOTPResponse(response)
-}
-
-function translateOTPResponse(response) {
-    try {
-        // Check the error
-        if (response.error) {
-            return translateOTPError(response.error)
-        }
-        return translateOTPPlan(response.plan)
-    } catch (exception) {
-        console.log(exception)
-    }
+    return convertPlanResponse(response)
 }
 
 const NO_PLAN_RESPONSE = { id: 10000, message: "DL_NO_PLAN_RESPONSE" }
@@ -86,6 +75,7 @@ const INVALID_STEPS_RESPONSE = { id: 1006, message: "DL_INVALID_STEPS_RESPONSE" 
 const INVALID_STEP_RESPONSE = { id: 1007, message: "DL_INVALID_STEP_RESPONSE" }
 
 function translateOTPPlan(plan) {
+    let convertedPlan = null
     try {
         if (!plan) {
             throw NO_PLAN_RESPONSE
@@ -147,12 +137,13 @@ function translateOTPItinerary(itinerary, idx) {
         walkLimitExceeded: itinerary.walkLimitExceeded, // Indicates that the walk limit distance has been exceeded
         walkDistance_m: itinerary.walkDistance,           // How far the user has to walk, in meters.
         totalDistance_m: getItineraryLength(itinerary.legs),
-        transitTime: itinerary.transitTime,             // How much time is spent on transit, in seconds.
-        waitingTime: itinerary.waitingTime,             // How much time is spent waiting for transit to arrive, in seconds.
+        transitTime: itinerary?.transitTime,             // How much time is spent on transit, in seconds.
+        waitingTime: itinerary?.waitingTime,             // How much time is spent waiting for transit to arrive, in seconds.
         elevationLost: itinerary.elevationLost,         // How much elevation is lost, over the course of the trip, in meters.
         elevationGained: itinerary.elevationGained,     // How much elevation is gained, in total, over the course of the trip, in meters.
         tooSloped: itinerary.tooSloped,	                // This itinerary has a greater slope than the user requested
         transfers: itinerary.transfers,                 // The number of transfers this trip has.
+        description: getItineraryDescription(itinerary),
         legs: translateOTPLegs(itinerary.legs),          // A list of Legs.
     }
 }
@@ -171,9 +162,19 @@ function getItineraryLength(legs) {
         default:
             length = legs?.reduce((a, b) => (a?.distance ?? 0) + (b?.distance ?? 0), 0)
     }
-    
+
     console.log(length)
     return length
+}
+
+function getItineraryDescription(itinerary) {
+    const longestLeg = itinerary.legs.reduce((l1, l2) =>
+        l1.distance > l2.distance ? l1 : l2)
+    const longestStep = longestLeg.steps.reduce((s1, s2) =>
+        s1.streetName && s1.distance > s2.distance ? s1 :
+            (s2.streetName ? s2 : s1)
+    )
+    return longestStep.streetName
 }
 
 function getStartLocation(itinerary) {
@@ -206,16 +207,16 @@ function translateOTPLeg(leg, idx) {
     }
     return {
         id: idx,
-        // startTime: new Date(leg.startTime),             // The date and time this leg begins.
-        // endTime: new Date(leg.endTime),                 // The date and time this leg ends.
+        startTime: leg.startTime,             // The date and time this leg begins.
+        endTime: leg.endTime,                 // The date and time this leg ends.
         duration_s: leg.duration,	                    // The leg's duration in seconds
         distance_m: leg.distance,                       // The distance traveled while traversing the leg in meters.
         mode: leg.mode,                                 // The mode (e.g., Walk) used when traversing this leg.
         route: leg.route,	                            // For transit legs, the route of the bus or train being used. For non-transit legs, the name of the street being traversed.
-        routeType: translateRouteType(leg.routeType),   
+        routeType: translateRouteType(leg.routeType),
         from: translateOTPPlace(leg.from),              // The Place where the leg originates.
         to: translateOTPPlace(leg.to),                  // The Place where the leg begins.
-        //steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
+        steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
     }
 }
 
@@ -225,13 +226,13 @@ function translateTransitLeg(leg, idx) {
     }
     return {
         id: idx,
-        // startTime: new Date(leg.startTime),             // The date and time this leg begins.
-        // endTime: new Date(leg.endTime),                 // The date and time this leg ends.
+        startTime: leg.startTime,             // The date and time this leg begins.
+        endTime: leg.endTime,                 // The date and time this leg ends.
         duration_s: leg.duration,	                    // The leg's duration in seconds
         distance_m: leg.distance,                       // The distance traveled while traversing the leg in meters.
         mode: leg.mode,                                 // The mode (e.g., Walk) used when traversing this leg.
         route: leg.route,	                            // For transit legs, the route of the bus or train being used. For non-transit legs, the name of the street being traversed.
-        routeType: translateRouteType(leg.routeType),   
+        routeType: translateRouteType(leg.routeType),
         from: translateOTPPlace(leg.from),              // The Place where the leg originates.
         to: translateOTPPlace(leg.to),                  // The Place where the leg begins.
         steps: translateOTPSteps(leg.steps),            // A series of turn by turn instructions used for walking, biking and driving.
@@ -256,11 +257,11 @@ function translateOTPStep(step, idx) {
         relativeDirection: translateOTPRelativeDirection(step.relativeDirection),      // The relative direction of this step.
         absoluteDirection: translateOTPAbsoluteDirection(step.absoluteDirection),   // The absolute direction of this step.
         streetName: step.bogusName ? null : step.streetName, // the name of the street
-        exitName: step.exitName,                        //	When exiting a highway or traffic circle, the exit name/number.
-        stayOn: step.stayOn,	                        // Indicates whether or not a street changes direction at an intersection.
-        isArea: step.area,                              // This step is on an open area, such as a plaza or train platform, and thus the directions should say something like "cross"
+        exitName: step?.exitName ?? null,                        //	When exiting a highway or traffic circle, the exit name/number.
+        stayOn: step.stayOn ?? false,	                        // Indicates whether or not a street changes direction at an intersection.
+        isArea: step.area ?? false,                              // This step is on an open area, such as a plaza or train platform, and thus the directions should say something like "cross"
         coordinates_xy: [step.lon, step.lat],           // Coordinate del punto
-        instructions: generateOTPInstruction(step),
+        instruction: generateOTPInstruction(step),
         icon: generateOTPIcon(step.relativeDirection)
     }
 }
@@ -268,18 +269,18 @@ function translateOTPStep(step, idx) {
 function generateOTPInstruction(step) {
     if (!step.streetName) {
         switch (step.relativeDirection) {
-            case "DEPART":   return "partenza"
+            case "DEPART": return "partenza"
             case "CONTINUE": return `continua per ${step.distance} metri`
             default: return translateOTPRelativeDirection(step.relativeDirection)
         }
     }
     let instruction = null
     switch (step.relativeDirection) {
-        case "DEPART":      instruction =  `partenza da ${step.streetName}`; break
+        case "DEPART": instruction = `partenza da ${step.streetName}`; break
         case "CONTINUE":
         case "UTURN_LEFT":
-            case "UTURN_RIGHT":
-                instruction = `${translateOTPRelativeDirection(step.relativeDirection)} su ${step.streetName}`; break
+        case "UTURN_RIGHT":
+            instruction = `${translateOTPRelativeDirection(step.relativeDirection)} su ${step.streetName}`; break
         case "SLIGHTLY_LEFT":
         case "LEFT":
         case "HARD_LEFT":
@@ -300,11 +301,11 @@ function generateOTPInstruction(step) {
 // http://dev.opentripplanner.org/apidoc/1.0.0/json_RelativeDirection.html
 function translateOTPRelativeDirection(direction) {
     switch (direction) {
-        case "DEPART":   return "partenza"
+        case "DEPART": return "partenza"
         case "CONTINUE": return "continua"
         case "SLIGHTLY_LEFT": return "gira leggermente a sinistra"
-        case "LEFT"	: return "gira a sinistra"
-        case "HARD_LEFT": return "gira a sinistra"	
+        case "LEFT": return "gira a sinistra"
+        case "HARD_LEFT": return "gira a sinistra"
         case "SLIGHTLY_RIGHT": return "gira leggermente a destra"
         case "RIGHT": return "gira a destra"
         case "HARD_RIGHT": return "gira a destra"
@@ -320,11 +321,11 @@ function translateOTPRelativeDirection(direction) {
 // http://dev.opentripplanner.org/apidoc/1.0.0/json_RelativeDirection.html
 function generateOTPIcon(direction) {
     switch (direction) {
-        case "DEPART":   return "departure"
+        case "DEPART": return "departure"
         case "CONTINUE": return "continue"
         case "SLIGHTLY_LEFT": return "slightly-left"
-        case "LEFT"	: return "left"
-        case "HARD_LEFT": return "hard-left"	
+        case "LEFT": return "left"
+        case "HARD_LEFT": return "hard-left"
         case "SLIGHTLY_RIGHT": return "slightly-right"
         case "RIGHT": return "right"
         case "HARD_RIGHT": return "hard-right"
@@ -340,9 +341,9 @@ function generateOTPIcon(direction) {
 // http://dev.opentripplanner.org/apidoc/1.0.0/json_AbsoluteDirection.html
 function translateOTPAbsoluteDirection(direction) {
     switch (direction) {
-        case "NORTH":   return "nord"
-        case "NORTHEAST": return "nord-est"	
-        case "EAST"	: return "est"
+        case "NORTH": return "nord"
+        case "NORTHEAST": return "nord-est"
+        case "EAST": return "est"
         case "SOUTHEAST": return "sud-est"
         case "SOUTH": return "sud"
         case "SOUTHWEST": return "sud-ovest"
@@ -375,6 +376,7 @@ function translateRouteType(type) {
 
 // http://dev.opentripplanner.org/apidoc/1.3.0/json_Message.html
 const Errors = {
+    "DL_UNKNOWN_ERROR": "Errore sconosciuto",
     "PLAN_OK": "Nessun errore",
     "SYSTEM_ERROR": "Errore di sistema",
     "GRAPH_UNAVAILABLE": "I dati per la ricerca non sono disponibili",
@@ -404,12 +406,32 @@ const Errors = {
     "DL_INVALID_ITINERARIES_RESPONSE": "Risposta non valida dal server - itinerari non validi",
 }
 
-function translateOTPError(error) {
-    let errorMsg = Errors[error.message] || "Il server ha risposto con un codice di errore sconosciuto"
-    return {
-        error: {
-            id: error.id || 99999,
-            message: errorMsg
-        }
-    }
+export function translateUnixDateTime(locale, unixTime) {
+    return new Intl.DateTimeFormat(locale ?? 'it-IT',
+        {
+            dateStyle: 'long',
+            timeStyle: "short"
+        }).format(unixTime ?? Date.now())
 }
+
+export function translateUnixTime(locale, unixTime) {
+    return new Intl.DateTimeFormat(locale ?? 'it-IT',
+        {
+            timeStyle: "short"
+        }).format(unixTime ?? Date.now())
+}
+
+export function translateDuration(s) {
+    const hours = Math.floor(s / 3600)
+    const min = Math.round((s % 3600) / 60)
+    const sec = s % 60
+    const hoursTr = ['ora', 'ore']
+    if (hours <= 0) {
+      return `${min} min. ${sec} s`
+    } else if (min <= 0) {
+      return `${sec} s`
+    }
+    return `${hours} ${hoursTr[Number(hours > 1)]} ${min} min.`
+  }
+  
+  

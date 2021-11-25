@@ -11,9 +11,37 @@
 */
 
 import styles from './MIPPlan.module.scss'
-import moment from 'moment'
 import { Disclosure, Tab } from '@headlessui/react'
 import { mipConcatenate } from '../../lib/MIPUtility'
+
+/**
+ * Pannello per la vsualizzazione del piano
+ * 
+ * @param {Object} plan il piano tradotto nella locale della pagina
+ */
+ function MIPPPlanPanel({plan, showHeader}) {
+    return (
+        <div className={styles.plan_panel}>
+            {isError(plan) &&
+                <div id="plan-error" className={styles.error_plan}>
+                {`${plan.error.message}`}
+                </div>
+            }
+            {isEmpty(plan) && 
+                <div className={styles.empty_plan}>
+                    Nessun piano disponibile
+                </div>
+            }
+            {isValid(plan) && 
+                <>
+                <MIPPPlanHeader plan={plan.plan} />
+                <MIPPPlanContainer plan={plan.plan} />
+                </>
+            }
+        </div>
+    )
+}
+
 
 // http://dev.opentripplanner.org/apidoc/1.3.0/syntax_json.html
 
@@ -39,7 +67,7 @@ function getArrivalLocationName(plan) {
 }
 
 function getTime(date) {
-    return moment(date).format('H:mm')
+    return mipFormatUnixTime(date)
 }
 
 function humanizeDuration(duration_s) {
@@ -55,7 +83,7 @@ function humanizeDuration(duration_s) {
     return mipConcatenate(daysDesc, hoursDesc, minDesc)
 }
 
-function humanizeDistance(distance_m) {
+export function humanizeDistance(distance_m) {
     const meters = Math.floor(distance_m)
     const km = Math.floor(meters / 1000)
     return km == 0 ? meters + " m" : Math.round(meters/100)/10 + " Km"
@@ -68,33 +96,6 @@ function getLegDescription(leg) {
 function getStepDescription(step) {
     return humanizeDistance(step.distance_m)
 }
-/**
- * 
- * @param {Object} pl
- */
-function MIPPPlanPanel({plan, showHeader}) {
-    return (
-        <div className={styles.plan_panel}>
-            {isError(plan) &&
-                <div className={styles.error_plan}>
-                {`${plan.error.message}`}
-                </div>
-            }
-            {isEmpty(plan) && 
-                <div className={styles.empty_plan}>
-                    Nessun piano disponibile
-                </div>
-            }
-            {isValid(plan) && 
-                <>
-                <MIPPPlanHeader plan={plan.plan} />
-                <MIPPPlanContainer plan={plan.plan} />
-                </>
-            }
-        </div>
-    )
-}
-
 function MIPPPlanHeader({plan}) {
     console.log(plan)
     return (

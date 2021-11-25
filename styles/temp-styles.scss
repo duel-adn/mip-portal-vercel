@@ -25,6 +25,25 @@
     background-color: lightyellow;
 }
 
+.mip-error-message {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: $mip-error-color;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mip-plan-header {
+    padding: 1rem;
+    padding-bottom: 1rem;
+    color: $mip-text-color;
+    background-color: $mip-light-background;
+    font-size: .875rem;
+    font-weight: 600;
+}
+
+
 .mip-itinerary-header {
     display: grid;
     grid-template-columns: auto 1fr auto;
