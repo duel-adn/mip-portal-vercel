@@ -124,20 +124,20 @@ $input-row: 2;
             align-items: center;
         }
 
-        .car::before {
-            background-image: url(/icons/car.svg);
+        .vehicle::before {
+            background-image: url(/path-icons/vehicle.svg);
         }
 
-        .bus::before {
-            background-image: url(/icons/bus.svg);
+        .public_transport::before {
+            background-image: url(/path-icons//public_transport.svg);
 
         }
-        .walk::before {
-            background-image: url(/icons/walk.svg);
+        .pedestrian::before {
+            background-image: url(/path-icons/pedestrian.svg);
         }
 
         .bike::before {
-            background-image: url(/icons/bike.svg);
+            background-image: url(/path-icons/bike.svg);
         }
 
         .checked::before {

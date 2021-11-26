@@ -13,6 +13,30 @@
 import { mipFetch } from "../../lib/MIPUtility"
 import {convertPlanResponse} from "../../lib/MIPOTPPlanConverter"
 
+// Sincronizzare con MIPPath.pathPlanModeStyles
+export const pathPlanModes = new Map([
+    ['vehicle', {
+        id: 'vehicle',
+        title: 'auto',
+        value: "CAR",
+    }],
+    ['public_transport', {
+        id: 'public_transport',
+        title: 'mezzi pubblici',
+        value: "TRANSIT,WALK",
+    }],
+    [ 'bike', {
+        id: 'bike',
+        title: 'bicicletta',
+        value: "BICYCLE",
+    }],
+    ['pedestrian', {
+        id: 'pedestrian',
+        title: 'a piedi',
+        value: "WALK",
+    }],
+])
+
 /**
  * Interroga la API per l'auto completion degli indirizzi e ritorna 
  * un array di indirizzi coerente con la stringa di ricerca.
@@ -62,109 +86,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
         'locale': lang,
     })
 
-    return convertPlanResponse(response)
-}
-
-const NO_PLAN_RESPONSE = { id: 10000, message: "DL_NO_PLAN_RESPONSE" }
-const INVALID_PLACE_RESPONSE = { id: 1001, message: "DL_INVALID_PLACE_RESPONSE" }
-const INVALID_ITINERARY_RESPONSE = { id: 1002, message: "DL_INVALID_ITINERARY_RESPONSE" }
-const INVALID_ITINERARIES_RESPONSE = { id: 1003, message: "DL_INVALID_ITINERARIES_RESPONSE" }
-const INVALID_LEGS_RESPONSE = { id: 1004, message: "DL_INVALID_LEGS_RESPONSE" }
-const INVALID_LEG_RESPONSE = { id: 1005, message: "DL_INVALID_LEG_RESPONSE" }
-const INVALID_STEPS_RESPONSE = { id: 1006, message: "DL_INVALID_STEPS_RESPONSE" }
-const INVALID_STEP_RESPONSE = { id: 1007, message: "DL_INVALID_STEP_RESPONSE" }
-
-function translateOTPPlan(plan) {
-    let convertedPlan = null
-    try {
-        if (!plan) {
-            throw NO_PLAN_RESPONSE
-        }
-        return {
-            plan: {
-                mode: translatePlanMode(plan),
-                from: translateOTPPlace(plan.from),
-                to: translateOTPPlace(plan.from),
-                itineraries: translateOTPItineraries(plan.itineraries)
-            }
-        }
-    } catch (error) {
-        console.log(error)
-        return translateOTPError({
-            error: {
-                message: error
-            }
-        })
-    }
-}
-
-function translatePlanMode(plan) {
-    const mode = plan?.requestParameters?.mode ?? 'CAR'
-    // TODO: controllo del valode ritornato
-    return mode
-}
-
-function translateOTPPlace(place) {
-    if (!place) {
-        throw INVALID_PLACE_RESPONSE
-    }
-    return {
-        name: place.name,
-        coords: [place.lon, place.lat],
-    }
-}
-
-function translateOTPItineraries(itineraries) {
-    if (!itineraries) {
-        throw INVALID_ITINERARIES_RESPONSE;
-    }
-    return itineraries.map(translateOTPItinerary)
-}
-
-function translateOTPItinerary(itinerary, idx) {
-    if (!itinerary) {
-        throw INVALID_ITINERARY_RESPONSE;
-    }
-    console.log(itinerary)
-    return {
-        id: idx,
-        startLocation: getStartLocation(itinerary),
-        endLocation: getEndLocation(itinerary),
-        duration_s: itinerary.duration ?? 0,            // 	Duration of the trip on this itinerary, in seconds.
-        startTime: itinerary.startTime,       // Time that the trip departs.
-        endTime: itinerary.endTime,           // Time that the trip arrives.
-        walkTime_s: itinerary.walkTime,	                // How much time is spent walking, in seconds.
-        walkLimitExceeded: itinerary.walkLimitExceeded, // Indicates that the walk limit distance has been exceeded
-        walkDistance_m: itinerary.walkDistance,           // How far the user has to walk, in meters.
-        totalDistance_m: getItineraryLength(itinerary.legs),
-        transitTime: itinerary?.transitTime,             // How much time is spent on transit, in seconds.
-        waitingTime: itinerary?.waitingTime,             // How much time is spent waiting for transit to arrive, in seconds.
-        elevationLost: itinerary.elevationLost,         // How much elevation is lost, over the course of the trip, in meters.
-        elevationGained: itinerary.elevationGained,     // How much elevation is gained, in total, over the course of the trip, in meters.
-        tooSloped: itinerary.tooSloped,	                // This itinerary has a greater slope than the user requested
-        transfers: itinerary.transfers,                 // The number of transfers this trip has.
-        description: getItineraryDescription(itinerary),
-        legs: translateOTPLegs(itinerary.legs),          // A list of Legs.
-    }
-}
-function getItineraryLength(legs) {
-    let length = 0;
-    console.log('legs')
-    console.log(legs)
-    switch (legs?.length ?? 0) {
-        case 0:
-            break
-
-        case 1:
-            length = legs[0].distance
-            break
-
-        default:
-            length = legs?.reduce((a, b) => (a?.distance ?? 0) + (b?.distance ?? 0), 0)
-    }
-
-    console.log(length)
-    return length
+    return convertPlanResponse(mode, response)
 }
 
 function getItineraryDescription(itinerary) {
@@ -175,19 +97,6 @@ function getItineraryDescription(itinerary) {
             (s2.streetName ? s2 : s1)
     )
     return longestStep.streetName
-}
-
-function getStartLocation(itinerary) {
-    return translateOTPPlace(itinerary.legs[0].from)
-}
-function getEndLocation(itinerary) {
-    return translateOTPPlace(itinerary.legs[itinerary.legs.length - 1].to)
-}
-function translateOTPLegs(legs) {
-    if (!legs) {
-        throw INVALID_LEGS_RESPONSE;
-    }
-    return legs.map(translateOTPLeg)
 }
 
 // see: http://dev.opentripplanner.org/apidoc/1.0.0/json_Leg.html

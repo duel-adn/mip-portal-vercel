@@ -3,8 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import styles from './MIPPath.module.scss'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
-import { mipPathSearch } from './MIPPathAPI';
-import MIPPlan from './MIPPlan';
+import { pathPlanModes, mipPathSearch } from './MIPPathAPI';
 
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
@@ -12,7 +11,7 @@ const PATH_DEST_ID = 'path_dest'
 function MIPPathController({className, title, responsive}) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
-    const [selectedOption, setSelectedOption] = useState(optionData[1])
+    const [selectedOption, setSelectedOption] = useState(pathPlanModes.get('public_transport'))
     const [plan, setPlan] = useState(null)
 
     const onChangeLocation = (id, location) => {
@@ -82,45 +81,34 @@ function MIPPathDataDialog({className, title, responsive, compact, onChangeLocat
     )
 }
 
-const optionData = [
-    {
-        id: 'vehicle',
+// Sincronizzare con MIPPathApi.pathPlanModes
+const pathPlanModeStyles = new Map([
+    ['vehicle', {
         title: 'auto',
-        icon: styles.car,
-        value: "CAR",
-        initialState: true
-    },
-    {
-        id: 'public_transport',
+        style: styles.vehicle,
+    }],
+    ['public_transport', {
         title: 'mezzi pubblici',
-        value: "TRANSIT,WALK",
-        icon: styles.bus,
-        initialState: false
-    },
-    {
-        id: 'bike',
+        style: styles.public_transport,
+    }],
+    [ 'bike', {
         title: 'bicicletta',
-        value: "BICYCLE",
-        icon: styles.bike,
-        initialState: false
-    },
-    {
-        id: 'pedestrian',
+        style: styles.bike,
+    }],
+    ['pedestrian', {
         title: 'a piedi',
-        icon: styles.walk,
-        value: "WALK",
-        initialState: false
-    },
-]
+        style: styles.pedestrian,
+    }],
+])
 function MIPPathOptions({selectedOption, setSelectedOption}) {
     return (
         <RadioGroup className={styles.path_options} value={selectedOption} onChange={setSelectedOption} >
         <RadioGroup.Label className={styles.label}>Mostra percorso</RadioGroup.Label>
         <div className={styles.radio_group}>
-            {optionData.map(opt => 
+            {Array.from(pathPlanModes.values()).map(opt => 
                 <RadioGroup.Option key={opt.id}
                     value={opt} 
-                    className={({ active, checked }) => mipConcatenate(styles.option, opt.icon,
+                    className={({ active, checked }) => mipConcatenate(styles.option, pathPlanModeStyles.get(opt.id)?.style,
                         active ? styles.active : '',
                         checked ?  styles.checked : '')}>
                     <RadioGroup.Label className={styles.radio_label}>{opt.title}</RadioGroup.Label>
@@ -128,36 +116,6 @@ function MIPPathOptions({selectedOption, setSelectedOption}) {
             )}
         </div>
     </RadioGroup>            
-    )
-}
-
-function MIPPathResultCard({step}) {
-
-}
-
-function MIPPathResults({plans}) {
-    return (
-        <div className={styles.path_plans_container}>
-        {plans.error &&
-            <div className={styles.error_container}>
-            </div>
-        }
-        { plans.itineraries && plans.itineraries.map((itinerary, idx) => 
-            <div key={idx} className={styles.itinerary_container}>
-                <div>Iinerary</div>
-                { itinerary.legs.map((leg, idx) =>
-                    <div key={idx}>
-                        {leg.steps.map((step, idx) => 
-                            <div key={idx} className={styles.instruction}>
-                                <img src={`/path-icons/${step.icon}.svg`}/>
-                                <div>{step.instructions}</div>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
-        )}
-        </div>
     )
 }
 
