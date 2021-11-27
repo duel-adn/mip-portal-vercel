@@ -1,0 +1,3632 @@
+{
+    "requestParameters": {
+        "mode": "TRANSIT,WALK",
+        "fromPlace": "torino, italia::45.059405,7.652514",
+        "toPlace": "alessandria, italia::44.910936,8.61412",
+        "maxWalkDistance": "2000",
+        "locale": "IT"
+    },
+    "plan": {
+        "date": 1637917307000,
+        "from": {
+            "name": "torino, italia",
+            "lon": 7.652514,
+            "lat": 45.059405,
+            "orig": "torino, italia",
+            "vertexType": "NORMAL"
+        },
+        "to": {
+            "name": "alessandria, italia",
+            "lon": 8.61412,
+            "lat": 44.910936,
+            "orig": "alessandria, italia",
+            "vertexType": "NORMAL"
+        },
+        "itineraries": [
+            {
+                "duration": 5833,
+                "startTime": 1637917953000,
+                "endTime": 1637923786000,
+                "walkTime": 1166,
+                "transitTime": 4119,
+                "waitingTime": 548,
+                "walkDistance": 1439.2986165285556,
+                "walkLimitExceeded": false,
+                "elevationLost": 4.700000000000003,
+                "elevationGained": 11.180000000000007,
+                "transfers": 1,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "symbol": "EUR",
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR"
+                            },
+                            "cents": -1
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "gtt:201",
+                                "price": {
+                                    "currency": {
+                                        "symbol": "EUR",
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR"
+                                    },
+                                    "cents": 170
+                                },
+                                "routes": [
+                                    "gtt:58U"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1637917953000,
+                        "endTime": 1637917961000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 10.44,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "torino, italia",
+                            "lon": 7.652514,
+                            "lat": 45.059405,
+                            "departure": 1637917953000,
+                            "orig": "torino, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "BRACCINI",
+                            "stopId": "gtt:1939",
+                            "stopCode": "1939",
+                            "lon": 7.65257,
+                            "lat": 45.05928,
+                            "arrival": 1637917961000,
+                            "departure": 1637917962000,
+                            "zoneId": "0",
+                            "stopIndex": 18,
+                            "stopSequence": 19,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "et_rGisum@NJ",
+                            "length": 2
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 8.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 10.44,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Spalato",
+                                "absoluteDirection": "SOUTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.65253223803107,
+                                "lat": 45.059398519813165,
+                                "elevation": []
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637917962000,
+                        "endTime": 1637918841000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 2731.3067969891463,
+                        "pathway": false,
+                        "mode": "BUS",
+                        "route": "58",
+                        "agencyName": "GTT Servizio Urbano",
+                        "agencyUrl": "https://www.gtt.to.it/cms/percorari/urbano",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "FF9900",
+                        "routeType": 3,
+                        "routeId": "gtt:58U",
+                        "routeTextColor": "0000FF",
+                        "interlineWithPreviousLeg": false,
+                        "tripBlockId": "58-5",
+                        "headsign": "CENTRO, VIA BERTOLA",
+                        "agencyId": "U",
+                        "tripId": "gtt:19957661U",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "BRACCINI",
+                            "stopId": "gtt:1939",
+                            "stopCode": "1939",
+                            "lon": 7.65257,
+                            "lat": 45.05928,
+                            "arrival": 1637917961000,
+                            "departure": 1637917962000,
+                            "zoneId": "0",
+                            "stopIndex": 18,
+                            "stopSequence": 19,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "PORTA NUOVA",
+                            "stopId": "gtt:253",
+                            "stopCode": "253",
+                            "lon": 7.67746,
+                            "lat": 45.06263,
+                            "arrival": 1637918841000,
+                            "departure": 1637918841000,
+                            "zoneId": "0",
+                            "stopIndex": 27,
+                            "stopSequence": 28,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "us_rG{rum@iBiAv@wOLoCXKN[Au@Uc@fDmLx@{CgHsE{QmL}KgHYQpFcThFkSlF}SzAcGBo@GQgEsCgC{A",
+                            "length": 22
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "us_rG{rum@iBiAv@wO",
+                                "length": 3
+                            },
+                            {
+                                "points": "gu_rG}evm@LoCXKN[Au@Uc@fDmL",
+                                "length": 7
+                            },
+                            {
+                                "points": "_o_rG}{vm@x@{CgHsE",
+                                "length": 3
+                            },
+                            {
+                                "points": "mv_rGmgwm@{QmL",
+                                "length": 2
+                            },
+                            {
+                                "points": "ii`rG{twm@}KgH",
+                                "length": 2
+                            },
+                            {
+                                "points": "gv`rGc~wm@YQpFcT",
+                                "length": 3
+                            },
+                            {
+                                "points": "oo`rGysxm@hFkS",
+                                "length": 2
+                            },
+                            {
+                                "points": "eh`rGehym@lF}S",
+                                "length": 2
+                            },
+                            {
+                                "points": "w``rGc}ym@zAcGBo@GQgEsCgC{A",
+                                "length": 6
+                            }
+                        ],
+                        "routeShortName": "58",
+                        "routeLongName": "feriale, via Allason - via Bertola",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 879.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637918841000,
+                        "endTime": 1637919054000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 279.448,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "PORTA NUOVA",
+                            "stopId": "gtt:253",
+                            "stopCode": "253",
+                            "lon": 7.67746,
+                            "lat": 45.06263,
+                            "arrival": 1637918841000,
+                            "departure": 1637918841000,
+                            "zoneId": "0",
+                            "stopIndex": 27,
+                            "stopSequence": 28,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione TORINO PORTA NUOVA",
+                            "stopId": "trepie:ITRP-ST0012729010",
+                            "lon": 7.67752,
+                            "lat": 45.0609,
+                            "arrival": 1637919054000,
+                            "departure": 1637919600000,
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "yh`rGoozm@YQECBGCEEIAK?ODOBKHB@E@CH[vE|CPu@d@XNo@",
+                            "length": 18
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 213.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 19.88,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Paolo Sacchi",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.6775266,
+                                "lat": 45.062692500000004,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 19.88,
+                                        "second": 225.0
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 259.568,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "percorso",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 7.6776384,
+                                "lat": 45.0628529,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 3.09,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 16.176000000000002,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 29.266000000000002,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 42.915000000000006,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 44.525000000000006,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 44.52700000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 56.56700000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 56.56800000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 238.87800000000001,
+                                        "second": 225.0
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637919600000,
+                        "endTime": 1637922840000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 81425.22404442963,
+                        "pathway": false,
+                        "mode": "RAIL",
+                        "route": "TORINO P.NUOVA - SALERNO",
+                        "agencyName": "TRENITALIA",
+                        "agencyUrl": "http://www.trenitalia.it",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "804040",
+                        "routeType": 2,
+                        "routeId": "trepie:ITRP-RO200_5108_20201213_20211211",
+                        "routeTextColor": "FFFFFF",
+                        "interlineWithPreviousLeg": false,
+                        "tripShortName": "IC 511",
+                        "headsign": "SALERNO F.S.",
+                        "agencyId": "ITRP-AG000174",
+                        "tripId": "trepie:ITRP-TR200_5108_49824",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "Stazione TORINO PORTA NUOVA",
+                            "stopId": "trepie:ITRP-ST0012729010",
+                            "lon": 7.67752,
+                            "lat": 45.0609,
+                            "arrival": 1637919054000,
+                            "departure": 1637919600000,
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637922840000,
+                            "departure": 1637922841000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "s}_rGoozm@juEj`CjvXwqjBguAabmA",
+                            "length": 4
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "s}_rGoozm@juEj`C",
+                                "length": 2
+                            },
+                            {
+                                "points": "ggyqGcnvm@jvXwqjB",
+                                "length": 2
+                            },
+                            {
+                                "points": "{o_qG{`bq@guAabmA",
+                                "length": 2
+                            }
+                        ],
+                        "routeLongName": "TORINO P.NUOVA - SALERNO",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 3240.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637922841000,
+                        "endTime": 1637923786000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 1149.0140000000004,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637922840000,
+                            "departure": 1637922841000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "alessandria, italia",
+                            "lon": 8.61412,
+                            "lat": 44.910936,
+                            "arrival": 1637923786000,
+                            "orig": "alessandria, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "sebqGccps@lC_DRULTwErFs@{AEKFIGKk@v@A@C?A@A?EAE?ECCAAAAA?AAE?C?E@E@CBG|BmCXe@BC?C@C?A@C?C?CAK]yO?IAE?A?IAE?A?CAAAAAAA?AAuA]KCCAAACCCAAAAA?AAA?AAA?AA?GGEA_Bc@b@gF?A?CAA?C?AACACAECCCEACCGCGGKAEECg@a@a@WOEqAk@",
+                            "length": 88
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 945.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 114.883,
+                                "relativeDirection": "DEPART",
+                                "streetName": "binario",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.60738266615309,
+                                "lat": 44.90858807999689,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 164.435,
+                                "relativeDirection": "UTURN_RIGHT",
+                                "streetName": "binario",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6081819,
+                                "lat": 44.907709600000004,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 93.55
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 93.67
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 93.74
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 93.77
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 93.75
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 93.56
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 93.17
+                                    },
+                                    {
+                                        "first": 90.0,
+                                        "second": 93.07
+                                    },
+                                    {
+                                        "first": 100.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 110.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 120.0,
+                                        "second": 93.94
+                                    },
+                                    {
+                                        "first": 130.0,
+                                        "second": 94.17
+                                    },
+                                    {
+                                        "first": 140.0,
+                                        "second": 94.36
+                                    },
+                                    {
+                                        "first": 152.79,
+                                        "second": 94.57
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 64.575,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "sottopassaggio",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.606969000000001,
+                                "lat": 44.9087821,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 94.57
+                                    },
+                                    {
+                                        "first": 46.59,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 46.587,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 64.577,
+                                        "second": 95.68
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 33.546,
+                                "relativeDirection": "HARD_LEFT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6075927,
+                                "lat": 44.9090701,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.68
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.9
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.92
+                                    },
+                                    {
+                                        "first": 33.55,
+                                        "second": 95.81
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 12.074,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607315700000001,
+                                "lat": 44.9092993,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.81
+                                    },
+                                    {
+                                        "first": 12.07,
+                                        "second": 95.84
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 8.548,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.607308,
+                                "lat": 44.909405,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.84
+                                    },
+                                    {
+                                        "first": 8.55,
+                                        "second": 95.89
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 15.324,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6073597,
+                                "lat": 44.909470600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.98
+                                    },
+                                    {
+                                        "first": 15.35,
+                                        "second": 96.0
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 89.716,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Spalto Borgoglio",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607531700000001,
+                                "lat": 44.9094453,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 95.7
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 95.53
+                                    },
+                                    {
+                                        "first": 89.72,
+                                        "second": 95.49
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 249.86399999999998,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Viale della Repubblica",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6082452,
+                                "lat": 44.908816300000005,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.49
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.54
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 95.62
+                                    },
+                                    {
+                                        "first": 36.96,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 36.955,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 46.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 56.955,
+                                        "second": 96.05
+                                    },
+                                    {
+                                        "first": 66.955,
+                                        "second": 96.21
+                                    },
+                                    {
+                                        "first": 76.955,
+                                        "second": 96.37
+                                    },
+                                    {
+                                        "first": 86.955,
+                                        "second": 96.32
+                                    },
+                                    {
+                                        "first": 96.955,
+                                        "second": 96.18
+                                    },
+                                    {
+                                        "first": 106.955,
+                                        "second": 96.03
+                                    },
+                                    {
+                                        "first": 116.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 126.955,
+                                        "second": 95.75
+                                    },
+                                    {
+                                        "first": 136.95499999999998,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 146.95499999999998,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 156.95499999999998,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 166.95499999999998,
+                                        "second": 96.14
+                                    },
+                                    {
+                                        "first": 176.95499999999998,
+                                        "second": 96.45
+                                    },
+                                    {
+                                        "first": 186.95499999999998,
+                                        "second": 96.76
+                                    },
+                                    {
+                                        "first": 196.95499999999998,
+                                        "second": 97.08
+                                    },
+                                    {
+                                        "first": 206.95499999999998,
+                                        "second": 97.39
+                                    },
+                                    {
+                                        "first": 216.95499999999998,
+                                        "second": 97.78
+                                    },
+                                    {
+                                        "first": 226.95499999999998,
+                                        "second": 98.25
+                                    },
+                                    {
+                                        "first": 236.95499999999998,
+                                        "second": 98.71
+                                    },
+                                    {
+                                        "first": 249.865,
+                                        "second": 99.31
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 91.191,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Piazza Giuseppe Garibaldi",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6113172,
+                                "lat": 44.9088063,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 99.31
+                                    },
+                                    {
+                                        "first": 4.15,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 4.154,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 6.254,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 6.2509999999999994,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 16.250999999999998,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 26.250999999999998,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 36.251,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 46.251,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 56.251,
+                                        "second": 100.94
+                                    },
+                                    {
+                                        "first": 66.251,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 71.62100000000001,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 71.599,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 81.599,
+                                        "second": 100.51
+                                    },
+                                    {
+                                        "first": 91.19900000000001,
+                                        "second": 100.42
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 9.249,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6118165,
+                                "lat": 44.9094606,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.42
+                                    },
+                                    {
+                                        "first": 9.25,
+                                        "second": 100.35
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 57.911,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "Corso Roma",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6118801,
+                                "lat": 44.9095292,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.24
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.15
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.02
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 99.97
+                                    },
+                                    {
+                                        "first": 57.91,
+                                        "second": 100.08
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 93.032,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "Via Carlo Caniggia",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.612079000000001,
+                                "lat": 44.910030600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.08
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.59
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.89
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.91
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 100.65
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 100.41
+                                    },
+                                    {
+                                        "first": 93.03,
+                                        "second": 100.27
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 65.506,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6132351,
+                                "lat": 44.909858500000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.27
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.16
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.2
+                                    },
+                                    {
+                                        "first": 33.97,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 33.953,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 43.953,
+                                        "second": 100.56
+                                    },
+                                    {
+                                        "first": 53.953,
+                                        "second": 100.7
+                                    },
+                                    {
+                                        "first": 65.503,
+                                        "second": 100.8
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 79.16,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Via San Giacomo della Vittoria",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6138022,
+                                "lat": 44.9102608,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.83
+                                    },
+                                    {
+                                        "first": 21.74,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 21.738,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 31.738,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 41.738,
+                                        "second": 100.64
+                                    },
+                                    {
+                                        "first": 51.738,
+                                        "second": 100.5
+                                    },
+                                    {
+                                        "first": 61.738,
+                                        "second": 100.3
+                                    },
+                                    {
+                                        "first": 71.738,
+                                        "second": 100.09
+                                    },
+                                    {
+                                        "first": 79.158,
+                                        "second": 100.03
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            },
+            {
+                "duration": 6231,
+                "startTime": 1637917555000,
+                "endTime": 1637923786000,
+                "walkTime": 2064,
+                "transitTime": 3718,
+                "waitingTime": 449,
+                "walkDistance": 2580.6947593822424,
+                "walkLimitExceeded": false,
+                "elevationLost": 4.700000000000003,
+                "elevationGained": 11.180000000000007,
+                "transfers": 1,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "symbol": "EUR",
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR"
+                            },
+                            "cents": -1
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "gtt:201",
+                                "price": {
+                                    "currency": {
+                                        "symbol": "EUR",
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR"
+                                    },
+                                    "cents": 170
+                                },
+                                "routes": [
+                                    "gtt:63U"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1637917555000,
+                        "endTime": 1637918641000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 1391.208,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "torino, italia",
+                            "lon": 7.652514,
+                            "lat": 45.059405,
+                            "departure": 1637917555000,
+                            "orig": "torino, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "OSPEDALE MAURIZIANO",
+                            "stopId": "gtt:264",
+                            "stopCode": "264",
+                            "lon": 7.66431,
+                            "lat": 45.05265,
+                            "arrival": 1637918641000,
+                            "departure": 1637918642000,
+                            "zoneId": "0",
+                            "stopIndex": 6,
+                            "stopSequence": 7,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "et_rGisum@NJtA|@NHBO@CTgAb@yBBG@Il@uC@WDSFIj@cCFYLc@HQFQZYHSBE@EDQBEr@cCZiAd@aBbAmDFQBODOBKDKFSFShA}DHYFWt@iCFSDOjAaEFSFShAaEDOLe@Ne@FM@EnBoEz@sBJBTXBIpCbD",
+                            "length": 57
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 1086.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 73.833,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Spalato",
+                                "absoluteDirection": "SOUTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.65253223803107,
+                                "lat": 45.059398519813165,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 307.65200000000004,
+                                "relativeDirection": "LEFT",
+                                "streetName": "Via Bobbio",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.6521105,
+                                "lat": 45.0588051,
+                                "elevation": [
+                                    {
+                                        "first": 91.411,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 95.031,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 95.027,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 163.987,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 163.985,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 181.495,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 181.497,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 244.697,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 244.698,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 255.648,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 255.643,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 272.473,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 272.473,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 289.863,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 289.867,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 307.65700000000004,
+                                        "second": 227.38
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 823.0040000000001,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "Via Sebastiano Caboto",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.655570900000001,
+                                "lat": 45.0575885,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 10.26,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 10.257,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 15.957,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 15.952,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 86.05199999999999,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 163.187,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 241.457,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 241.45300000000003,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 249.39300000000003,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 249.39400000000003,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 256.34400000000005,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 256.34400000000005,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 263.04400000000004,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 263.04800000000006,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 273.6580000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 273.6550000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 283.0850000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 283.0830000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 388.7730000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 388.7700000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 470.9600000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 470.95600000000013,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 573.3660000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 573.3640000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 676.8740000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 676.8760000000002,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 693.3860000000002,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 693.3870000000002,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 710.5970000000002,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 710.6010000000001,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 823.0010000000001,
+                                        "second": 227.38
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 186.719,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Largo Re Umberto",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.664626800000001,
+                                "lat": 45.0538864,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 56.47,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 83.301,
+                                        "second": 227.38
+                                    },
+                                    {
+                                        "first": 110.141,
+                                        "second": 227.38
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637918642000,
+                        "endTime": 1637919600000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 3862.7337505145615,
+                        "pathway": false,
+                        "mode": "BUS",
+                        "route": "63",
+                        "agencyName": "GTT Servizio Urbano",
+                        "agencyUrl": "https://www.gtt.to.it/cms/percorari/urbano",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "FF9900",
+                        "routeType": 3,
+                        "routeId": "gtt:63U",
+                        "routeTextColor": "0000FF",
+                        "interlineWithPreviousLeg": false,
+                        "tripBlockId": "63-5",
+                        "headsign": "MIRAFIORI SUD, VIA NEGARVILLE",
+                        "agencyId": "U",
+                        "tripId": "gtt:19958628U",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "OSPEDALE MAURIZIANO",
+                            "stopId": "gtt:264",
+                            "stopCode": "264",
+                            "lon": 7.66431,
+                            "lat": 45.05265,
+                            "arrival": 1637918641000,
+                            "departure": 1637918642000,
+                            "zoneId": "0",
+                            "stopIndex": 6,
+                            "stopSequence": 7,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "STAZIONE LINGOTTO",
+                            "stopId": "gtt:2603",
+                            "stopCode": "2603",
+                            "lon": 7.65655,
+                            "lat": 45.02623,
+                            "arrival": 1637919600000,
+                            "departure": 1637919600000,
+                            "zoneId": "0",
+                            "stopIndex": 17,
+                            "stopSequence": 18,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "mi~qG}}wm@~JlL|IfKVXz@~Ct@lB^gAJoArEwIfAuBjOhQtNrPNYhBmHjEyQnAv@|LxHlLpFzLvFpMbGxOlHd@iBz@sDTGE_@p@kCh@mAn@Yt@?",
+                            "length": 29
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "mi~qG}}wm@~JlL",
+                                "length": 2
+                            },
+                            {
+                                "points": "m}}qGopwm@|IfK",
+                                "length": 2
+                            },
+                            {
+                                "points": "or}qGgdwm@VXz@~Ct@lB^gAJoArEwI",
+                                "length": 7
+                            },
+                            {
+                                "points": "ef}qGojwm@fAuBjOhQ",
+                                "length": 3
+                            },
+                            {
+                                "points": "qs|qG{{vm@tNrPNYhBmH",
+                                "length": 4
+                            },
+                            {
+                                "points": "a`|qGotvm@jEyQnAv@",
+                                "length": 3
+                            },
+                            {
+                                "points": "ew{qGqewm@|LxHlLpF",
+                                "length": 3
+                            },
+                            {
+                                "points": "y{zqGetvm@zLvF",
+                                "length": 2
+                            },
+                            {
+                                "points": "}mzqGmlvm@pMbG",
+                                "length": 2
+                            },
+                            {
+                                "points": "k_zqGidvm@xOlHd@iB",
+                                "length": 3
+                            },
+                            {
+                                "points": "kmyqGe~um@z@sDTGE_@p@kCh@mAn@Yt@?",
+                                "length": 8
+                            }
+                        ],
+                        "routeShortName": "63",
+                        "routeLongName": "via Negarville - piazza Solferino",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 958.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637919600000,
+                        "endTime": 1637919633000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 39.968999999999994,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "STAZIONE LINGOTTO",
+                            "stopId": "gtt:2603",
+                            "stopCode": "2603",
+                            "lon": 7.65655,
+                            "lat": 45.02623,
+                            "arrival": 1637919600000,
+                            "departure": 1637919600000,
+                            "zoneId": "0",
+                            "stopIndex": 17,
+                            "stopSequence": 18,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione TORINO LINGOTTO",
+                            "stopId": "trepie:ITRP-ST0012729012",
+                            "lon": 7.65682,
+                            "lat": 45.0266,
+                            "arrival": 1637919633000,
+                            "departure": 1637920080000,
+                            "stopIndex": 1,
+                            "stopSequence": 2,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "}dyqGgmvm@I?U?K?M?M@",
+                            "length": 6
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 33.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 39.968999999999994,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Mario Pannunzio",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.656687657372766,
+                                "lat": 45.02623127885959,
+                                "elevation": []
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637920080000,
+                        "endTime": 1637922840000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 77278.96196351835,
+                        "pathway": false,
+                        "mode": "RAIL",
+                        "route": "TORINO P.NUOVA - SALERNO",
+                        "agencyName": "TRENITALIA",
+                        "agencyUrl": "http://www.trenitalia.it",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "804040",
+                        "routeType": 2,
+                        "routeId": "trepie:ITRP-RO200_5108_20201213_20211211",
+                        "routeTextColor": "FFFFFF",
+                        "interlineWithPreviousLeg": false,
+                        "tripShortName": "IC 511",
+                        "headsign": "SALERNO F.S.",
+                        "agencyId": "ITRP-AG000174",
+                        "tripId": "trepie:ITRP-TR200_5108_49824",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "Stazione TORINO LINGOTTO",
+                            "stopId": "trepie:ITRP-ST0012729012",
+                            "lon": 7.65682,
+                            "lat": 45.0266,
+                            "arrival": 1637919633000,
+                            "departure": 1637920080000,
+                            "stopIndex": 1,
+                            "stopSequence": 2,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637922840000,
+                            "departure": 1637922841000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "ggyqGcnvm@jvXwqjBguAabmA",
+                            "length": 3
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "ggyqGcnvm@jvXwqjB",
+                                "length": 2
+                            },
+                            {
+                                "points": "{o_qG{`bq@guAabmA",
+                                "length": 2
+                            }
+                        ],
+                        "routeLongName": "TORINO P.NUOVA - SALERNO",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 2760.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637922841000,
+                        "endTime": 1637923786000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 1149.0140000000004,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637922840000,
+                            "departure": 1637922841000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "alessandria, italia",
+                            "lon": 8.61412,
+                            "lat": 44.910936,
+                            "arrival": 1637923786000,
+                            "orig": "alessandria, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "sebqGccps@lC_DRULTwErFs@{AEKFIGKk@v@A@C?A@A?EAE?ECCAAAAA?AAE?C?E@E@CBG|BmCXe@BC?C@C?A@C?C?CAK]yO?IAE?A?IAE?A?CAAAAAAA?AAuA]KCCAAACCCAAAAA?AAA?AAA?AA?GGEA_Bc@b@gF?A?CAA?C?AACACAECCCEACCGCGGKAEECg@a@a@WOEqAk@",
+                            "length": 88
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 945.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 114.883,
+                                "relativeDirection": "DEPART",
+                                "streetName": "binario",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.60738266615309,
+                                "lat": 44.90858807999689,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 164.435,
+                                "relativeDirection": "UTURN_RIGHT",
+                                "streetName": "binario",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6081819,
+                                "lat": 44.907709600000004,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 93.55
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 93.67
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 93.74
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 93.77
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 93.75
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 93.56
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 93.17
+                                    },
+                                    {
+                                        "first": 90.0,
+                                        "second": 93.07
+                                    },
+                                    {
+                                        "first": 100.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 110.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 120.0,
+                                        "second": 93.94
+                                    },
+                                    {
+                                        "first": 130.0,
+                                        "second": 94.17
+                                    },
+                                    {
+                                        "first": 140.0,
+                                        "second": 94.36
+                                    },
+                                    {
+                                        "first": 152.79,
+                                        "second": 94.57
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 64.575,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "sottopassaggio",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.606969000000001,
+                                "lat": 44.9087821,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 94.57
+                                    },
+                                    {
+                                        "first": 46.59,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 46.587,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 64.577,
+                                        "second": 95.68
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 33.546,
+                                "relativeDirection": "HARD_LEFT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6075927,
+                                "lat": 44.9090701,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.68
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.9
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.92
+                                    },
+                                    {
+                                        "first": 33.55,
+                                        "second": 95.81
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 12.074,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607315700000001,
+                                "lat": 44.9092993,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.81
+                                    },
+                                    {
+                                        "first": 12.07,
+                                        "second": 95.84
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 8.548,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.607308,
+                                "lat": 44.909405,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.84
+                                    },
+                                    {
+                                        "first": 8.55,
+                                        "second": 95.89
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 15.324,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6073597,
+                                "lat": 44.909470600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.98
+                                    },
+                                    {
+                                        "first": 15.35,
+                                        "second": 96.0
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 89.716,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Spalto Borgoglio",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607531700000001,
+                                "lat": 44.9094453,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 95.7
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 95.53
+                                    },
+                                    {
+                                        "first": 89.72,
+                                        "second": 95.49
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 249.86399999999998,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Viale della Repubblica",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6082452,
+                                "lat": 44.908816300000005,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.49
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.54
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 95.62
+                                    },
+                                    {
+                                        "first": 36.96,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 36.955,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 46.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 56.955,
+                                        "second": 96.05
+                                    },
+                                    {
+                                        "first": 66.955,
+                                        "second": 96.21
+                                    },
+                                    {
+                                        "first": 76.955,
+                                        "second": 96.37
+                                    },
+                                    {
+                                        "first": 86.955,
+                                        "second": 96.32
+                                    },
+                                    {
+                                        "first": 96.955,
+                                        "second": 96.18
+                                    },
+                                    {
+                                        "first": 106.955,
+                                        "second": 96.03
+                                    },
+                                    {
+                                        "first": 116.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 126.955,
+                                        "second": 95.75
+                                    },
+                                    {
+                                        "first": 136.95499999999998,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 146.95499999999998,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 156.95499999999998,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 166.95499999999998,
+                                        "second": 96.14
+                                    },
+                                    {
+                                        "first": 176.95499999999998,
+                                        "second": 96.45
+                                    },
+                                    {
+                                        "first": 186.95499999999998,
+                                        "second": 96.76
+                                    },
+                                    {
+                                        "first": 196.95499999999998,
+                                        "second": 97.08
+                                    },
+                                    {
+                                        "first": 206.95499999999998,
+                                        "second": 97.39
+                                    },
+                                    {
+                                        "first": 216.95499999999998,
+                                        "second": 97.78
+                                    },
+                                    {
+                                        "first": 226.95499999999998,
+                                        "second": 98.25
+                                    },
+                                    {
+                                        "first": 236.95499999999998,
+                                        "second": 98.71
+                                    },
+                                    {
+                                        "first": 249.865,
+                                        "second": 99.31
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 91.191,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Piazza Giuseppe Garibaldi",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6113172,
+                                "lat": 44.9088063,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 99.31
+                                    },
+                                    {
+                                        "first": 4.15,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 4.154,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 6.254,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 6.2509999999999994,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 16.250999999999998,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 26.250999999999998,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 36.251,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 46.251,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 56.251,
+                                        "second": 100.94
+                                    },
+                                    {
+                                        "first": 66.251,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 71.62100000000001,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 71.599,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 81.599,
+                                        "second": 100.51
+                                    },
+                                    {
+                                        "first": 91.19900000000001,
+                                        "second": 100.42
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 9.249,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6118165,
+                                "lat": 44.9094606,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.42
+                                    },
+                                    {
+                                        "first": 9.25,
+                                        "second": 100.35
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 57.911,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "Corso Roma",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6118801,
+                                "lat": 44.9095292,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.24
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.15
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.02
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 99.97
+                                    },
+                                    {
+                                        "first": 57.91,
+                                        "second": 100.08
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 93.032,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "Via Carlo Caniggia",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.612079000000001,
+                                "lat": 44.910030600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.08
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.59
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.89
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.91
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 100.65
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 100.41
+                                    },
+                                    {
+                                        "first": 93.03,
+                                        "second": 100.27
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 65.506,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6132351,
+                                "lat": 44.909858500000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.27
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.16
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.2
+                                    },
+                                    {
+                                        "first": 33.97,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 33.953,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 43.953,
+                                        "second": 100.56
+                                    },
+                                    {
+                                        "first": 53.953,
+                                        "second": 100.7
+                                    },
+                                    {
+                                        "first": 65.503,
+                                        "second": 100.8
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 79.16,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Via San Giacomo della Vittoria",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6138022,
+                                "lat": 44.9102608,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.83
+                                    },
+                                    {
+                                        "first": 21.74,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 21.738,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 31.738,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 41.738,
+                                        "second": 100.64
+                                    },
+                                    {
+                                        "first": 51.738,
+                                        "second": 100.5
+                                    },
+                                    {
+                                        "first": 61.738,
+                                        "second": 100.3
+                                    },
+                                    {
+                                        "first": 71.738,
+                                        "second": 100.09
+                                    },
+                                    {
+                                        "first": 79.158,
+                                        "second": 100.03
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            },
+            {
+                "duration": 6253,
+                "startTime": 1637920833000,
+                "endTime": 1637927086000,
+                "walkTime": 1166,
+                "transitTime": 4419,
+                "waitingTime": 668,
+                "walkDistance": 1439.2986165285556,
+                "walkLimitExceeded": false,
+                "elevationLost": 4.700000000000003,
+                "elevationGained": 11.180000000000007,
+                "transfers": 1,
+                "fare": {
+                    "fare": {
+                        "regular": {
+                            "currency": {
+                                "symbol": "EUR",
+                                "currency": "EUR",
+                                "defaultFractionDigits": 2,
+                                "currencyCode": "EUR"
+                            },
+                            "cents": -1
+                        }
+                    },
+                    "details": {
+                        "regular": [
+                            {
+                                "fareId": "gtt:201",
+                                "price": {
+                                    "currency": {
+                                        "symbol": "EUR",
+                                        "currency": "EUR",
+                                        "defaultFractionDigits": 2,
+                                        "currencyCode": "EUR"
+                                    },
+                                    "cents": 170
+                                },
+                                "routes": [
+                                    "gtt:58U"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "legs": [
+                    {
+                        "startTime": 1637920833000,
+                        "endTime": 1637920841000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 10.44,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "torino, italia",
+                            "lon": 7.652514,
+                            "lat": 45.059405,
+                            "departure": 1637920833000,
+                            "orig": "torino, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "to": {
+                            "name": "BRACCINI",
+                            "stopId": "gtt:1939",
+                            "stopCode": "1939",
+                            "lon": 7.65257,
+                            "lat": 45.05928,
+                            "arrival": 1637920841000,
+                            "departure": 1637920842000,
+                            "zoneId": "0",
+                            "stopIndex": 18,
+                            "stopSequence": 19,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "et_rGisum@NJ",
+                            "length": 2
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 8.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 10.44,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Spalato",
+                                "absoluteDirection": "SOUTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.65253223803107,
+                                "lat": 45.059398519813165,
+                                "elevation": []
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637920842000,
+                        "endTime": 1637921721000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 2731.3067969891463,
+                        "pathway": false,
+                        "mode": "BUS",
+                        "route": "58",
+                        "agencyName": "GTT Servizio Urbano",
+                        "agencyUrl": "https://www.gtt.to.it/cms/percorari/urbano",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "FF9900",
+                        "routeType": 3,
+                        "routeId": "gtt:58U",
+                        "routeTextColor": "0000FF",
+                        "interlineWithPreviousLeg": false,
+                        "tripBlockId": "58-6",
+                        "headsign": "CENTRO, VIA BERTOLA",
+                        "agencyId": "U",
+                        "tripId": "gtt:19957678U",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "BRACCINI",
+                            "stopId": "gtt:1939",
+                            "stopCode": "1939",
+                            "lon": 7.65257,
+                            "lat": 45.05928,
+                            "arrival": 1637920841000,
+                            "departure": 1637920842000,
+                            "zoneId": "0",
+                            "stopIndex": 18,
+                            "stopSequence": 19,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "PORTA NUOVA",
+                            "stopId": "gtt:253",
+                            "stopCode": "253",
+                            "lon": 7.67746,
+                            "lat": 45.06263,
+                            "arrival": 1637921721000,
+                            "departure": 1637921721000,
+                            "zoneId": "0",
+                            "stopIndex": 27,
+                            "stopSequence": 28,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "us_rG{rum@iBiAv@wOLoCXKN[Au@Uc@fDmLx@{CgHsE{QmL}KgHYQpFcThFkSlF}SzAcGBo@GQgEsCgC{A",
+                            "length": 22
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "us_rG{rum@iBiAv@wO",
+                                "length": 3
+                            },
+                            {
+                                "points": "gu_rG}evm@LoCXKN[Au@Uc@fDmL",
+                                "length": 7
+                            },
+                            {
+                                "points": "_o_rG}{vm@x@{CgHsE",
+                                "length": 3
+                            },
+                            {
+                                "points": "mv_rGmgwm@{QmL",
+                                "length": 2
+                            },
+                            {
+                                "points": "ii`rG{twm@}KgH",
+                                "length": 2
+                            },
+                            {
+                                "points": "gv`rGc~wm@YQpFcT",
+                                "length": 3
+                            },
+                            {
+                                "points": "oo`rGysxm@hFkS",
+                                "length": 2
+                            },
+                            {
+                                "points": "eh`rGehym@lF}S",
+                                "length": 2
+                            },
+                            {
+                                "points": "w``rGc}ym@zAcGBo@GQgEsCgC{A",
+                                "length": 6
+                            }
+                        ],
+                        "routeShortName": "58",
+                        "routeLongName": "feriale, via Allason - via Bertola",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 879.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637921721000,
+                        "endTime": 1637921934000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 279.448,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "PORTA NUOVA",
+                            "stopId": "gtt:253",
+                            "stopCode": "253",
+                            "lon": 7.67746,
+                            "lat": 45.06263,
+                            "arrival": 1637921721000,
+                            "departure": 1637921721000,
+                            "zoneId": "0",
+                            "stopIndex": 27,
+                            "stopSequence": 28,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione TORINO PORTA NUOVA",
+                            "stopId": "trepie:ITRP-ST0012729010",
+                            "lon": 7.67752,
+                            "lat": 45.0609,
+                            "arrival": 1637921934000,
+                            "departure": 1637922600000,
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "yh`rGoozm@YQECBGCEEIAK?ODOBKHB@E@CH[vE|CPu@d@XNo@",
+                            "length": 18
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 213.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 19.88,
+                                "relativeDirection": "DEPART",
+                                "streetName": "Via Paolo Sacchi",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 7.6775266,
+                                "lat": 45.062692500000004,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 19.88,
+                                        "second": 225.0
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 259.568,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "percorso",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 7.6776384,
+                                "lat": 45.0628529,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 3.09,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 16.176000000000002,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 29.266000000000002,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 42.915000000000006,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 44.525000000000006,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 44.52700000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 56.56700000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 56.56800000000001,
+                                        "second": 225.0
+                                    },
+                                    {
+                                        "first": 238.87800000000001,
+                                        "second": 225.0
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "startTime": 1637922600000,
+                        "endTime": 1637926140000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 81425.22404442963,
+                        "pathway": false,
+                        "mode": "RAIL",
+                        "route": "TORINO P.NUOVA - GENOVA BRIGNOLE",
+                        "agencyName": "TRENITALIA",
+                        "agencyUrl": "http://www.trenitalia.it",
+                        "agencyTimeZoneOffset": 3600000,
+                        "routeColor": "804040",
+                        "routeType": 2,
+                        "routeId": "trepie:ITRP-RO200_5154_20201213_20211211",
+                        "routeTextColor": "FFFFFF",
+                        "interlineWithPreviousLeg": false,
+                        "tripShortName": "RV 2125",
+                        "headsign": "GENOVA BRIGNOLE F.S.",
+                        "agencyId": "ITRP-AG000174",
+                        "tripId": "trepie:ITRP-TR200_5154_55824",
+                        "serviceDate": "20211126",
+                        "from": {
+                            "name": "Stazione TORINO PORTA NUOVA",
+                            "stopId": "trepie:ITRP-ST0012729010",
+                            "lon": 7.67752,
+                            "lat": 45.0609,
+                            "arrival": 1637921934000,
+                            "departure": 1637922600000,
+                            "stopIndex": 0,
+                            "stopSequence": 1,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637926140000,
+                            "departure": 1637926141000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "legGeometry": {
+                            "points": "s}_rGoozm@juEj`CjvXwqjBguAabmA",
+                            "length": 4
+                        },
+                        "interStopGeometry": [
+                            {
+                                "points": "s}_rGoozm@juEj`C",
+                                "length": 2
+                            },
+                            {
+                                "points": "ggyqGcnvm@jvXwqjB",
+                                "length": 2
+                            },
+                            {
+                                "points": "{o_qG{`bq@guAabmA",
+                                "length": 2
+                            }
+                        ],
+                        "routeLongName": "TORINO P.NUOVA - GENOVA BRIGNOLE",
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 3540.0,
+                        "transitLeg": true,
+                        "steps": []
+                    },
+                    {
+                        "startTime": 1637926141000,
+                        "endTime": 1637927086000,
+                        "departureDelay": 0,
+                        "arrivalDelay": 0,
+                        "realTime": false,
+                        "distance": 1149.0140000000004,
+                        "pathway": false,
+                        "mode": "WALK",
+                        "route": "",
+                        "agencyTimeZoneOffset": 3600000,
+                        "interlineWithPreviousLeg": false,
+                        "from": {
+                            "name": "Stazione ALESSANDRIA",
+                            "stopId": "trepie:ITRP-ST0060039003",
+                            "lon": 8.60751,
+                            "lat": 44.90866,
+                            "arrival": 1637926140000,
+                            "departure": 1637926141000,
+                            "stopIndex": 3,
+                            "stopSequence": 4,
+                            "vertexType": "TRANSIT",
+                            "boardAlightType": "DEFAULT"
+                        },
+                        "to": {
+                            "name": "alessandria, italia",
+                            "lon": 8.61412,
+                            "lat": 44.910936,
+                            "arrival": 1637927086000,
+                            "orig": "alessandria, italia",
+                            "vertexType": "NORMAL"
+                        },
+                        "legGeometry": {
+                            "points": "sebqGccps@lC_DRULTwErFs@{AEKFIGKk@v@A@C?A@A?EAE?ECCAAAAA?AAE?C?E@E@CBG|BmCXe@BC?C@C?A@C?C?CAK]yO?IAE?A?IAE?A?CAAAAAAA?AAuA]KCCAAACCCAAAAA?AAA?AAA?AA?GGEA_Bc@b@gF?A?CAA?C?AACACAECCCEACCGCGGKAEECg@a@a@WOEqAk@",
+                            "length": 88
+                        },
+                        "rentedBike": false,
+                        "rentedCar": false,
+                        "rentedVehicle": false,
+                        "hailedCar": false,
+                        "flexDrtAdvanceBookMin": 0.0,
+                        "duration": 945.0,
+                        "transitLeg": false,
+                        "steps": [
+                            {
+                                "distance": 114.883,
+                                "relativeDirection": "DEPART",
+                                "streetName": "binario",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.60738266615309,
+                                "lat": 44.90858807999689,
+                                "elevation": []
+                            },
+                            {
+                                "distance": 164.435,
+                                "relativeDirection": "UTURN_RIGHT",
+                                "streetName": "binario",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6081819,
+                                "lat": 44.907709600000004,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 93.55
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 93.67
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 93.74
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 93.77
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 93.75
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 93.56
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 93.17
+                                    },
+                                    {
+                                        "first": 90.0,
+                                        "second": 93.07
+                                    },
+                                    {
+                                        "first": 100.0,
+                                        "second": 93.39
+                                    },
+                                    {
+                                        "first": 110.0,
+                                        "second": 93.68
+                                    },
+                                    {
+                                        "first": 120.0,
+                                        "second": 93.94
+                                    },
+                                    {
+                                        "first": 130.0,
+                                        "second": 94.17
+                                    },
+                                    {
+                                        "first": 140.0,
+                                        "second": 94.36
+                                    },
+                                    {
+                                        "first": 152.79,
+                                        "second": 94.57
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 64.575,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "sottopassaggio",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.606969000000001,
+                                "lat": 44.9087821,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 94.57
+                                    },
+                                    {
+                                        "first": 46.59,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 46.587,
+                                        "second": 95.37
+                                    },
+                                    {
+                                        "first": 64.577,
+                                        "second": 95.68
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 33.546,
+                                "relativeDirection": "HARD_LEFT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTHWEST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6075927,
+                                "lat": 44.9090701,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.68
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.9
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.92
+                                    },
+                                    {
+                                        "first": 33.55,
+                                        "second": 95.81
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 12.074,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Piazza Eugenio Curiel",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607315700000001,
+                                "lat": 44.9092993,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.81
+                                    },
+                                    {
+                                        "first": 12.07,
+                                        "second": 95.84
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 8.548,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.607308,
+                                "lat": 44.909405,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.84
+                                    },
+                                    {
+                                        "first": 8.55,
+                                        "second": 95.89
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 15.324,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": true,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6073597,
+                                "lat": 44.909470600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.98
+                                    },
+                                    {
+                                        "first": 15.35,
+                                        "second": 96.0
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 89.716,
+                                "relativeDirection": "SLIGHTLY_RIGHT",
+                                "streetName": "Spalto Borgoglio",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.607531700000001,
+                                "lat": 44.9094453,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 96.0
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 95.7
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 95.53
+                                    },
+                                    {
+                                        "first": 89.72,
+                                        "second": 95.49
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 249.86399999999998,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Viale della Repubblica",
+                                "absoluteDirection": "SOUTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6082452,
+                                "lat": 44.908816300000005,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 95.49
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 95.54
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 95.62
+                                    },
+                                    {
+                                        "first": 36.96,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 36.955,
+                                        "second": 95.73
+                                    },
+                                    {
+                                        "first": 46.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 56.955,
+                                        "second": 96.05
+                                    },
+                                    {
+                                        "first": 66.955,
+                                        "second": 96.21
+                                    },
+                                    {
+                                        "first": 76.955,
+                                        "second": 96.37
+                                    },
+                                    {
+                                        "first": 86.955,
+                                        "second": 96.32
+                                    },
+                                    {
+                                        "first": 96.955,
+                                        "second": 96.18
+                                    },
+                                    {
+                                        "first": 106.955,
+                                        "second": 96.03
+                                    },
+                                    {
+                                        "first": 116.955,
+                                        "second": 95.89
+                                    },
+                                    {
+                                        "first": 126.955,
+                                        "second": 95.75
+                                    },
+                                    {
+                                        "first": 136.95499999999998,
+                                        "second": 95.6
+                                    },
+                                    {
+                                        "first": 146.95499999999998,
+                                        "second": 95.51
+                                    },
+                                    {
+                                        "first": 156.95499999999998,
+                                        "second": 95.83
+                                    },
+                                    {
+                                        "first": 166.95499999999998,
+                                        "second": 96.14
+                                    },
+                                    {
+                                        "first": 176.95499999999998,
+                                        "second": 96.45
+                                    },
+                                    {
+                                        "first": 186.95499999999998,
+                                        "second": 96.76
+                                    },
+                                    {
+                                        "first": 196.95499999999998,
+                                        "second": 97.08
+                                    },
+                                    {
+                                        "first": 206.95499999999998,
+                                        "second": 97.39
+                                    },
+                                    {
+                                        "first": 216.95499999999998,
+                                        "second": 97.78
+                                    },
+                                    {
+                                        "first": 226.95499999999998,
+                                        "second": 98.25
+                                    },
+                                    {
+                                        "first": 236.95499999999998,
+                                        "second": 98.71
+                                    },
+                                    {
+                                        "first": 249.865,
+                                        "second": 99.31
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 91.191,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Piazza Giuseppe Garibaldi",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6113172,
+                                "lat": 44.9088063,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 99.31
+                                    },
+                                    {
+                                        "first": 4.15,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 4.154,
+                                        "second": 99.5
+                                    },
+                                    {
+                                        "first": 6.254,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 6.2509999999999994,
+                                        "second": 99.6
+                                    },
+                                    {
+                                        "first": 16.250999999999998,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 26.250999999999998,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 36.251,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 46.251,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 56.251,
+                                        "second": 100.94
+                                    },
+                                    {
+                                        "first": 66.251,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 71.62100000000001,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 71.599,
+                                        "second": 100.67
+                                    },
+                                    {
+                                        "first": 81.599,
+                                        "second": 100.51
+                                    },
+                                    {
+                                        "first": 91.19900000000001,
+                                        "second": 100.42
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 9.249,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6118165,
+                                "lat": 44.9094606,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.42
+                                    },
+                                    {
+                                        "first": 9.25,
+                                        "second": 100.35
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 57.911,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "Corso Roma",
+                                "absoluteDirection": "NORTH",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6118801,
+                                "lat": 44.9095292,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.24
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.15
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.07
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.02
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 99.97
+                                    },
+                                    {
+                                        "first": 57.91,
+                                        "second": 100.08
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 93.032,
+                                "relativeDirection": "RIGHT",
+                                "streetName": "Via Carlo Caniggia",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.612079000000001,
+                                "lat": 44.910030600000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.08
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.32
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.59
+                                    },
+                                    {
+                                        "first": 30.0,
+                                        "second": 100.89
+                                    },
+                                    {
+                                        "first": 40.0,
+                                        "second": 100.91
+                                    },
+                                    {
+                                        "first": 50.0,
+                                        "second": 100.78
+                                    },
+                                    {
+                                        "first": 60.0,
+                                        "second": 100.65
+                                    },
+                                    {
+                                        "first": 70.0,
+                                        "second": 100.53
+                                    },
+                                    {
+                                        "first": 80.0,
+                                        "second": 100.41
+                                    },
+                                    {
+                                        "first": 93.03,
+                                        "second": 100.27
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 65.506,
+                                "relativeDirection": "SLIGHTLY_LEFT",
+                                "streetName": "strada senza nome",
+                                "absoluteDirection": "EAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": true,
+                                "lon": 8.6132351,
+                                "lat": 44.909858500000006,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.27
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.16
+                                    },
+                                    {
+                                        "first": 20.0,
+                                        "second": 100.2
+                                    },
+                                    {
+                                        "first": 33.97,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 33.953,
+                                        "second": 100.35
+                                    },
+                                    {
+                                        "first": 43.953,
+                                        "second": 100.56
+                                    },
+                                    {
+                                        "first": 53.953,
+                                        "second": 100.7
+                                    },
+                                    {
+                                        "first": 65.503,
+                                        "second": 100.8
+                                    }
+                                ]
+                            },
+                            {
+                                "distance": 79.16,
+                                "relativeDirection": "CONTINUE",
+                                "streetName": "Via San Giacomo della Vittoria",
+                                "absoluteDirection": "NORTHEAST",
+                                "stayOn": false,
+                                "area": false,
+                                "bogusName": false,
+                                "lon": 8.6138022,
+                                "lat": 44.9102608,
+                                "elevation": [
+                                    {
+                                        "first": 0.0,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 10.0,
+                                        "second": 100.83
+                                    },
+                                    {
+                                        "first": 21.74,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 21.738,
+                                        "second": 100.8
+                                    },
+                                    {
+                                        "first": 31.738,
+                                        "second": 100.75
+                                    },
+                                    {
+                                        "first": 41.738,
+                                        "second": 100.64
+                                    },
+                                    {
+                                        "first": 51.738,
+                                        "second": 100.5
+                                    },
+                                    {
+                                        "first": 61.738,
+                                        "second": 100.3
+                                    },
+                                    {
+                                        "first": 71.738,
+                                        "second": 100.09
+                                    },
+                                    {
+                                        "first": 79.158,
+                                        "second": 100.03
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "tooSloped": false
+            }
+        ]
+    },
+    "debugOutput": {
+        "precalculationTime": 52,
+        "pathCalculationTime": 1019,
+        "pathTimes": [
+            120,
+            272,
+            627
+        ],
+        "renderingTime": 1,
+        "totalTime": 1072,
+        "timedOut": false
+    },
+    "elevationMetadata": {
+        "ellipsoidToGeoidDifference": 36.187942044440106,
+        "geoidElevation": false
+    }
+}

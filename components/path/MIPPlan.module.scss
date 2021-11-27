@@ -12,66 +12,140 @@
 
 @import '../../styles/variables';
 
+$plan-cell-padding-x: 1.5rem;
+$plan-cell-padding-y: 1rem;
+$plan-icon-col-width: 2rem;
+
+.plan_cell_base {
+    width: 100%;
+    padding: $plan-cell-padding-y $plan-cell-padding-x;
+    border-bottom: 1px solid $mip-light-border-color;
+}
+
+// Icona
+.path_icon {
+    width: 1.5rem;
+    height: auto;
+}
 // Contenitore di un piano
 
 .plan_panel {
-
-    .error_plan {
-        color: red;
-    }
-
-    .empty_plan {
-
-    }
-
-}
-
-.plan_header {
-    background-color: lightgrey;
-    .departure {
-        color: green;
-    }
-
-    .arrival {
-        color: blue;
-    }
-}
-
-.plan_container {
-
+    position: relative;
+    width: 100%;
+    height: 100%;
     background-color: lightyellow;
+    color: $mip-text-color;
 }
 
-.itinerary_container {
+// Itinerario
 
-    background-color: lightsteelblue;
-
-    .itinerary_header{
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-.leg_container {
-
-    background-color: lightseagreen;
-    .leg_header {
-        display: flex;
-        width: 100%;
-        background-color: palegreen;
-    }
-
-    .leg_panel {
-
-    }
-}
-
-.step_container {
-    background-color: lightgreen;
+.itinerary_panel {
+    position: absolute;
+    top: 0;
+    left: 90%;
+    height: 100%;
+    width: 100%;
+    background-color: linen;
     display: flex;
-    padding: .5rem;;
-    .step_content {
-        margin: 0 1em;
+    flex-direction: column;
+    overflow: scroll;
+
+    &.open {
+        left: 0%;
     }
+}
+
+// Pannello messaggi (usato solo per errori
+
+.plan_msg_panel {
+    @extend .plan_cell_base;
+
+    color: $mip-error-color;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.itinerary_panel {
+
+}
+
+// Bottone di apertura di un itinerario
+
+.itinerary_expand_button {
+    width: 100%;
+    background-color: $mip-light-background;
+    color: $mip-text-color;
+    text-align: start;
+}
+
+// Header per itinerario
+
+.itinerary_header {
+    @extend .plan_cell_base;
+    display: grid;
+    grid-template-columns: $plan-icon-col-width 1fr auto;
+    column-gap: 1rem;
+    width: 100%;
+    background-color: $mip-light-background;
+    font-size: .8125rem;
+    
+    .details {
+        text-align: end;
+    }
+
+    .duration,
+    .title {
+        font-size: .9375rem;
+    }
+
+    .duration {
+        color: $mip-blue-color;
+    }
+    .distance{
+        font-weight: 300;
+    }
+
+    .cta {
+        grid-column: 2 / -1;
+        text-transform: uppercase;
+        color: $mip-blue-color;
+        font-weight: 600;
+        text-align: left;
+    }
+}
+
+// Bottone apertura Leg
+
+.leg_expand_button {
+    width: 100%;
+    background-color: $mip-light-background;
+    color: $mip-text-color;
+    text-align: start;
+}
+
+.leg_header {
+    @extend .plan_cell_base;
+    display: grid;
+    grid-template-columns: $plan-icon-col-width 1fr $plan-icon-col-width;
+
+    .title {
+        font-size: .9375rem;
+    }
+
+    .duration {
+        font-weight: 300;
+    }
+}
+
+// Descritione di uno step
+
+
+.step_panel {
+    @extend .plan_cell_base;
+    display: grid;
+    grid-template-columns: $plan-icon-col-width 1fr;
+    border-bottom: 1px solid $mip-light-border-color;
+
 
 }

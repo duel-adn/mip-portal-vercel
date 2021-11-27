@@ -108,48 +108,33 @@ $input-row: 2;
             font-weight: bold;
         }
 
-        .option::before {
-            content: '';
-            width: 2.4rem;
-            height: 2.4rem;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: 1px solid white;
-            border-radius: 50%;
-        }
-        
         .option {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .vehicle::before {
-            background-image: url(/path-icons/vehicle.svg);
+        .icon {
+            width: 2.4rem;
+            height: 2.4rem;
+            padding: .25rem;
+            border: 1px solid $mip-light-color;
+            border-radius: 50%;
         }
 
-        .public_transport::before {
-            background-image: url(/path-icons//public_transport.svg);
-
-        }
-        .pedestrian::before {
-            background-image: url(/path-icons/pedestrian.svg);
-        }
-
-        .bike::before {
-            background-image: url(/path-icons/bike.svg);
-        }
-
-        .checked::before {
+        .active {
+            .icon {
+                border: 1px solid black;
+            }
+        }    
+        .checked {
+            .icon {
             border-color: black;
             background-color: black;
             filter: invert(1);
+            border: 1px solid black;
         }
-        
-        .active::before {
-            border: 1px solid $mip-light-color;
         }
-
     }
 }
 
@@ -225,23 +210,5 @@ $input-row: 2;
                 text-transform: uppercase;
             }
         }
-    }
-}
-
-// istruzioni
-
-.path_plans_container {
-    overflow: hidden;
-
-    .itinerary_container {
-        overflow-y: scroll;
-    }
-    .instruction {
-        display: flex;
-        justify-content: space-between;
-        text-align: start;
-    }
-    .error_container {
-        color: red;
     }
 }

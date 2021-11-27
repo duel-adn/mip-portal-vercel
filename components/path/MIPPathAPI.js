@@ -13,29 +13,12 @@
 import { mipFetch } from "../../lib/MIPUtility"
 import {convertPlanResponse} from "../../lib/MIPOTPPlanConverter"
 
-// Sincronizzare con MIPPath.pathPlanModeStyles
-export const pathPlanModes = new Map([
-    ['vehicle', {
-        id: 'vehicle',
-        title: 'auto',
-        value: "CAR",
-    }],
-    ['public_transport', {
-        id: 'public_transport',
-        title: 'mezzi pubblici',
-        value: "TRANSIT,WALK",
-    }],
-    [ 'bike', {
-        id: 'bike',
-        title: 'bicicletta',
-        value: "BICYCLE",
-    }],
-    ['pedestrian', {
-        id: 'pedestrian',
-        title: 'a piedi',
-        value: "WALK",
-    }],
-])
+export const PathPlanMode = {
+    vehicle: 'CAR',
+    publicTransport: 'TRANSIT,WALK',
+    bicicle: 'BICYCLE',
+    pedestrian: 'WALK'
+}
 
 /**
  * Interroga la API per l'auto completion degli indirizzi e ritorna 
