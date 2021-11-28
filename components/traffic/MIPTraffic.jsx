@@ -28,7 +28,7 @@ function MIPTrafficEventCard({className, compact, event}) {
     return ((typeof event === undefined) || (event === null) ? null :
         <div className={finalClassName}>
             <h5 className={styles.card_title}
-                style={{ 'backgroundImage': `url(/traffic-icons/ico_${event.style}.png)` }}>{event.road}</h5>
+                style={{ 'backgroundImage': `url(/traffic-icons/ico-${event.style}.svg)` }}>{event.road}</h5>
             <div className={styles.container}>
             {isCompact ?
                     <>
