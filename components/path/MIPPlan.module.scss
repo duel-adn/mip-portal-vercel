@@ -33,7 +33,6 @@ $plan-icon-col-width: 2rem;
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: lightyellow;
     color: $mip-text-color;
 }
 
@@ -45,10 +44,9 @@ $plan-icon-col-width: 2rem;
     left: 90%;
     height: 100%;
     width: 100%;
-    background-color: linen;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: scroll;
 
     &.open {
         left: 0%;
@@ -144,8 +142,26 @@ $plan-icon-col-width: 2rem;
 .step_panel {
     @extend .plan_cell_base;
     display: grid;
-    grid-template-columns: $plan-icon-col-width 1fr;
-    border-bottom: 1px solid $mip-light-border-color;
+    grid-template-columns: $plan-icon-col-width auto 1fr;
+    margin-left: $plan-icon-col-width;
+    border: none;
 
-
+    .instruction {
+        grid-column:  2 / -1;
+        padding-bottom: 1rem;
+    }
+    .emphasis {
+        color: $mip-dark-blue-color;
+        font-weight: 600;
+    }
+    .distance {
+        grid-column:  2 / 2;
+        color: $mip-gray-text-color;
+    }
+    .filler {
+        grid-column:  3 / -1;
+        width: 100%;
+        height: 50%;
+        border-bottom: 1px solid $mip-light-border-color;
+    }
 }

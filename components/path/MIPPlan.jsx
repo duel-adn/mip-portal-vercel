@@ -17,7 +17,6 @@ import {
     translateLegHeader, translatePlanStep,
     translatePlanErrors
 } from "../../lib/MIPPlanTranslator"
-import { style } from "dom-helpers"
 import { mipConcatenate } from "../../lib/MIPUtility"
 
 /**
@@ -132,7 +131,7 @@ function MIPItineraryHeader({ locale, itinerary, open }) {
     const hdr = translateItineraryHeader(locale, itinerary)
     return (
         <div className={styles.itinerary_header}>
-            <img class={styles.path_icon} src={hdr.modeIconUrl} alt={hdr.modeIconAlt}/>
+            <img className={styles.path_icon} src={hdr.modeIconUrl} alt={hdr.modeIconAlt}/>
             <div>
                 {hdr?.description &&
                     <div className={styles.title}>{hdr.description}</div>
@@ -220,10 +219,10 @@ function MIPLegHeader({ locale, leg, fixed, open }) {
             </div>
             {!fixed && <>
             {open ? 
-            <img class={styles.path_icon} 
+            <img className={styles.path_icon} 
                 src="/path-icons/leg-closed.svg" alt="Chiudi"/>
             :
-            <img class={styles.path_icon} 
+            <img className={styles.path_icon} 
                 src="/path-icons/leg-open.svg" alt="Apri"/>
             }
             </>}
@@ -238,10 +237,15 @@ function MIPStepPanel({ locale, step }) {
     return (
         <div className={styles.step_panel}>
             <img src={`/path-icons/${stepTr.icon}.svg`} />
-            <div>
-                <div>{stepTr.exit}</div>
-                <div>{stepTr.instruction}</div>
-            </div>
+            <p className={styles.instruction}>
+                {stepTr.instruction?.map((instr, idx) =>
+                    <span key={idx} className={instr[0] ? styles.emphasis : null}>
+                        {instr[1] + ' '}
+                    </span>
+                )}
+            </p>
+            <p className={styles.distance}>{stepTr.distance}&nbsp;</p>
+            <div className={styles.filler} />
         </div>
     )
 }

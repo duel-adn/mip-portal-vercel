@@ -13,7 +13,7 @@
 import { mipFetch } from "../../lib/MIPUtility"
 import {convertPlanResponse} from "../../lib/MIPOTPPlanConverter"
 
-export const PathPlanMode = {
+export const MIPPlanMode = {
     vehicle: 'CAR',
     publicTransport: 'TRANSIT,WALK',
     bicicle: 'BICYCLE',
@@ -54,7 +54,7 @@ export async function mipPathAutocomplete(lang, searchString) {
     return []
 }
 
-export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocation, toCoordinates, mode) {
+export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocation, toCoordinates, mode, intermediateStops) {
     const fromLocationString = fromLocation.toLowerCase()
     const fromPlace = `${fromLocationString}::${fromCoordinates[1]},${fromCoordinates[0]}`
     const toLocationString = toLocation.toLowerCase()
@@ -67,6 +67,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
         'mode': encodeURI(mode || 'CAR'),
         'maxWalkDistance': 2000,
         'locale': lang,
+        'showIntermediateStops': intermediateStops ?? false
     })
 
     return convertPlanResponse(mode, response)

@@ -3,7 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import styles from './MIPPath.module.scss'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
-import { PathPlanMode, mipPathSearch } from './MIPPathAPI';
+import { MIPPlanMode, mipPathSearch } from './MIPPathAPI';
 import { translatePathMode } from '../../lib/MIPPlanTranslator';
 
 const PATH_ORIGIN_ID = 'path_origin'
@@ -12,7 +12,7 @@ const PATH_DEST_ID = 'path_dest'
 function MIPPathController({ className, locale, title, responsive }) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
-    const [selectedOption, setSelectedOption] = useState(PathPlanMode.publicTransport)
+    const [selectedOption, setSelectedOption] = useState(MIPPlanMode.publicTransport)
     const [plan, setPlan] = useState(null)
 
     const onChangeLocation = (id, location) => {
@@ -85,10 +85,10 @@ function MIPPathDataDialog({ className, title, responsive, compact, onChangeLoca
 
 // Sincronizzare con MIPPathApi.PathPlanMode
 const pathPlanModeOptions = [
-    PathPlanMode.vehicle,
-    PathPlanMode.publicTransport,
-    PathPlanMode.bicicle,
-    PathPlanMode.pedestrian].map(mode => 
+    MIPPlanMode.vehicle,
+    MIPPlanMode.publicTransport,
+    MIPPlanMode.bicicle,
+    MIPPlanMode.pedestrian].map(mode => 
         ({
             mode: mode,
             ...translatePathMode(null, mode)
