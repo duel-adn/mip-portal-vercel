@@ -23,7 +23,7 @@ export default function Layout({ plan }) {
     <MIPPage.Page className="mip-home--" pageTitle="Layout test" >
       <section className="path-page">
         <MIPPath.Controller title="Calcolo percorso"/>
-        <MIPPlan.Panel plan={plan} displayHeader />
+        <MIPPlan.Panel plan={plan} />
       </section>
     </MIPPage.Page >
   )

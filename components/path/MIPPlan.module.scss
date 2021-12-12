@@ -119,6 +119,37 @@ $plan-icon-col-width: 2rem;
         font-weight: 600;
         text-align: left;
     }
+
+}
+
+.pictogram {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 1.5rem;
+    font-size: .75rem;
+    color: darkgray;
+    
+    img {
+        width: 1rem;
+        height: 1rem;
+        margin-right: .5rem;
+    }
+
+    .plate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 .5em;
+        margin-right: .5rem;
+        border: 1px solid darkgray;
+        border-radius: 2px;
+    }
+
+    .separator {
+        margin-right: .5rem;
+        font-size: 1rem;
+    }
 }
 
 // Bottone apertura Leg

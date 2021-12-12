@@ -13,6 +13,7 @@
 import styles from "./MIPPlan.module.scss"
 import { Disclosure } from "@headlessui/react"
 import { mipConcatenate } from "../../lib/MIPUtility"
+import { Fragment } from "react"
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -24,15 +25,15 @@ import { mipConcatenate } from "../../lib/MIPUtility"
 function MIPPlanPanel({ plan, displayHeader }) {
     return (
         <div className={styles.plan_panel}>
-        {plan?.error &&
-            <MIPPlanMessages plan={plan} />
-        }
-        {displayHeader && plan &&
-            <MIPPlanDescriptionPanel plan={plan} />
-        }
-        {plan?.itineraries &&
-            <MIPItinerariesPanel plan={plan} />
-        }
+            {plan?.error &&
+                <MIPPlanMessages plan={plan} />
+            }
+            {displayHeader && plan &&
+                <MIPPlanDescriptionPanel plan={plan} />
+            }
+            {plan?.itineraries &&
+                <MIPItinerariesPanel plan={plan} />
+            }
         </div>
     )
 }
@@ -43,7 +44,7 @@ function MIPPlanPanel({ plan, displayHeader }) {
  * @param {Object} plan piano calcolato dal server 
  * @returns un elemento React con i messaggi di errore
  */
- function MIPPlanMessages({ plan }) {
+function MIPPlanMessages({ plan }) {
     return (
         <>
             {plan?.error &&
@@ -87,7 +88,6 @@ function MIPPlanDescriptionPanel({ plan }) {
  */
 function MIPItinerariesPanel({ plan }) {
     const itineraries = plan.itineraries
-    console.log(itineraries)
     if (itineraries) {
         return (
             <>
@@ -95,7 +95,7 @@ function MIPItinerariesPanel({ plan }) {
                     <>
                         <MIPItineraryDescriptionPanel itinerary={itineraries[0].description} />
                         <MIPItineraryDetailsPanel className={mipConcatenate(styles.itinerary_panel, styles.open)}
-                         open={true} itinerary={itineraries[0]} />
+                            open={true} itinerary={itineraries[0]} />
                     </>
                 }
                 {(itineraries?.length > 1) && itineraries.map((itn, idx) =>
@@ -107,9 +107,9 @@ function MIPItinerariesPanel({ plan }) {
                                 </Disclosure.Button>
                                 <Disclosure.Panel id={`itinerary-${idx}`} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
                                     <Disclosure.Button className={styles.itinerary_expand_button}>
-                                    <MIPPlanDescriptionPanel plan={plan}/>
+                                        <MIPPlanDescriptionPanel plan={plan} />
                                     </Disclosure.Button>
-                                        <MIPItineraryDescriptionPanel open={open} itinerary={itn.description} />
+                                    <MIPItineraryDescriptionPanel open={open} itinerary={itn.description} />
                                     <MIPItineraryDetailsPanel itinerary={itn} />
                                 </Disclosure.Panel>
                             </>
@@ -133,17 +133,35 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
     const iconUrl = `/path-icons/${itinerary.iconName}.svg`
     return (
         <div className={styles.itinerary_header}>
-            <img className={styles.path_icon} src={iconUrl} alt={itinerary.iconAlt}/>
+            <img className={styles.path_icon} src={iconUrl} alt={itinerary.iconAlt} />
             <div>
                 {itinerary?.description &&
                     <div className={styles.title}>{itinerary.description}</div>
                 }
-                {itinerary.departure && 
+                {itinerary.departure &&
                     <div className={styles.title}>{itinerary.departure}</div>
                 }
-                {itinerary.arrival && 
+                {itinerary.arrival &&
                     <div className={styles.title}>{itinerary.arrival}</div>
                 }
+                <div className={styles.pictogram}>
+                    {itinerary.pictogram && itinerary.pictogram?.map((pict, idx) =>
+                        <div key={idx} className={styles.pictogram}>
+                            <img src={`/path-icons/${pict.iconName}.svg`} alt={pict.iconName} />
+                            {pict.name && 
+                            <div className={styles.plate} style={{
+                                color: pict.textColor,
+                                backgroundColor: pict.color,
+                                borderColor: pict.borderColor
+                            }}>{pict.name}
+                            </div>
+                            }
+                                {idx != itinerary.pictogram.length - 1 &&
+                                    <div className={styles.separator}>&gt;</div>
+                                }
+                        </div>
+                    )}
+                </div>
             </div>
             <div className={styles.details}>
                 <div className={styles.duration}>{itinerary.duration}</div>
@@ -159,7 +177,7 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
 function MIPItineraryDetailsPanel({ className, itinerary }) {
     return (
         <div className={className}>
-            {itinerary.legs?.length == 1 && 
+            {itinerary.legs?.length == 1 &&
                 <MIPLegPanel fixed leg={itinerary.legs[0]} />
             }
             {itinerary.legs?.length > 1 && itinerary.legs.map((leg, idx) =>
@@ -177,30 +195,33 @@ function MIPItineraryDetailsPanel({ className, itinerary }) {
  * @param {Object} leg itinerario da mostrare
  * @returns 
  */
- function MIPLegPanel({ fixed, leg }) {
+function MIPLegPanel({ fixed, leg }) {
     if (fixed) {
         return (
-        <div>
-            <MIPLegDescription leg={leg.description} fixed={fixed} />
-            {leg.steps && leg.steps.map((step, idx) =>
-                <MIPStepPanel key={step.id ?? idx} step={step} />
-            )}
-        </div>
+            <div>
+                <MIPLegDescription leg={leg.description} fixed={fixed} />
+                {leg.steps && leg.steps.map((step, idx) =>
+                    <MIPStepPanel key={step.id ?? idx} step={step} />
+                )}
+            </div>
         )
     }
     return (
         <Disclosure as="div" >
             {({ open }) =>
-            <>
-            <Disclosure.Button className={styles.leg_expand_button}>
-                <MIPLegDescription leg={leg} open={open}/>
-            </Disclosure.Button>
-            <Disclosure.Panel>
-                {leg.steps && leg.steps.map((step, idx) =>
-                    <MIPStepPanel key={step.id ?? idx} step={step} />
-                )}
-            </Disclosure.Panel>
-            </>
+                <>
+                    <Disclosure.Button className={styles.leg_expand_button}>
+                        <MIPLegDescription leg={leg} open={open} />
+                    </Disclosure.Button>
+                    <Disclosure.Panel>
+                        {leg.steps && leg.steps.map((step, idx) =>
+                            <MIPStepPanel key={step.id ?? idx} step={step} />
+                        )}
+                        {leg.stops && leg.stops.map((stop, idx) =>
+                            <MIPStopPanel key={stop.id ?? idx} stop={stop} />
+                        )}
+                    </Disclosure.Panel>
+                </>
             }
         </Disclosure>
     )
@@ -211,8 +232,8 @@ function MIPLegDescription({ leg, fixed, open }) {
     const iconUrl = `/path-icons/${description?.iconName}.svg`
     return (
         <div className={mipConcatenate(styles.leg_header, fixed || open ? styles.open : null)}>
-            <img className={styles.path_icon} 
-                src={iconUrl} alt={description.iconAlt}/>
+            <img className={styles.path_icon}
+                src={iconUrl} alt={description.iconAlt} />
             <div>
                 <div>{description.shortDescription}</div>
                 <div>{description.destination}</div>
@@ -220,19 +241,19 @@ function MIPLegDescription({ leg, fixed, open }) {
                 <div>{description.distance}</div>
             </div>
             {!fixed && <>
-            {open ? 
-            <img className={styles.path_icon} 
-                src="/path-icons/leg-closed.svg" alt="Chiudi"/>
-            :
-            <img className={styles.path_icon} 
-                src="/path-icons/leg-open.svg" alt="Apri"/>
-            }
+                {open ?
+                    <img className={styles.path_icon}
+                        src="/path-icons/leg-closed.svg" alt="Chiudi" />
+                    :
+                    <img className={styles.path_icon}
+                        src="/path-icons/leg-open.svg" alt="Apri" />
+                }
             </>}
         </div>
     )
 }
 
-function MIPStepPanel({ locale, step }) {
+function MIPStepPanel({ step }) {
     return (
         <div className={styles.step_panel}>
             <img src={`/path-icons/${step.icon}.svg`} />
@@ -245,6 +266,16 @@ function MIPStepPanel({ locale, step }) {
             </p>
             <p className={styles.distance}>{step.distance}&nbsp;</p>
             <div className={styles.filler} />
+        </div>
+    )
+}
+
+function MIPStopPanel({ stop }) {
+    return (
+        <div className={styles.step_panel}>
+            <p className={styles.instruction}>
+                {stop.departureTime} {stop.name}
+            </p>
         </div>
     )
 }

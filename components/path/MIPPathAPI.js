@@ -12,6 +12,7 @@
 
 import { mipFetch } from "../../lib/MIPUtility"
 import {convertPlanResponse} from "../../lib/MIPOTPPlanConverter"
+import {translatePlanResponse} from "../../lib/MIPPlanTranslator"
 
 export const MIPPlanMode = {
     vehicle: 'CAR',
@@ -19,7 +20,6 @@ export const MIPPlanMode = {
     bicicle: 'BICYCLE',
     pedestrian: 'WALK'
 }
-import {translatePlanResponse} from "../../lib/MIPPlanTranslator"
 
 /**
  * Interroga la API per l'auto completion degli indirizzi e ritorna 
