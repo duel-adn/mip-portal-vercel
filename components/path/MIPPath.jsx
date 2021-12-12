@@ -41,9 +41,7 @@ function MIPPathController({ className, locale, title, responsive }) {
             alert("Inserire una località di arrivo")
         } else {
             const response = await mipPathSearch(locale, startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption.value)
-            console.log("response")
             setPlan(response)
-            console.log(plan)
         }
         return false
     }
@@ -131,8 +129,8 @@ function MIPPathOptions({ selectedOption, setSelectedOption }) {
                             checked ? styles.checked : '')
                         }>
                         <img className={styles.icon}
-                            src={`/path-icons/mode-${opt.iconBaseName}.svg`} alt={opt.iconAlt} />
-                        <RadioGroup.Label className={styles.radio_label}>{opt.shortDescription}</RadioGroup.Label>
+                            src={`/path-icons/mode-${opt.iconName}.svg`} alt={opt.iconAlt} />
+                        <RadioGroup.Label className={styles.radio_label}>{opt.modeDescription}</RadioGroup.Label>
                     </RadioGroup.Option>
                 )}
             </div>

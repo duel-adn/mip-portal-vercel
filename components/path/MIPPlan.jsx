@@ -12,65 +12,66 @@
 
 import styles from "./MIPPlan.module.scss"
 import { Disclosure } from "@headlessui/react"
-import {
-    translatePlanHeader, translateItineraryHeader,
-    translateLegHeader, translatePlanStep,
-    translatePlanErrors
-} from "../../lib/MIPPlanTranslator"
 import { mipConcatenate } from "../../lib/MIPUtility"
 
 /**
  * Pannelllo con i risultati di una pianificazione
  * 
- * @param {String} locale lingua per la traduzione (default it)
  * @param {Object} plan piano calcolato dal server 
  * @param {Boolean} displayHeader true se bisogna mostrare i dati riassuntivi del piano
  * @returns il componente React con i risultati del piano
  */
-function MIPPlanPanel({ locale, plan, displayHeader }) {
+function MIPPlanPanel({ plan, displayHeader }) {
     return (
-        <>
-        {plan &&
         <div className={styles.plan_panel}>
-            <MIPPlanMessages locale={locale} plan={plan} />
-            {displayHeader && plan?.plan &&
-                <MIPPlanHeader locale={locale} plan={plan.plan} />
-            }
-            {plan?.plan?.itineraries &&
-                <MIPItinerariesPanel locale={locale} itineraries={plan.plan.itineraries} />
-            }
-        </div>
+        {plan?.error &&
+            <MIPPlanMessages plan={plan} />
         }
-        </>
+        {displayHeader && plan &&
+            <MIPPlanDescriptionPanel plan={plan} />
+        }
+        {plan?.itineraries &&
+            <MIPItinerariesPanel plan={plan} />
+        }
+        </div>
     )
 }
 
 /**
  * Pannelllo con i messaggi (solo errori) provenienti dal planner
  * 
- * @param {String} locale lingua per la traduzione (default it)
  * @param {Object} plan piano calcolato dal server 
  * @returns un elemento React con i messaggi di errore
  */
- function MIPPlanMessages({ locale, plan }) {
+ function MIPPlanMessages({ plan }) {
     return (
         <>
             {plan?.error &&
                 <div className={styles.plan_msg_panel}>
-                    {translatePlanErrors(plan.error)}
+                    {plan.error.message}
                 </div>
             }
         </>
     )
 }
 
-function MIPPlanHeader({ locale, plan }) {
-    const hdr = translatePlanHeader('it', plan)
+/**
+ * Componente che visualizza la descrizione del piano
+ * 
+ * @param {Object} plan piano generato dal PlanTranslator
+ * 
+ * @returns il componente React con òa descrizione del piano
+ */
+function MIPPlanDescriptionPanel({ plan }) {
+    const description = plan.description
     return (
-        <div className="mip-plan-header">
-            <div>{hdr.fromLabel} <b>{hdr.fromName}</b></div>
-            <div>{hdr.toLabel} <b>{hdr.toName}</b></div>
-            <div>{hdr.departureLabel} <b>{hdr.departure}</b></div>
+        <div className={styles.plan_header}>
+            <img src="/path-icons/plan-close.svg" alt="chiudi" />
+            <div>
+                <div>{description.fromLabel} <b>{description.fromName}</b></div>
+                <div>{description.toLabel} <b>{description.toName}</b></div>
+                <div>{description.departureLabel} <b>{description.departureDateTime}</b></div>
+            </div>
         </div>
     )
 }
@@ -81,19 +82,20 @@ function MIPPlanHeader({ locale, plan }) {
  * dei disclosure panel che permettono di visualizzare i dettagli 
  * di ciascuno.
  * 
- * @param {String} locale lingua da usare per la traduzione
- * @param {Object} itineraries itinerari da mostrare
+ * @param {Object} plan piano da mostrare
  * @returns un elemento React con i dati degli itinerari
  */
-function MIPItinerariesPanel({ locale, itineraries }) {
+function MIPItinerariesPanel({ plan }) {
+    const itineraries = plan.itineraries
+    console.log(itineraries)
     if (itineraries) {
         return (
             <>
                 {(itineraries?.length == 1) &&
                     <>
-                        <MIPItineraryHeader locale={locale} itinerary={itineraries[0]} />
-                        <MIPItineraryPanel className={mipConcatenate(styles.itinerary_panel, styles.open)}
-                            locale={locale} open={true} itinerary={itineraries[0]} />
+                        <MIPItineraryDescriptionPanel itinerary={itineraries[0].description} />
+                        <MIPItineraryDetailsPanel className={mipConcatenate(styles.itinerary_panel, styles.open)}
+                         open={true} itinerary={itineraries[0]} />
                     </>
                 }
                 {(itineraries?.length > 1) && itineraries.map((itn, idx) =>
@@ -101,13 +103,14 @@ function MIPItinerariesPanel({ locale, itineraries }) {
                         {({ open }) =>
                             <>
                                 <Disclosure.Button className={styles.itinerary_expand_button}>
-                                    <MIPItineraryHeader locale={locale} itinerary={itn} />
+                                    <MIPItineraryDescriptionPanel itinerary={itn.description} />
                                 </Disclosure.Button>
                                 <Disclosure.Panel id={`itinerary-${idx}`} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
                                     <Disclosure.Button className={styles.itinerary_expand_button}>
-                                        <MIPItineraryHeader locale={locale} open={open} itinerary={itn} />
+                                    <MIPPlanDescriptionPanel plan={plan}/>
                                     </Disclosure.Button>
-                                    <MIPItineraryPanel locale={locale} itinerary={itn} />
+                                        <MIPItineraryDescriptionPanel open={open} itinerary={itn.description} />
+                                    <MIPItineraryDetailsPanel itinerary={itn} />
                                 </Disclosure.Panel>
                             </>
                         }
@@ -116,45 +119,44 @@ function MIPItinerariesPanel({ locale, itineraries }) {
             </>
         )
     }
-    return nulll
+    return null
 }
 
 /**
  * Pannello usato per mostrare i dati riassuntivi di un itinerario
  * 
- * @param {String} locale locale per la traduzione
  * @param {Boolean} open flag che dice se il pannello è aperto
  * @param {Object} itinerary itinerario da mostrare
  * @returns 
  */
-function MIPItineraryHeader({ locale, itinerary, open }) {
-    const hdr = translateItineraryHeader(locale, itinerary)
+function MIPItineraryDescriptionPanel({ itinerary, open }) {
+    const iconUrl = `/path-icons/${itinerary.iconName}.svg`
     return (
         <div className={styles.itinerary_header}>
-            <img className={styles.path_icon} src={hdr.modeIconUrl} alt={hdr.modeIconAlt}/>
+            <img className={styles.path_icon} src={iconUrl} alt={itinerary.iconAlt}/>
             <div>
-                {hdr?.description &&
-                    <div className={styles.title}>{hdr.description}</div>
+                {itinerary?.description &&
+                    <div className={styles.title}>{itinerary.description}</div>
                 }
-                {hdr.departureTime && 
-                    <div className={styles.title}>{hdr.departureTime}</div>
+                {itinerary.departure && 
+                    <div className={styles.title}>{itinerary.departure}</div>
                 }
-                {hdr.arrivalTime && 
-                    <div className={styles.title}>{hdr.arrivalTime}</div>
+                {itinerary.arrival && 
+                    <div className={styles.title}>{itinerary.arrival}</div>
                 }
             </div>
             <div className={styles.details}>
-                <div className={styles.duration}>{hdr.duration}</div>
-                <div className={styles.distance}>{hdr.distance}</div>
+                <div className={styles.duration}>{itinerary.duration}</div>
+                <div className={styles.distance}>{itinerary.distance}</div>
             </div>
             {!open &&
-                <div className={styles.cta}>{hdr.cta}</div>
+                <div className={styles.cta}>{itinerary.detailsLabel}</div>
             }
         </div>
     )
 }
 
-function MIPItineraryPanel({ className, itinerary }) {
+function MIPItineraryDetailsPanel({ className, itinerary }) {
     return (
         <div className={className}>
             {itinerary.legs?.length == 1 && 
@@ -175,16 +177,13 @@ function MIPItineraryPanel({ className, itinerary }) {
  * @param {Object} leg itinerario da mostrare
  * @returns 
  */
- function MIPLegPanel({ locale, fixed, leg }) {
-    console.log(leg)
-    const hdr = translateLegHeader(locale, leg)
-    console.log(hdr)
+ function MIPLegPanel({ fixed, leg }) {
     if (fixed) {
         return (
         <div>
-            <MIPLegHeader locale={locale} leg={leg} fixed={fixed} />
+            <MIPLegDescription leg={leg.description} fixed={fixed} />
             {leg.steps && leg.steps.map((step, idx) =>
-                <MIPStepPanel key={step.id ?? idx} locale={locale} step={step} />
+                <MIPStepPanel key={step.id ?? idx} step={step} />
             )}
         </div>
         )
@@ -194,11 +193,11 @@ function MIPItineraryPanel({ className, itinerary }) {
             {({ open }) =>
             <>
             <Disclosure.Button className={styles.leg_expand_button}>
-                <MIPLegHeader locale={locale} leg={leg} open={open}/>
+                <MIPLegDescription leg={leg} open={open}/>
             </Disclosure.Button>
             <Disclosure.Panel>
                 {leg.steps && leg.steps.map((step, idx) =>
-                    <MIPStepPanel key={step.id ?? idx} locale={locale} step={step} />
+                    <MIPStepPanel key={step.id ?? idx} step={step} />
                 )}
             </Disclosure.Panel>
             </>
@@ -207,15 +206,18 @@ function MIPItineraryPanel({ className, itinerary }) {
     )
 }
 
-function MIPLegHeader({ locale, leg, fixed, open }) {
-    const hdr = translateLegHeader(locale, leg)
+function MIPLegDescription({ leg, fixed, open }) {
+    const description = leg.description
+    const iconUrl = `/path-icons/${description?.iconName}.svg`
     return (
         <div className={mipConcatenate(styles.leg_header, fixed || open ? styles.open : null)}>
-            <img className={styles.path_icon} src={hdr.iconUrl} alt={hdr.iconAlt}/>
+            <img className={styles.path_icon} 
+                src={iconUrl} alt={description.iconAlt}/>
             <div>
-                <div>{hdr.shortDescription}</div>
-                <div>{hdr.duration}</div>
-                <div>{hdr.distance}</div>
+                <div>{description.shortDescription}</div>
+                <div>{description.destination}</div>
+                <div>{description.duration}</div>
+                <div>{description.distance}</div>
             </div>
             {!fixed && <>
             {open ? 
@@ -231,20 +233,17 @@ function MIPLegHeader({ locale, leg, fixed, open }) {
 }
 
 function MIPStepPanel({ locale, step }) {
-    console.log(step)
-    const stepTr = translatePlanStep(locale, step)
-    console.log(stepTr)
     return (
         <div className={styles.step_panel}>
-            <img src={`/path-icons/${stepTr.icon}.svg`} />
+            <img src={`/path-icons/${step.icon}.svg`} />
             <p className={styles.instruction}>
-                {stepTr.instruction?.map((instr, idx) =>
-                    <span key={idx} className={instr[0] ? styles.emphasis : null}>
-                        {instr[1] + ' '}
+                {step.instruction?.map((instruction, idx) =>
+                    <span key={idx} className={instruction[0] ? styles.emphasis : null}>
+                        {instruction[1] + ' '}
                     </span>
                 )}
             </p>
-            <p className={styles.distance}>{stepTr.distance}&nbsp;</p>
+            <p className={styles.distance}>{step.distance}&nbsp;</p>
             <div className={styles.filler} />
         </div>
     )
@@ -254,7 +253,7 @@ function MIPStepPanel({ locale, step }) {
 const MIPPlan = {
     Panel: MIPPlanPanel,
     ErrorPanel: MIPPlanMessages,
-    PlanHeader: MIPPlanHeader,
+    PlanHeader: MIPPlanDescriptionPanel,
 }
 
 export default MIPPlan
