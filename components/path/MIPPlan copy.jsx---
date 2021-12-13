@@ -13,7 +13,6 @@
 import styles from "./MIPPlan.module.scss"
 import { Disclosure } from "@headlessui/react"
 import { mipConcatenate } from "../../lib/MIPUtility"
-import { MIPPlanMode } from "./MIPPathAPI"
 import { Fragment } from "react"
 
 /**
@@ -92,15 +91,15 @@ function MIPItinerariesPanel({ plan }) {
     if (itineraries) {
         return (
             <>
-                {/* {(itineraries?.length == 1) &&
+                {(itineraries?.length == 1) &&
                     <>
                         <MIPPlanDescriptionPanel plan={plan} />
                         <MIPItineraryDescriptionPanel itinerary={itineraries[0].description} />
                         <MIPItineraryDetailsPanel className={mipConcatenate(styles.itinerary_panel, styles.open)}
                             open={true} itinerary={itineraries[0]} />
                     </>
-                } */}
-                {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
+                }
+                {(itineraries?.length > 1) && itineraries.map((itn, idx) =>
                     <Disclosure key={itn?.id ?? idx}>
                         {({ open }) =>
                             <>
@@ -146,31 +145,24 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
                 {itinerary.arrival &&
                     <div className={styles.title}>{itinerary.arrival}</div>
                 }
-                {itinerary.pictogram &&
-                    <div className={styles.pictogram}>
-                        {itinerary.pictogram && itinerary.pictogram?.map((pict, idx) =>
-                            <div key={idx} className={styles.pictogram}>
-                                <img src={`/path-icons/${pict.iconName}.svg`} alt={pict.iconName} />
-                                {pict.name &&
-                                    <div className={styles.plate} style={{
-                                        color: pict.textColor,
-                                        backgroundColor: pict.color,
-                                        borderColor: pict.borderColor
-                                    }}>{pict.name}
-                                    </div>
-                                }
+                <div className={styles.pictogram}>
+                    {itinerary.pictogram && itinerary.pictogram?.map((pict, idx) =>
+                        <div key={idx} className={styles.pictogram}>
+                            <img src={`/path-icons/${pict.iconName}.svg`} alt={pict.iconName} />
+                            {pict.name && 
+                            <div className={styles.plate} style={{
+                                color: pict.textColor,
+                                backgroundColor: pict.color,
+                                borderColor: pict.borderColor
+                            }}>{pict.name}
+                            </div>
+                            }
                                 {idx != itinerary.pictogram.length - 1 &&
                                     <div className={styles.separator}>&gt;</div>
                                 }
-                            </div>
-                        )}
-                    </div>
-                }
-                {(itinerary.walkTime || itinerary.walkDistance) &&
-                    <p className={styles.pictogrammm}>
-                        A piedi {itinerary.walkDistance} ({itinerary.walkTime})
-                    </p>
-                }
+                        </div>
+                    )}
+                </div>
             </div>
             <div className={styles.details}>
                 <div className={styles.duration}>{itinerary.duration}</div>

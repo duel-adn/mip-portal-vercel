@@ -1,11 +1,13 @@
 .path-page {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 90vh;
     width: 50%;
+    margin-bottom: 2rem;
     min-width: 20rem;
     overflow: hidden;
-    position: relative;
+
 }
 
 .path-dialog {

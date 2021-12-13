@@ -85,7 +85,7 @@ function MIPPathDataDialog({ className, title, responsive, compact, onChangeLoca
 const pathPlanModeOptions = [
     MIPPlanMode.vehicle,
     MIPPlanMode.publicTransport,
-    MIPPlanMode.bicicle,
+    MIPPlanMode.bicycle,
     MIPPlanMode.pedestrian].map(mode => 
         ({
             mode: mode,
@@ -130,7 +130,7 @@ function MIPPathOptions({ selectedOption, setSelectedOption }) {
                         }>
                         <img className={styles.icon}
                             src={`/path-icons/mode-${opt.iconName}.svg`} alt={opt.iconAlt} />
-                        <RadioGroup.Label className={styles.radio_label}>{opt.modeDescription}</RadioGroup.Label>
+                        <RadioGroup.Label className={styles.radio_label}>{opt.shortDescription}</RadioGroup.Label>
                     </RadioGroup.Option>
                 )}
             </div>
