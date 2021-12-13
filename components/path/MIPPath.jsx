@@ -9,7 +9,7 @@ import { translatePathMode } from '../../lib/MIPPlanTranslator';
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
 
-function MIPPathController({ className, locale, title, responsive }) {
+function MIPPathController({ className, locale, title, responsive, onPathPlan }) {
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const [selectedOption, setSelectedOption] = useState(MIPPlanMode.publicTransport)
@@ -40,8 +40,11 @@ function MIPPathController({ className, locale, title, responsive }) {
         } else if (!endLocation) {
             alert("Inserire una località di arrivo")
         } else {
-            const response = await mipPathSearch(locale, startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption.value)
-            setPlan(response)
+            if (onPathPlan) {
+                onPathPlan(startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
+            }
+            // const response = await mipPathSearch(locale, startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption.value)
+            // setPlan(response)
         }
         return false
     }

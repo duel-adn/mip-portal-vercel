@@ -16,25 +16,41 @@ import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
 import MIPLegend from '../components/forms/MIPLegend';
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import MIPPath from '../components/path/MIPPath';
+import MIPPlan from '../components/path/MIPPlan'
+import { useState } from 'react';
+import { MIPPlanMode, mipPathSearch } from '../components/path/MIPPathAPI'
+import MIPPlanMapPanel from '../components/path/MIPPlanMapPanel';
 
-export default function Traffic(props) {
+export default function Peth(props) {
+  const [plan, setPlan] = useState(null)
+  const pathPlan = async (startLocation, startCoords, endLocation, endCoords, mode) => {
+    const plan = await mipPathSearch('IT', startLocation, startCoords,
+    endLocation, endCoords, 
+    mode, true)
+    setPlan(plan)
+  }
+
   return (
     <MIPPage.Page className="mip-traffic-page"
       pageTitle="Calcolo percorso"
       title="Calcolo del percorso"
         titleClassName="mip-bg-blue"
         breadcrumb='Indietro'>
-          <MIPPath.Controller className="mip-rounded-corners path-panel" title="Calcola il percorso" />
+      <section className="path-results">
+        <MIPPath.Controller title="Calcolo percorso" onPathPlan={pathPlan}/>
+        <MIPPlan.Panel plan={plan} />
+      </section>
+          <MIPPlanMapPanel className="map-panel" />
     </MIPPage.Page>
   )
 }
 
-export async function getServerSideProps(context) {
-  const eventData = await mipFetchTrafficEventData(context)
+// export async function getServerSideProps(context) {
+//   const eventData = await mipFetchTrafficEventData(context)
 
-  return {
-    props: {
-      eventData,
-    },
-  }
-}
+//   return {
+//     props: {
+//       eventData,
+//     },
+//   }
+// }

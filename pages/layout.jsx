@@ -33,6 +33,7 @@ export async function getServerSideProps(context) {
   const plan = await mipPathSearch('IT', 'torino, italia', [7.652514, 45.059405],
     'alessandria, italia', [8.61412, 44.910936], 
     MIPPlanMode.publicTransport, true)
+
   return {
     props: {
       plan: plan,
