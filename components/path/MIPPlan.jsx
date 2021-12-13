@@ -260,7 +260,7 @@ function MIPLegDescription({ leg, fixed, open }) {
                         }}>{route.name}
                         </div>
                         {route.agencyUrl ? 
-                            <div><a href={route.agencyUrl} target="_blank" noopener> 
+                            <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer"> 
                                 {route.agencyName}
                             </a></div>
                             :

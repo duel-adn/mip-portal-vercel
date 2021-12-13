@@ -52,15 +52,6 @@ export default function MIPPathMap(props) {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}map.5t.torino.it/light-new/{z}/{x}/{y}"
       />
-      {
-        props.trafficEventData && props.trafficEventData.map(evt => 
-          <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={getMapIcon(evt.style)}>
-          <Popup>
-            <MIPTraffic.EventCard event={evt} />
-          </Popup>
-        </Marker>
-        )
-      }
       <LayersControl position="topright">
         <LayersControl.Overlay name="traffico">
       <WMSTileLayer
