@@ -15,6 +15,7 @@
 $plan-cell-padding-x: 1.5rem;
 $plan-cell-padding-y: 1rem;
 $plan-icon-col-width: 2rem;
+$plan-time-col-width: 3rem;
 
 // Contenitore di un piano
 
@@ -26,10 +27,6 @@ $plan-icon-col-width: 2rem;
     overflow-y: scroll;
     border: 1px solid $mip-light-border-color;
 }
-
-
-
-
 
 .plan_cell_base {
     width: 100%;
@@ -181,6 +178,34 @@ $plan-icon-col-width: 2rem;
     }
 }
 
+.transit_leg_description {
+    @extend .plan_cell_base;
+
+    display: grid;
+    grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr $plan-icon-col-width;
+
+    .title {
+        display: flex;
+        font-size: .9375rem;
+    }
+
+    .plate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 .5em;
+        margin-right: .5rem;
+        border: 1px solid darkgray;
+        border-radius: 2px;
+    }
+}
+
+.itinerary_location {
+    @extend .plan_cell_base;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
 // Descritione di uno step
 
 
@@ -190,6 +215,7 @@ $plan-icon-col-width: 2rem;
     grid-template-columns: $plan-icon-col-width auto 1fr;
     margin-left: $plan-icon-col-width;
     border: none;
+    font-size: .9375rem;
 
     .instruction {
         grid-column:  2 / -1;
@@ -214,13 +240,31 @@ $plan-icon-col-width: 2rem;
 .stop_panel {
     @extend .plan_cell_base;
     display: grid;
-    grid-template-columns: $plan-icon-col-width auto 1fr;
+    grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr;
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+    font-size: .9375rem;
 
-    .instruction {
-        grid-column:  2 / -1;
+    .time {
+        grid-column:  2 / 2;
     }
 
-    .line {
+    .stop_name {
+        grid-column:  3 / -1;
+        position: relative;
+        height: 2rem;
+        line-height: 2rem;
+        border-left: 4px solid darkgrey;
+        margin-left: 4px;
+        padding-left: 10px;
+    }
 
+    .stop_name::after {
+        content: url("data:image/svg+xml,<svg width='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='5' cy='5' r='5' fill='white' stroke='black'/></svg>");
+        position: absolute;
+        left: -7px;
+        top: 0%;
     }
 }

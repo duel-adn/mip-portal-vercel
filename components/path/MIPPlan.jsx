@@ -112,7 +112,9 @@ function MIPItinerariesPanel({ plan }) {
                                         <MIPPlanDescriptionPanel plan={plan} />
                                     </Disclosure.Button>
                                     <MIPItineraryDescriptionPanel open={open} itinerary={itn.description} />
+                                    <MIPLocationPanel location={plan.description.fromName} />
                                     <MIPItineraryDetailsPanel itinerary={itn} />
+                                    <MIPLocationPanel location={plan.description.toName} />
                                 </Disclosure.Panel>
                             </>
                         }
@@ -212,6 +214,7 @@ function MIPLegPanel({ fixed, leg }) {
                 {leg.steps && leg.steps.map((step, idx) =>
                     <MIPStepPanel key={step.id ?? idx} step={step} />
                 )}
+                { }
             </div>
         )
     }
@@ -227,7 +230,7 @@ function MIPLegPanel({ fixed, leg }) {
                             <MIPStepPanel key={step.id ?? idx} step={step} />
                         )}
                         {leg.stops && leg.stops.map((stop, idx) =>
-                            <MIPStopPanel key={stop.id ?? idx} stop={stop} />
+                            <MIPStopPanel key={stop.id ?? idx} route={leg.description.route} stop={stop} />
                         )}
                     </Disclosure.Panel>
                 </>
@@ -239,13 +242,57 @@ function MIPLegPanel({ fixed, leg }) {
 function MIPLegDescription({ leg, fixed, open }) {
     const description = leg.description
     const iconUrl = `/path-icons/${description?.iconName}.svg`
+    if (leg.isTransit) {
+        const route = description.route
+        return (
+            <div className={mipConcatenate(styles.transit_leg_description, fixed || open ? styles.open : null)}>
+                <img className={styles.path_icon}
+                    src={iconUrl} alt={description?.iconAlt} />
+                <div>
+                    {description.startTime}
+                </div>
+                <div>
+                    <div className={styles.title}>
+                        <div className={styles.plate} style={{
+                            color: route.textColor,
+                            backgroundColor: route.color,
+                            borderColor: route.borderColor
+                        }}>{route.name}
+                        </div>
+                        {route.agencyUrl ? 
+                            <div><a href={route.agencyUrl} target="_blank" noopener> 
+                                {route.agencyName}
+                            </a></div>
+                            :
+                            <div>{route.agencyName}</div>
+                        }
+                    </div>
+                    <div className={styles.title}>
+                        {route.headsign}
+                    </div>
+                    <div className={styles.title}>
+                        da {description.startLocation}
+                    </div>
+                    <div className={styles.title}>
+                        a {description.endLocation}
+                    </div>
+                </div>
+                {open ?
+                    <img className={styles.path_icon}
+                        src="/path-icons/leg-closed.svg" alt="Chiudi" />
+                    :
+                    <img className={styles.path_icon}
+                        src="/path-icons/leg-open.svg" alt="Apri" />
+                }
+            </div>
+        )
+    }
     return (
         <div className={mipConcatenate(styles.leg_header, fixed || open ? styles.open : null)}>
             <img className={styles.path_icon}
                 src={iconUrl} alt={description?.iconAlt} />
             <div>
-                <div>{description?.shortDescription}</div>
-                <div>{description?.destination}</div>
+                <div>fino a {description?.endLocation}</div>
                 <div>{description?.duration}</div>
                 <div>{description?.distance}</div>
             </div>
@@ -279,18 +326,28 @@ function MIPStepPanel({ step }) {
     )
 }
 
-function MIPStopPanel({ stop }) {
+function MIPStopPanel({ route, stop }) {
     return (
         <div className={styles.stop_panel}>
-            <div className={styles.line} />
-            <p className={styles.instruction}>
-                {stop.departureTime} {stop.name}
-            </p>
+            <div className={styles.time}>{stop.arrivalTime}</div>
+            <div className={styles.stop_name} 
+                style={{
+                    borderColor: route.borderColor
+                }}
+            >
+                {stop.name}
+            </div>
         </div>
     )
 }
 
-
+function MIPLocationPanel({ location }) {
+    return (
+        <div className={styles.itinerary_location}>
+            {location}
+        </div>
+    )
+}
 const MIPPlan = {
     Panel: MIPPlanPanel,
     ErrorPanel: MIPPlanMessages,

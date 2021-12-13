@@ -23,6 +23,5 @@ export async function mipFetchTrafficEventData(context) {
 }
 
 export function mipGetTrafficEventIconUrl(style) {
-    console.log(`/traffic-icons/ico-${style}.svg`)
     return `/traffic-icons/ico-${style}.svg`
 }
