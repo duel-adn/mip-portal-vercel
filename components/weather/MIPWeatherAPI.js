@@ -42,11 +42,13 @@ export async function mipFetchWeatherData() {
                 date: today.toLocaleDateString('it', {weekday: 'short', day: 'numeric'}),
                 icon: md.oggi.meteoImg,
                 temperature: md.oggi.temperature,
+                code: md.oggi.code
             },
             {
                 date: tomorrow.toLocaleDateString('it', {weekday: 'short', day: 'numeric'}),
                 icon: md.domani.meteoImg,
                 temperature: md.domani.temperature,
+                code: md.domani.code
             }
         ]
     }})
