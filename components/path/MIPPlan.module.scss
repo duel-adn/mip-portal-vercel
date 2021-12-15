@@ -254,7 +254,7 @@ $plan-time-col-width: 3rem;
     .stop_name {
         grid-column:  3 / -1;
         position: relative;
-        height: 2rem;
+        min-height: 2rem;
         line-height: 2rem;
         border-left: 4px solid darkgrey;
         margin-left: 4px;

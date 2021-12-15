@@ -27,6 +27,7 @@ export default function Peth(props) {
     const plan = await mipPathSearch('IT', startLocation, startCoords,
     endLocation, endCoords, 
     mode, true)
+    console.log(plan)
     setPlan(plan)
   }
 

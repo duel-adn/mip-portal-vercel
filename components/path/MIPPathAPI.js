@@ -35,7 +35,7 @@ export async function mipPathAutocomplete(lang, searchString) {
         const reqString = searchString.toLowerCase().trim()
         if (reqString.length > 2) {
             const response = await mipFetch(
-                process.env.NEXT_PUBLIC_MIP_AUTOCOMPLETE_URL, {
+                '/api/autocomplete', {
                 'lang': lang,
                 'text': encodeURIComponent(searchString)
             })
@@ -62,7 +62,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
     const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
     const dateTime = new Date(Date.now() + 5 * 60000)
     const response = await mipFetch(
-        process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL, {
+        '/api/plan', {
         'fromPlace': encodeURI(fromPlace.replace(' ', '+')),
         'toPlace': encodeURI(toPlace.replace(' ', '+')),
         'mode': encodeURI(mode || 'CAR'),
