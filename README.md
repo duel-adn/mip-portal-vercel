@@ -3,16 +3,16 @@
 Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ## Stack tecnologico
 
-| Componente | Versione | Descrizione | 
-| ---------- | -------- | ----------- |
-| [NVM.js] | | Node version manager |
-| [Node.js] | v14.17.4 | Node Javascript runtime |
-| [NPM.js] | v6.14.14 | Node package manager |
-| [Next.js] | 11.1.0 | React framework |
+| Componente | Descrizione | 
+| ---------- | ----------- |
+| [NVM.js] | Node version manager |
+| [Node.js] | Node Javascript runtime |
+| [NPM.js] | Node package manager |
+| [Next.js] | React framework |
 | [Leaflet] | Leaflet map library |
 | [Headless UI] | Libreria di componenti headless |
 | [React-select] | WAI-ARIA Compliant select component | 
-| [Moment.js] | Libreria per la gestione e la traduzione di date |
+| [mapbox/polyline] | Libreria per la conversione delle geometrie [Google]  |
 
 ## Installazione ubuntu
 
@@ -32,8 +32,8 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ```npm install @headlessui/react```
 1. Installare `react-select`
 ```npm i --save react-select```
-1. Installare `moment`
-```npm install moment --save```
+1. Installare `mapbox/polyline`
+```npm install @mapbox/polyline```
 
 [5T]:https://www.5t.torino.it
 [Muoversi in piemonte]:https://www.muoversinpiemonte.it
@@ -46,4 +46,5 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 [Leaflet]:https://leafletjs.com/
 [Headless UI]:https://headlessui.dev/
 [React-select]:https://react-select.com/
-[Moment.js]:https://momentjs.com/
+[mapbox/polyline]:https://github.com/mapbox/polyline
+[Google]:https://developers.google.com/maps/documentation/utilities/polylinealgorithm
