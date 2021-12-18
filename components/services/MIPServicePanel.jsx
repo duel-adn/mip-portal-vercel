@@ -63,7 +63,7 @@ function MIPServiceCard({service, cta}) {
             {service.external ?
                 <a href={service.url} target="_blank" rel="noopener noreferrer">{cta}</a>
                 :
-                <Link href="{service.url}"><a>{cta}</a></Link>
+                <Link href={service.url}><a>{cta}</a></Link>
             }
         </div>
     </div>
