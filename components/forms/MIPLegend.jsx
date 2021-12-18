@@ -12,11 +12,11 @@
 
 import styles from './MIPForms.module.scss';
 
-export default function MIPLegend({className, items}) {
+export default function MIPLegend({className, title, items}) {
     const finalClassName = `${className || ''} ${styles.traffic_legend}`;
     return (
         <div className={finalClassName}>
-            <div className={styles.title}>Legenda</div>
+            <div className={styles.title}>{title}</div>
             <div className={styles.container}>
 
                 { items && items.map(item => 

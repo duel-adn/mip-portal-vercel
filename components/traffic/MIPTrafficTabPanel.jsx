@@ -10,11 +10,14 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 import { Tab } from '@headlessui/react'
-import MIPPath from '../path/MIPPath'
 
+import useTranslation from 'next-translate/useTranslation'
+
+import MIPPath from '../path/MIPPath'
 import MIPTraffic from './MIPTraffic'
 
 export default function MIPTrafficTabPanel({ className, selected, trafficEventData }) {
+    const { t, tl } = useTranslation('traffic')
     return (
         <div className={className}>
             <Tab.Group defaultIndex={selected} as="div" className="mip-tab-group">
@@ -25,7 +28,7 @@ export default function MIPTrafficTabPanel({ className, selected, trafficEventDa
                     </Tab>
                     <Tab key="traffic" as="h4"
                         className="mip-bg-accent mip-tab-header mip-traffic-icon">
-                        Traffico
+                        {t("Traffic")}
                     </Tab>
                 </Tab.List>
                 <Tab.Panels className="mip-tab-panel">

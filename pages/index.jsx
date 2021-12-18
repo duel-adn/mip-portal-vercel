@@ -9,6 +9,8 @@
   | ---------- | ------ | ----------------------------------- |
   | 2021/08/10 | Duel   | Prima versione                      |
 */
+import useTranslation from 'next-translate/useTranslation'
+
 import MIPPage from '../components/page/MIPPage'
 import MIPBanner from '../components/page/MIPBanner'
 import MIPPath from '../components/path/MIPPath'
@@ -24,7 +26,7 @@ import { mipFetchMobilityNewsData } from '../components/news/MIPMobilityNewsAPI'
 import MIPTraffic from '../components/traffic/MIPTraffic'
 
 export default function Home(props) {
-  return (
+    return (
       <MIPPage.Page className="mip-home-page"
         pageTitle="Muoversi in Piemonte">
           <MIPBanner.RTBanner className="banner"
@@ -33,8 +35,8 @@ export default function Home(props) {
               tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" />
           <MIPPath.Controller className="mip-rounded-corners path-panel" title="Calcola il percorso" responsive />
           <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
-            title="Tempo reale"
-            subtitle="Scopri le news sul traffico in tempo reale"
+            title="RealTimeShort"
+            subtitle="DiscoverRealTime"
             trafficEventData={props.trafficEventData} compact={true} />
           <MIPTrafficMapPanel className="map-panel" 
               trafficEventData={props.trafficEventData}/>
