@@ -20,13 +20,17 @@ export default function MIPWeatherPanel(props) {
                 <h4>Previsioni meteo</h4>
                 <p>In collaborazione con Arpa Piemonte</p>
             </div>
-            <div className={styles.card_list_container}>
-                {
-                    props.weatherData && props.weatherData.map((data, idx) =>
-                        <MIPWeatherCard key={idx} province={data.prov} data={data.data} />
-                    )
-                }
-            </div>
+            {props.weatherData?.length === 0 ?
+                <div className={styles.card_list_container}>Previsioni meteo non disponibili. Attendere qualche minuto e riprovare</div>
+                :
+                <div className={styles.card_list_container}>
+                    {
+                        props.weatherData.map((data, idx) =>
+                            <MIPWeatherCard key={idx} province={data.prov} data={data.data} />
+                        )
+                    }
+                </div>
+            }
         </div>
     )
 }
