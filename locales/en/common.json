@@ -15,5 +15,14 @@
     "5T": "5T srl",
     "WeatherConditions": "Weather conditions",
     "ArpaPiemonte": "In collaboration with Arpa Piemonte",
-    "WeatherCondError": "Weather conditions are not available. Tray again later."
+    "WeatherCondError": "Weather conditions are not available. Try again later.",
+    "PassesTitle": "The alpine passes in Piedmont",
+    "PassesSubitle": "The opening of the main alpine passes in Piedmont",
+    "TrainsTimetableTitle": "Trains timetable",
+    "TrainsTimetableSubitle": "Check the timetables of the Piedmont rail network",
+    "FlightScheduleTitle": "Flight schedule",
+    "FlightScheduleSubitle": "Check the flight schedules of Piedmont's airports",
+    "VisitUsTitle": "Visit Piedmont",
+    "VisitUsSubtitle": "Piedmont. The experience you don't expect",
+    "ServiceCta": "Find out more"
 }

@@ -34,7 +34,6 @@ const Languages = [
  */
 export default function MIPSecondaryHeader(props) {
     const router = useRouter()
-    console.log(router)
     const className = `${props.className} ${styles.secondary_header}`
     function setLocale(locale) {
         console.log('Setting locale to ' + locale)

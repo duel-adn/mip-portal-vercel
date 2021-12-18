@@ -12,8 +12,7 @@
 import styles from './MIPService.module.scss'
 import Link from 'next/link'
 
-export default function MIPServiceCard(props) {
-    const service = props.service
+export default function MIPServiceCard({service, cta}) {
     const style = {
         backgroundImage:`url(${service.icon})`
     }
@@ -23,9 +22,9 @@ export default function MIPServiceCard(props) {
         <p className={styles.description}>{service.subtitle}</p>
         <div style={style} className={styles.toolbar}>
             {service.external ?
-                <a href={service.url} target="_blank" rel="noopener noreferrer">Scopri di più</a>
+                <a href={service.url} target="_blank" rel="noopener noreferrer">{cta}</a>
                 :
-                <Link href={service.url}><a>Scopri di più</a></Link>
+                <Link href="{service.url}"><a>{cta}</a></Link>
             }
         </div>
     </div>

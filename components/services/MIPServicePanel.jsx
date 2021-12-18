@@ -11,50 +11,81 @@
 */
 
 import styles from './MIPService.module.scss'
-import MIPServiceCard from './MIPServiceCard'
+
+import Link from 'next/link'
+
+import useTranslation from 'next-translate/useTranslation'
 
 const serviceData = [
     {
         id: 1,
-        title: "I colli alpini in Piemonte",
-        subtitle: "L’apertura dei principali colli alpini piemontesi",
+        title: "PassesTitle",
+        subtitle: "PassesSubitle",
         icon: "/icons/colli-alpini.svg",
         url: "/passes",
-        external: false
+        external: true
     },
     {
         id: 2,
-        title: "Orari dei treni",
-        subtitle: "Controlla gli orari della rete ferroviaria del Piemonte",
+        title: "TrainsTimetableTitle",
+        subtitle: "TrainsTimetableSubitle",
         icon: "/icons/train-timetable.svg",
         url: "https://www.sfmtorino.it/orari/",
         external: true
     },
     {
         id: 3,
-        title: "Orario dei voli",
-        subtitle: "Controlla l'orario dei voli dagli aeroporti piemontesi",
+        title: "FlightScheduleTitle",
+        subtitle: "FlightScheduleSubitle",
         icon: "/icons/flight-timetable.svg",
         url: "https://www.aeroportoditorino.it/it",
         external: true
     },
     {
         id: 4,
-        title: "Visita il Piemonte",
-        subtitle: "Piemonte. L’esperienza che non ti aspetti",
+        title: "VisitUsTitle",
+        subtitle: "VisitUsSubtitle",
         icon: "/icons/visita-piemonte.svg",
         url: "https://www.visitpiemonte.com/it",
         external: true
     },
 ]
 
+function MIPServiceCard({service, cta}) {
+    const style = {
+        backgroundImage:`url(${service.icon})`
+    }
+    return (
+    <div className={styles.service_card}>
+        <h2 className={styles.title}>{service.title}</h2>
+        <p className={styles.description}>{service.subtitle}</p>
+        <div style={style} className={styles.toolbar}>
+            {service.external ?
+                <a href={service.url} target="_blank" rel="noopener noreferrer">{cta}</a>
+                :
+                <Link href="{service.url}"><a>{cta}</a></Link>
+            }
+        </div>
+    </div>
+    )
+}
+
 export default function MIPServicePanel(props) {
     const className = `${props.className || ''} ${styles.service_panel}`;
+    const { t, tl } = useTranslation('common')
+    const translatedServices = serviceData.map(s => ({
+        id: s.id,
+        title: t(s.title),
+        subtitle: t(s.subtitle),
+        icon: s.icon,
+        url: s.url,
+        external: s.external
+    }))
     return (
     <div className={className}>
         {
-            serviceData.map(service => 
-                <MIPServiceCard key={service.id} service={service} />
+            translatedServices.map(service => 
+                <MIPServiceCard key={service.id} service={service} cta={t("ServiceCta")}/>
             )
         }
     </div>

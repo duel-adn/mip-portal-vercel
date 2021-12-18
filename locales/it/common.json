@@ -15,5 +15,14 @@
     "5T": "5T srl",
     "WeatherConditions": "Condizioni meteo",
     "ArpaPiemonte": "In collaborazione con Arpa Piemonte",
-    "WeatherCondError": "Condizioni meteo non disponibili. Attendere qualche minuto e riprovare."
+    "WeatherCondError": "Condizioni meteo non disponibili. Attendere qualche minuto e riprovare.",
+    "PassesTitle": "I colli alpini in piemonte",
+    "PassesSubitle": "L’apertura dei principali colli alpini piemontesi",
+    "TrainsTimetableTitle": "Orario dei treni",
+    "TrainsTimetableSubitle": "Consulta gli orari della rete ferroviaria del Piemonte",
+    "xFlightScheduleTitle": "Orario dei voli",
+    "FlightScheduleSubitle": "Consulta l'orario dei voli degli aeroporti piemontesi",
+    "VisitUsTitle": "Visita il Piemonte",
+    "VisitUsSubtitle": "Piemonte. L’esperienza che non ti aspetti",
+    "ServiceCta": "Scopri di più"
 }
