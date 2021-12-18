@@ -4,8 +4,9 @@ import styles from './MIPHeader.module.scss'
 // TODO: Move outside
 const navbarData = [
     { title: 'Home', url: '/'},
+    { title: 'Percorso', url: '/path'},
     { title: 'Traffico', url: '/traffic'},
-    { title: 'Trasporto pubblico', url: '/tpl' },
+    // { title: 'Trasporto pubblico', url: '/tpl' },
     { title: 'Mobilità alternativa', url: '/mobility' },
     { title: 'Il servizio', url: '/news' },
     { title: 'Contatti', url: '#' },

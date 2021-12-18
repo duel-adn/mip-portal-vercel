@@ -28,8 +28,9 @@ function history_back() {
  */
 const navbarLinks = [
     { title: 'Home', url: '/' },
+    { title: 'Calcolo percorso', url: '/path' },
     { title: 'Traffico', url: '/traffic' },
-    { title: 'Trasporto pubblico', url: '/tpl' },
+    // { title: 'Trasporto pubblico', url: '/tpl' },
     { title: 'Mobilità alternativa', url: '/mobility' },
     { title: 'Il servizio', url: '/service' },
     { title: 'Contatti', url: '/contacts' },
@@ -113,7 +114,7 @@ function MIPMainToolbar(props) {
                 <Link href="/"><a><img src='/images/logo.svg' height="48" alt='Muoversi in piemonte' /></a></Link>
             </div>
             <MIPMainMenubar className={!menuOpen && "mip-md-none"} links={navbarLinks} />
-            <MIPSearchBar className="mip-dd-block" />
+            {/* <MIPSearchBar className="mip-dd-block" /> */}
             <MIPMobileButtonBar open={menuOpen}
                 onChange={() => setMenuOpen(!menuOpen)} />
         </div>

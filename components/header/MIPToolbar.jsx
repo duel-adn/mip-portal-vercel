@@ -13,7 +13,7 @@ export default function MipToolbar(props) {
                     <option value="IT">IT</option>
                     <option value="EN">EN</option>
                 </select>
-                <button>Area riservata</button>
+                {/* <button>Area riservata</button> */}
             </div>
         </nav>
     )
