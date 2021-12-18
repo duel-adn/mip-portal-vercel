@@ -14,6 +14,8 @@ import styles from './MIPPageHeader.module.scss'
 
 import { useRouter } from 'next/router'
 
+import useTranslation from 'next-translate/useTranslation'
+
 const Languages = [
     {
         lang: 'it',
@@ -33,6 +35,7 @@ const Languages = [
  * @returns il template dell'elemento
  */
 export default function MIPSecondaryHeader(props) {
+    const { t, lang } = useTranslation('common')
     const router = useRouter()
     const className = `${props.className} ${styles.secondary_header}`
     function setLocale(locale) {
@@ -45,7 +48,7 @@ export default function MIPSecondaryHeader(props) {
         <nav className={className}>
             <div className={styles.tools}>
                 <a className={styles.link} href="https://twitter.com/MIPiemonte" target="_blank" rel="noreferrer noopener">
-                    <span>Seguici su</span>
+                    <span>{t("FollowUs")}</span>
                     <img className={styles.icon} src="/icons/twitter.svg" alt="twitter" />
                 </a>
                 <select onChange={event => setLocale(event.target.value)}>
