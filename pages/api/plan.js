@@ -27,7 +27,7 @@ function decodeResponse(response) {
 
 export default async function planHandler(req, res) {
     const query = req.url.slice(req.url.indexOf('?'))
-    const completeUrl = `${process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL}${query}`
+    const completeUrl = encodeURI(`${process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL}${query}`)
     console.log('PH: ' + completeUrl)
     const response = await fetch(completeUrl, {
         //redirect: 'follow',

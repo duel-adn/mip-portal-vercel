@@ -13,8 +13,6 @@
 import styles from "./MIPPlan.module.scss"
 import { Disclosure } from "@headlessui/react"
 import { mipConcatenate } from "../../lib/MIPUtility"
-import { MIPPlanMode } from "./MIPPathAPI"
-import { Fragment } from "react"
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -210,7 +208,7 @@ function MIPLegPanel({ fixed, leg }) {
     if (fixed) {
         return (
             <div>
-                <MIPLegDescription leg={leg} fixed={fixed} />
+                <MIPLegDescriptionPanel leg={leg} fixed={fixed} />
                 {leg.steps && leg.steps.map((step, idx) =>
                     <MIPStepPanel key={step.id ?? idx} step={step} />
                 )}
@@ -223,7 +221,7 @@ function MIPLegPanel({ fixed, leg }) {
             {({ open }) =>
                 <>
                     <Disclosure.Button className={styles.leg_expand_button}>
-                        <MIPLegDescription leg={leg} open={open} />
+                        <MIPLegDescriptionPanel leg={leg} open={open} />
                     </Disclosure.Button>
                     <Disclosure.Panel>
                         {leg.steps && leg.steps.map((step, idx) =>
@@ -239,7 +237,48 @@ function MIPLegPanel({ fixed, leg }) {
     )
 }
 
-function MIPLegDescription({ leg, fixed, open }) {
+function MIPLegDescription({ leg }) {
+    const description = leg.description
+    if (leg.isTransit) {
+        const route = description.route
+        return (
+            <div>
+                <div className={styles.title}>
+                    <div className={styles.plate} style={{
+                        color: route.textColor,
+                        backgroundColor: route.color,
+                        borderColor: route.borderColor
+                    }}>{route.name}
+                    </div>
+                    {route.agencyUrl ?
+                        <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer">
+                            {route.agencyName}
+                        </a></div>
+                        :
+                        <div>{route.agencyName}</div>
+                    }
+                </div>
+                <div className={styles.title}>
+                    {route.headsign}
+                </div>
+                <div className={styles.title}>
+                    da {description.startLocation}
+                </div>
+                <div className={styles.title}>
+                    a {description.endLocation}
+                </div>
+            </div>
+        )
+    }
+    return (<div>
+        <div>fino a {description?.endLocation}</div>
+        <div>{description?.duration}</div>
+        <div>{description?.distance}</div>
+    </div>
+    )
+}
+
+function MIPLegDescriptionPanel({ leg, fixed, open }) {
     const description = leg.description
     const iconUrl = `/path-icons/${description?.iconName}.svg`
     if (leg.isTransit) {
@@ -259,8 +298,8 @@ function MIPLegDescription({ leg, fixed, open }) {
                             borderColor: route.borderColor
                         }}>{route.name}
                         </div>
-                        {route.agencyUrl ? 
-                            <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer"> 
+                        {route.agencyUrl ?
+                            <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer">
                                 {route.agencyName}
                             </a></div>
                             :
@@ -330,7 +369,7 @@ function MIPStopPanel({ route, stop }) {
     return (
         <div className={styles.stop_panel}>
             <div className={styles.time}>{stop.arrivalTime}</div>
-            <div className={styles.stop_name} 
+            <div className={styles.stop_name}
                 style={{
                     borderColor: route.borderColor
                 }}
@@ -348,10 +387,10 @@ function MIPLocationPanel({ location }) {
         </div>
     )
 }
-const MIPPlan = {
+
+export default {
     Panel: MIPPlanPanel,
     ErrorPanel: MIPPlanMessages,
     PlanHeader: MIPPlanDescriptionPanel,
+    LegHeader: MIPLegDescription
 }
-
-export default MIPPlan

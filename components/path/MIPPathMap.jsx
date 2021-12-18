@@ -10,37 +10,65 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer, LayersControl } from 'react-leaflet'
+import styles from "./MIPPlan.module.scss"
+
+import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useIconMap } from '../../lib/MIPHooks'
+import MIPPlan from './MIPPlan'
 
-function createIcon(path) {
-  const icon =
-    L.icon({
-      //       iconUrl: '/traffic-icons/accident.svg',
-      //       iconRetinaUrl: '/traffic-icons/accident.svg',
-      //       iconAnchor: null,
-      //       popupAnchor: null,
-      //       shadowUrl: null,
-      //       shadowSize: null,
-      //       shadowAnchor: null,
-      //       iconSize: new L.Point(60, 75),
-      //       className: 'leaflet-div-icon'
-      //   });
-      //   var myIcon = L.icon({
-      iconUrl: path,
-      iconSize: [46, 47],
-      iconAnchor: [23, 47],
-      popupAnchor: [0, -47],
-      shadowUrl: null,
-      shadowSize: [68, 95],
-      shadowAnchor: [22, 94]
-    })
-  return icon
+const departureIcon = L.icon({
+  iconUrl: '/path-icons/departure.svg',
+  iconSize: [24, 24],
+  iconAnchor: [0, 24],
+  popupAnchor: [12, -30],
+})
+
+const arrivalIcon = L.icon({
+  iconUrl: '/path-icons/arrival.svg',
+  iconSize: [24, 24],
+  iconAnchor: [12, 24],
+  popupAnchor: [0, -30],
+})
+
+
+function LegPopup({leg}) {
+  
 }
 
-export default function MIPPathMap(props) {
-  const getMapIcon = useIconMap('/traffic-icons/pin', createIcon)
+function LocationLayer({label, name, coords, icon}) {
+  return (
+
+    <Marker position={coords} icon={icon}>
+    <Popup>
+      <div className={styles.location_popup}>
+      <div className={styles.title}>{label}</div>
+      <div className={styles.name}>{name}</div>
+      </div>
+    </Popup>
+     </Marker>
+  )
+}
+function PlanItineraryLayer({ itinerary }) {
+  return (
+    itinerary?.legs && itinerary.legs.map(leg =>
+      <>
+
+        <GeoJSON data={leg.geometry}
+          style={{
+            color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
+            weight: 6,
+          }}>
+            <Popup>
+              <MIPPlan.LegHeader leg={leg} />
+            </Popup>
+          </GeoJSON>
+      </>
+    )
+  )
+}
+
+export default function MIPPathMap({ plan, activeId }) {
   return (
     <MapContainer
       tap={false}
@@ -62,6 +90,15 @@ export default function MIPPathMap(props) {
           />
         </LayersControl.Overlay>
       </LayersControl>
+      {plan?.itineraries && plan.itineraries.map(it =>
+        <PlanItineraryLayer key={it.id} itinerary={it} />
+      )}
+      {plan?.description?.fromCoords  &&
+        <LocationLayer label="Partenza" name={plan.description?.fromName} coords={plan.description.fromCoords} icon={departureIcon} />
+      }
+      {plan?.description?.toCoords  &&
+        <LocationLayer label="Arrivo" name={plan.description?.toName} coords={plan.description.toCoords} icon={arrivalIcon} />
+      }
     </MapContainer>
   )
 }

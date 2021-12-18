@@ -268,3 +268,18 @@ $plan-time-col-width: 3rem;
         top: 0%;
     }
 }
+
+.location_popup {
+    padding: .25rem;
+    font-size: .826rem;
+
+    .title {
+        font-weight: 600;
+        margin-bottom: .25rem;
+    }
+
+    .name {
+        text-transform: capitalize;
+        word-wrap: break-word;
+    }
+}

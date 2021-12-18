@@ -13,7 +13,7 @@
 import dynamic from 'next/dynamic'
 import MIPMapPanel, { MIPMapLoadPlaceholder }  from '../map/MIPMapPanel'
 
-export default function MIPPlanMapPanel({className }) {
+export default function MIPPlanMapPanel({className, plan, activeId }) {
     const DynamicMap = dynamic(
         () => import('./MIPPathMap'), // replace '@components/map' with your component's location
         { 
@@ -23,7 +23,7 @@ export default function MIPPlanMapPanel({className }) {
       )
     return (
         <MIPMapPanel className={className}>
-            <DynamicMap />
+            <DynamicMap plan={plan} activeId={activeId}/>
         </MIPMapPanel>
     )
 }

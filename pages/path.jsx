@@ -41,7 +41,7 @@ export default function Peth(props) {
         <MIPPath.Controller title="Calcolo percorso" onPathPlan={pathPlan}/>
         <MIPPlan.Panel plan={plan} />
       </section>
-          <MIPPlanMapPanel className="map-panel" />
+          <MIPPlanMapPanel className="map-panel" plan={plan} itineraries={plan?.itineraries}/>
     </MIPPage.Page>
   )
 }
