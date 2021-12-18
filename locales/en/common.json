@@ -32,5 +32,6 @@
     "Closed": "Closed",
     "Legend": "Legend",
     "OpenPass": "Closed pass",
-    "ClosedPass": "Open pass"
+    "ClosedPass": "Open pass",
+    "GoBack": "Indietro"
 }
