@@ -1,4 +1,5 @@
-module.exports = {
+const nextTranslate = require('next-translate')
+module.exports = nextTranslate({
   reactStrictMode: true,
 
   i18n: {
@@ -10,4 +11,4 @@ module.exports = {
     defaultLocale: 'it',
     localeDetection: true,
   }
-}
+})

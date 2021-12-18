@@ -13,6 +13,7 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 | [Headless UI] | Libreria di componenti headless |
 | [React-select] | WAI-ARIA Compliant select component | 
 | [mapbox/polyline] | Libreria per la conversione delle geometrie [Google]  |
+| [next-translate] | Libreria internazionalizzazione per [Next.Js] | 
 
 ## Installazione ubuntu
 
@@ -34,6 +35,8 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ```npm i --save react-select```
 1. Installare `mapbox/polyline`
 ```npm install @mapbox/polyline```
+1. Installare `next-translate`
+```npm install next-translate```
 
 [5T]:https://www.5t.torino.it
 [Muoversi in piemonte]:https://www.muoversinpiemonte.it
@@ -48,3 +51,4 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 [React-select]:https://react-select.com/
 [mapbox/polyline]:https://github.com/mapbox/polyline
 [Google]:https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+[next-translate]:https://github.com/vinissimus/next-translate
