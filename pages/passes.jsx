@@ -10,11 +10,12 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import useTranslation from 'next-translate/useTranslation'
+
 import MIPPage from '../components/page/MIPPage';
-import MIPPassDataPanel from '../components/pass/MIPPassDataPanel'
+import MIPPass from '../components/pass/MIPPass'
 import MIPPassMapPanel from '../components/pass/MIPPassMapPanel';
-import MIPLegend from '../components/forms/MIPLegend';
-import { fetchPassData } from '../components/pass/MIPPassDataList';
+import { fetchPassData } from '../components/pass/MIPPassAPI';
 
 const items = [
   {
@@ -32,23 +33,20 @@ const items = [
 ]
 
 export default function Passes({passData}) {
-  return (
+    const { t, tl } = useTranslation('common')
+    return (
     <MIPPage.Page className="mip-traffic-page"
-      pageTitle="Colli alpini"
-      title="Colli alpini"
+      pageTitle={t("PassesTitleShort")}
+      title={t("PassesTitle")}
         titleClassName="mip-bg-accent"
         breadcrumb='Indietro'>
-          <MIPPassDataPanel 
+          <MIPPass.Panel 
             headerClassName="mip-tl-rounded-corners mip-bg-accent"
             contentClassName="mip-bl-rounded-corners mip-bg-light"
-            title="Colli alpini"
-            titleIcon="traffic"
-            subtitle="Scopri informazioni su colli e trafori"
-            enableSearch={true}
-            searchPlaceholder="Seleziona un colle" 
+            enableSearch={false}
             passData={passData}/>
       <MIPPassMapPanel className="map-panel" passData={passData}/>
-      <MIPLegend className="legend-panel mip-rounded-corners" items={items}/>
+      <MIPPass.Legend className="legend-panel mip-rounded-corners" />
     </MIPPage.Page>
   )
 }

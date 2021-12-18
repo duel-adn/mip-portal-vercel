@@ -12,7 +12,7 @@
 
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import { MIPPassDataCard } from './MIPPassDataList';
+import MIPPass from './MIPPass';
 
 export default function MIPPassMap({passData}) {
   const iconOpen =
@@ -74,7 +74,7 @@ export default function MIPPassMap({passData}) {
             position={[pass.latitude, pass.longitude]} 
             icon={pass.state ? iconOpen : iconClosed}>
           <Popup>
-            <MIPPassDataCard passData={pass} />
+            <MIPPass.Card passData={pass} />
           </Popup>
         </Marker>
         )
