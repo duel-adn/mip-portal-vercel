@@ -53,7 +53,7 @@ export default function MIPSecondaryHeader(props) {
                 </a>
                 <select onChange={event => setLocale(event.target.value)}>
                     {Languages.map(lang =>
-                        <option value={lang.lang} selected={lang.lang === router.locale}>{lang.description}</option>
+                        <option key={lang.lang} value={lang.lang} selected={lang.lang === router.locale}>{lang.description}</option>
                     )}
                 </select>
                 {/* <button className="mip-md-none">Area riservata</button> */}
