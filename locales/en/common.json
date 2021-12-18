@@ -10,8 +10,10 @@
     "Cookies": "Cookies",
     "Radio": "Radio",
     "ServiceBy": "A service offered by",
-    "CollaborationWith": "In collabortion with",
+    "CollaborationWith": "In collaboration with",
     "Piemonte": "Regione Piemonte",
-    "5T": "5T srl"
-
+    "5T": "5T srl",
+    "WeatherConditions": "Weather conditions",
+    "ArpaPiemonte": "In collaboration with Arpa Piemonte",
+    "WeatherCondError": "Weather conditions are not available. Tray again later."
 }

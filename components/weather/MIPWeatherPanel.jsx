@@ -11,17 +11,32 @@
 */
 
 import styles from './MIPWeather.module.scss';
-import MIPWeatherCard from './MIPWeatherCard';
+
+import useTranslation from 'next-translate/useTranslation'
+
+function MIPWeatherCard(props) {
+    return (
+        <div className={styles.card}>
+            <h5>{props.province}</h5>
+            {
+                props.data.map((daily) => 
+                    <p key={daily.date} style={{backgroundImage: `url(/weather-icons/${daily.code}.svg)`}}>{daily.date}</p>
+                )
+            }
+        </div>
+    )
+}
 
 export default function MIPWeatherPanel(props) {
+    const { t, lang } = useTranslation('common')
     return (
         <div className={`${props.className || ""} ${styles.weather_panel}`}>
             <div className={styles.title_container}>
-                <h4>Previsioni meteo</h4>
-                <p>In collaborazione con Arpa Piemonte</p>
+                <h4>{t("WeatherConditions")}</h4>
+                <p>{t("ArpaPiemonte")}</p>
             </div>
             {props.weatherData?.length === 0 ?
-                <div className={styles.card_list_container}>Previsioni meteo non disponibili. Attendere qualche minuto e riprovare</div>
+                <div className={styles.card_list_container}>{t("WeatherCondError")}</div>
                 :
                 <div className={styles.card_list_container}>
                     {

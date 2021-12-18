@@ -12,5 +12,8 @@
     "ServiceBy": "Un servizio di",
     "CollaborationWith": "In collaborazione con",
     "Piemonte": "Regione Piemonte",
-    "5T": "5T srl"
+    "5T": "5T srl",
+    "WeatherConditions": "Condizioni meteo",
+    "ArpaPiemonte": "In collaborazione con Arpa Piemonte",
+    "WeatherCondError": "Condizioni meteo non disponibili. Attendere qualche minuto e riprovare."
 }
