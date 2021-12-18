@@ -10,8 +10,11 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import styles from './MIPPageFooter.module.scss'
+
 import Link from 'next/link'
-import styles from './MIPPageFooter.module.scss';
+
+import useTranslation from 'next-translate/useTranslation'
 
 /**
  * Footer delle pagine del portale.
@@ -22,36 +25,37 @@ import styles from './MIPPageFooter.module.scss';
  */
 export default function MIPPageFooter(props) {
     const className = `${props.className || ''} mip-bg-blue`
+    const { t, lang } = useTranslation('common')
     return (
         <footer className={className} >
             <div className={`${styles.page_footer} mip-page-section`}>
                 <nav className={styles.navbar}>
                     <ul>
-                        <li>
+                        {/* <li>
                             <Link href="#"><a>Mappa del sito</a></Link><span>|</span>
+                        </li> */}
+                        <li>
+                            <Link href="/disclaimer"><a>{t('Disclaimer')}</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="/disclaimer"><a>Disclaimer</a></Link><span>|</span>
+                            <Link href="/cookies"><a>{t("Cookies")}</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="/cookies"><a>Cookies</a></Link><span>|</span>
+                            <Link href="/radio"><a>{t("Radio")}</a></Link><span>|</span>
                         </li>
                         <li>
-                            <Link href="/radio"><a>Radio</a></Link><span>|</span>
-                        </li>
-                        <li>
-                            <Link href="/contacts"><a>Contatti</a></Link>
+                            <Link href="/contacts"><a>{t("Contatti")}</a></Link>
                         </li>
                     </ul>
                 </nav>
                 <div className={styles.credits}>
                     <div className={styles.credit}>
-                        <p>Un servizio di</p>
-                        <img className={styles.piemonte} src="/images/logo-piemonte.svg" alt="regione piemonte" />
+                        <p>{t("ServiceBy")}</p>
+                        <img className={styles.piemonte} src="/images/logo-piemonte.svg" alt={t("Piemonte")} />
                     </div>
                     <div className={styles.credit}>
-                        <p>In collaborazione con</p>
-                        <img className={styles.l5t} src="/images/logo-5t.svg" alt="regione piemonte" />
+                        <p>{t("CollaborationWith")}</p>
+                        <img className={styles.l5t} src="/images/logo-5t.svg" alt={t("5T")} />
                     </div>
                 </div>
             </div>
