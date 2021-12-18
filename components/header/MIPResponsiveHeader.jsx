@@ -10,9 +10,13 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import Link from 'next/link'
-import { useState } from 'react'
 import styles from './MIPPageHeader.module.scss'
+
+import { useState } from 'react'
+
+import Link from 'next/link'
+import useTranslation from 'next-translate/useTranslation'
+
 import MIPSecondaryHeader from './MIPSecondaryHeader'
 import MIPSearchBar from './MIPSearchBar'
 import MIPTrafficNewsPlayback from '../forms/MIPTrafficNewsPlayback'
@@ -28,11 +32,11 @@ function history_back() {
  */
 const navbarLinks = [
     { title: 'Home', url: '/' },
-    { title: 'Calcolo percorso', url: '/path' },
+    { title: 'Percorso', url: '/path' },
     { title: 'Traffico', url: '/traffic' },
     // { title: 'Trasporto pubblico', url: '/tpl' },
-    { title: 'Mobilità alternativa', url: '/mobility' },
-    { title: 'Il servizio', url: '/service' },
+    { title: 'Alternativa', url: '/mobility' },
+    { title: 'Servizio', url: '/service' },
     { title: 'Contatti', url: '/contacts' },
 ]
 
@@ -77,13 +81,20 @@ function MIPMobileButtonBar(props) {
  * @returns il template dell'elemento con il menu principale
  */
 function MIPMainMenubar(props) {
+    const { t, lang } = useTranslation('common')
     const className = `${props.className || ''} ${styles.menubar}`
     return (
         <div className={className}>
             <nav>
                 <ul>
                     {props.links.map(item =>
-                        <li key={item.title} ><Link href={item.url}><a className={styles.nav_link}>{item.title}</a></Link></li>
+                        <li key={item.title} >
+                            <Link href={item.url}>
+                                <a className={styles.nav_link}>
+                                    {t(item.title)}
+                                </a>
+                            </Link>
+                        </li>
                     )}
                 </ul>
             </nav>

@@ -12,6 +12,8 @@
 
 import styles from './MIPForms.module.scss'
 
+import useTranslation from 'next-translate/useTranslation'
+
 function togglePlay(src) {
     const player = document.getElementById('notiziario')
     if (player) {
@@ -54,10 +56,11 @@ function displayProgress() {
  * @param {string} audioUrl url dell'audio da utilizzare
  */
 export default function MIPTrafficNewsPlayback(props) {
+    const { t, lang } = useTranslation('common')
     return (
         <div className={styles.playback_container}>
         <button className={styles.traffic_news_btn} onClick={() => togglePlay(props.audioUrl)}>
-            Ascolta il notiziario sul traffico
+            {t('Audio')}
         </button>
         <audio id="notiziario" 
             onTimeUpdate={() => displayProgress()}>No audio
