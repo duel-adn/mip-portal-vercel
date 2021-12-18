@@ -12,16 +12,36 @@
 
 import styles from './MIPPageHeader.module.scss'
 
+import { useRouter } from 'next/router'
+
+const Languages = [
+    {
+        lang: 'it',
+        description: 'IT'
+    },
+    {
+        lang: 'en',
+        description: 'EN'
+    }
+]
 /**
- * Header sedondario
+ * Header secondario
  * 
  * @param {*} props le property dell'elemento
  * @param props.className classe da aggiungere all'elemento esterno
  * 
  * @returns il template dell'elemento
  */
- export default function MIPSecondaryHeader(props) {
-    const className=`${props.className} ${styles.secondary_header}`
+export default function MIPSecondaryHeader(props) {
+    const router = useRouter()
+    console.log(router)
+    const className = `${props.className} ${styles.secondary_header}`
+    function setLocale(locale) {
+        console.log('Setting locale to ' + locale)
+        document.cookie = `NEXT_LOCALE=${locale}; path=/`
+        router.push(router.pathname, router.saPath, { locale })
+    }
+
     return (
         <nav className={className}>
             <div className={styles.tools}>
@@ -29,11 +49,12 @@ import styles from './MIPPageHeader.module.scss'
                     <span>Seguici su</span>
                     <img className={styles.icon} src="/icons/twitter.svg" alt="twitter" />
                 </a>
-                <select>
-                    <option value="IT">IT</option>
-                    <option value="EN">EN</option>
+                <select onChange={event => setLocale(event.target.value)}>
+                    {Languages.map(lang =>
+                        <option value={lang.lang} selected={lang.lang === router.locale}>{lang.description}</option>
+                    )}
                 </select>
-                <button className="mip-md-none">Area riservata</button>
+                {/* <button className="mip-md-none">Area riservata</button> */}
             </div>
         </nav>
     )
