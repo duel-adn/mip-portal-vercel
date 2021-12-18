@@ -18,14 +18,14 @@ import { useIconMap } from '../../lib/MIPHooks'
 import MIPPlan from './MIPPlan'
 
 const departureIcon = L.icon({
-  iconUrl: '/path-icons/departure.svg',
+  iconUrl: '/path-icons/map-departure.svg',
   iconSize: [24, 24],
   iconAnchor: [0, 24],
   popupAnchor: [12, -30],
 })
 
 const arrivalIcon = L.icon({
-  iconUrl: '/path-icons/arrival.svg',
+  iconUrl: '/path-icons/map-arrival.svg',
   iconSize: [24, 24],
   iconAnchor: [12, 24],
   popupAnchor: [0, -30],
