@@ -32,21 +32,20 @@ const arrivalIcon = L.icon({
 })
 
 
-function LegPopup({leg}) {
-  
+function LegPopup({ leg }) {
+
 }
 
-function LocationLayer({label, name, coords, icon}) {
+function LocationLayer({ label, name, coords, icon }) {
   return (
-
     <Marker position={coords} icon={icon}>
-    <Popup>
-      <div className={styles.location_popup}>
-      <div className={styles.title}>{label}</div>
-      <div className={styles.name}>{name}</div>
-      </div>
-    </Popup>
-     </Marker>
+      <Popup>
+        <div className={styles.location_popup}>
+          <div className={styles.title}>{label}</div>
+          <div className={styles.name}>{name}</div>
+        </div>
+      </Popup>
+    </Marker>
   )
 }
 function PlanItineraryLayer({ itinerary }) {
@@ -59,10 +58,10 @@ function PlanItineraryLayer({ itinerary }) {
             color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
             weight: 6,
           }}>
-            <Popup>
-              <MIPPlan.LegHeader leg={leg} />
-            </Popup>
-          </GeoJSON>
+          <Popup>
+            <MIPPlan.LegHeader leg={leg} />
+          </Popup>
+        </GeoJSON>
       </>
     )
   )
@@ -93,10 +92,10 @@ export default function MIPPathMap({ plan, activeId }) {
       {plan?.itineraries && plan.itineraries.map(it =>
         <PlanItineraryLayer key={it.id} itinerary={it} />
       )}
-      {plan?.description?.fromCoords  &&
+      {plan?.description?.fromCoords &&
         <LocationLayer label="Partenza" name={plan.description?.fromName} coords={plan.description.fromCoords} icon={departureIcon} />
       }
-      {plan?.description?.toCoords  &&
+      {plan?.description?.toCoords &&
         <LocationLayer label="Arrivo" name={plan.description?.toName} coords={plan.description.toCoords} icon={arrivalIcon} />
       }
     </MapContainer>
