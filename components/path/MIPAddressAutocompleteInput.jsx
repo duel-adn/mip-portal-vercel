@@ -12,7 +12,9 @@
 */
 
 import { useState } from 'react';
-import styles from './MIPPath.module.scss'
+
+import useTranslation from 'next-translate/useTranslation'
+
 import AsyncSelect from 'react-select/async';
 import { mipPathAutocomplete } from './MIPPathAPI';
 import { mipConcatenate } from '../../lib/MIPUtility';
@@ -86,6 +88,7 @@ const customStyles = {
  * @returns il componente pronto per l'uso
  */
 export default function MIPAddressAutocompleteInput({ className, id, placeholder, icon, onChange }) {
+    const { t } = useTranslation("planner")
     const [searchString, setSearchString] = useState("")
 
     const handleInputChange = (value) => setSearchString(value)
@@ -115,7 +118,8 @@ export default function MIPAddressAutocompleteInput({ className, id, placeholder
                 isClearable
                 onInputChange={handleInputChange}
                 onChange={handleSelect}
-                noOptionsMessage={() => searchString.length < 3 ? "Digitare un indirizzo" : "Località non trovata"}
+                noOptionsMessage={() => searchString.length < 3 ? 
+                    t("SupplyAddress") : t("NoAddress")}
                 menuShouldScrollIntoView={true}
             />
         </div>

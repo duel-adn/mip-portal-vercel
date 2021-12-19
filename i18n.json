@@ -3,7 +3,8 @@
     "defaultLocale": "it",
     "pages": {
       "*": ["common"],
-      "/": ["traffic"],
-      "/traffic": ["traffic"]
+      "/": ["planner", "traffic"],
+      "/traffic": ["traffic"],
+      "/planner": ["planner"]
     }
   }

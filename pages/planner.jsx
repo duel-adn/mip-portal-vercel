@@ -1,7 +1,7 @@
 /**
     Duel S.p.A.
 
-    Pagina traffico in tempo reale
+    Pagina pianificazione viaggio
 
     Revision history
 
@@ -10,38 +10,38 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import { useState } from 'react';
+
+import useTranslation from 'next-translate/useTranslation'
+
 import MIPPage from '../components/page/MIPPage';
-import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
-import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
-import MIPLegend from '../components/forms/MIPLegend';
-import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import MIPPath from '../components/path/MIPPath';
 import MIPPlan from '../components/path/MIPPlan'
-import { useState } from 'react';
-import { MIPPlanMode, mipPathSearch } from '../components/path/MIPPathAPI'
+import { mipPathSearch } from '../components/path/MIPPathAPI'
 import MIPPlanMapPanel from '../components/path/MIPPlanMapPanel';
 
-export default function Peth(props) {
+export default function Planner(props) {
+  const { t, lang } = useTranslation("planner")
   const [plan, setPlan] = useState(null)
   const pathPlan = async (startLocation, startCoords, endLocation, endCoords, mode) => {
-    const plan = await mipPathSearch('IT', startLocation, startCoords,
-    endLocation, endCoords, 
-    mode, true)
+    const plan = await mipPathSearch(lang, startLocation, startCoords,
+      endLocation, endCoords,
+      mode, true)
     console.log(plan)
     setPlan(plan)
   }
 
   return (
     <MIPPage.Page className="mip-traffic-page"
-      pageTitle="Calcolo percorso"
-      title="Calcolo del percorso"
-        titleClassName="mip-bg-blue"
-        breadcrumb='Indietro'>
+      pageTitle={t("PlanPageTitle")}
+      title={t("PlanPageTitle")}
+      titleClassName="mip-bg-blue"
+      breadcrumb={t("GoBack")}>
       <section className="path-results">
-        <MIPPath.Controller title="Calcolo percorso" onPathPlan={pathPlan}/>
+        <MIPPath.Controller title={t("PlanTitle")} onPathPlan={pathPlan} />
         <MIPPlan.Panel plan={plan} />
       </section>
-          <MIPPlanMapPanel className="map-panel" plan={plan} itineraries={plan?.itineraries}/>
+      <MIPPlanMapPanel className="map-panel" plan={plan} itineraries={plan?.itineraries} />
     </MIPPage.Page>
   )
 }

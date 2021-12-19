@@ -1,7 +1,22 @@
-import { useMemo, useState } from 'react';
-import { RadioGroup } from '@headlessui/react'
+/**
+    Duel S.p.A.
+
+    Elementi interfaccia pianificazione viaggio
+
+    Revision history
+
+    | Data       | Autore | Descrizione 
+    | ---------- | ------ | ----------------------------------- |
+    | 2021/08/10 | Duel   | Prima versione                      |
+*/
 import styles from './MIPPath.module.scss'
+
+import { useState } from 'react';
+import { RadioGroup } from '@headlessui/react'
+
+import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
+
 import { mipConcatenate } from '../../lib/MIPUtility';
 import { MIPPlanMode, mipPathSearch } from './MIPPathAPI';
 import { translatePathMode } from '../../lib/MIPPlanTranslator';
@@ -9,7 +24,8 @@ import { translatePathMode } from '../../lib/MIPPlanTranslator';
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
 
-function MIPPathController({ className, locale, title, responsive, onPathPlan }) {
+function MIPPathController({ className, title, responsive, onPathPlan }) {
+    const { t, lang } = useTranslation("planner")
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const [selectedOption, setSelectedOption] = useState(MIPPlanMode.publicTransport)
@@ -35,10 +51,10 @@ function MIPPathController({ className, locale, title, responsive, onPathPlan })
         event.preventDefault()
         event.stopPropagation()
         if (!startLocation) {
-            // TODO: improve and translate
-            alert("Inserire una località di partenza")
+            // TODO: improve 
+            alert(t("MissingStart"))
         } else if (!endLocation) {
-            alert("Inserire una località di arrivo")
+            alert(t("MissingEnd"))
         } else {
             if (onPathPlan) {
                 onPathPlan(startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
@@ -63,23 +79,24 @@ function MIPPathController({ className, locale, title, responsive, onPathPlan })
 }
 
 function MIPPathDataDialog({ className, title, responsive, compact, onChangeLocation, selectedOption, onChangeOption, onSubmit }) {
+    const { t } = useTranslation("planner")
     return (
         <form className={mipConcatenate(className, styles.path_data_dialog, responsive ? styles.responsive : undefined)} onSubmit={onSubmit}>
             {title &&
-                <h3 className={styles.title}>Calcola il percorso</h3>
+                <h3 className={styles.title}>{title}</h3>
             }
             <div className={styles.endpoint_data_container}>
                 <MIPAddressAutocompleteInput id={PATH_ORIGIN_ID} className={styles.input}
-                    icon='/icons/path-start.svg' placeholder='Punto di partenza'
+                    icon='/icons/path-start.svg' placeholder={t("StartPlaceholder")}
                     onChange={onChangeLocation} />
                 <MIPAddressAutocompleteInput id={PATH_DEST_ID} className={styles.input}
-                    icon='/icons/path-dest.svg' placeholder='Punto di arrivo'
+                    icon='/icons/path-dest.svg' placeholder={t("EndPlaceholder")}
                     onChange={onChangeLocation} />
                 <div className={styles.input_separator} />
                 <button className={styles.swap_button} />
             </div>
             <MIPPathOptions selectedOption={selectedOption} setSelectedOption={onChangeOption} />
-            <input className={styles.submit_button} type="submit" value="Calcola" />
+            <input className={styles.submit_button} type="submit" value={t("Submit")} />
         </form>
     )
 }
@@ -89,34 +106,12 @@ const pathPlanModeOptions = [
     MIPPlanMode.vehicle,
     MIPPlanMode.publicTransport,
     MIPPlanMode.bicycle,
-    MIPPlanMode.pedestrian].map(mode => 
-        ({
-            mode: mode,
-            ...translatePathMode(null, mode)
-        })
+    MIPPlanMode.pedestrian].map(mode =>
+    ({
+        mode: mode,
+        ...translatePathMode(null, mode)
+    })
     )
-
-// test =
-//     {
-//         mode: PathPlanMode.vehicle,
-//         ...translatePathMode(PathPlanMode.vehicle)
-//     },
-//     {
-//         mode: PathPlanMode.publicTransport,
-//         title: 'mezzi pubblici',
-//         style: styles.public_transport,
-//     },
-//     {
-//         mode: PathPlanMode.bicicle,
-//         title: 'bicicletta',
-//         style: styles.bike,
-//     },
-//     {
-//         mode: PathPlanMode.pedestrian,
-//         title: 'a piedi',
-//         style: styles.pedestrian,
-//     },
-// ]
 
 function MIPPathOptions({ selectedOption, setSelectedOption }) {
     return (
@@ -127,7 +122,7 @@ function MIPPathOptions({ selectedOption, setSelectedOption }) {
                 {pathPlanModeOptions.map(opt =>
                     <RadioGroup.Option key={opt.mode}
                         value={opt.mode}
-                        className={({ active, checked }) => mipConcatenate(styles.option, opt.style,
+                        className={({ active, checked }) => mipConcatenate(styles.option,
                             active ? styles.active : '',
                             checked ? styles.checked : '')
                         }>

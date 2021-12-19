@@ -1,0 +1,12 @@
+{
+    "PlanPageTitle": "Journey planner",
+    "PlanTitle": "Plan your journey",
+    "StartPlaceholder": "Starting point",
+    "EndPlaceholder": "Destination",
+    "MissingStart": "Please supply a starting point",
+    "MissingEnd": "Please supply a destination",
+    "SupplyAddress": "Please type an address",
+    "NoAddress": "No address found",
+    "Submit": "Plan",
+    "GoBack": "back"
+}

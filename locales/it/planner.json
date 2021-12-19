@@ -1,0 +1,12 @@
+{
+    "PlanPageTitle": "Pianifica il tuo viaggio",
+    "PlanTitle": "Pianificazione percorso",
+    "StartPlaceholder": "Punto di partenza",
+    "EndPlaceholder": "Destinazione",
+    "MissingStart": "Please supply a starting point",
+    "MissingEnd": "Please supply a destination",
+    "SupplyAddress": "Digitare un indirizzo",
+    "NoAddress": "Nessuna località trovata",
+    "Submit": "Calcola",
+    "GoBack": "indietro"
+}

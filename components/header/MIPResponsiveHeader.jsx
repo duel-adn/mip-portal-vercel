@@ -32,7 +32,7 @@ function history_back() {
  */
 const navbarLinks = [
     { title: 'Home', url: '/' },
-    { title: 'Percorso', url: '/path' },
+    { title: 'Percorso', url: '/planner' },
     { title: 'Traffico', url: '/traffic' },
     // { title: 'Trasporto pubblico', url: '/tpl' },
     { title: 'Alternativa', url: '/mobility' },
