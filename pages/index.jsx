@@ -38,7 +38,7 @@ export default function Home(props) {
         tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" /> */}
       <MIPPath.Controller>
         <MIPPath.DataForm className="mip-rounded-corners path-panel"
-          title={t("PlannerTitle")} responsive/>
+          title={t("PlannerTitle")} responsive />
       </MIPPath.Controller>
       <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
         title={t("RealTimeShort")}
@@ -60,17 +60,21 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  const trafficEventData = await mipFetchTrafficEventData(context)
-  const weatherData = await mipFetchWeatherData(context)
-  const publicTransportData = await mipFetchPublicTransportData(context)
-  const newsData = await mipFetchMobilityNewsData(context)
-
-  return {
+  const trafficEventData = mipFetchTrafficEventData(context)
+  const weatherData = mipFetchWeatherData(context)
+  const publicTransportData = mipFetchPublicTransportData(context)
+  const newsData = mipFetchMobilityNewsData(context)
+  return Promise.all([
+    trafficEventData,
+    weatherData,
+    publicTransportData,
+    newsData
+  ]).then(values => ({
     props: {
-      trafficEventData,
-      weatherData,
-      publicTransportData,
-      newsData
-    },
-  }
+      trafficEventData: values[0],
+      weatherData: values[1],
+      publicTransportData: values[2],
+      newsData: values[3]
+    }
+  }))
 }
