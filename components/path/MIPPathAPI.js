@@ -16,9 +16,9 @@ import {translatePlanResponse} from "../../lib/MIPPlanTranslator"
 
 export const MIPPlanMode = {
     vehicle: 'CAR',
-    publicTransport: 'TRANSIT,WALK',
+    transit: 'TRANSIT,WALK',
     bicycle: 'BICYCLE',
-    pedestrian: 'WALK'
+    walk: 'WALK'
 }
 
 /**

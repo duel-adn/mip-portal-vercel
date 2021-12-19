@@ -51,9 +51,7 @@ function LocationLayer({ label, name, coords, icon }) {
 function PlanItineraryLayer({ itinerary }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
-      <>
-
-        <GeoJSON data={leg.geometry}
+        <GeoJSON key={leg.id} data={leg.geometry}
           style={{
             color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
             weight: 6,
@@ -62,7 +60,6 @@ function PlanItineraryLayer({ itinerary }) {
             <MIPPlan.LegHeader leg={leg} />
           </Popup>
         </GeoJSON>
-      </>
     )
   )
 }

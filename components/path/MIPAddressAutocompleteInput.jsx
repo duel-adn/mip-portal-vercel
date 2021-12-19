@@ -87,14 +87,14 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ className, id, placeholder, icon, onChange }) {
+export default function MIPAddressAutocompleteInput({ className, placeholder, icon, onChange, loadingMsg }) {
     const { t } = useTranslation("planner")
     const [searchString, setSearchString] = useState("")
 
     const handleInputChange = (value) => setSearchString(value)
     const handleSelect = (location) => {
         if (onChange) {
-            onChange(id, location)
+            onChange(location)
         }
     }
 
@@ -108,12 +108,13 @@ export default function MIPAddressAutocompleteInput({ className, id, placeholder
         callback(rawData)
     }
     return (
-        <div id={id} className={mipConcatenate(className, "mip-flex-col")}>
+        <div className={mipConcatenate(className, "mip-flex-col")}>
             <img src={icon} with="15" aria-hidden="true" alt="icona" />
             <AsyncSelect
                 styles={customStyles}
                 placeholder={placeholder}
                 loadOptions={loadOptions}
+                loadingMessage={() => loadingMsg ?? "Loading..."}
                 defaultOptions
                 isClearable
                 onInputChange={handleInputChange}

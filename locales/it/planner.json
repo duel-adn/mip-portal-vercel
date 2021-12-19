@@ -7,6 +7,19 @@
     "MissingEnd": "Inserire un indirizzo di destinazione",
     "SupplyAddress": "Digitare un indirizzo",
     "NoAddress": "Nessuna località trovata",
+    "PlanType": "Mezzo di trasporto",
+    "ModeLabel" : {
+        "vehicle": "auto",
+        "transit": "mezzi pubblici",
+        "bicycle": "bicicletta",
+        "walk": "a piedi"
+    },
+    "StartTime": "Partenza il",
+    "BikePathType": "Tipo di percorso",
+    "BikePathTypeSafe": "Più sicuro",
+    "BikePathTypeEasy": "Più facile",
+    "BikePathTypeFast": "Più veloce",
+    "Loading": "Ricerca...",
     "Submit": "Calcola",
     "GoBack": "indietro"
 }

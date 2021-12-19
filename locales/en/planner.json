@@ -7,6 +7,19 @@
     "MissingEnd": "Please supply a destination",
     "SupplyAddress": "Please type an address",
     "NoAddress": "No address found",
+    "PlanType": "Travel mode",
+    "ModeLabel" : {
+        "vehicle": "car",
+        "transit": "public",
+        "bicycle": "bicycle",
+        "walk": "walk"
+    },
+    "StartTime": "Departure",
+    "BikePathType": "Path type",
+    "BikePathTypeSafe": "Safer",
+    "BikePathTypeEasy": "Easier",
+    "BikePathTypeFast": "Faster",
+    "Loading": "Searching...",
     "Submit": "Plan",
     "GoBack": "back"
 }
