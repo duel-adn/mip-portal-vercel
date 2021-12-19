@@ -15,7 +15,7 @@ import styles from './MIPPass.module.scss'
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate } from '../../lib/MIPUtility'
-import MIPLegend from '../forms/MIPLegend';
+import MIPForms from '../forms/MIPForms';
 
 function getStyle(style, pass) {
     return `${style} ${pass.state ? styles.open : styles.closed}`;
@@ -104,7 +104,7 @@ const items = [
 function MIPPassLegend({ className }) {
     const { t, tl } = useTranslation('common')
     return (
-        <MIPLegend className={className} title={t("Legend")}
+        <MIPForms.Legend className={className} title={t("Legend")}
             items={items.map(i => ({
                 title: t(i.title),
                 icon: i.icon,
@@ -117,5 +117,4 @@ export default {
     List: MIPPassDataList,
     Card: MIPPassDataCard,
     Legend: MIPPassLegend
-
 }

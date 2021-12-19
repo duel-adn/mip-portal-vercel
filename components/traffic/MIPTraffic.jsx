@@ -16,7 +16,7 @@ import { useMemo, useRef, useState } from "react"
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate, debounce } from "../../lib/MIPUtility"
-import MIPLegend from '../forms/MIPLegend';
+import MIPForms from '../forms/MIPForms';
 
 /**
  * Card che mostra un singolo evento di traffico
@@ -164,7 +164,7 @@ function MIPTrafficLegend({ className }) {
     const { t, tl } = useTranslation('traffic')
 
     return (
-        <MIPLegend className={className} title={t("Legend")}
+        <MIPForms.Legend className={className} title={t("Legend")}
             items={LegendItems.map(i => ({ title: t(i.title), icon: i.icon }))} />
     )
 }

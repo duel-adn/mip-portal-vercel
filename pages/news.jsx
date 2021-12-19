@@ -12,7 +12,7 @@
 
 import MIPPage from '../components/page/MIPPage'
 import MIPNewsCardGrid from '../components/news/MIPNewsCardGrid'
-import MIPPager from '../components/forms/MIPPager'
+import MIPForms from '../components/forms/MIPForms'
 import MIPWeatherPanel from '../components/weather/MIPWeatherPanel'
 import { mipFetchWeatherData } from '../components/weather/MIPWeatherAPI'
 
@@ -23,7 +23,7 @@ export default function News(props) {
       titleClassName="mip-bg-gray"
       breadcrumb="Indietro" >
       <MIPNewsCardGrid className="mip-3col-page" />
-      <MIPPager />
+      <MIPForms.Pager />
       <MIPWeatherPanel className="mip-my-2" weatherData={props.weatherData}/>
     </MIPPage.Page>
   )

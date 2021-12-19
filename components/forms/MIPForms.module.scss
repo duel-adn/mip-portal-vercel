@@ -136,3 +136,47 @@
     }
 }
 
+// Animated placeholder
+
+@keyframes bounce {
+	0%, 50%, 100% {
+		transform: scale(1);
+		filter: blur(0px);
+	}
+	25% {
+		transform: scale(0.5);
+		filter: blur(2px);
+	}
+	75% {
+		filter: blur(2px);
+		transform: scale(1.4);
+	}
+}
+
+.mip_loading_panel {
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+    width: 2rem;
+    div {
+        min-width: .8rem;
+        min-height: .8rem;
+        border-radius: 50%;
+        margin: .3rem;
+        background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+        animation: bounce 1s 0s linear infinite;    
+    }
+    .blue {
+        background-color: $mip-logo-blue;
+        animation-delay: 0.1s;
+    }
+    .gray {
+        background-color: $mip-logo-gray;
+        animation-delay: 0.2s;
+    }
+
+    .red {
+        background-color: $mip-logo-red;
+        animation-delay: 0.3s;
+    }
+}

@@ -17,9 +17,13 @@ $mip-default-font-family:  'Titillium Web';
 
 // Colors
 
+
+$mip-logo-blue: #0061B2;
+$mip-logo-gray: #BDBDBD;
+$mip-logo-red: #B9141B;
+
 $mip-dark-background: #001729;
 $mip-light-color: #fff;
-
 $mip-light-background: #fff;
 $mip-text-color: #222;
 $mip-dark-color: #222;
@@ -28,19 +32,18 @@ $mip-dark-blue-color: #001729;
 $mip-blue-background: #008bff;
 $mip-gray-background: #E9E9E9;
 $mip-light-green-color: #00B431;
-$mip-dark-red-color: #B9141B;
-$mip-error-color: #B9141B;
-$mip-error-background: #B9141B;
+$mip-dark-red-color: $mip-logo-red;
+$mip-error-color: $mip-logo-red;
+$mip-error-background: $mip-logo-red;
 
 $mip-accent-color: #DA3463;
 $mip-accent-background: #DA3463;
-$mip-dark-blue-background: #0061B2;
+$mip-dark-blue-background: $mip-logo-blue;
 $mip-blue-color: #008BFF;
 
 $mip-dark-link-color: #081932;
-$mip-dark-border-color: #BDBDBD;
+$mip-dark-border-color: $mip-logo-gray;
 $mip-light-border-color: #D2D2D2;
-$mip-dark-border-color: #BDBDBD;
 
 // Dimensioni
 
