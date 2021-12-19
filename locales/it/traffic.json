@@ -1,7 +1,8 @@
 {
     "Traffic": "Traffico",
-    "RealTimeShort": "Tempo reale",
-    "RealTime": "Traffico in tempo reale",
+    "RealTimeShort": "Eventi di traffico",
+    "RealTime": "Informazioni di traffico in tempo reale",
+    "RealTimeTitle": "Informazioni di traffico in tempo reale in Piemonte",
     "EventSearch": "Cerca tra gli eventi di traffico",
     "Free": "Traffico scorrevole",
     "Heavy": "Traffico intenso",

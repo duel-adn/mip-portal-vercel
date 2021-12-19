@@ -13,25 +13,21 @@
 import useTranslation from 'next-translate/useTranslation'
 
 import MIPPage from '../components/page/MIPPage';
+import MIPTrafficTabPanel from '../components/traffic/MIPTrafficTabPanel'
 import MIPTrafficMapPanel from '../components/traffic/MIPTrafficMapPanel';
 import { mipFetchTrafficEventData } from '../components/traffic/MIPTrafficAPI'
 import MIPTraffic from '../components/traffic/MIPTraffic';
 
-export default function Traffic({eventData}) {
+export default function Traffic(props) {
     const { t, tl } = useTranslation('traffic')
     return (
     <MIPPage.Page className="mip-traffic-page"
-      pageTitle={t("RealTimeTitle")}
+      pageTitle={t("RealTime")}
       title={t("RealTime")}
         titleClassName="mip-bg-accent"
         breadcrumb={t("GoBack")}>
-        <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
-          title={t("RealTimeShort")}
-          trafficEventData={eventData} 
-          searchable />
-
-      {/* <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/> */}
-      <MIPTrafficMapPanel className="map-panel" trafficEventData={eventData}/>
+      <MIPTrafficTabPanel className="event-panel" trafficEventData={props.eventData} selected={1}/>
+      <MIPTrafficMapPanel className="map-panel" trafficEventData={props.eventData}/>
       <MIPTraffic.Legend className="legend-panel mip-rounded-corners" />
     </MIPPage.Page>
   )

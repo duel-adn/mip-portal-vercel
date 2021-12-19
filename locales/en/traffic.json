@@ -1,7 +1,8 @@
 {
     "Traffic": "Traffic",
-    "RealTimeShort": "Real time",
-    "RealTime": "Real time traffic",
+    "RealTimeShort": "Traffic events",
+    "RealTime": "Real time traffic information",
+    "RealTimeTitle": "Real time traffic information in Piedmont",
     "EventSearch": "Filter traffic events",
     "Free": "Free",
     "Heavy": "Heavy",
