@@ -28,12 +28,14 @@ function MIPPager(props) {
     )
 }
 
-function MIPLoading() {
+function MIPLoading({className}) {
     return (
-        <div class={styles.mip_loading_panel}>
+        <div className={className}>
+            <div class={styles.mip_loading_panel}>
             <div class={styles.blue}></div>
             <div class={styles.gray}></div>
             <div class={styles.red}></div>
+            </div>
         </div>
     )
 }

@@ -36,7 +36,7 @@ $input-row: 2;
     .endpoint_data_container {
         display: grid;
         grid-template-columns: auto 1fr auto;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
     }
 
     .input {
@@ -66,7 +66,7 @@ $input-row: 2;
         grid-row: $input-row;
         width: 80%;
         height: 3rem;
-        margin: 2.8rem auto .75rem auto;
+        margin: 1.5rem auto .75rem auto;
         padding: .3em 1em;
         font-size: .875rem;
         font-weight: bold;
@@ -78,6 +78,18 @@ $input-row: 2;
         &:focus {
             text-decoration: underline;
         }
+    }
+
+    .loading_indicator {
+        grid-row: $input-row;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 3rem;
+        margin: 1.5rem auto .75rem auto;
+        background-color: $mip-light-background;
     }
 
     .path_options {
@@ -129,11 +141,26 @@ $input-row: 2;
         }    
         .checked {
             .icon {
-            border-color: black;
-            background-color: black;
-            filter: invert(1);
-            border: 1px solid black;
+                border-color: black;
+                background-color: black;
+                filter: invert(1);
+                border: 1px solid black;
+            }
         }
+    }
+
+    .additional_options {
+        display: flex;
+        //width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+
+        input,
+        select {
+            flex-grow: 1;
+            margin-left: 1rem;
+            height: auto;
         }
     }
 }

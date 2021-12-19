@@ -23,13 +23,6 @@ import MIPPlanMapPanel from '../components/path/MIPPlanMapPanel';
 export default function Planner(props) {
   const { t, lang } = useTranslation("planner")
   const [plan, setPlan] = useState(null)
-  const pathPlan = async (startLocation, startCoords, endLocation, endCoords, mode) => {
-    const plan = await mipPathSearch(lang, startLocation, startCoords,
-      endLocation, endCoords,
-      mode, true)
-    console.log(plan)
-    setPlan(plan)
-  }
 
   return (
     <MIPPage.Page className="mip-traffic-page"
@@ -38,10 +31,10 @@ export default function Planner(props) {
       titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
       <section className="path-results">
-        <MIPPath.Controller title={t("PlanTitle")} onPathPlan={pathPlan} />
+        <MIPPath.Controller title={t("PlanTitle")} plan={plan} setPlan={setPlan} />
         <MIPPlan.Panel plan={plan} />
       </section>
-      <MIPPlanMapPanel className="map-panel" plan={plan} itineraries={plan?.itineraries} />
+      <MIPPlanMapPanel className="map-panel" plan={plan} />
     </MIPPage.Page>
   )
 }

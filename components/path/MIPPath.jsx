@@ -20,16 +20,25 @@ import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility';
 import { MIPPlanMode, mipPathSearch } from './MIPPathAPI';
 import { translatePathMode } from '../../lib/MIPPlanTranslator';
+import MIPForms from '../forms/MIPForms';
+
 
 const PATH_ORIGIN_ID = 'path_origin'
 const PATH_DEST_ID = 'path_dest'
 
-function MIPPathController({ className, title, responsive, onPathPlan }) {
+function MIPPathController({ className, title, responsive, plan, setPlan }) {
     const { t, lang } = useTranslation("planner")
+    const [planning, setPlanning] = useState(false)
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const [selectedOption, setSelectedOption] = useState(MIPPlanMode.transit)
-    const [plan, setPlan] = useState(null)
+    const pathPlan = async (startLocation, startCoords, endLocation, endCoords, mode) => {
+        const plan = await mipPathSearch(lang, startLocation, startCoords,
+            endLocation, endCoords,
+            mode, true)
+        console.log(plan)
+        return plan
+    }
     async function onPathSearch(event) {
         event.preventDefault()
         event.stopPropagation()
@@ -39,13 +48,11 @@ function MIPPathController({ className, title, responsive, onPathPlan }) {
         } else if (!endLocation) {
             alert(t("MissingEnd"))
         } else {
-            if (onPathPlan) {
-                onPathPlan(startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
-            }
-            // const response = await mipPathSearch(locale, startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption.value)
-            // setPlan(response)
+            setPlanning(true)
+            const newPlan = await pathPlan(startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
+            setPlanning(false)
+            setPlan(newPlan)
         }
-        return false
     }
     return (
         <form className={mipConcatenate(className, styles.path_data_dialog, responsive ? styles.responsive : undefined)}
@@ -66,33 +73,39 @@ function MIPPathController({ className, title, responsive, onPathPlan }) {
                 <button className={styles.swap_button} />
             </div>
             <MIPPathOptions selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-            <AdditionalOptions mode={selectedOption} />
-            <input className={styles.submit_button} type="submit" value={t("Submit")} />
+            {!responsive &&
+                <AdditionalOptions mode={selectedOption} />
+            }
+            {planning ?
+                <MIPForms.Loading className={styles.loading_indicator} />
+                :
+                <input className={styles.submit_button} type="submit" value={t("Submit")} />
+            }
         </form>
     )
 }
 
 function AdditionalOptions({ mode }) {
     const { t } = useTranslation("planner")
-    const [startDate, setStartDate] = useState(Date.now() + 5 * 60000 )
+    const [startDate, setStartDate] = useState(Date.now() + 5 * 60000)
     const adjustedDate = new Date(startDate)
     // toISOString riporta la data in GMT, quindi bisogna aggiustare la data passata
     // come argomento per "ingannarlo"
     const isoDate = new Date(startDate - 60000 * adjustedDate.getTimezoneOffset()).toISOString().slice(0, -8)
     return (
-        <div>
+        <div >
             {mode == MIPPlanMode.transit &&
-                <div>
+                <div className={styles.additional_options}>
                     <label htmlFor="start-time-picker">{t("StartTime")}</label>
                     <input id="start-time-picker" type="datetime-local"
-                        min={isoDate} value={isoDate} 
+                        min={isoDate} value={isoDate}
                         onChange={e => setStartDate
-                        (new Date(e.target.value))}
+                            (new Date(e.target.value))}
                     />
                 </div>
             }
             {mode == MIPPlanMode.bicycle &&
-                <div>
+                <div className={styles.additional_options}>
                     <label htmlFor="bike-option-selector">{t("BikePathType")}</label>
                     <select>
                         <option value="a">{t("BikePathTypeSafe")}</option>
