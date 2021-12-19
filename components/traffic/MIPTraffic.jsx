@@ -87,7 +87,7 @@ function filterEvents(eventData, text) {
  * TODO: Verificare accessibilità box di input per selezione
  */
 function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, compact, trafficEventData }) {
-    const { t, tl } = useTranslation('traffic')
+    const { t } = useTranslation('traffic')
     const finalClassName = mipConcatenate(className, styles.traffic_event_card_list)
     const placeholder = searchPlaceholder || t("EventSearch")
     const inputElementRef = useRef(null)
@@ -122,16 +122,15 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
 }
 
 function MIPTrafficPanel({ className, headerClass, listClass, searchable, searchPlaceholder, title, subtitle, compact, trafficEventData }) {
-    const { t, lang } = useTranslation('traffic')
     const finalClassName = mipConcatenate(className, styles.traffic_panel)
     const finalHeaderClass = mipConcatenate(headerClass, styles.header)
     const finalListClass = mipConcatenate(listClass, styles.event_list)
     return (
         <div className={finalClassName}>
             <div className={finalHeaderClass}>
-                <h3 className={styles.title}>{t(title)}</h3>
+                <h3 className={styles.title}>{title}</h3>
                 {subtitle &&
-                    <h4 className={styles.subtitle}>{t(subtitle)}</h4>
+                    <h4 className={styles.subtitle}>{subtitle}</h4>
                 }
             </div>
             <MIPTrafficEventCardList className={finalListClass} compact={compact}

@@ -9,6 +9,7 @@
   | ---------- | ------ | ----------------------------------- |
   | 2021/08/10 | Duel   | Prima versione                      |
 */
+
 import useTranslation from 'next-translate/useTranslation'
 
 import MIPPage from '../components/page/MIPPage'
@@ -26,30 +27,32 @@ import { mipFetchMobilityNewsData } from '../components/news/MIPMobilityNewsAPI'
 import MIPTraffic from '../components/traffic/MIPTraffic'
 
 export default function Home(props) {
-    return (
-      <MIPPage.Page className="mip-home-page"
-        pageTitle="Muoversi in Piemonte">
-          <MIPBanner.RTBanner className="banner"
-              title="Allerta meteo Cuneo:
+  const { t } = useTranslation("common")
+  const { tt } = useTranslation("traffic")
+  return (
+    <MIPPage.Page className="mip-home-page"
+      pageTitle="Muoversi in Piemonte">
+      {/* <MIPBanner.RTBanner className="banner"
+        title="Allerta meteo Cuneo:
                   ANAS al lavoro per rimozione neve."
-              tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" />
-          <MIPPath.Controller className="mip-rounded-corners path-panel" title="Calcola il percorso" responsive />
-          <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
-            title="RealTimeShort"
-            subtitle="DiscoverRealTime"
-            trafficEventData={props.trafficEventData} compact={true} />
-          <MIPTrafficMapPanel className="map-panel" 
-              trafficEventData={props.trafficEventData}/>
-          <MIPPublicTransportPanel className="tpl-panel"
-              title="Avvisi di trasporto pubblico locale" 
-              publicTransportData={props.publicTransportData} />
-            <MIPMobilityNewsPanel className="news-panel"
-              title="Avvisi mobilità" newsData={props.newsData} />
-            <MIPServicePanel className="service-panel" />
-            <MIPWeatherPanel 
-              className="weather-panel"
-              weatherData={props.weatherData} />
-      </MIPPage.Page>
+        tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" /> */}
+      <MIPPath.Controller className="mip-rounded-corners path-panel" title={t("PlannerTitle")} responsive />
+      <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
+        title={t("RealTimeShort")}
+        subtitle={t("DiscoverRealTime")}
+        trafficEventData={props.trafficEventData} compact={true} />
+      <MIPTrafficMapPanel className="map-panel"
+        trafficEventData={props.trafficEventData} />
+      <MIPPublicTransportPanel className="tpl-panel"
+        title={t("PTNewsTitle")}
+        publicTransportData={props.publicTransportData} />
+      <MIPMobilityNewsPanel className="news-panel"
+        title={t("MobilityNewsTitle")} newsData={props.newsData} />
+      <MIPServicePanel className="service-panel" />
+      <MIPWeatherPanel
+        className="weather-panel"
+        weatherData={props.weatherData} />
+    </MIPPage.Page>
   )
 }
 
@@ -58,7 +61,7 @@ export async function getServerSideProps(context) {
   const weatherData = await mipFetchWeatherData(context)
   const publicTransportData = await mipFetchPublicTransportData(context)
   const newsData = await mipFetchMobilityNewsData(context)
-  
+
   return {
     props: {
       trafficEventData,
