@@ -1,6 +1,6 @@
 {
     "Home": "Home",
-    "Percorso": "Route Planner",
+    "Percorso": "Journey planner",
     "Traffico": "Traffic",
     "Servizio": "About",
     "Contatti": "Contacts",
@@ -33,6 +33,15 @@
     "Legend": "Legend",
     "OpenPass": "Closed pass",
     "ClosedPass": "Open pass",
-    "GoBack": "Indietro",
-    "FollowUs": "Follow us on"
+    "GoBack": "back",
+    "FollowUs": "Follow us on",
+    "PageNotFound": "Page not found",
+    "SorryNotFound": "We are sorry, we could not found what you were looking for.",
+    "PageSuggestion": "You can try these other pages:",
+    "TrafficPage": "Real time traffic information",
+    "PassesPage": "Information on passes and tunnels",
+    "PlannerPage": "Journey planner",
+    "Otherwise": "otherwise",
+    "GoHome": "Visit the home page",
+    "ImageAlt": "Young woman with binoculars"
 }

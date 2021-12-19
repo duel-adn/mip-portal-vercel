@@ -1,6 +1,6 @@
 {
     "Home": "Home",
-    "Percorso": "Calcolo percorso",
+    "Percorso": "Pianificazione viaggio",
     "Traffico": "Traffico",
     "Servizio": "Il servizio",
     "Contatti": "Contatti",
@@ -34,5 +34,14 @@
     "OpenPass": "Passo aperto",
     "ClosedPass": "Passo chiuso",
     "GoBack": "Indietro",
-    "FollowUs": "Seguici su"
+    "FollowUs": "Seguici su",
+    "PageNotFound": "Pagina non trovata",
+    "SorryNotFound": "Ci dispiace, non abbiamo trovato quello che cercavi.",
+    "PageSuggestion": "Puoi provare queste pagine:",
+    "TrafficPage": "Informazioni di traffico in tempo reale",
+    "PlannerPage": "Pianificazione del viaggio",
+    "PassesPage": "Informazioni sui colli alpini",
+    "Otherwise": "oppure",
+    "GoHome": "Vai alla home page",
+    "ImageAlt": "Giovane donna con binocolo"
 }
