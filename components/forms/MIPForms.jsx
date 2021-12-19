@@ -14,10 +14,15 @@ import styles from './MIPForms.module.scss'
 
 import Link from 'next/link'
 
-function MIPPager(props) {
-    const className = `${props.className || ''} ${styles.mip_pager}`;
+/**
+ * Componente usato per scorrere tra le pagine (ad esempio nelle news)
+ * @param {String} className nome della classe del div esterno
+ * @returns il componente React 
+ */
+function MIPPager({className}) {
+    const finalClassName = `${className || ''} ${styles.mip_pager}`;
     return (
-        <div className={className}>
+        <div className={finalClassName}>
             <Link href="/article"><a><img src='/icons/chevron-left-gray.svg' alt="pagina precedente"></img></a></Link>
             <Link href="/article"><a className={styles.selected} href="">1</a></Link>
             <Link href="/article"><a>2</a></Link>
@@ -28,18 +33,30 @@ function MIPPager(props) {
     )
 }
 
+/**
+ * Ritorna un componente che mostra un'animazione CSS ciclica 
+ * @param {String} className nome della classe del div esterno
+ * @returns il componente React 
+ */
 function MIPLoading({className}) {
     return (
         <div className={className}>
-            <div class={styles.mip_loading_panel}>
-            <div class={styles.blue}></div>
-            <div class={styles.gray}></div>
-            <div class={styles.red}></div>
+            <div className={styles.mip_loading_panel}>
+            <div className={styles.blue}></div>
+            <div className={styles.gray}></div>
+            <div className={styles.red}></div>
             </div>
         </div>
     )
 }
 
+/**
+ * Componente generico usato per le legende
+ * @param {String} className nome della classe del div esterno
+ * @param {String} title titolo della legenda 
+ * @param {Array} items elementi della legenda 
+ * @returns il componente React
+ */
 function MIPLegend({className, title, items}) {
     const finalClassName = `${className || ''} ${styles.traffic_legend}`;
     return (
