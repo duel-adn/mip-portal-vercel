@@ -17,8 +17,13 @@
  */
 
 export async function mipFetchMobilityNewsData(context) {
-    const res = await fetch(process.env.MIP_NEWS_URL)
-    const news = await res.json()
-    console.log(`${process.env.MIP_NEWS_URL} (${news.length})`)
-    return news
+    try {
+        const res = await fetch(process.env.MIP_NEWS_URL)
+        const news = await res.json()
+        console.log(`${process.env.MIP_NEWS_URL} (${news.length})`)
+        return news
+    } catch (exc) {
+        console.log(exc)
+    }
+    return []
 }

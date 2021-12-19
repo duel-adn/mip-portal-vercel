@@ -24,12 +24,18 @@ function showDate(text) {
  */
 
 export async function mipFetchPublicTransportData(context) {
-    const res = await fetch(process.env.MIP_TPL_URL)
-    const news = await res.json()
-    console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
-    return news.map(({validitystart, ...other}) => {
-        return {
-        validitystart: showDate(validitystart),
-        ...other
-    }})
+    try {
+        const res = await fetch(process.env.MIP_TPL_URL)
+        const news = await res.json()
+        console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
+        return news.map(({ validitystart, ...other }) => {
+            return {
+                validitystart: showDate(validitystart),
+                ...other
+            }
+        })
+    } catch (exc) {
+        console.log(exc)
+    }
+    return []
 }
