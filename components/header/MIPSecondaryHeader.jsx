@@ -51,9 +51,9 @@ export default function MIPSecondaryHeader(props) {
                     <span>{t("FollowUs")}</span>
                     <img className={styles.icon} src="/icons/twitter.svg" alt="twitter" />
                 </a>
-                <select onChange={event => setLocale(event.target.value)}>
+                <select value={lang} onChange={event => setLocale(event.target.value)}>
                     {Languages.map(lang =>
-                        <option key={lang.lang} value={lang.lang} selected={lang.lang === router.locale}>{lang.description}</option>
+                        <option key={lang.lang} value={lang.lang}>{lang.description}</option>
                     )}
                 </select>
                 {/* <button className="mip-md-none">Area riservata</button> */}
