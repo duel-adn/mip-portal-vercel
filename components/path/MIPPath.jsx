@@ -11,7 +11,7 @@
 */
 import styles from './MIPPath.module.scss'
 
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 
 import useTranslation from 'next-translate/useTranslation'
@@ -19,27 +19,52 @@ import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
 import { mipConcatenate } from '../../lib/MIPUtility';
 import { MIPPlanMode, mipPathSearch } from './MIPPathAPI';
-import { translatePathMode } from '../../lib/MIPPlanTranslator';
 import MIPForms from '../forms/MIPForms';
 
+const initialContext = {
+    plan: null
+}
 
-const PATH_ORIGIN_ID = 'path_origin'
-const PATH_DEST_ID = 'path_dest'
+const MIPPlannerContext = createContext(initialContext)
 
-function MIPPathController({ className, title, responsive, plan, setPlan }) {
-    const { t, lang } = useTranslation("planner")
+function MIPPathController({ children }) {
+    const [plan, setPlan] = useState(false)
     const [planning, setPlanning] = useState(false)
+    const [map, setMap] = useState(null)
+    //function recalcPathPlan() { console.log()}
+    const recalcPathPlan = async (lang, startLocation, startCoords, endLocation, endCoords, mode) => {
+        setPlanning(true)
+        try {
+            const newPlan = await mipPathSearch(lang, startLocation, startCoords,
+                endLocation, endCoords,
+                mode, true)
+            console.log(newPlan)
+            setPlan(newPlan)
+        } catch (exc) {
+            console.log(exc)
+        }
+        setPlanning(false)
+    }
+    const context = {
+        plan, planning, recalcPathPlan,
+        setMap
+    }
+    return (
+        <MIPPlannerContext.Provider value={context}>
+            {children}
+        </MIPPlannerContext.Provider>
+    )
+}
+
+function MIPPathDataForm({ className, title, responsive }) {
+    const {
+        plan, planning, recalcPathPlan
+    } = useContext(MIPPlannerContext)
+    const { t, lang } = useTranslation("planner")
     const [startLocation, setStartLocation] = useState(null)
     const [endLocation, setEndLocation] = useState(null)
     const [selectedOption, setSelectedOption] = useState(MIPPlanMode.transit)
-    const pathPlan = async (startLocation, startCoords, endLocation, endCoords, mode) => {
-        const plan = await mipPathSearch(lang, startLocation, startCoords,
-            endLocation, endCoords,
-            mode, true)
-        console.log(plan)
-        return plan
-    }
-    async function onPathSearch(event) {
+    function onPathSearch(event) {
         event.preventDefault()
         event.stopPropagation()
         if (!startLocation) {
@@ -48,10 +73,9 @@ function MIPPathController({ className, title, responsive, plan, setPlan }) {
         } else if (!endLocation) {
             alert(t("MissingEnd"))
         } else {
-            setPlanning(true)
-            const newPlan = await pathPlan(startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
-            setPlanning(false)
-            setPlan(newPlan)
+            if (recalcPathPlan) {
+                recalcPathPlan(lang, startLocation.label, startLocation.coordinates, endLocation.label, endLocation.coordinates, selectedOption)
+            }
         }
     }
     return (
@@ -143,7 +167,9 @@ function MIPPathOptions({ selectedOption, setSelectedOption }) {
 }
 
 const MIPPath = {
+    Context: MIPPlannerContext,
     Controller: MIPPathController,
+    DataForm: MIPPathDataForm
 }
 
 export default MIPPath

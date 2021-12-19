@@ -11,8 +11,11 @@
 */
 
 import styles from "./MIPPlan.module.scss"
+import { useContext } from "react"
 import { Disclosure } from "@headlessui/react"
+
 import { mipConcatenate } from "../../lib/MIPUtility"
+import MIPPath from "./MIPPath"
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -21,7 +24,11 @@ import { mipConcatenate } from "../../lib/MIPUtility"
  * @param {Boolean} displayHeader true se bisogna mostrare i dati riassuntivi del piano
  * @returns il componente React con i risultati del piano
  */
-function MIPPlanPanel({ plan, displayHeader }) {
+function MIPPlanPanel({ displayHeader }) {
+    const {
+        plan
+    } = useContext(MIPPath.Context)
+
     return (
         <div className={styles.plan_panel}>
             {plan?.error &&

@@ -10,31 +10,28 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import { useState } from 'react';
-
 import useTranslation from 'next-translate/useTranslation'
 
 import MIPPage from '../components/page/MIPPage';
 import MIPPath from '../components/path/MIPPath';
 import MIPPlan from '../components/path/MIPPlan'
-import { mipPathSearch } from '../components/path/MIPPathAPI'
 import MIPPlanMapPanel from '../components/path/MIPPlanMapPanel';
 
 export default function Planner(props) {
-  const { t, lang } = useTranslation("planner")
-  const [plan, setPlan] = useState(null)
-
+  const { t } = useTranslation("planner")
   return (
     <MIPPage.Page className="mip-traffic-page"
       pageTitle={t("PlanPageTitle")}
       title={t("PlanPageTitle")}
       titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
-      <section className="path-results">
-        <MIPPath.Controller title={t("PlanTitle")} plan={plan} setPlan={setPlan} />
-        <MIPPlan.Panel plan={plan} />
-      </section>
-      <MIPPlanMapPanel className="map-panel" plan={plan} />
+      <MIPPath.Controller title={t("PlanTitle")}>
+        <section className="path-results">
+          <MIPPath.DataForm className="mip-tl-rounded-corners"/>
+          <MIPPlan.Panel />
+        </section>
+        <MIPPlanMapPanel className="map-panel"/>
+      </MIPPath.Controller>
     </MIPPage.Page>
   )
 }

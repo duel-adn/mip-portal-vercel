@@ -10,11 +10,13 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import 'leaflet/dist/leaflet.css'
 import styles from "./MIPPlan.module.scss"
 
+import { useContext } from "react"
+
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-import { useIconMap } from '../../lib/MIPHooks'
+import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
 
 const departureIcon = L.icon({
@@ -51,25 +53,29 @@ function LocationLayer({ label, name, coords, icon }) {
 function PlanItineraryLayer({ itinerary }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
-        <GeoJSON key={leg.id} data={leg.geometry}
-          style={{
-            color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
-            weight: 6,
-          }}>
-          <Popup>
-            <MIPPlan.LegHeader leg={leg} />
-          </Popup>
-        </GeoJSON>
+      <GeoJSON key={leg.id} data={leg.geometry}
+        style={{
+          color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
+          weight: 6,
+        }}>
+        <Popup>
+          <MIPPlan.LegHeader leg={leg} />
+        </Popup>
+      </GeoJSON>
     )
   )
 }
 
-export default function MIPPathMap({ plan, activeId }) {
+export default function MIPPathMap() {
+  const {
+    plan, setMap
+  } = useContext(MIPPath.Context)
   return (
     <MapContainer
       tap={false}
       center={[45.052237, 7.515388]} zoom={9}
       scrollWheelZoom={false}
+      whenCreated={setMap}
       style={{ flex: "1 1 100%" }}
     >
       <TileLayer
