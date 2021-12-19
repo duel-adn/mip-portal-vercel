@@ -10,25 +10,27 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import Link from 'next/link';
 import styles from './MIPPage.module.scss'
 
-export default function MIP404Panel(props) {
+import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation'
 
+export default function MIP404Panel(props) {
+    const { t } = useTranslation("common")
     const className = `${props.className || ''} ${styles.page_404}`;
 
     return (
         <div className={className}>
             <img src='/images/not-found.svg' alt="donna con binocolo"/>
             <div className={styles.container}>
-                <h2>Ci dispiace, non abbiamo trovato quello che cercavi.</h2>
-                <p>Puoi provare queste pagine:</p>
+                <h2>{t("SorryNotFound")}</h2>
+                <p>{t("PageSuggestion")}</p>
                 <ul>
-                <li><Link href="/traffic"><a className={styles.link}>Vai alle news del Traffico in Tempo Reale</a></Link></li>
-                <li><Link href="/tpl" ><a className={styles.link}>Vai alle news del Trasporto Pubblico Locale</a></Link></li>
-                <li><Link href="/colli"><a className={styles.link}>Vai ai Colli Alpini del Piemonte</a></Link></li>
-                <p>oppure</p>
-                <li><Link href="/"><a className={styles.home_link}>Vai alla home page</a></Link></li>
+                <li><Link href="/traffic"><a className={styles.link}>{t("TrafficPage")}</a></Link></li>
+                <li><Link href="/planner" ><a className={styles.link}>{t("PlannerPage")}</a></Link></li>
+                <li><Link href="/colli"><a className={styles.link}>{t("PassesPage")}</a></Link></li>
+                <p>{t("Otherwise")}</p>
+                <li><Link href="/"><a className={styles.home_link}>{t("GoHome")}</a></Link></li>
                 </ul>
             </div>
         </div>
