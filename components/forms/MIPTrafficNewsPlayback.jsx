@@ -64,7 +64,7 @@ export default function MIPTrafficNewsPlayback(props) {
         </button>
         <audio id="notiziario" 
             onTimeUpdate={() => displayProgress()}>No audio
-            <source src="https://www.muoversinpiemonte.it/notiziario/notiziario.mp3"></source>
+            <source src="https://www.muoversinpiemonte.it/notiziario.mp3"></source>
             </audio>   
         <progress id="progress" className={`${styles.progress} mip-d-none`} />
         </div>
