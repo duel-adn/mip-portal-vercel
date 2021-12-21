@@ -64,7 +64,7 @@ function PlanItineraryLayer({ itinerary }) {
       //     <MIPPlan.LegHeader leg={leg} />
       //   </Popup>
       // </GeoJSON>
-      <Polyline positions={leg.rawGeometry}
+      <Polyline key={leg.id} positions={leg.rawGeometry}
         pathOptions={
           {
             color: leg.description?.route?.borderColor ?? '#222',
