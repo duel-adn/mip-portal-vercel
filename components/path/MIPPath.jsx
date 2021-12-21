@@ -11,7 +11,7 @@
 */
 import styles from './MIPPath.module.scss'
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef, useEffect } from 'react';
 import { RadioGroup } from '@headlessui/react'
 
 import useTranslation from 'next-translate/useTranslation'
@@ -120,6 +120,12 @@ function MIPPathDataForm({ className, title, responsive }) {
     )
 }
 
+// toISOString riporta la data in GMT, quindi bisogna aggiustare la data passata
+// come argomento per "ingannarlo"
+function toISODate(d) {
+    return d ? new Date(d - 60000 * d.getTimezoneOffset()).toISOString().slice(0, -8) : null
+}
+
 function AdditionalOptions() {
     const { t } = useTranslation("planner")
     const {
@@ -127,25 +133,19 @@ function AdditionalOptions() {
         startDate, setStartDate,
         bikeOptions, setBikeOptions,
     } = useContext(MIPPlannerContext)
-    const trySettingDate = d => {
-        try {
-            const date = new Date(d)
-            setStartDate(date)
-        } catch (e) {}
-    }
-    const adjustedDate = new Date(startDate)
-    // toISOString riporta la data in GMT, quindi bisogna aggiustare la data passata
-    // come argomento per "ingannarlo"
-    const isoDate = new Date(startDate - 60000 * adjustedDate.getTimezoneOffset()).toISOString().slice(0, -8)
+    const datePickerRef = useRef(null)
+    useEffect(() => {
+        datePickerRef?.current?.value = toISODate(new Date())
+    }, [datePickerRef.current])
     return (
         <div >
             {planMode == MIPPlanMode.transit &&
                 <div className={styles.additional_options}>
                     <label htmlFor="start-time-picker">{t("StartTime")}</label>
                     {startDate && 
-                        <input id="start-time-picker" type="datetime-local"
-                            min={isoDate} value={isoDate}
-                            onChange={e => trySettingDate(e.target.value)}
+                        <input ref={datePickerRef} id="start-time-picker" type="datetime-local"
+                            onChange={e => setStartDate
+                            (new Date(e.target.value))}
                         />
                     }
                     <button className={styles.date_toggle} type="button"
