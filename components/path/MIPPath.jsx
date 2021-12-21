@@ -36,8 +36,11 @@ function MIPPathController({ children }) {
     const [startDate, setStartDate] = useState(null)
     const [bikeOptions, setBikeOptions] = useState(MIPBikeOptions.safe)
     const [map, setMap] = useState(null)
+    const [selectedItinerary, setSelectedItinerary]=useState(null)
     const recalcPathPlan = async (lang) => {
         setPlanning(true)
+        setPlan(null)
+        setSelectedItinerary(null)
         try {
             const newPlan = await mipPathSearch(lang, startLocation.label, startLocation.coordinates,
                 endLocation.label, endLocation.coordinates,
@@ -59,6 +62,7 @@ function MIPPathController({ children }) {
         planMode, setPlanMode,
         startDate, setStartDate,
         bikeOptions, setBikeOptions,
+        selectedItinerary, setSelectedItinerary,
         recalcPathPlan,
         setMap
     }
