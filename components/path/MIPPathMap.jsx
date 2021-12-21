@@ -15,9 +15,10 @@ import styles from "./MIPPlan.module.scss"
 
 import { useContext } from "react"
 
-import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl, Polyline } from 'react-leaflet'
 import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
+import { position } from 'dom-helpers'
 
 const departureIcon = L.icon({
   iconUrl: '/path-icons/map-departure.svg',
@@ -50,18 +51,31 @@ function LocationLayer({ label, name, coords, icon }) {
     </Marker>
   )
 }
+
 function PlanItineraryLayer({ itinerary }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
-      <GeoJSON key={leg.id} data={leg.geometry}
-        style={{
-          color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
-          weight: 6,
-        }}>
+      // <GeoJSON key={leg.id} data={leg.geometry}
+      //   style={{
+      //     color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
+      //     weight: 6,
+      //   }}>
+      //   <Popup>
+      //     <MIPPlan.LegHeader leg={leg} />
+      //   </Popup>
+      // </GeoJSON>
+      <Polyline positions={leg.rawGeometry}
+        pathOptions={
+          {
+            color: leg.description?.route?.borderColor ?? '#222',
+            weight: 6
+          }
+        }
+      >
         <Popup>
           <MIPPlan.LegHeader leg={leg} />
         </Popup>
-      </GeoJSON>
+      </Polyline>
     )
   )
 }

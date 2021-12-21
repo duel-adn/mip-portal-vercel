@@ -74,7 +74,7 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates,
     const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
     const departOpts = startDate ? {
         'arriveBy': false,
-        'date': startDate.toISOString()
+        'date': new Date(startDate).toISOString()
     } : {}
     const bikeOpts = mode == MIPPlanMode.bicycle ? MIPBikeOptions[bikeOptions] : {}
     const response = await mipFetch(
