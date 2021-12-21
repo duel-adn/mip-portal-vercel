@@ -135,7 +135,9 @@ function AdditionalOptions() {
     } = useContext(MIPPlannerContext)
     const datePickerRef = useRef(null)
     useEffect(() => {
-        datePickerRef?.current?.value = toISODate(new Date())
+        if (datePickerRef.current) {
+            datePickerRef.current.value = toISODate(new Date())
+        }
     }, [datePickerRef.current])
     return (
         <div >
