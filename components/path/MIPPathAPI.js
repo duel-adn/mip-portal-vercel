@@ -21,6 +21,15 @@ export const MIPPlanMode = {
     walk: 'WALK'
 }
 
+/*
+    L'ordine è: triangleSafetyFactor, triangleSlopeFactor, triangleTimeFactor
+*/
+export const MIPBikeOptions = {
+    safe: { triangleSafetyFactor: .7, triangleSlopeFacto: .2,triangleTimeFactor: .1 },
+    easy: { triangleSafetyFactor: .4, triangleSlopeFacto: .5,triangleTimeFactor: .1 },
+    fast: { triangleSafetyFactor: .3, triangleSlopeFacto: .1,triangleTimeFactor: .6 },
+}
+
 /**
  * Interroga la API per l'auto completion degli indirizzi e ritorna 
  * un array di indirizzi coerente con la stringa di ricerca.
@@ -55,12 +64,19 @@ export async function mipPathAutocomplete(lang, searchString) {
     return []
 }
 
-export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocation, toCoordinates, mode, intermediateStops) {
+export async function mipPathSearch(lang, fromLocation, fromCoordinates, 
+    toLocation, toCoordinates, 
+    mode, startDate, bikeOptions, 
+    intermediateStops) {
     const fromLocationString = fromLocation.toLowerCase()
     const fromPlace = `${fromLocationString}::${fromCoordinates[1]},${fromCoordinates[0]}`
     const toLocationString = toLocation.toLowerCase()
     const toPlace = `${toLocationString}::${toCoordinates[1]},${toCoordinates[0]}`
-    const dateTime = new Date(Date.now() + 5 * 60000)
+    const departOpts = startDate ? {
+        'arriveBy': false,
+        'date': startDate.toISOString()
+    } : {}
+    const bikeOpts = mode == MIPPlanMode.bicycle ? MIPBikeOptions[bikeOptions] : {}
     const response = await mipFetch(
         '/api/plan', {
         'fromPlace': encodeURI(fromPlace.replace(' ', '+')),
@@ -68,6 +84,8 @@ export async function mipPathSearch(lang, fromLocation, fromCoordinates, toLocat
         'mode': encodeURI(mode || 'CAR'),
         'maxWalkDistance': 2000,
         'locale': lang,
+        ...departOpts,
+        ...bikeOpts,
         'showIntermediateStops': intermediateStops ?? false
     })
 

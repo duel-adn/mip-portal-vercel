@@ -14,11 +14,14 @@
         "bicycle": "bicicletta",
         "walk": "a piedi"
     },
-    "StartTime": "Partenza il",
-    "BikePathType": "Tipo di percorso",
-    "BikePathTypeSafe": "Più sicuro",
-    "BikePathTypeEasy": "Più facile",
-    "BikePathTypeFast": "Più veloce",
+    "StartTime": "Partenza",
+    "Now": "Ora",
+    "BikePathTypeTitle": "Tipo di percorso",
+    "BikePathType" : {
+        "safe": "Più sicuro",
+        "easy": "Più facile",
+        "fast": "Più veloce"
+    },
     "Loading": "Ricerca...",
     "Submit": "Calcola",
     "GoBack": "indietro"

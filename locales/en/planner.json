@@ -15,10 +15,13 @@
         "walk": "walk"
     },
     "StartTime": "Departure",
-    "BikePathType": "Path type",
-    "BikePathTypeSafe": "Safer",
-    "BikePathTypeEasy": "Easier",
-    "BikePathTypeFast": "Faster",
+    "Now": "Now",
+    "BikePathTypeTitle": "Path type",
+    "BikePathType" : {
+        "safe": "Safe",
+        "easy": "Easy",
+        "fast": "Fast"
+    },
     "Loading": "Searching...",
     "Submit": "Plan",
     "GoBack": "back"

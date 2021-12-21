@@ -152,15 +152,36 @@ $input-row: 2;
     .additional_options {
         display: flex;
         //width: 100%;
-        justify-content: space-between;
+        //justify-content: space-between;
         align-items: center;
         margin-top: 1rem;
-
+        label {
+            margin-right: .5rem;
+        }
         input,
         select {
             flex-grow: 1;
             margin-left: 1rem;
+            margin-right: 1rem;
             height: auto;
+            background-color: $mip-blue-background;
+            color: $mip-light-color;
+            accent-color: $mip-light-color;
+            border-bottom: 1px solid $mip-light-color;
+            font-size: .875rem;
+        }
+
+        .date_toggle {
+            padding: .25em .5em;
+            background-color: $mip-light-background;
+            color: $mip-blue-color;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 10%;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
