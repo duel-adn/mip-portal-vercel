@@ -127,6 +127,12 @@ function AdditionalOptions() {
         startDate, setStartDate,
         bikeOptions, setBikeOptions,
     } = useContext(MIPPlannerContext)
+    const trySettingDate = d => {
+        try {
+            const date = new Date(d)
+            setStartDate(date)
+        } catch (e) {}
+    }
     const adjustedDate = new Date(startDate)
     // toISOString riporta la data in GMT, quindi bisogna aggiustare la data passata
     // come argomento per "ingannarlo"
@@ -139,8 +145,7 @@ function AdditionalOptions() {
                     {startDate && 
                         <input id="start-time-picker" type="datetime-local"
                             min={isoDate} value={isoDate}
-                            onChange={e => setStartDate
-                            (new Date(e.target.value))}
+                            onChange={e => trySettingDate(e.target.value)}
                         />
                     }
                     <button className={styles.date_toggle} type="button"
