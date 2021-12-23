@@ -41,7 +41,7 @@ export default function MIPSecondaryHeader(props) {
     function setLocale(locale) {
         console.log('Setting locale to ' + locale)
         document.cookie = `NEXT_LOCALE=${locale}; path=/`
-        router.push(router.pathname, router.saPath, { locale })
+        router.push(router.pathname, router.asPath, { locale })
     }
 
     return (

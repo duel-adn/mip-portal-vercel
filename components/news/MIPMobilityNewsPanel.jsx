@@ -25,10 +25,10 @@ export default function MIPMobilityNewsPanel(props) {
                 <div className={styles.public_transport_card} key={data.id}>
                     <div className={`mip-tag mip-bg-blue ${styles.tag}`}>News</div>
                     <h3 className={styles.title}>{data.title}</h3>
-                    <p className={styles.content}>{data.description.length > 200 ? data.description.substring(0, 197) + "..." : data.description}</p>
+                    <div className={styles.content} dangerouslySetInnerHTML={{__html: data.description}}></div>
                     <div className={styles.footer}>
-                        <div>{showDate(data.validitystart)}</div>
-                        <Link href="/article"><a>Leggi tutto</a></Link>
+                        <div>{data.validitystart + (data.validityend ? ` - ${data.validityend}` : '')}</div>
+                        {/* <Link href="/article"><a>Leggi tutto</a></Link> */}
                     </div>
                 </div>
             )}

@@ -25,11 +25,18 @@
     }
 
     .content {
-        word-break: break-all;
         padding: .75rem 0;
+        height: fit-content;
+        max-height: 5rem;
+        margin-bottom: .75rem;
         font-size: .75rem;
         line-height: 1.125rem;
         color: $mip-gray-text-color;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        a {
+            color: $mip-blue-color;
+        }
     }
 
     .footer {
@@ -115,4 +122,27 @@
             margin-bottom: 1em;
         }
     }
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: .5rem;
+        color: $mip-gray-text-color;
+        font-size: .75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        .expander {
+            @include mip-right-icon('chevron-down', 2rem);
+            font-size: .875rem;
+            font-weight: 600;
+        }
+
+        a {
+            @include mip-right-icon('chevron-right', 2rem);
+            font-size: .875rem;
+            font-weight: 600;
+            color: $mip-accent-color;
+        }
+    }
+
 }

@@ -13,6 +13,7 @@
 import styles from "./MIPPlan.module.scss"
 import { useContext } from "react"
 import { Disclosure } from "@headlessui/react"
+import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate } from "../../lib/MIPUtility"
 import MIPPath from "./MIPPath"

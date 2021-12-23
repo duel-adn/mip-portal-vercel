@@ -37,6 +37,11 @@ function MIPPathController({ children }) {
     const [bikeOptions, setBikeOptions] = useState(MIPBikeOptions.safe)
     const [map, setMap] = useState(null)
     const [selectedItinerary, setSelectedItinerary]=useState(null)
+    const swapLocations = () => {
+        const temp = startLocation
+        setStartLocation(endLocation)
+        setEndLocation(temp)
+    }
     const recalcPathPlan = async (lang) => {
         setPlanning(true)
         setPlan(null)
@@ -63,7 +68,7 @@ function MIPPathController({ children }) {
         startDate, setStartDate,
         bikeOptions, setBikeOptions,
         selectedItinerary, setSelectedItinerary,
-        recalcPathPlan,
+        swapLocations, recalcPathPlan,
         setMap
     }
     return (
@@ -78,7 +83,7 @@ function MIPPathDataForm({ className, title, responsive }) {
         startLocation, setStartLocation,
         endLocation, setEndLocation,
         planMode, setPlanMode,
-        planning, recalcPathPlan
+        planning, swapLocations, recalcPathPlan
     } = useContext(MIPPlannerContext)
     const { t, lang } = useTranslation("planner")
     function onPathSearch(event) {
@@ -102,16 +107,17 @@ function MIPPathDataForm({ className, title, responsive }) {
                 <h3 className={styles.title}>{title}</h3>
             }
             <div className={styles.endpoint_data_container}>
-                <MIPAddressAutocompleteInput className={styles.input}
+                <MIPAddressAutocompleteInput className={styles.input} 
+                    searchString={startLocation?.label} setSearchString={setStartLocation}
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} />
-                <MIPAddressAutocompleteInput className={styles.input}
+                <MIPAddressAutocompleteInput className={styles.input} initialString={endLocation?.label}
                     icon='/icons/path-dest.svg'
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setEndLocation} />
                 <div className={styles.input_separator} />
-                <button className={styles.swap_button} />
+                <button type="button" onClick={swapLocations} className={styles.swap_button} aria-label="scambia" />
             </div>
             <MIPPathOptions planMode={planMode} setPlanMode={setPlanMode} />
             {!responsive &&
@@ -191,7 +197,7 @@ function MIPPathOptions({ planMode, setPlanMode }) {
                             active ? styles.active : '',
                             checked ? styles.checked : '')
                         }>
-                        <img className={styles.icon}
+                        <img className={styles.icon} aria-hidden="true"
                             src={`/path-icons/mode-${key}.svg`} alt={MIPPlanMode[key]} />
                         <RadioGroup.Label className={styles.radio_label}>{t("ModeLabel." + key)}</RadioGroup.Label>
                     </RadioGroup.Option>
