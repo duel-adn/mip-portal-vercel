@@ -26,19 +26,5 @@ export async function fetchPassData({locale}) {
             longitude: extractCoords(rawPass.Coordinate)[1]
         }})
     
-    return passData.sort((p1, p2) => {
-        let result = 0
-        if (p1.state) {
-            if (p2.state) {
-                result = p1.name.localeCompare(p2.name)
-            } else {
-                result = -11
-            }
-        } else if (p2.state) {
-            result = 1
-        } else {
-            result = p1.name.localeCompare(p2.name)
-        }
-        return result
-    })
+    return passData.sort((p1, p2) => p1.name.localeCompare(p2.name))
 }
