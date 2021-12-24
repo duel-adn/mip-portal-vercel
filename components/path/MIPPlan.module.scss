@@ -164,6 +164,11 @@ $plan-time-col-width: 3rem;
     text-align: start;
 }
 
+.leg_panel {
+    overflow: hidden;
+    width: 100%;
+}
+
 .leg_header {
     @extend .plan_cell_base;
     display: grid;
@@ -213,10 +218,10 @@ $plan-time-col-width: 3rem;
     @extend .plan_cell_base;
     display: grid;
     grid-template-columns: $plan-icon-col-width auto 1fr;
-    margin-left: $plan-icon-col-width;
+    padding-left: $plan-icon-col-width;
     border: none;
     font-size: .9375rem;
-
+    width: 100%;
     .instruction {
         grid-column:  2 / -1;
         padding-bottom: 1rem;

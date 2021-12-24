@@ -215,7 +215,7 @@ function MIPItineraryDetailsPanel({ className, itinerary }) {
 function MIPLegPanel({ fixed, leg }) {
     if (fixed) {
         return (
-            <div>
+            <div className={styles.leg_panel}>
                 <MIPLegDescriptionPanel leg={leg} fixed={fixed} />
                 {leg.steps && leg.steps.map((step, idx) =>
                     <MIPStepPanel key={step.id ?? idx} step={step} />
