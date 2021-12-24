@@ -38,9 +38,9 @@ function MIPPathController({ children }) {
     const [map, setMap] = useState(null)
     const [selectedItinerary, setSelectedItinerary]=useState(null)
     const swapLocations = () => {
-        const temp = startLocation
-        setStartLocation(endLocation)
-        setEndLocation(temp)
+        // const temp = startLocation
+        // setStartLocation(endLocation)
+        // setEndLocation(temp)
     }
     const recalcPathPlan = async (lang) => {
         setPlanning(true)
@@ -112,7 +112,8 @@ function MIPPathDataForm({ className, title, responsive }) {
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} />
-                <MIPAddressAutocompleteInput className={styles.input} initialString={endLocation?.label}
+                <MIPAddressAutocompleteInput className={styles.input}
+                    searchString={endLocation?.label} setSearchString={setEndLocation}
                     icon='/icons/path-dest.svg'
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setEndLocation} />
