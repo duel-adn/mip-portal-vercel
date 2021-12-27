@@ -23,7 +23,6 @@ export async function mipFetchPublicTransportData(context) {
         const res = await fetch(process.env.MIP_TPL_URL)
         const news = await res.json()
         console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
-        console.log(news)
         const mappedNews = news.map(({ validitystart, validityend, ...other }) => {
             return {
                 validitystart: validitystart ? translateLocalDateTime(context.locale, new Date(validitystart)) : null,
