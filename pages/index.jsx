@@ -40,12 +40,13 @@ export default function Home(props) {
         <MIPPath.DataForm className="mip-rounded-corners path-panel"
           title={t("PlannerTitle")} responsive />
       </MIPPath.Controller>
-      <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
-        title={t("RealTimeShort")}
-        subtitle={t("DiscoverRealTime")}
-        trafficEventData={props.trafficEventData} compact={true} />
-      <MIPTrafficMapPanel className="map-panel"
-        trafficEventData={props.trafficEventData} />
+      <MIPTraffic.Controller eventData={props.trafficEventData}>
+        <MIPTraffic.Panel className="event-panel mip-tl-rounded-corners" headerClass="mip-bg-accent"
+          title={t("RealTimeShort")}
+          subtitle={t("DiscoverRealTime")} compact={true} />
+        <MIPTrafficMapPanel className="map-panel"
+          trafficEventData={props.trafficEventData} />
+      </MIPTraffic.Controller>
       <MIPPublicTransportPanel className="tpl-panel"
         title={t("PTNewsTitle")}
         publicTransportData={props.publicTransportData} />

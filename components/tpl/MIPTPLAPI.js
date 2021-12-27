@@ -43,7 +43,6 @@ export async function mipFetchPublicTransportArticle(locale, newsId, maxNews) {
         const res = await fetch(process.env.MIP_TPL_URL)
         const news = await res.json()
         console.log(`${process.env.MIP_TPL_URL} (${news.length})`)
-        console.log(news)
         const intId = parseInt(newsId)
         const mappedNews = news.map(({ id, validitystart, validityend, ...other }) => {
             return {
@@ -61,7 +60,6 @@ export async function mipFetchPublicTransportArticle(locale, newsId, maxNews) {
             article: filteredNews[0],
             others: others
         }
-        console.log(validNews)
         return validNews
     } catch (exc) {
         console.log(exc)

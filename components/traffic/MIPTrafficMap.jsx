@@ -10,11 +10,11 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import MIPTraffic from './MIPTraffic';
-import { useEffect, useMemo } from 'react';
+import { useContext } from 'react'
+import { MapContainer, Marker, Popup, TileLayer, WMSTileLayer } from 'react-leaflet'
 import { useIconMap } from '../../lib/MIPHooks'
+import MIPTraffic from './MIPTraffic'
 
 function createIcon(path) {
   const icon =
@@ -28,7 +28,7 @@ function createIcon(path) {
   //       shadowAnchor: null,
   //       iconSize: new L.Point(60, 75),
   //       className: 'leaflet-div-icon'
-  //   });
+  //   })
   //   var myIcon = L.icon({
       iconUrl: path,
       iconSize: [46, 47],
@@ -43,20 +43,24 @@ function createIcon(path) {
 
 export default function MIPTrafficMap(props) {
   const getMapIcon = useIconMap('/traffic-icons/pin', createIcon)
+  const { setMap, selectedEvent, trafficEventData } = useContext(MIPTraffic.Context)
   return (
     <MapContainer 
       tap={false}
       center={[45.052237, 7.515388]} zoom={9} 
       scrollWheelZoom={false} 
       style={{flex: "1 1 100%"}}
+      whenCreated={setMap}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}map.5t.torino.it/light-new/{z}/{x}/{y}"
       />
       {
-        props.trafficEventData && props.trafficEventData.map(evt => 
-          <Marker key={evt.id} position={[evt.lat, evt.lng]} icon={getMapIcon(evt.style)}>
+        trafficEventData && trafficEventData.map(evt => 
+          <Marker key={evt.id} position={[evt.lat, evt.lng]} 
+            icon={getMapIcon(evt.style, evt.id === selectedEvent?.id)} 
+            zIndexOffset={evt.id == selectedEvent?.id ? 100: 0}>
           <Popup>
             <MIPTraffic.EventCard event={evt} />
           </Popup>

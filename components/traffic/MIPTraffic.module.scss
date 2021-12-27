@@ -16,14 +16,14 @@
 // Stile per MIPTraffic.EventCard ------------------------------
 
 .traffic_event_card {
+    background-size: 31px 22px;
+    background-repeat: no-repeat;
+    background-position: 0 .3rem;
 
     .card_title {
         padding-left: 2.3rem;
         font-size: 1rem;
         font-weight: bold;
-        background-size: 31px 22px;
-        background-position: left;
-        background-repeat: no-repeat;
     }
 
     .container {
@@ -125,7 +125,9 @@
         padding: 0 1rem;
     }
 
-    .list_item:hover {
+    .event_selected,
+    .list_item:hover,
+    .list_item:focus {
         background-color: $mip-gray-background;
     }
 }

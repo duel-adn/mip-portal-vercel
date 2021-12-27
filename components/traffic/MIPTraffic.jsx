@@ -11,12 +11,63 @@
 */
 
 import styles from "./MIPTraffic.module.scss"
-import { useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState , createContext, useContext, useEffect} from "react"
 
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate, debounce } from "../../lib/MIPUtility"
 import MIPForms from '../forms/MIPForms';
+
+const initialContext = {
+    eventData: null,
+    map: null
+}
+
+const MIPTrafficContext = createContext(initialContext)
+
+function MIPTrafficControlller({eventData, children}) {
+    const [trafficEventData, setTrafficEventData] = useState(eventData)
+    const [map, setMap] = useState(null)
+    const [selectedEvent, setSelectedEvent] = useState(null)
+    useEffect(() => {
+        console.log(selectedEvent?.id)
+        if (selectedEvent?.id && map) {
+            map.panTo([selectedEvent.lat, selectedEvent.lng])
+        }
+    }, [selectedEvent])
+    const context = {
+        trafficEventData,
+        map, setMap,
+        setSelectedEvent, selectedEvent
+    }
+    return (
+        <MIPTrafficContext.Provider value={context}>
+            {children}
+        </MIPTrafficContext.Provider>
+    )
+}
+
+function MIPTrafficPanel({ className, headerClass, listClass, searchable, searchPlaceholder, title, subtitle, compact }) {
+    const finalClassName = mipConcatenate(className, styles.traffic_panel)
+    const finalHeaderClass = mipConcatenate(headerClass, styles.header)
+    const finalListClass = mipConcatenate(listClass, styles.event_list)
+    const { trafficEventData } = useContext(MIPTrafficContext)
+
+    return (
+        <div className={finalClassName}>
+            <div className={finalHeaderClass}>
+                <h3 className={styles.title}>{title}</h3>
+                {subtitle &&
+                    <h4 className={styles.subtitle}>{subtitle}</h4>
+                }
+            </div>
+            <MIPTrafficEventCardList className={finalListClass} compact={compact}
+                searchable={searchable} searchPlaceholder={searchPlaceholder}
+                trafficEventData={trafficEventData}
+            />
+        </div>
+    )
+}
 
 /**
  * Card che mostra un singolo evento di traffico
@@ -29,9 +80,8 @@ function MIPTrafficEventCard({ className, compact, event }) {
     const finalClassName = mipConcatenate(className, styles.traffic_event_card)
     const isCompact = compact === undefined ? false : compact
     return ((typeof event === undefined) || (event === null) ? null :
-        <div className={finalClassName}>
-            <h5 className={styles.card_title}
-                style={{ 'backgroundImage': `url(/traffic-icons/ico-${event.style}.svg)` }}>{event.road}</h5>
+        <div className={finalClassName} style={{ 'backgroundImage': `url(/traffic-icons/ico-${event.style}.svg)`}}>
+            <h5 className={styles.card_title}>{event.road}</h5>
             <div className={styles.container}>
                 {isCompact ?
                     <>
@@ -96,6 +146,7 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
     const onInputChange = debounce((event) => setFilterText(event.target.value.toLowerCase()))
     const onInputKey = (event) => event.key === 'Escape' && clearInput()
     const clearInput = () => { inputElementRef.current.value = ''; setFilterText(''); inputElementRef.current.focus() }
+    const { selectedEvent, setSelectedEvent } = useContext(MIPTrafficContext)
     return (
         <div className={finalClassName}>
             {searchable &&
@@ -111,32 +162,13 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
             <div className={styles.list_container}>
                 <ul >
                     {filteredEvents && filteredEvents.map && filteredEvents.map(event =>
-                        <li key={event.id} className={styles.list_item}>
-                            <MIPTrafficEventCard compact={compact} event={event} />
+                        <li key={event.id} className={mipConcatenate(styles.list_item, event.id === selectedEvent?.id ? styles.event_selected : null)} 
+                            onClick={() => setSelectedEvent(event)}>
+                            <MIPTrafficEventCard compact={compact} event={event}/>
                         </li>
                     )}
                 </ul>
             </div>
-        </div>
-    )
-}
-
-function MIPTrafficPanel({ className, headerClass, listClass, searchable, searchPlaceholder, title, subtitle, compact, trafficEventData }) {
-    const finalClassName = mipConcatenate(className, styles.traffic_panel)
-    const finalHeaderClass = mipConcatenate(headerClass, styles.header)
-    const finalListClass = mipConcatenate(listClass, styles.event_list)
-    return (
-        <div className={finalClassName}>
-            <div className={finalHeaderClass}>
-                <h3 className={styles.title}>{title}</h3>
-                {subtitle &&
-                    <h4 className={styles.subtitle}>{subtitle}</h4>
-                }
-            </div>
-            <MIPTrafficEventCardList className={finalListClass} compact={compact}
-                searchable={searchable} searchPlaceholder={searchPlaceholder}
-                trafficEventData={trafficEventData}
-            />
         </div>
     )
 }
@@ -174,6 +206,8 @@ function MIPTrafficLegend({ className }) {
  * Elemento esportato
  */
 const MIPTraffic = {
+    Context: MIPTrafficContext,
+    Controller: MIPTrafficControlller,
     EventCard: MIPTrafficEventCard,
     EventCardList: MIPTrafficEventCardList,
     Legend: MIPTrafficLegend,
