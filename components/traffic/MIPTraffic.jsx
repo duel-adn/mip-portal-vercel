@@ -30,7 +30,6 @@ function MIPTrafficControlller({eventData, children}) {
     const [map, setMap] = useState(null)
     const [selectedEvent, setSelectedEvent] = useState(null)
     useEffect(() => {
-        console.log(selectedEvent?.id)
         if (selectedEvent?.id && map) {
             map.panTo([selectedEvent.lat, selectedEvent.lng])
         }
