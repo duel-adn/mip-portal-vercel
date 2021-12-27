@@ -39,7 +39,7 @@ export default function Passes({passData}) {
       pageTitle={t("PassesTitleShort")}
       title={t("PassesTitle")}
         titleClassName="mip-bg-accent"
-        breadcrumb='Indietro'>
+        breadcrumb={t("GoBack")}>
           <MIPPass.Panel 
             headerClassName="mip-tl-rounded-corners mip-bg-accent"
             contentClassName="mip-bl-rounded-corners mip-bg-light"
