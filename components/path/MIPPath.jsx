@@ -38,9 +38,9 @@ function MIPPathController({ children }) {
     const [map, setMap] = useState(null)
     const [selectedItinerary, setSelectedItinerary]=useState(null)
     const swapLocations = () => {
-        // const temp = startLocation
-        // setStartLocation(endLocation)
-        // setEndLocation(temp)
+        const temp = startLocation
+        setStartLocation(endLocation)
+        setEndLocation(temp)
     }
     const recalcPathPlan = async (lang) => {
         setPlanning(true)
@@ -108,15 +108,15 @@ function MIPPathDataForm({ className, title, responsive }) {
             }
             <div className={styles.endpoint_data_container}>
                 <MIPAddressAutocompleteInput className={styles.input} 
-                    searchString={startLocation?.label} setSearchString={setStartLocation}
+                    searchString={startLocation?.label} 
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
-                    onChange={setStartLocation} />
+                    onChange={setStartLocation} value={startLocation} />
                 <MIPAddressAutocompleteInput className={styles.input}
-                    searchString={endLocation?.label} setSearchString={setEndLocation}
+                    searchString={endLocation?.label} 
                     icon='/icons/path-dest.svg'
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
-                    onChange={setEndLocation} />
+                    onChange={setEndLocation} value={endLocation}  />
                 <div className={styles.input_separator} />
                 <button type="button" onClick={swapLocations} className={styles.swap_button} aria-label="scambia" />
             </div>

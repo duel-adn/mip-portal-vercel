@@ -87,9 +87,9 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ className, placeholder, icon, onChange, loadingMsg, initialString }) {
+export default function MIPAddressAutocompleteInput({ className, placeholder, icon, value, onChange, loadingMsg }) {
     const { t } = useTranslation("planner")
-    const [searchString, setSearchString] = useState(initialString)
+    const [searchString, setSearchString] = useState(null)
 
     const handleInputChange = (value) => setSearchString(value)
     const handleSelect = (location) => {
@@ -119,7 +119,7 @@ export default function MIPAddressAutocompleteInput({ className, placeholder, ic
                 isClearable
                 onInputChange={handleInputChange}
                 onChange={handleSelect}
-                value={initialString}
+                value={value}
                 noOptionsMessage={() => searchString?.length < 3 ? 
                     t("SupplyAddress") : t("NoAddress")}
                 menuShouldScrollIntoView={true}
