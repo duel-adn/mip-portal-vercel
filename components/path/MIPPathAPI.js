@@ -25,9 +25,9 @@ export const MIPPlanMode = {
     L'ordine è: triangleSafetyFactor, triangleSlopeFactor, triangleTimeFactor
 */
 export const MIPBikeOptions = {
-    safe: { triangleSafetyFactor: .7, triangleSlopeFactor: .2,triangleTimeFactor: .1 },
-    easy: { triangleSafetyFactor: .4, triangleSlopeFactor: .5,triangleTimeFactor: .1 },
-    fast: { triangleSafetyFactor: .3, triangleSlopeFactor: .1,triangleTimeFactor: .6 },
+    safe: { optimize: "TRIANGLE", triangleSafetyFactor: .7, triangleSlopeFactor: .2,triangleTimeFactor: .1 },
+    easy: { optimize: "TRIANGLE", triangleSafetyFactor: .4, triangleSlopeFactor: .5,triangleTimeFactor: .1 },
+    fast: { optimize: "TRIANGLE", triangleSafetyFactor: .3, triangleSlopeFactor: .1,triangleTimeFactor: .6 },
 }
 
 /**
