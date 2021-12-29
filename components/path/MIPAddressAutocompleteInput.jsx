@@ -16,7 +16,7 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation'
 
 import AsyncSelect from 'react-select/async';
-import { mipPathAutocomplete } from './MIPPathAPI';
+import { mipPathAutocomplete } from '../../lib/MIPPathAPI';
 import { mipConcatenate } from '../../lib/MIPUtility';
 
 /**
@@ -87,7 +87,7 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ className, placeholder, icon, value, onChange, loadingMsg }) {
+export default function MIPAddressAutocompleteInput({ className, placeholder, icon, value, onChange, loadingMsg, useCurrentPosition }) {
     const { t } = useTranslation("planner")
     const [searchString, setSearchString] = useState(null)
 
@@ -105,7 +105,7 @@ export default function MIPAddressAutocompleteInput({ className, placeholder, ic
             console.log('error' + rawData)
             return
         }
-        callback(rawData)
+        callback(rawData.locations)
     }
     return (
         <div className={mipConcatenate(className, "mip-flex-col")}>
@@ -124,6 +124,9 @@ export default function MIPAddressAutocompleteInput({ className, placeholder, ic
                     t("SupplyAddress") : t("NoAddress")}
                 menuShouldScrollIntoView={true}
             />
+            <button type="button" aria-label="usa posizione corrente" onClick={() => useCurrentPosition ? useCurrentPosition() : null}>
+                <img src="/path-icons/location.svg" alt="usa posizione corrente"/>
+            </button>
         </div>
     )
 }

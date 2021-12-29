@@ -18,7 +18,6 @@ import { useContext } from "react"
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl, Polyline } from 'react-leaflet'
 import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
-import { position } from 'dom-helpers'
 
 const departureIcon = L.icon({
   iconUrl: '/path-icons/map-departure.svg',
@@ -41,7 +40,7 @@ function LegPopup({ leg }) {
 
 function LocationLayer({ label, name, coords, icon }) {
   return (
-    <Marker position={coords} icon={icon}>
+    <Marker position={coords} icon={icon} draggable={true}>
       <Popup>
         <div className={styles.location_popup}>
           <div className={styles.title}>{label}</div>

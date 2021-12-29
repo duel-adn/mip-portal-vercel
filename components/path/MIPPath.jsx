@@ -18,7 +18,7 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
 import { mipConcatenate } from '../../lib/MIPUtility';
-import { MIPPlanMode, MIPBikeOptions, mipPathSearch } from './MIPPathAPI';
+import { MIPPlanMode, MIPBikeOptions, mipPathSearch } from '../../lib/MIPPathAPI';
 import MIPForms from '../forms/MIPForms';
 
 const initialContext = {
@@ -78,6 +78,32 @@ function MIPPathController({ children }) {
     )
 }
 
+function getCurrentPosition(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((p) => alert(JSON.stringify(p)), showError)
+    } else {
+        alert("No geolocation")
+    }
+}
+
+function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.")
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.")
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.")
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.")
+        break;
+    }
+  }
+
+
 function MIPPathDataForm({ className, title, responsive }) {
     const {
         startLocation, setStartLocation,
@@ -108,6 +134,7 @@ function MIPPathDataForm({ className, title, responsive }) {
             }
             <div className={styles.endpoint_data_container}>
                 <MIPAddressAutocompleteInput className={styles.input} 
+                    useCurrentPosition={getCurrentPosition}
                     searchString={startLocation?.label} 
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}

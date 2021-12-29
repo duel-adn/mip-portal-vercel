@@ -15,7 +15,7 @@ import { useMemo, useRef, useState , createContext, useContext, useEffect} from 
 
 import useTranslation from 'next-translate/useTranslation'
 
-import { mipConcatenate, debounce } from "../../lib/MIPUtility"
+import { mipConcatenate, mipDebounce } from "../../lib/MIPUtility"
 import MIPForms from '../forms/MIPForms';
 
 const initialContext = {
@@ -142,7 +142,7 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
     const inputElementRef = useRef(null)
     const [filterText, setFilterText] = useState('')
     const filteredEvents = useMemo(() => filterEvents(trafficEventData, filterText), [trafficEventData, filterText])
-    const onInputChange = debounce((event) => setFilterText(event.target.value.toLowerCase()))
+    const onInputChange = mipDebounce((event) => setFilterText(event.target.value.toLowerCase()))
     const onInputKey = (event) => event.key === 'Escape' && clearInput()
     const clearInput = () => { inputElementRef.current.value = ''; setFilterText(''); inputElementRef.current.focus() }
     const { selectedEvent, setSelectedEvent } = useContext(MIPTrafficContext)
