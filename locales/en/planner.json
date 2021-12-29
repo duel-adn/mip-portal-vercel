@@ -25,7 +25,11 @@
     "Loading": "Searching...",
     "Submit": "Plan",
     "GoBack": "back",
-
+    "From": "from",
+    "To": "to",
+    "Departure": "Departure",
+    "Arrival": "Arrival",
+    "NoNameRoad": "strada senza nome",
     "PlannerError": {
         "PLAN_OK": "Nessun errore",
         "SYSTEM_ERROR": "Errore di sistema",

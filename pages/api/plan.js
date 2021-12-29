@@ -10,21 +10,6 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import { convertPlanResponse } from "../../lib/MIPOTPPlanConverter"
-import { translatePlanResponse } from "../../lib/MIPPlanTranslator"
-
-function decodeResponse(response) {
-    if (!response.ok) {
-        return {
-            fetchError: {
-                statusCode: response.status,
-                errorMessage: response.statusText
-            }
-        }
-    }
-    return response.json();
-}
-
 export default async function planHandler(req, res) {
     const query = req.url.slice(req.url.indexOf('?'))
     const completeUrl = `${process.env.NEXT_PUBLIC_MIP_PATH_PLAN_URL}${query}`

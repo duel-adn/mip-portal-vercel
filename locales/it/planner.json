@@ -24,5 +24,10 @@
     },
     "Loading": "Ricerca...",
     "Submit": "Calcola",
-    "GoBack": "indietro"
+    "GoBack": "indietro",
+    "From": "da:",
+    "To": "a:",
+    "Departure": "Partenza",
+    "Arrival": "Arrivo",
+    "NoNameRoad": "strada senza nome"
 }
