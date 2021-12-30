@@ -10,7 +10,9 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+import 'react-toastify/dist/ReactToastify.css';
 import Head from "next/head"
+import { ToastContainer } from 'react-toastify';
 import { mipConcatenate } from "../../lib/MIPUtility"
 import MIPPageFooter from '../footer/MIPPageFooter'
 import MIPPageHeader from '../header/MIPResponsiveHeader'
@@ -26,19 +28,30 @@ import MIPPageHeader from '../header/MIPResponsiveHeader'
  * @param {*} children elementi interni, da visualizzare nel main
  * @returns 
  */
-function MIPPageTemplate({className, pageTitle, title, titleClassName, breadcrumb, children}) {
+function MIPPageTemplate({ className, pageTitle, title, titleClassName, breadcrumb, children }) {
     const finalClassName = mipConcatenate(className, "mip-page-section")
     return (
         <>
-        <MIPPageHead title={pageTitle} />
-        <div className="mip-page-container">
-            <MIPPageHeader className="mip-w-100" breadcrumb={breadcrumb}
-                title={title} titleClassName={titleClassName}/>
-            <main className={finalClassName}>
-                {children}
-            </main>
-            <MIPPageFooter className="mip-mt-auto mip-w-100"/>
-        </div>
+            <MIPPageHead title={pageTitle} />
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover
+            />
+            <div className="mip-page-container">
+                <MIPPageHeader className="mip-w-100" breadcrumb={breadcrumb}
+                    title={title} titleClassName={titleClassName} />
+                <main className={finalClassName}>
+                    {children}
+                </main>
+                <MIPPageFooter className="mip-mt-auto mip-w-100" />
+            </div>
         </>
     )
 }
@@ -48,12 +61,12 @@ function MIPPageTemplate({className, pageTitle, title, titleClassName, breadcrum
  * @param {String} title titolo della pagina
  * @returns 
  */
-function MIPPageHead({title}) {
+function MIPPageHead({ title }) {
     return (
-    <Head>
-        <title>{title || 'Muoversi in Piemonte'}</title>
-        <link rel="icon" href="/favicon.ico" />
-    </Head>
+        <Head>
+            <title>{title || 'Muoversi in Piemonte'}</title>
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
     )
 }
 

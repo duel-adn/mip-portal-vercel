@@ -12,9 +12,10 @@
 */
 
 import styles from './MIPPath.module.scss'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation'
+import { toast } from 'react-toastify';
 
 import AsyncSelect from 'react-select/async';
 import { mipGetUserPosition, mipPathAutocomplete } from '../../lib/MIPPlannerAPI';
@@ -91,6 +92,7 @@ const customStyles = {
 export default function MIPAddressAutocompleteInput({ id, className, placeholder, icon, value, onChange, loadingMsg, label }) {
     const { t, lang } = useTranslation("planner")
     const [searchString, setSearchString] = useState(null)
+    const toastId = useRef(null);
 
     const handleInputChange = (value) => setSearchString(value)
     const handleSelect = (location) => {
@@ -99,8 +101,15 @@ export default function MIPAddressAutocompleteInput({ id, className, placeholder
         }
     }
     const getCurrentPosition = () => {
+        toastId.current = toast(t("UserPosition"), { autoClose: false });
         mipGetUserPosition(lang, position => {
-            onChange(position.locations[0])
+            if (position.error) {
+                const message = t("PositionError." + position.error.errorCode)
+                toast.update(toastId.current, { type: toast.TYPE.ERROR, render: message, autoClose: 5000 })
+            } else {
+                toast.dismiss()
+                onChange(position.locations[0])
+            }
         })
     }
     const loadOptions = async (inputValue, callback) => {

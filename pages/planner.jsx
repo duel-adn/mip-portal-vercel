@@ -17,7 +17,7 @@ import MIPPath from '../components/path/MIPPath';
 import MIPPlan from '../components/path/MIPPlan'
 import MIPPlanMapPanel from '../components/path/MIPPlanMapPanel';
 
-export default function Planner(props) {
+export default function Planner({query}) {
   const { t } = useTranslation("planner")
   return (
     <MIPPage.Page className="mip-traffic-page"
@@ -25,7 +25,7 @@ export default function Planner(props) {
       title={t("PlanPageTitle")}
       titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
-      <MIPPath.Controller title={t("PlanTitle")}>
+      <MIPPath.Controller title={t("PlanTitle")} query={query}>
         <section className="path-results">
           <MIPPath.DataForm className="mip-tl-rounded-corners"/>
           <MIPPlan.Panel />
@@ -36,12 +36,10 @@ export default function Planner(props) {
   )
 }
 
-// export async function getServerSideProps(context) {
-//   const eventData = await mipFetchTrafficEventData(context)
-
-//   return {
-//     props: {
-//       eventData,
-//     },
-//   }
-// }
+export function getServerSideProps({ query }) {
+  return {
+    props: {
+      query: query
+    }
+  }
+}

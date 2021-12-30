@@ -36,7 +36,7 @@ export default function Home(props) {
         title="Allerta meteo Cuneo:
                   ANAS al lavoro per rimozione neve."
         tagTitle="Ultim'ora" height="300px" imageUrl="/images/home-hero.jpg" /> */}
-      <MIPPath.Controller>
+      <MIPPath.Controller url="/planner">
         <MIPPath.DataForm className="mip-rounded-corners path-panel"
           title={t("PlannerTitle")} responsive />
       </MIPPath.Controller>

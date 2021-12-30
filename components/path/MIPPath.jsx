@@ -12,13 +12,16 @@
 import styles from './MIPPath.module.scss'
 
 import { createContext, useContext, useState, useRef, useEffect } from 'react';
+import Router from 'next/router'
+
 import { RadioGroup } from '@headlessui/react'
+import { toast } from 'react-toastify';
 
 import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
-import { mipConcatenate } from '../../lib/MIPUtility';
-import { MIPPlanMode, MIPBikeOptions, mipPathSearch } from '../../lib/MIPPlannerAPI';
+import { mipCreateId, mipConcatenate } from '../../lib/MIPUtility';
+import { MIPPlanMode, MIPBikeOptions, mipPathSearch, mipPathSearchQuery } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
 
 const initialContext = {
@@ -27,16 +30,48 @@ const initialContext = {
 
 const MIPPlannerContext = createContext(initialContext)
 
-function MIPPathController({ children }) {
-    const [plan, setPlan] = useState(false)
+function parseLocation(loc) {
+    if (typeof loc !== 'string') {
+        return null
+    }
+    const components = loc.split("::")
+    if (components.length === 2) {
+        const name = decodeURI(components[0])
+        const coords = components[1].split(",")
+        if (coords.length === 2) {
+            const id = mipCreateId()
+            return {
+                id: id,
+                value: id,
+                label: name,
+                name: name,
+                coordinates: [Number(coords[1]), Number(coords[0])]
+            }
+        }
+    }
+    return null
+}
+
+function parseMode(mode) {
+    const newMode = mode ? Object.values(MIPPlanMode).filter(v => mode === v) : null
+
+    return newMode?.length ? newMode[0] : MIPPlanMode.transit
+}
+
+function MIPPathController({ children, query, url }) {
+    const { lang } = useTranslation("planner")
+    const initialStartLocation = parseLocation(query?.fromPlace)
+    const initialEndLocation = parseLocation(query?.toPlace)
+    const initialMode = parseMode(query?.mode)
+    const [plan, setPlan] = useState(null)
     const [planning, setPlanning] = useState(false)
-    const [startLocation, setStartLocation] = useState(null)
-    const [endLocation, setEndLocation] = useState(null)
-    const [planMode, setPlanMode] = useState(MIPPlanMode.transit)
+    const [startLocation, setStartLocation] = useState(initialStartLocation)
+    const [endLocation, setEndLocation] = useState(initialEndLocation)
+    const [planMode, setPlanMode] = useState(initialMode)
     const [startDate, setStartDate] = useState(null)
     const [bikeOptions, setBikeOptions] = useState(MIPBikeOptions.safe)
     const [map, setMap] = useState(null)
-    const [selectedItinerary, setSelectedItinerary]=useState(null)
+    const [selectedItinerary, setSelectedItinerary] = useState(null)
     const swapLocations = () => {
         const temp = startLocation
         setStartLocation(endLocation)
@@ -47,19 +82,32 @@ function MIPPathController({ children }) {
         setPlan(null)
         setSelectedItinerary(null)
         try {
-            const newPlan = await mipPathSearch(lang, startLocation.label, startLocation.coordinates,
-                endLocation.label, endLocation.coordinates,
-                planMode, planMode == MIPPlanMode.transit ? startDate : null,
-                bikeOptions, true)
-            console.log(newPlan)
-            setPlan(newPlan)
-            const newBounds = [[newPlan.mbr[0][1], newPlan.plan?.mbr[0][0]], [newPlan.plan?.mbr[1][1], newPlan.plan?.mbr[1][0]]]
-            map?.fitBounds(newPlan.mbr)
+            if (url) {
+                Router.push({
+                    pathname: url,
+                    query: mipPathSearchQuery(lang, startLocation.label, startLocation.coordinates,
+                        endLocation.label, endLocation.coordinates,
+                        planMode, planMode == MIPPlanMode.transit ? startDate : null,
+                        bikeOptions, true)
+                })
+            } else {
+                const newPlan = await mipPathSearch(lang, startLocation.label, startLocation.coordinates,
+                    endLocation.label, endLocation.coordinates,
+                    planMode, planMode == MIPPlanMode.transit ? startDate : null,
+                    bikeOptions, true)
+                console.log(newPlan)
+                setPlan(newPlan)
+            }
         } catch (exc) {
             console.log(exc)
         }
         setPlanning(false)
     }
+    useEffect(() => {
+        if (plan?.mbr && map) {
+            map?.fitBounds(plan.mbr)
+        }
+    }, plan)
     const context = {
         plan, planning,
         startLocation, setStartLocation,
@@ -71,6 +119,11 @@ function MIPPathController({ children }) {
         swapLocations, recalcPathPlan,
         setMap
     }
+    useEffect(() => {
+        if (initialStartLocation && initialEndLocation) {
+            recalcPathPlan(lang)
+        }
+    }, [])
     return (
         <MIPPlannerContext.Provider value={context}>
             {children}
@@ -90,10 +143,9 @@ function MIPPathDataForm({ className, title, responsive }) {
         event.preventDefault()
         event.stopPropagation()
         if (!startLocation) {
-            // TODO: improve 
-            alert(t("MissingStart"))
+            toast.error(t("MissingStart"), {toastId: "no-start-error"})
         } else if (!endLocation) {
-            alert(t("MissingEnd"))
+            toast.error(t("MissingEnd"), {toastId: "no-end-error"})
         } else {
             if (recalcPathPlan) {
                 recalcPathPlan(lang)
@@ -108,19 +160,19 @@ function MIPPathDataForm({ className, title, responsive }) {
             }
             <div className={styles.endpoint_data_container}>
                 <MIPAddressAutocompleteInput id="start-position"
-                    className={styles.input} 
+                    className={styles.input}
                     label={t("StartLabel")}
-                    searchString={startLocation?.label} 
+                    searchString={startLocation?.label}
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} value={startLocation} />
                 <MIPAddressAutocompleteInput id="start-position"
                     className={styles.input}
                     label={t("EndLabel")}
-                    searchString={endLocation?.label} 
+                    searchString={endLocation?.label}
                     icon='/icons/path-dest.svg'
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
-                    onChange={setEndLocation} value={endLocation}  />
+                    onChange={setEndLocation} value={endLocation} />
                 <div className={styles.input_separator} />
                 <button type="button" onClick={swapLocations} className={styles.swap_button} aria-label="scambia" />
             </div>

@@ -14,6 +14,7 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 | [React-select] | WAI-ARIA Compliant select component | 
 | [mapbox/polyline] | Libreria per la conversione delle geometrie [Google]  |
 | [next-translate] | Libreria internazionalizzazione per [Next.Js] | 
+| [react-toastify] | Libreria per toaster (messaggi per l'utente non bloccanti) |
 
 ## Installazione ubuntu
 
@@ -37,6 +38,8 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 ```npm install @mapbox/polyline```
 1. Installare `next-translate`
 ```npm install next-translate```
+1. Installare `react-toastify`
+```npm install react-toastify```
 
 [5T]:https://www.5t.torino.it
 [Muoversi in piemonte]:https://www.muoversinpiemonte.it
@@ -52,3 +55,4 @@ Prototipo del portale [Muoversi in piemonte] commissionato da [5T]
 [mapbox/polyline]:https://github.com/mapbox/polyline
 [Google]:https://developers.google.com/maps/documentation/utilities/polylinealgorithm
 [next-translate]:https://github.com/vinissimus/next-translate
+[react-toastify]:https://github.com/fkhadra/react-toastify#readme

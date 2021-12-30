@@ -9,6 +9,7 @@
     "MissingEnd": "Inserire un indirizzo di destinazione o selezionarlo sulla mappa",
     "SupplyAddress": "Digitare un indirizzo",
     "NoAddress": "Nessuna località trovata",
+    "UserPosition": "Ricerca posizione...",
     "PlanType": "Mezzo di trasporto",
     "ModeLabel" : {
         "vehicle": "auto",
@@ -31,5 +32,14 @@
     "To": "a:",
     "Departure": "Partenza",
     "Arrival": "Arrivo",
-    "NoNameRoad": "strada senza nome"
+    "NoNameRoad": "strada senza nome",
+    "PositionError": {
+        "ReverseGeocodeError": "Errore durante l'aquisizione dell'indirizzo",
+        "ReverseGeocodeNoLocation": "Il punto selezionato non corrisponde a una località nota",
+        "PositionNotSupporrted": "Il browser non supporta l'acquisizione della posizione",
+        "PositionPermissionDenied": "Il browser non ha il permesso per acquisire la posizione",
+        "PositionNotAvailable": "La posizione non è disponibile",
+        "PositionTimeout": "La ricerca della posizione sta richiedendo troppo tempo",
+        "PositionUnknownError": "Errore durante l'acquisizione della posizione"
+    }
 }

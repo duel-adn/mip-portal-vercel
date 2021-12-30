@@ -9,6 +9,7 @@
     "MissingEnd": "Please supply a destination or select it on the map",
     "SupplyAddress": "Please type an address",
     "NoAddress": "No address found",
+    "UserPosition": "Getting user position...",
     "PlanType": "Travel mode",
     "ModeLabel" : {
         "vehicle": "car",
@@ -32,6 +33,15 @@
     "Departure": "Departure",
     "Arrival": "Arrival",
     "NoNameRoad": "strada senza nome",
+    "PositionError": {
+        "ReverseGeocodeError": "Could not determine the address",
+        "ReverseGeocodeNoLocation": "No location found",
+        "PositionNotSupporrted": "The browser does not support location",
+        "PositionPermissionDenied": "The request for user location has been denied",
+        "PositionNotAvailable": "Location information is not available",
+        "PositionTimeout": "e request to get user location timed out",
+        "PositionUnknownError": "Error while getting the user location"
+    },
     "PlannerError": {
         "PLAN_OK": "Nessun errore",
         "SYSTEM_ERROR": "Errore di sistema",
