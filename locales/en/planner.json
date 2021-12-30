@@ -22,7 +22,7 @@
     "BikePathTypeTitle": "Path type",
     "BikePathType" : {
         "safe": "Safe",
-        "easy": "Easy",
+        "easy": "Flat",
         "fast": "Fast"
     },
     "Loading": "Searching...",
