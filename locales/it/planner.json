@@ -22,7 +22,7 @@
     "BikePathTypeTitle": "Tipo di percorso",
     "BikePathType" : {
         "safe": "Più sicuro",
-        "easy": "Più facile",
+        "easy": "Più pianeggiante",
         "fast": "Più veloce"
     },
     "Loading": "Ricerca...",
