@@ -41,7 +41,7 @@ territorio regionale.</p>
   <li className="mip-mt-2 square">
   un servizio di calcolo percorso che permette di ricercare e pianificare gli spostamenti sul territorio regionale utilizzando i servizi di trasporto pubblico in tutte le sue declinazioni (bus e tram urbani, servizi extraurbani e treno) o tramite percorsi pedonali o con l’utilizzo dell’auto personale. 
   Il servizio utilizza tecnologie open source, largamente diffuse e consolidate come <a href="http://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> e <a href="http://www.opentripplanner.org/" target="_blank" rel="noopener noreferrer">OpenTripPlanner</a>, e 
-  si basa sugli <a href="https://www.muoversinpiemonte.it/page/dati" target="_blank" rel="noopener noreferrer"> orari programmati forniti dagli Enti e dalle aziende piemontesi di trasporto pubblico</a> aderenti al sistema 
+  si basa sugli <Link href="/data"><a>orari programmati forniti dagli Enti e dalle aziende piemontesi di trasporto pubblico</a></Link> aderenti al sistema 
   BIP <a href="http://bip.piemonte.it/" target="_blank" rel="noopener noreferrer">(Biglietto Integrato Piemonte)</a>.
   </li>
 </ul>
