@@ -30,7 +30,7 @@ const serviceData = [
         title: "TrainsTimetableTitle",
         subtitle: "TrainsTimetableSubitle",
         icon: "/icons/train-timetable.svg",
-        url: "https://www.sfmtorino.it/orari/",
+        url: "http://www.viaggiatreno.it/viaggiatrenonew/index.jsp?idreg=3",
         external: true
     },
     {
