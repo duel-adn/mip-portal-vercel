@@ -88,7 +88,7 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ className, placeholder, icon, value, onChange, loadingMsg, useCurrentPosition }) {
+export default function MIPAddressAutocompleteInput({ id, className, placeholder, icon, value, onChange, loadingMsg, label }) {
     const { t, lang } = useTranslation("planner")
     const [searchString, setSearchString] = useState(null)
 
@@ -128,6 +128,9 @@ export default function MIPAddressAutocompleteInput({ className, placeholder, ic
                 noOptionsMessage={() => searchString?.length < 3 ? 
                     t("SupplyAddress") : t("NoAddress")}
                 menuShouldScrollIntoView={true}
+                aria-label={label}
+                inputId={id}
+                instanceId={id + "-select"}
             />
             <button className={styles.position_btn} type="button" aria-label="usa posizione corrente" 
                 onClick={() => getCurrentPosition()}/>

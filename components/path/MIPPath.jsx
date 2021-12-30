@@ -107,12 +107,16 @@ function MIPPathDataForm({ className, title, responsive }) {
                 <h3 className={styles.title}>{title}</h3>
             }
             <div className={styles.endpoint_data_container}>
-                <MIPAddressAutocompleteInput className={styles.input} 
+                <MIPAddressAutocompleteInput id="start-position"
+                    className={styles.input} 
+                    label={t("StartLabel")}
                     searchString={startLocation?.label} 
                     icon='/icons/path-start.svg'
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} value={startLocation} />
-                <MIPAddressAutocompleteInput className={styles.input}
+                <MIPAddressAutocompleteInput id="start-position"
+                    className={styles.input}
+                    label={t("EndLabel")}
                     searchString={endLocation?.label} 
                     icon='/icons/path-dest.svg'
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
