@@ -55,10 +55,10 @@ function MIPMobileButtonBar(props) {
     return (
         <div className={className}>
             <button className={styles.toolbar_btn}>
-                <img src="/icons/toolbar-search.svg" alt="" />
+                <img src="/icons/toolbar-search.svg" alt="search" />
             </button>
             <button className={styles.toolbar_btn}>
-                <img src="/icons/toolbar-user.svg" alt="" />
+                <img src="/icons/toolbar-user.svg" alt="user" />
             </button>
             <button className={styles.toolbar_btn} onClick={() => props.onChange()}>
                 {props.open ?
@@ -122,7 +122,7 @@ function MIPMainToolbar(props) {
     return (
         <div className={className}>
             <div className={styles.logo}>
-                <Link href="/"><a><img src='/images/logo.svg' height="48" alt='Muoversi in piemonte' /></a></Link>
+                <Link href="/"><a><img src='/images/logo.svg' height="52" alt='Muoversi in piemonte' /></a></Link>
             </div>
             <MIPMainMenubar className={!menuOpen && "mip-md-none"} links={navbarLinks} />
             {/* <MIPSearchBar className="mip-dd-block" /> */}
