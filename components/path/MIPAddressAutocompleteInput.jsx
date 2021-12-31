@@ -107,7 +107,7 @@ export default function MIPAddressAutocompleteInput({ id, className, placeholder
                 const message = t("PositionError." + position.error.errorCode)
                 toast.update(toastId.current, { type: toast.TYPE.ERROR, render: message, autoClose: 5000 })
             } else {
-                toast.dismiss()
+                toast.dismiss(toastId.current)
                 onChange(position.locations[0])
             }
         })

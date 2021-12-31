@@ -107,7 +107,7 @@ function MIPPathController({ children, query, url }) {
         if (plan?.mbr && map) {
             map?.fitBounds(plan.mbr)
         }
-    }, plan)
+    }, [plan])
     const context = {
         plan, planning,
         startLocation, setStartLocation,

@@ -211,8 +211,6 @@ $plan-time-col-width: 3rem;
     font-weight: 600;
     text-transform: capitalize;
 }
-// Descritione di uno step
-
 
 .step_panel {
     @extend .plan_cell_base;
@@ -286,5 +284,21 @@ $plan-time-col-width: 3rem;
     .name {
         text-transform: capitalize;
         word-wrap: break-word;
+    }
+
+    .button_bar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: .5rem;
+        margin-top: 1em;
+    }
+    button {
+        background-color: $mip-blue-background;
+        color: $mip-light-color;
+        font-size: .75rem;
+        padding: .3em 1em;
+        width: 100%;
+        border-radius: .35em;
     }
 }

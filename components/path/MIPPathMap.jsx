@@ -13,11 +13,20 @@
 import 'leaflet/dist/leaflet.css'
 import styles from "./MIPPlan.module.scss"
 
-import { useContext } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 
-import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl, Polyline } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl, Polyline, useMapEvents } from 'react-leaflet'
 import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
+import { mipReverseGeocode } from '../../lib/MIPPlannerAPI'
+import { Popover } from '@headlessui/react'
+
+const positionIcon = L.icon({
+  iconUrl: '/path-icons/position.svg',
+  iconSize: [30, 30],
+  iconAnchor: [15, 15],
+  popupAnchor: [0, -20],
+})
 
 const departureIcon = L.icon({
   iconUrl: '/path-icons/map-departure.svg',
@@ -33,36 +42,104 @@ const arrivalIcon = L.icon({
   popupAnchor: [0, -30],
 })
 
-
-function LegPopup({ leg }) {
-
+function reverseGeocodeMarker(markerRef, setLocation) {
+  if (markerRef.current) {
+    markerRef.current.openPopup()
+    const coords = markerRef.current.getLatLng()
+    setLocation({
+      name: null,
+      coordinates: coords
+    })
+    reverseGeocode(markerRef.current.getLatLng(), (loc => {
+      setLocation(loc)
+    }))
+  }
 }
 
-function LocationLayer({ label, name, coords, icon }) {
+function reverseGeocode(position, setLocation) {
+  if (position) {
+    mipReverseGeocode('it', position.lng, position.lat)
+      .then(pos => {
+        const newLocation = pos.locations?.length ? pos.locations[0] : {
+          name: "Località sconosciuta",
+          coordinates: position
+        }
+        setLocation(newLocation)
+      })
+  }
+}
+
+function LocationPopup({ title, location, placeholder, children }) {
   return (
-    <Marker position={coords} icon={icon} draggable={true}>
-      <Popup>
-        <div className={styles.location_popup}>
-          <div className={styles.title}>{label}</div>
-          <div className={styles.name}>{name}</div>
-        </div>
-      </Popup>
+    <Popup minWidth={200}>
+      <div className={styles.location_popup}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.name}>{location?.name ? location.name : placeholder}</div>
+        <div className={styles.name}>{location?.locality ? location.locality : "\u00a0"}</div>
+        {children}
+      </div>
+    </Popup>
+  )
+}
+
+function PathEndpointLayer({ title, icon, location, setLocation, children }) {
+  const markerRef = useRef()
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() { reverseGeocodeMarker(markerRef, setLocation) }
+    })
+  )
+  return (
+    <Marker ref={markerRef}
+      position={location.coordinates} icon={icon}
+      draggable={true} eventHandlers={eventHandlers} >
+      <LocationPopup title={title} location={location}>
+        {children}
+      </LocationPopup>
     </Marker>
+  )
+}
+
+function LocationMarker({ title, icon, setStartLocation, setEndLocation }) {
+  const markerRef = useRef()
+  const [position, setPosition] = useState(null)
+  const [location, setLocation] = useState(null)
+  useMapEvents({
+    click(e) {
+      setPosition(e.latlng)
+    }
+  })
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() { reverseGeocodeMarker(markerRef, setLocation) }
+    })
+  )
+  useEffect(() => {
+    reverseGeocodeMarker(markerRef, setLocation)
+  }, [position])
+  return (
+    position ?
+      <Marker ref={markerRef}
+        position={position} icon={icon}
+        draggable={true} eventHandlers={eventHandlers} >
+        <LocationPopup title={title} location={location}>
+          <div className={styles.button_bar}>
+            <button type="button" onClick={() => {
+              if (location && setStartLocation) { setStartLocation(location); setPosition(null) }
+            }}>Partenza</button>
+            <button type="button" onClick={() => {
+              if (location && setEndLocation) { setEndLocation(location); setPosition(null) }
+            }}>Destinazione</button>
+          </div>
+        </LocationPopup>
+      </Marker>
+      : null
   )
 }
 
 function PlanItineraryLayer({ itinerary }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
-      // <GeoJSON key={leg.id} data={leg.geometry}
-      //   style={{
-      //     color: leg.description?.route?.borderColor ?? 'rgb(46, 97, 167)',
-      //     weight: 6,
-      //   }}>
-      //   <Popup>
-      //     <MIPPlan.LegHeader leg={leg} />
-      //   </Popup>
-      // </GeoJSON>
       <Polyline key={leg.id} positions={leg.rawGeometry}
         pathOptions={
           {
@@ -79,9 +156,12 @@ function PlanItineraryLayer({ itinerary }) {
   )
 }
 
+
 export default function MIPPathMap() {
   const {
-    plan, setMap
+    plan, setMap,
+    startLocation, setStartLocation,
+    endLocation, setEndLocation
   } = useContext(MIPPath.Context)
   return (
     <MapContainer
@@ -91,6 +171,7 @@ export default function MIPPathMap() {
       whenCreated={setMap}
       style={{ flex: "1 1 100%" }}
     >
+
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}map.5t.torino.it/light-new/{z}/{x}/{y}"
@@ -108,12 +189,15 @@ export default function MIPPathMap() {
       {plan?.itineraries && plan.itineraries.map(it =>
         <PlanItineraryLayer key={it.id} itinerary={it} />
       )}
-      {plan?.description?.fromCoords &&
-        <LocationLayer label="Partenza" name={plan.description?.fromName} coords={plan.description.fromCoords} icon={departureIcon} />
+      {startLocation &&
+        <PathEndpointLayer title="Partenza" location={startLocation} icon={departureIcon}
+          setLocation={setStartLocation} />
       }
-      {plan?.description?.toCoords &&
-        <LocationLayer label="Arrivo" name={plan.description?.toName} coords={plan.description.toCoords} icon={arrivalIcon} />
+      {endLocation &&
+        <PathEndpointLayer title="Arrivo" location={endLocation} icon={arrivalIcon}
+          setLocation={setEndLocation} />
       }
+      <LocationMarker title="Località" icon={positionIcon} setStartLocation={setStartLocation} setEndLocation={setEndLocation} open />
     </MapContainer>
   )
 }
