@@ -45,7 +45,7 @@ function parseLocation(loc) {
                 value: id,
                 label: name,
                 name: name,
-                coordinates: [Number(coords[1]), Number(coords[0])]
+                coordinates: {lng: Number(coords[1]), lat: Number(coords[0])}
             }
         }
     }
