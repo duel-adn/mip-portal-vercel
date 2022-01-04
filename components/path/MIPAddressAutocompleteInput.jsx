@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import AsyncSelect from 'react-select/async';
 import { mipGetUserPosition, mipPathAutocomplete } from '../../lib/MIPPlannerAPI';
 import { mipConcatenate } from '../../lib/MIPUtility';
+import { useList } from '../../lib/MIPHooks';
 
 /**
  * Styling per il box di input e il dropdown
@@ -92,11 +93,15 @@ const customStyles = {
 export default function MIPAddressAutocompleteInput({ id, className, placeholder, icon, value, onChange, loadingMsg, label }) {
     const { t, lang } = useTranslation("planner")
     const [searchString, setSearchString] = useState(null)
+    const [itemList, addItem] = useList()
     const toastId = useRef(null);
 
     const handleInputChange = (value) => setSearchString(value)
     const handleSelect = (location) => {
         if (onChange) {
+            if (location != null) {
+                addItem(location)
+            }
             onChange(location)
         }
     }
@@ -113,13 +118,18 @@ export default function MIPAddressAutocompleteInput({ id, className, placeholder
         })
     }
     const loadOptions = async (inputValue, callback) => {
+        if (inputValue && inputValue.length < 2) {
+            callback(itemList)
+        } else {
         const rawData = await mipPathAutocomplete('it', inputValue)
         if (rawData instanceof Error) {
             // TODO: show error on control
             console.log('error' + rawData)
             return
         }
+        console.log(rawData.locations)
         callback(rawData.locations)
+    }
     }
     return (
         <div className={mipConcatenate(className, "mip-flex-col")}>
@@ -129,7 +139,7 @@ export default function MIPAddressAutocompleteInput({ id, className, placeholder
                 placeholder={placeholder}
                 loadOptions={loadOptions}
                 loadingMessage={() => loadingMsg ?? "Loading..."}
-                defaultOptions
+                defaultOptions={itemList}
                 isClearable
                 onInputChange={handleInputChange}
                 onChange={handleSelect}
