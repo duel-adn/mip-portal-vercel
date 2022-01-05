@@ -16,7 +16,10 @@ import { Disclosure } from "@headlessui/react"
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate } from "../../lib/MIPUtility"
+import { I18NNamespace } from "../../lib/MIPI18N"
+
 import MIPPath from "./MIPPath"
+import { MIPErrorCode } from "../../lib/MIPErrorHandling"
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -52,11 +55,12 @@ function MIPPlanPanel({ displayHeader }) {
  * @returns un elemento React con i messaggi di errore
  */
 function MIPPlanMessages({ plan }) {
+    const { t } = useTranslation(I18NNamespace.ERROR)
     return (
         <>
             {plan?.error &&
                 <div className={styles.plan_msg_panel}>
-                    {plan.error.message}
+                    {t(plan.error.mipErrorCode ?? MIPErrorCode.MIP_INV_SRV_RESP)}
                 </div>
             }
         </>

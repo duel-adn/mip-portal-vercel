@@ -2,7 +2,7 @@
     "locales": ["en", "it"],
     "defaultLocale": "it",
     "pages": {
-      "*": ["common"],
+      "*": ["common", "error"],
       "/": ["planner", "traffic"],
       "/traffic": ["traffic"],
       "/planner": ["planner"]

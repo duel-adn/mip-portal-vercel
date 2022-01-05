@@ -1,0 +1,4 @@
+{
+    "MipConnectionError": "Unable to establish a connection with the server",
+    "MipUnknownError": "Unkwnon error"
+}

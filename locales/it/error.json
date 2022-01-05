@@ -1,0 +1,4 @@
+{
+    "MipConnectionError": "Errore di connessione con il server. Controllare la rete e riprovare",
+    "MipUnknownError": "Errore inatteso"
+}
