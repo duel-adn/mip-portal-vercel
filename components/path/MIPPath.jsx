@@ -21,7 +21,7 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
 import { mipCreateId, mipConcatenate } from '../../lib/MIPUtility';
-import { MIPPlanMode, MIPBikeOptions, mipPathSearch, mipPathSearchQuery } from '../../lib/MIPPlannerAPI';
+import { MIPPlanMode, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, otp2MipMode } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
 
 const initialContext = {
@@ -52,17 +52,11 @@ function parseLocation(loc) {
     return null
 }
 
-function parseMode(mode) {
-    const newMode = mode ? Object.values(MIPPlanMode).filter(v => mode === v) : null
-
-    return newMode?.length ? newMode[0] : MIPPlanMode.transit
-}
-
 function MIPPathController({ children, query, url }) {
     const { lang } = useTranslation("planner")
     const initialStartLocation = parseLocation(query?.fromPlace)
     const initialEndLocation = parseLocation(query?.toPlace)
-    const initialMode = parseMode(query?.mode)
+    const initialMode = otp2MipMode(query?.mode)
     const [plan, setPlan] = useState(null)
     const [planning, setPlanning] = useState(false)
     const [startLocation, setStartLocation] = useState(initialStartLocation)
@@ -87,13 +81,13 @@ function MIPPathController({ children, query, url }) {
                     pathname: url,
                     query: mipPathSearchQuery(lang, startLocation.label, startLocation.coordinates,
                         endLocation.label, endLocation.coordinates,
-                        planMode, planMode == MIPPlanMode.transit ? startDate : null,
+                        planMode, planMode == MIPPlanMode.TRANSIT ? startDate : null,
                         bikeOptions, true)
                 })
             } else {
                 const newPlan = await mipPathSearch(lang, startLocation.label, startLocation.coordinates,
                     endLocation.label, endLocation.coordinates,
-                    planMode, planMode == MIPPlanMode.transit ? startDate : null,
+                    planMode, planMode == MIPPlanMode.TRANSIT ? startDate : null,
                     bikeOptions, true)
                 console.log(newPlan)
                 setPlan(newPlan)
@@ -212,7 +206,7 @@ function AdditionalOptions() {
     }, [startDate])
     return (
         <div >
-            {planMode == MIPPlanMode.transit &&
+            {planMode == MIPPlanMode.TRANSIT &&
                 <div className={styles.additional_options}>
                     <label htmlFor="start-time-picker">{t("StartTime")}</label>
                     {startDate &&
@@ -226,7 +220,7 @@ function AdditionalOptions() {
                     >{t("Now")}</button>
                 </div>
             }
-            {planMode == MIPPlanMode.bicycle &&
+            {planMode == MIPPlanMode.BICYCLE &&
                 <div className={styles.additional_options}>
                     <label htmlFor="bike-option-selector">{t("BikePathTypeTitle")}</label>
                     <select value={bikeOptions} onChange={e => setBikeOptions(e.target.value)}>
@@ -247,16 +241,16 @@ function MIPPathOptions({ planMode, setPlanMode }) {
             onChange={setPlanMode} >
             <RadioGroup.Label className={styles.label}>{t("PlanType")}</RadioGroup.Label>
             <div className={styles.radio_group}>
-                {Object.keys(MIPPlanMode).map(key =>
-                    <RadioGroup.Option key={key}
-                        value={MIPPlanMode[key]}
+                {Object.values(MIPPlanMode).map(value =>
+                    <RadioGroup.Option key={value}
+                        value={value}
                         className={({ active, checked }) => mipConcatenate(styles.option,
                             active ? styles.active : '',
                             checked ? styles.checked : '')
                         }>
                         <img className={styles.icon} aria-hidden="true"
-                            src={`/path-icons/mode-${key}.svg`} alt={MIPPlanMode[key]} />
-                        <RadioGroup.Label className={styles.radio_label}>{t("ModeLabel." + key)}</RadioGroup.Label>
+                            src={`/path-icons/mode-${value.toLowerCase()}.svg`} alt={t(`ModeLabel.${value}`)} />
+                        <RadioGroup.Label className={styles.radio_label}>{t(`ModeLabel.${value}`)}</RadioGroup.Label>
                     </RadioGroup.Option>
                 )}
             </div>

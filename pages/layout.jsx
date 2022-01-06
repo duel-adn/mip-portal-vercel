@@ -92,7 +92,7 @@ export default function Layout({ plan }) {
 export async function getServerSideProps(context) {
   const plan = await mipPathSearch('IT', 'torino, italia', [7.652514, 45.059405],
     'alessandria, italia', [8.61412, 44.910936], 
-    MIPPlanMode.publicTransport, true)
+    MIPPlanMode.TRANSIT, true)
 
   return {
     props: {

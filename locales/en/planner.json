@@ -12,11 +12,50 @@
     "UserPosition": "Getting user position...",
     "PlanType": "Travel mode",
     "ModeLabel" : {
-        "vehicle": "car",
-        "transit": "public",
-        "bicycle": "bicycle",
-        "walk": "walk"
+        "Vehicle": "car",
+        "Transit": "public",
+        "Bicycle": "bicycle",
+        "Walk": "walk"
     },
+    "LegMode": {
+        "Walk": {
+            "Icon": "walk",
+            "Description": "walk"
+        },
+        "Vehicle": {
+            "Icon": "vehicle",
+            "Description": "by car"
+        },
+        "Bicycle": {
+            "Icon": "bicycle",
+            "Description": "by bike"
+        },
+        "Bus": {
+            "Icon": "bus",
+            "Description": "by bus"
+        },
+        "Tram": {
+            "Icon": "tram",
+            "Description": "by tram"
+        },
+        "Subway": {
+            "Icon": "subway",
+            "Description": "by subway"
+        },
+        "Train": {
+            "Icon": "train",
+            "Description": "by train"
+        },
+        "Ferry": {
+            "Icon": "ferry",
+            "Description": "by ferry"
+        },
+        "CableCar": {
+            "Icon": "cable-car",
+            "Description": "by cable-car"
+        }
+    },
+    "Details": "Details",
     "StartTime": "Departure",
     "Now": "Now",
     "BikePathTypeTitle": "Path type",
@@ -32,7 +71,12 @@
     "To": "to",
     "Departure": "Departure",
     "Arrival": "Arrival",
-    "NoNameRoad": "strada senza nome",
+    "UnnamedLocation": "unnamed location",
+    "DepartureTime": "Depart.: {{time}}",
+    "ArrivalTime": "Arrival at {{time}}",
+    "ItineraryWalkData": "Walk {{distance}} ({{time}})",
+    "FromLocation": "from {{name}}",
+    "ToLocation": "to {{name}}",
     "PositionError": {
         "ReverseGeocodeError": "Could not determine the address",
         "ReverseGeocodeNoLocation": "No location found",

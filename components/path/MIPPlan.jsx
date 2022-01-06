@@ -16,10 +16,11 @@ import { Disclosure } from "@headlessui/react"
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate } from "../../lib/MIPUtility"
-import { I18NNamespace } from "../../lib/MIPI18N"
+import { I18NNamespace, translateDistance, translateDuration, translateUnixDateTime, translateUnixTime } from "../../lib/MIPI18N"
 
 import MIPPath from "./MIPPath"
 import { MIPErrorCode } from "../../lib/MIPErrorHandling"
+import { MIPPlanMode } from "../../lib/MIPPlannerAPI"
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -32,17 +33,18 @@ function MIPPlanPanel({ displayHeader }) {
     const {
         plan
     } = useContext(MIPPath.Context)
-
+    console.log('plan')
+    console.log(plan)
     return (
         <div className={styles.plan_panel}>
             {plan?.error &&
                 <MIPPlanMessages plan={plan} />
             }
             {displayHeader && plan &&
-                <MIPPlanDescriptionPanel plan={plan} />
+                <MIPPlanDescriptionPanel plan={plan?.plan} />
             }
-            {plan?.itineraries &&
-                <MIPItinerariesPanel plan={plan} />
+            {plan &&
+                <MIPItinerariesPanel plan={plan?.plan} />
             }
         </div>
     )
@@ -75,14 +77,14 @@ function MIPPlanMessages({ plan }) {
  * @returns il componente React con òa descrizione del piano
  */
 function MIPPlanDescriptionPanel({ plan }) {
-    const description = plan.description
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
     return (
         <div className={styles.plan_header}>
             <img src="/path-icons/plan-close.svg" alt="chiudi" />
             <div>
-                <div>{description.fromLabel} <b>{description.fromName}</b></div>
-                <div>{description.toLabel} <b>{description.toName}</b></div>
-                <div>{description.departureLabel} <b>{description.departureDateTime}</b></div>
+                <div>{t("From")} <b>{plan?.startLocation?.name ?? t("UnnamedLocation")}</b></div>
+                <div>{t("To")} <b>{plan?.endLocation?.name ?? t("UnnamedLocation")}</b></div>
+                <div>{t("StartTime")} <b>{translateUnixDateTime(lang, plan?.startTime ?? Date.now())}</b></div>
             </div>
         </div>
     )
@@ -98,7 +100,8 @@ function MIPPlanDescriptionPanel({ plan }) {
  * @returns un elemento React con i dati degli itinerari
  */
 function MIPItinerariesPanel({ plan }) {
-    const itineraries = plan.itineraries
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const itineraries = plan?.itineraries
     if (itineraries) {
         return (
             <>
@@ -115,16 +118,16 @@ function MIPItinerariesPanel({ plan }) {
                         {({ open }) =>
                             <>
                                 <Disclosure.Button className={styles.itinerary_expand_button}>
-                                    <MIPItineraryDescriptionPanel itinerary={itn.description} />
+                                    <MIPItineraryDescriptionPanel itinerary={itn} />
                                 </Disclosure.Button>
-                                <Disclosure.Panel id={`itinerary-${idx}`} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
+                                <Disclosure.Panel id={itn.id} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
                                     <Disclosure.Button className={styles.itinerary_expand_button}>
                                         <MIPPlanDescriptionPanel plan={plan} />
                                     </Disclosure.Button>
-                                    <MIPItineraryDescriptionPanel open={open} itinerary={itn.description} />
-                                    <MIPLocationPanel location={plan.description.fromName} />
+                                    <MIPItineraryDescriptionPanel open={open} itinerary={itn} />
+                                    <MIPLocationPanel location={plan?.startLocation?.name} />
                                     <MIPItineraryDetailsPanel itinerary={itn} />
-                                    <MIPLocationPanel location={plan.description.toName} />
+                                    <MIPLocationPanel location={plan?.endLocation?.name} />
                                 </Disclosure.Panel>
                             </>
                         }
@@ -144,57 +147,65 @@ function MIPItinerariesPanel({ plan }) {
  * @returns 
  */
 function MIPItineraryDescriptionPanel({ itinerary, open }) {
-    const iconUrl = `/path-icons/${itinerary.iconName}.svg`
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const iconUrl = `/path-icons/${itinerary.mode?.toLowerCase()}.svg`
     return (
         <div className={styles.itinerary_header}>
-            <img className={styles.path_icon} src={iconUrl} alt={itinerary.iconAlt} />
+            <img className={styles.path_icon} src={iconUrl} alt={t(`ModeLabel.${itinerary.mode}`)} />
             <div>
-                {itinerary?.description &&
-                    <div className={styles.title}>{itinerary.description}</div>
+                {itinerary.startTime &&
+                    <div className={styles.title}>{t("DepartureTime", { time: translateUnixDateTime(lang, itinerary.startTime) })}</div>
                 }
-                {itinerary.departure &&
-                    <div className={styles.title}>{itinerary.departure}</div>
+                {itinerary.endTime &&
+                    <div className={styles.title}>{t("ArrivalTime", { time: translateUnixTime(lang, itinerary.endTime) })}</div>
                 }
-                {itinerary.arrival &&
-                    <div className={styles.title}>{itinerary.arrival}</div>
-                }
-                {itinerary.pictogram &&
-                    <div className={styles.pictogram}>
-                        {itinerary.pictogram && itinerary.pictogram?.map((pict, idx) =>
-                            <div key={idx} className={styles.pictogram}>
-                                <img src={`/path-icons/${pict.iconName}.svg`} alt={pict.iconName} />
-                                {pict.name &&
-                                    <div className={styles.plate} style={{
-                                        color: pict.textColor,
-                                        backgroundColor: pict.color,
-                                        borderColor: pict.borderColor
-                                    }}>{pict.name}
-                                    </div>
-                                }
-                                {idx != itinerary.pictogram.length - 1 &&
-                                    <div className={styles.separator}>&gt;</div>
-                                }
-                            </div>
-                        )}
-                    </div>
-                }
-                {(itinerary.walkTime || itinerary.walkDistance) &&
-                    <p className={styles.pictogrammm}>
-                        A piedi {itinerary.walkDistance} ({itinerary.walkTime})
+                <MIPItineraryPictogram pictogram={itinerary.pictogram} />
+                {itinerary.walkDistance_m > 0 &&
+                    <p className={styles.title}>
+                        {t("ItineraryWalkData", {
+                            distance: translateDistance(lang, itinerary.walkDistance_m),
+                            time: translateDuration(lang, itinerary.walkTime_s)
+                        })}
                     </p>
                 }
             </div>
             <div className={styles.details}>
-                <div className={styles.duration}>{itinerary.duration}</div>
-                <div className={styles.distance}>{itinerary.distance}</div>
+                <div className={styles.duration}>{translateDuration(lang, itinerary.duration_s)}</div>
+                <div className={styles.distance}>{translateDistance(lang, itinerary.distance_m)}</div>
             </div>
             {!open &&
-                <div className={styles.cta}>{itinerary.detailsLabel}</div>
+                <div className={styles.cta}>{t("Details")}</div>
             }
         </div>
     )
 }
 
+function MIPItineraryPictogram({ pictogram }) {
+    const { t } = useTranslation(I18NNamespace.PLANNER)
+
+    return (
+        pictogram ?
+        <div className={styles.pictogram}>
+            {pictogram && pictogram.map((pict, idx) =>
+                <div key={idx} className={styles.pictogram}>
+                    <img src={`/path-icons/${t("LegMode." + pict.mode + ".Icon")}.svg`} alt={t("LegMode." + pict.mode + ".Description")} />
+                    {pict.name &&
+                        <div className={styles.plate} style={{
+                            color: pict.textColor,
+                            backgroundColor: pict.color,
+                            borderColor: pict.borderColor
+                        }}>{pict.name}
+                        </div>
+                    }
+                    {idx != pictogram.length - 1 &&
+                        <div className={styles.separator}>&gt;</div>
+                    }
+                </div>
+            )}
+        </div>
+        : null
+    )
+}
 function MIPItineraryDetailsPanel({ className, itinerary }) {
     return (
         <div className={className}>
@@ -239,8 +250,8 @@ function MIPLegPanel({ fixed, leg }) {
                         {leg.steps && leg.steps.map((step, idx) =>
                             <MIPStepPanel key={step.id ?? idx} step={step} />
                         )}
-                        {leg.stops && leg.stops.map((stop, idx) =>
-                            <MIPStopPanel key={stop.id ?? idx} route={leg.description.route} stop={stop} />
+                        {leg.intermediateStops && leg.intermediateStops.map((stop, idx) =>
+                            <MIPStopPanel key={stop.id ?? idx} leg={leg} stop={stop} />
                         )}
                     </Disclosure.Panel>
                 </>
@@ -250,83 +261,80 @@ function MIPLegPanel({ fixed, leg }) {
 }
 
 function MIPLegDescription({ leg }) {
-    const description = leg.description
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
     if (leg.isTransit) {
-        const route = description.route
         return (
             <div>
                 <div className={styles.title}>
                     <div className={styles.plate} style={{
-                        color: route.textColor,
-                        backgroundColor: route.color,
-                        borderColor: route.borderColor
-                    }}>{route.name}
+                        color: leg.routeTextColor || "#222",
+                        backgroundColor: leg.routeColor || "white",
+                        borderColor: leg.routeColor || "gray"
+                    }}>{leg.transitRouteName}
                     </div>
                     {route.agencyUrl ?
                         <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer">
-                            {route.agencyName}
+                            {leg.agencyName}
                         </a></div>
                         :
-                        <div>{route.agencyName}</div>
+                        <div>{leg.agencyName}</div>
                     }
                 </div>
                 <div className={styles.title}>
-                    {route.headsign}
+                    {leg.headsign}
                 </div>
                 <div className={styles.title}>
-                    da {description.startLocation}
+                    da {leg.startLocation?.name}
                 </div>
                 <div className={styles.title}>
-                    a {description.endLocation}
+                    a {leg.endLocation?.name}
                 </div>
             </div>
         )
     }
     return (<div>
-        <div>fino a {description?.endLocation}</div>
-        <div>{description?.duration}</div>
-        <div>{description?.distance}</div>
+        <div>fino a {leg?.endLocation?.name}</div>
+        <div>{translateDuration(lang, leg?.duration_s)}</div>
+        <div>{translateDistance(lang, leg?.distance_m)}</div>
     </div>
     )
 }
 
 function MIPLegDescriptionPanel({ leg, fixed, open }) {
-    const description = leg.description
-    const iconUrl = `/path-icons/${description?.iconName}.svg`
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const iconUrl = "/path-icons/" + t(`LegMode.${leg.mode}.Icon`) + ".svg"
+    const description = t(`LegMode.${leg.mode}.Description`)
+    const startName = leg.startLocation?.name ?? t("UnnamedLocation")
+    const endName = leg.endLocation?.name ?? t("UnnamedLocation")
     if (leg.isTransit) {
-        const route = description.route
         return (
             <div className={mipConcatenate(styles.transit_leg_description, fixed || open ? styles.open : null)}>
                 <img className={styles.path_icon}
-                    src={iconUrl} alt={description?.iconAlt} />
+                    src={iconUrl} alt={description} />
                 <div>
-                    {description.startTime}
+                    {translateUnixTime(lang, leg.startTime)}
                 </div>
                 <div>
                     <div className={styles.title}>
                         <div className={styles.plate} style={{
-                            color: route.textColor,
-                            backgroundColor: route.color,
-                            borderColor: route.borderColor
-                        }}>{route.name}
+                            color: leg.routeTextColor,
+                            backgroundColor: leg.routeColor,
+                            borderColor: leg.borderColor
+                        }}>{leg.transitRouteName}
                         </div>
-                        {route.agencyUrl ?
-                            <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer">
-                                {route.agencyName}
+                        {leg.agencyUrl ?
+                            <div><a href={leg.agencyUrl} target="_blank" rel="noopener noreferrer">
+                                {leg.agencyName}
                             </a></div>
                             :
-                            <div>{route.agencyName}</div>
+                            <div>{leg.agencyName}</div>
                         }
                     </div>
                     <div className={styles.title}>
-                        {route.headsign}
+                        {leg.headsign}
                     </div>
-                    <div className={styles.title}>
-                        da {description.startLocation}
-                    </div>
-                    <div className={styles.title}>
-                        a {description.endLocation}
-                    </div>
+                    <div className={styles.title}>{t("FromLocation", {name: startName})}</div>
+                    <div className={styles.title}>{t("ToLocation", {name: endName})}</div>
                 </div>
                 {open ?
                     <img className={styles.path_icon}
@@ -343,9 +351,9 @@ function MIPLegDescriptionPanel({ leg, fixed, open }) {
             <img className={styles.path_icon}
                 src={iconUrl} alt={description?.iconAlt} />
             <div>
-                <div>fino a {description?.endLocation}</div>
-                <div>{description?.duration}</div>
-                <div>{description?.distance}</div>
+                <div>{t("ToLocation", {name: endName})}</div>
+                <div>{translateDuration(lang, leg.duration_s)}</div>
+                <div>{translateDistance(lang, leg.distance_m)}</div>
             </div>
             {!fixed && <>
                 {open ?
@@ -377,13 +385,13 @@ function MIPStepPanel({ step }) {
     )
 }
 
-function MIPStopPanel({ route, stop }) {
+function MIPStopPanel({ leg, stop }) {
     return (
         <div className={styles.stop_panel}>
             <div className={styles.time}>{stop.arrivalTime}</div>
             <div className={styles.stop_name}
                 style={{
-                    borderColor: route.borderColor
+                    borderColor: leg.borderColor
                 }}
             >
                 {stop.name}
