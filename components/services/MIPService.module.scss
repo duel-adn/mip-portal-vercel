@@ -2,7 +2,7 @@
 @import '../../styles/mixin';
 
 .service_panel {
-    min-width: 24rem;
+    min-width: $mip-min-width;
 
     .service_card {
         display: flex;
@@ -58,7 +58,7 @@
         flex-grow: 1;
         flex-direction: column;
         justify-content: space-between;
-        min-width: 20rem;
+        min-width: $mip-min-width;
         height: 12rem;
         margin-bottom: 1rem;
         padding: 1rem 1.25rem;

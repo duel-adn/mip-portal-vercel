@@ -21,6 +21,7 @@ import AsyncSelect from 'react-select/async';
 import { mipGetUserPosition, mipPathAutocomplete } from '../../lib/MIPPlannerAPI';
 import { mipConcatenate } from '../../lib/MIPUtility';
 import { useList } from '../../lib/MIPHooks';
+import MIPForms from '../forms/MIPForms';
 
 /**
  * Styling per il box di input e il dropdown
@@ -90,7 +91,7 @@ const customStyles = {
  * 
  * @returns il componente pronto per l'uso
  */
-export default function MIPAddressAutocompleteInput({ id, className, placeholder, icon, value, onChange, loadingMsg, label }) {
+export default function MIPAddressAutocompleteInput({ id, icon, placeholder, value, onChange, loadingMsg, label }) {
     const { t, lang } = useTranslation("planner")
     const [searchString, setSearchString] = useState(null)
     const [itemList, addItem] = useList()
@@ -121,38 +122,39 @@ export default function MIPAddressAutocompleteInput({ id, className, placeholder
         if (inputValue && inputValue.length < 2) {
             callback(itemList)
         } else {
-        const rawData = await mipPathAutocomplete('it', inputValue)
-        if (rawData instanceof Error) {
-            // TODO: show error on control
-            console.log('error' + rawData)
-            return
+            const rawData = await mipPathAutocomplete('it', inputValue)
+            if (rawData instanceof Error) {
+                // TODO: show error on control
+                console.log('error' + rawData)
+                return
+            }
+            console.log(rawData.locations)
+            callback(rawData.locations)
         }
-        console.log(rawData.locations)
-        callback(rawData.locations)
-    }
     }
     return (
-        <div className={mipConcatenate(className, "mip-flex-col")}>
-            <img src={icon} width="18" aria-hidden="true" alt="icona" />
-            <AsyncSelect
-                styles={customStyles}
-                placeholder={placeholder}
-                loadOptions={loadOptions}
-                loadingMessage={() => loadingMsg ?? "Loading..."}
-                defaultOptions={itemList}
-                isClearable
-                onInputChange={handleInputChange}
-                onChange={handleSelect}
-                value={value}
-                noOptionsMessage={() => searchString?.length < 3 ? 
-                    t("SupplyAddress") : t("NoAddress")}
-                menuShouldScrollIntoView={true}
-                aria-label={label}
-                inputId={id}
-                instanceId={id + "-select"}
-            />
-            <button className={styles.position_btn} type="button" aria-label="usa posizione corrente" 
-                onClick={() => getCurrentPosition()}/>
-        </div>
+        <>
+        <img className={styles.icon} src={icon} aria-hidden={true} alt={label}/>
+        <AsyncSelect
+            styles={customStyles}
+            placeholder={placeholder}
+            loadOptions={loadOptions}
+            loadingMessage={() => loadingMsg ?? "Loading..."}
+            defaultOptions={itemList}
+            isClearable
+            onInputChange={handleInputChange}
+            onChange={handleSelect}
+            value={value}
+            noOptionsMessage={() => searchString?.length < 3 ?
+                t("SupplyAddress") : t("NoAddress")}
+            menuShouldScrollIntoView={true}
+            aria-label={label}
+            inputId={id}
+            instanceId={id + "-select"}
+        />
+        <MIPForms.IconButton icon="/icons/position.svg" 
+            label={t("UseUserPosition")} 
+            onClick={() => getCurrentPosition()}/>
+        </>
     )
 }

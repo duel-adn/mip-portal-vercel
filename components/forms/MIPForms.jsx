@@ -14,6 +14,8 @@ import styles from './MIPForms.module.scss'
 
 import Link from 'next/link'
 
+import { mipConcatenate } from '../../lib/MIPUtility';
+
 /**
  * Componente usato per scorrere tra le pagine (ad esempio nelle news)
  * @param {String} className nome della classe del div esterno
@@ -75,8 +77,35 @@ function MIPLegend({className, title, items}) {
     )
 }
 
+function MIPIconButtton({className, icon, label, onClick}) {
+    return (
+        <button type="button"className={mipConcatenate(className, styles.icon_btn)} 
+            aria-label={label}
+            onClick={onClick}>
+            <img className={styles.icon} src={icon} alt={label} aria-hidden={true} />
+        </button>
+    )
+}
+
+function MIPIconTitle({className, icon, title, subtitle, url}) {
+    return (title ? 
+        <div className={mipConcatenate(className, styles.form_title)}>
+            {icon && <img className={styles.icon} src={icon} aria-hidden={true} alt={title} /> }
+            <h3 className={styles.title}>{title}</h3>
+            {subtitle && 
+                url ? 
+                <Link href={url}>
+                    <a>{subtitle}</a>
+                </Link> : <p>{subtitle}</p>
+            }
+        </div>
+    : null)
+}
+
 export default {
     Pager: MIPPager,
     Loading: MIPLoading,
-    Legend: MIPLegend
+    Legend: MIPLegend,
+    IconTitle: MIPIconTitle,
+    IconButton: MIPIconButtton
 }

@@ -2,13 +2,15 @@
     "PlanPageTitle": "Pianifica il tuo viaggio",
     "PlanTitle": "Pianificazione percorso",
     "StartLabel": "Partenza",
+    "StartDateLabel": "Partenza",
     "EndLabel": "Destinazione",
-    "StartPlaceholder": "Inserire l'indirizzo di partenza",
-    "EndPlaceholder": "Inserire la destinazione",
+    "StartPlaceholder": "Indirizzo di partenza",
+    "EndPlaceholder": "Destinazione",
     "MissingStart": "Inserire un indirizzo di partenza o selezionarlo sulla mappa",
     "MissingEnd": "Inserire un indirizzo di destinazione o selezionarlo sulla mappa",
     "SupplyAddress": "Digitare un indirizzo",
     "NoAddress": "Nessuna località trovata",
+    "UseUserPosition": "usa la posizione corrente",
     "UserPosition": "Ricerca posizione...",
     "PlanType": "Mezzo di trasporto",
     "ModeLabel" : {
@@ -16,6 +18,11 @@
         "Transit": "mezzi pubblici",
         "Bicycle": "bicicletta",
         "Walk": "a piedi"
+    },
+    "DateOption": {
+        "StartNow": "Partenza ora",
+        "DepartAt": "Partenza alle",
+        "ArriveBy": "Arrivo entro le"
     },
     "LegMode": {
         "Walk": {

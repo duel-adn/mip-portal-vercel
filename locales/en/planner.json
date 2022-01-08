@@ -3,12 +3,14 @@
     "PlanTitle": "Plan your journey",
     "StartLabel": "Start",
     "EndLabel": "Destination",
-    "StartPlaceholder": "Insert the starting address",
-    "EndPlaceholder": "Insert the destination address",
+    "StartDateLabel": "Depart",
+    "StartPlaceholder": "Start address",
+    "EndPlaceholder": "Destination address",
     "MissingStart": "Please supply a starting point or select in ont the map",
     "MissingEnd": "Please supply a destination or select it on the map",
     "SupplyAddress": "Please type an address",
     "NoAddress": "No address found",
+    "UseUserPosition": "use current position",
     "UserPosition": "Getting user position...",
     "PlanType": "Travel mode",
     "ModeLabel" : {
@@ -16,6 +18,11 @@
         "Transit": "public",
         "Bicycle": "bicycle",
         "Walk": "walk"
+    },
+    "DateOption": {
+        "StartNow": "Leave now",
+        "DepartAt": "Depart at",
+        "ArriveBy": "Arrive by"
     },
     "LegMode": {
         "Walk": {
