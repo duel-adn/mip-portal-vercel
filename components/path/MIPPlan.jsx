@@ -20,7 +20,8 @@ import { I18NNamespace, translateDistance, translateDuration, translateUnixDateT
 
 import MIPPath from "./MIPPath"
 import { MIPErrorCode } from "../../lib/MIPErrorHandling"
-import { MIPPlanMode } from "../../lib/MIPPlannerAPI"
+
+const PlanColors = ["#0061B2", "#DA3463", "#00B431", "#F9C900"]
 
 /**
  * Pannelllo con i risultati di una pianificazione
@@ -92,9 +93,6 @@ function MIPPlanDescriptionPanel({ plan }) {
 
 /**
  * Pannello che mostra i dettagli degli itinerari.
- * Se c'è un solo itinerario lo mostra, altrimenti mostra
- * dei disclosure panel che permettono di visualizzare i dettagli 
- * di ciascuno.
  * 
  * @param {Object} plan piano da mostrare
  * @returns un elemento React con i dati degli itinerari
@@ -102,41 +100,30 @@ function MIPPlanDescriptionPanel({ plan }) {
 function MIPItinerariesPanel({ plan }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
     const itineraries = plan?.itineraries
-    if (itineraries) {
-        return (
-            <>
-                {/* {(itineraries?.length == 1) &&
-                    <>
-                        <MIPPlanDescriptionPanel plan={plan} />
-                        <MIPItineraryDescriptionPanel itinerary={itineraries[0].description} />
-                        <MIPItineraryDetailsPanel className={mipConcatenate(styles.itinerary_panel, styles.open)}
-                            open={true} itinerary={itineraries[0]} />
-                    </>
-                } */}
-                {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
-                    <Disclosure key={itn?.id ?? idx}>
-                        {({ open }) =>
-                            <>
-                                <Disclosure.Button className={styles.itinerary_expand_button}>
-                                    <MIPItineraryDescriptionPanel itinerary={itn} />
-                                </Disclosure.Button>
-                                <Disclosure.Panel id={itn.id} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
-                                    <Disclosure.Button className={styles.itinerary_expand_button}>
-                                        <MIPPlanDescriptionPanel plan={plan} />
-                                    </Disclosure.Button>
-                                    <MIPItineraryDescriptionPanel open={open} itinerary={itn} />
-                                    <MIPLocationPanel location={plan?.startLocation?.name} />
-                                    <MIPItineraryDetailsPanel itinerary={itn} />
-                                    <MIPLocationPanel location={plan?.endLocation?.name} />
-                                </Disclosure.Panel>
-                            </>
-                        }
-                    </Disclosure>
-                )}
-            </>
-        )
-    }
-    return null
+    return (<>
+        {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
+            <Disclosure key={itn?.id ?? idx}>
+                {({ open }) => <>
+                    <Disclosure.Button>
+                        <MIPItineraryDescriptionPanel itinerary={itn} />
+                    </Disclosure.Button>
+                    <Disclosure.Panel id={itn.id} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
+                        <Disclosure.Button aria-label={t("OpenPanel")}>
+                            <MIPPlanDescriptionPanel plan={plan} />
+                        </Disclosure.Button>
+                        <div className={styles.itinerary_details}>
+                            <MIPItineraryDescriptionPanel open={open} itinerary={itn} />
+                            <div className={styles.location_header}>{plan?.startLocation?.name}</div>
+                            {itn.legs?.length > 0 && itn.legs.map((leg, idx) =>
+                                <MIPLegPanel key={leg?.id ?? idx} leg={leg} />
+                            )}
+                            <div className={styles.location_header}>{plan?.endLocation?.name}</div>
+                        </div>
+                    </Disclosure.Panel>
+                </>}
+            </Disclosure>
+        )}
+    </>)
 }
 
 /**
@@ -144,7 +131,7 @@ function MIPItinerariesPanel({ plan }) {
  * 
  * @param {Boolean} open flag che dice se il pannello è aperto
  * @param {Object} itinerary itinerario da mostrare
- * @returns 
+ * @returns elemento React
  */
 function MIPItineraryDescriptionPanel({ itinerary, open }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
@@ -170,8 +157,8 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
                 }
             </div>
             <div className={styles.details}>
-                <div className={styles.duration}>{translateDuration(lang, itinerary.duration_s)}</div>
-                <div className={styles.distance}>{translateDistance(lang, itinerary.distance_m)}</div>
+                <div>{translateDuration(lang, itinerary.duration_s)}</div>
+                <div>{translateDistance(lang, itinerary.distance_m)}</div>
             </div>
             {!open &&
                 <div className={styles.cta}>{t("Details")}</div>
@@ -180,215 +167,195 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
     )
 }
 
+/**
+ * Riassunto delle leg di un itinerario in forma grafica
+ * @param {Object} pictogram la rappresentazione dell'itinerario
+ * @returns elemento React
+ */
 function MIPItineraryPictogram({ pictogram }) {
     const { t } = useTranslation(I18NNamespace.PLANNER)
-
-    return (
-        pictogram ?
+    return ( pictogram ?
         <div className={styles.pictogram}>
-            {pictogram && pictogram.map((pict, idx) =>
-                <div key={idx} className={styles.pictogram}>
-                    <img src={`/path-icons/${t("LegMode." + pict.mode + ".Icon")}.svg`} alt={t("LegMode." + pict.mode + ".Description")} />
-                    {pict.name &&
-                        <div className={styles.plate} style={{
-                            color: pict.textColor,
-                            backgroundColor: pict.color,
-                            borderColor: pict.borderColor
-                        }}>{pict.name}
-                        </div>
-                    }
-                    {idx != pictogram.length - 1 &&
-                        <div className={styles.separator}>&gt;</div>
-                    }
-                </div>
-            )}
+            {pictogram && pictogram.map((pict, idx) => <>
+                <img src={`/path-icons/${t("LegMode." + pict.mode + ".Icon")}.svg`} alt={t("LegMode." + pict.mode + ".Description")} />
+                {pict.name &&
+                    <div className={styles.plate} style={{
+                        color: pict.textColor,
+                        backgroundColor: pict.color,
+                        borderColor: pict.borderColor
+                    }}>{pict.name}
+                    </div>
+                }
+                {idx != pictogram.length - 1 &&
+                    <div className={styles.separator}>&gt;</div>
+                }
+            </>)}
         </div>
         : null
     )
 }
-function MIPItineraryDetailsPanel({ className, itinerary }) {
-    return (
-        <div className={className}>
-            {itinerary.legs?.length == 1 &&
-                <MIPLegPanel fixed leg={itinerary.legs[0]} />
-            }
-            {itinerary.legs?.length > 1 && itinerary.legs.map((leg, idx) =>
-                <MIPLegPanel key={leg?.id ?? idx} leg={leg} />
-            )}
-        </div>
-    )
-}
-
 
 /**
  * Pannello usato per mostrare i dati di una Leg
  * 
  * @param {String} locale locale per la traduzione
  * @param {Object} leg itinerario da mostrare
- * @returns 
+ * @returns elemento React
  */
-function MIPLegPanel({ fixed, leg }) {
-    if (fixed) {
-        return (
-            <div className={styles.leg_panel}>
-                <MIPLegDescriptionPanel leg={leg} fixed={fixed} />
-                {leg.steps && leg.steps.map((step, idx) =>
-                    <MIPStepPanel key={step.id ?? idx} step={step} />
-                )}
-                { }
-            </div>
-        )
-    }
+function MIPLegPanel({ leg }) {
     return (
-        <Disclosure as="div" >
-            {({ open }) =>
-                <>
-                    <Disclosure.Button className={styles.leg_expand_button}>
-                        <MIPLegDescriptionPanel leg={leg} open={open} />
-                    </Disclosure.Button>
-                    <Disclosure.Panel>
-                        {leg.steps && leg.steps.map((step, idx) =>
-                            <MIPStepPanel key={step.id ?? idx} step={step} />
-                        )}
-                        {leg.intermediateStops && leg.intermediateStops.map((stop, idx) =>
-                            <MIPStopPanel key={stop.id ?? idx} leg={leg} stop={stop} />
-                        )}
-                    </Disclosure.Panel>
-                </>
-            }
+        <Disclosure>
+            {({ open }) => <>
+                <Disclosure.Button className={mipConcatenate(styles.leg_expand_button, open ? styles.panel_open : null)}>
+                    <MIPLegDescriptionPanel leg={leg} open={open} />
+                </Disclosure.Button>
+                <Disclosure.Panel>
+                    {leg.steps && leg.steps.map((step, idx) =>
+                        <MIPStepPanel key={step.id ?? idx} step={step} />
+                    )}
+                    <div>
+                    {leg.isTransit &&
+                        <MIPStopPanel leg={leg} stop={leg.startLocation} icon="step-in" />
+                    }
+                    {leg.intermediateStops && leg.intermediateStops.map((stop, idx) =>
+                        <MIPStopPanel key={stop.id ?? idx} leg={leg} stop={stop} />
+                    )}
+                    {leg.isTransit &&
+                       <MIPStopPanel leg={leg} stop={leg.endLocation} icon="step-out" />
+                    }
+                    </div>
+                </Disclosure.Panel>
+            </>}
         </Disclosure>
     )
 }
 
-function MIPLegDescription({ leg }) {
-    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
-    if (leg.isTransit) {
-        return (
-            <div>
-                <div className={styles.title}>
-                    <div className={styles.plate} style={{
-                        color: leg.routeTextColor || "#222",
-                        backgroundColor: leg.routeColor || "white",
-                        borderColor: leg.routeColor || "gray"
-                    }}>{leg.transitRouteName}
-                    </div>
-                    {route.agencyUrl ?
-                        <div><a href={route.agencyUrl} target="_blank" rel="noopener noreferrer">
-                            {leg.agencyName}
-                        </a></div>
-                        :
-                        <div>{leg.agencyName}</div>
-                    }
-                </div>
-                <div className={styles.title}>
-                    {leg.headsign}
-                </div>
-                <div className={styles.title}>
-                    da {leg.startLocation?.name}
-                </div>
-                <div className={styles.title}>
-                    a {leg.endLocation?.name}
-                </div>
-            </div>
-        )
-    }
-    return (<div>
-        <div>fino a {leg?.endLocation?.name}</div>
-        <div>{translateDuration(lang, leg?.duration_s)}</div>
-        <div>{translateDistance(lang, leg?.distance_m)}</div>
-    </div>
+/**
+ * Pannello di descrizione di una leg
+ * @param {Object} leg la leg da descrivere 
+ * @param {Boolean} open true se il pannello è aperto
+ * @returns elemento React
+ */
+function MIPLegDescriptionPanel({ leg, open }) {
+    const { t, lang } = useTranslation(I18NNamespace.COMMON)
+    return (
+        <div className={styles.leg_header}>
+            {leg.isTransit ?
+                <MIPTransitLegHeader leg={leg} />
+                :
+                <MIPLegHeader leg={leg} />
+            }
+            {open ?
+                <img className={styles.path_icon}
+                    src="/path-icons/close-panel.svg" aria-hidden={true} alt={t("Open")} />
+                :
+                <img className={styles.path_icon}
+                    src="/path-icons/open-panel.svg" aria-hidden={true} alt={t("Closed")} />
+            }
+        </div>
     )
 }
 
-function MIPLegDescriptionPanel({ leg, fixed, open }) {
+/**
+ * Descrizione generale di una leg di tipo transit
+ * @param {Object} leg leg da descrivere
+ * @returns elemento React
+ */
+function MIPTransitLegHeader({ leg }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
     const iconUrl = "/path-icons/" + t(`LegMode.${leg.mode}.Icon`) + ".svg"
     const description = t(`LegMode.${leg.mode}.Description`)
     const startName = leg.startLocation?.name ?? t("UnnamedLocation")
     const endName = leg.endLocation?.name ?? t("UnnamedLocation")
-    if (leg.isTransit) {
-        return (
-            <div className={mipConcatenate(styles.transit_leg_description, fixed || open ? styles.open : null)}>
-                <img className={styles.path_icon}
-                    src={iconUrl} alt={description} />
-                <div>
-                    {translateUnixTime(lang, leg.startTime)}
-                </div>
-                <div>
-                    <div className={styles.title}>
-                        <div className={styles.plate} style={{
-                            color: leg.routeTextColor,
-                            backgroundColor: leg.routeColor,
-                            borderColor: leg.borderColor
-                        }}>{leg.transitRouteName}
-                        </div>
-                        {leg.agencyUrl ?
-                            <div><a href={leg.agencyUrl} target="_blank" rel="noopener noreferrer">
-                                {leg.agencyName}
-                            </a></div>
-                            :
-                            <div>{leg.agencyName}</div>
-                        }
-                    </div>
-                    <div className={styles.title}>
-                        {leg.headsign}
-                    </div>
-                    <div className={styles.title}>{t("FromLocation", {name: startName})}</div>
-                    <div className={styles.title}>{t("ToLocation", {name: endName})}</div>
-                </div>
-                {open ?
-                    <img className={styles.path_icon}
-                        src="/path-icons/leg-closed.svg" alt="Chiudi" />
-                    :
-                    <img className={styles.path_icon}
-                        src="/path-icons/leg-open.svg" alt="Apri" />
-                }
-            </div>
-        )
-    }
     return (
-        <div className={mipConcatenate(styles.leg_header, fixed || open ? styles.open : null)}>
-            <img className={styles.path_icon}
-                src={iconUrl} alt={description?.iconAlt} />
+        <>
+            <img className={styles.path_icon} src={iconUrl} alt={description} />
+            <div>{translateUnixTime(lang, leg.startTime)}</div>
             <div>
-                <div>{t("ToLocation", {name: endName})}</div>
+                <div>
+                    <span className={styles.plate} style={{
+                        color: leg.routeTextColor,
+                        backgroundColor: leg.routeColor,
+                        borderColor: leg.borderColor
+                    }}>{leg.transitRouteName}
+                    </span>
+                    {leg.agencyUrl ?
+                        <a href={leg.agencyUrl} target="_blank" rel="noopener noreferrer">
+                            {leg.agencyName}
+                        </a>
+                        :
+                        <span>{leg.agencyName}</span>
+                    }
+                </div>
+                <div>{leg.headsign}</div>
+                <div>{t("FromLocation", { name: startName })}</div>
+                <div>{t("ToLocation", { name: endName })}</div>
+            </div>
+        </>
+    )
+}
+
+/**
+ * Descrizione generale di una leg di tipo diverso da transit
+ * @param {Object} leg leg da descrivere
+ * @returns elemento React
+ */
+function MIPLegHeader({ leg }) {
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const iconUrl = "/path-icons/" + t(`LegMode.${leg.mode}.Icon`) + ".svg"
+    const description = t(`LegMode.${leg.mode}.Description`)
+    const endName = leg.endLocation?.name ?? t("UnnamedLocation")
+    return (
+        <>
+            <img className={styles.path_icon} src={iconUrl} alt={description} />
+            <div className={styles.title}>
+                <div>{t("ToLocation", { name: endName })}</div>
                 <div>{translateDuration(lang, leg.duration_s)}</div>
                 <div>{translateDistance(lang, leg.distance_m)}</div>
             </div>
-            {!fixed && <>
-                {open ?
-                    <img className={styles.path_icon}
-                        src="/path-icons/leg-closed.svg" alt="Chiudi" />
-                    :
-                    <img className={styles.path_icon}
-                        src="/path-icons/leg-open.svg" alt="Apri" />
-                }
-            </>}
-        </div>
+        </>
     )
 }
 
+/**
+ * De
+ * @returns elemento React
+ * 
+ */
 function MIPStepPanel({ step }) {
-    return (
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const direction = step.instruction?.direction ? t(`Instruction.${step.instruction.direction}`) : null
+    const absoluteDirection = step.instruction?.absoluteDirection ? t(`Instruction.${step.instruction.absoluteDirection}`) : null
+    const exit = step.instruction?.exit ? t(`Instruction.${step.instruction.exit}`) : null
+    const translation = step.instruction ? t(`Instruction.${step.instruction.instruction}`, 
+        { streetName: step.instruction?.streetName, direction, absoluteDirection, exit }) : null
+    return (translation ? 
         <div className={styles.step_panel}>
-            <img src={`/path-icons/${step.icon}.svg`} />
-            <p className={styles.instruction}>
-                {step.instruction?.map((instruction, idx) =>
-                    <span key={idx} className={instruction[0] ? styles.emphasis : null}>
-                        {instruction[1] + ' '}
-                    </span>
-                )}
-            </p>
-            <p className={styles.distance}>{step.distance}&nbsp;</p>
+            <img className={styles.icon} src={`/path-icons/${step.icon}.svg`} />
+            <div className={styles.instruction}>{translation}</div>
+            <div className={styles.distance}>{translateDistance(lang, step.distance_m)}&nbsp;</div>
             <div className={styles.filler} />
         </div>
+        :null
     )
 }
 
-function MIPStopPanel({ leg, stop }) {
+/**
+ * Descrizione di una fermata per le leg di tipo transit
+ * @param {Object} leg la leg che contiene la fermata
+ * @param {Object} stop i dati della fermata
+ * @param {String} icon il nome dell'icona
+ * @returns elemento React
+ * 
+ */
+function MIPStopPanel({ leg, stop, icon }) {
+    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
     return (
         <div className={styles.stop_panel}>
-            <div className={styles.time}>{stop.arrivalTime}</div>
+            {icon &&
+                <img className={styles.icon} src={`/path-icons/${icon}.svg`} aria-hidden={true} />
+            }
+            <div className={styles.time}>{translateUnixTime(lang, stop.arrival)}</div>
             <div className={styles.stop_name}
                 style={{
                     borderColor: leg.borderColor
@@ -400,17 +367,9 @@ function MIPStopPanel({ leg, stop }) {
     )
 }
 
-function MIPLocationPanel({ location }) {
-    return (
-        <div className={styles.itinerary_location}>
-            {location}
-        </div>
-    )
-}
-
 export default {
     Panel: MIPPlanPanel,
     ErrorPanel: MIPPlanMessages,
     PlanHeader: MIPPlanDescriptionPanel,
-    LegHeader: MIPLegDescription
+    LegHeader: MIPLegDescriptionPanel
 }

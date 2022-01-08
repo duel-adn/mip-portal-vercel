@@ -12,107 +12,101 @@
 
 @import '../../styles/variables';
 
-$plan-cell-padding-x: 1.5rem;
+$plan-cell-padding-x: 1rem;
 $plan-cell-padding-y: 1rem;
+$plan-column-gap: .5rem;
 $plan-icon-col-width: 2rem;
-$plan-time-col-width: 3rem;
+$plan-time-col-width: 4em;
+$plan-font-size: .875rem;
+$plan-border-color: $mip-light-border-color; 
+$plan-hover-background: #ddd;
 
-// Contenitore di un piano
+// Utility
 
+// Contenitore del piano
 .plan_panel {
     width: 100%;
     height: 100%;
-    color: $mip-text-color;
     overflow: hidden;
-    overflow-y: scroll;
-    border: 1px solid $mip-light-border-color;
-}
+    color: $mip-text-color;
+    font-size: $plan-font-size;
+    border: 1px solid $plan-border-color;
 
-.plan_cell_base {
-    width: 100%;
-    padding: $plan-cell-padding-y $plan-cell-padding-x;
-    border-bottom: 1px solid $mip-light-border-color;
-}
-
-// Icona
-.path_icon {
-    width: 1.5rem;
-    height: auto;
-}
-.plan_header {
-    @extend .plan_cell_base;
-    display: grid;
-    grid-template-columns: $plan-icon-col-width 1fr auto;
-    column-gap: 1rem;
-    background-color: $mip-blue-color;
-    color: $mip-light-color;
-    font-size: 1rem;
-    img {
-        margin: auto;
+    & > * {
+        width: 100%;
+        background-color: $mip-light-background;
     }
 }
-// Itinerario
 
+// Contenintore della descrizione di un itinerario
 .itinerary_panel {
     position: absolute;
     top: 0;
     left: 90%;
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
-    background-color: $mip-light-background;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     &.open {
         left: 0%;
     }
 }
 
-// Pannello messaggi (usato solo per errori
+.itinerary_details {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-left: 1px solid $plan-border-color;
+    border-bottom: 1px solid $plan-border-color;
 
-.plan_msg_panel {
-    @extend .plan_cell_base;
-
-    color: $mip-error-color;
-    font-size: 1rem;
-    text-align: center;
-    font-weight: bold;
+    & > * {
+        border-bottom: 1px solid $plan-border-color;
+    }
+    & :last-child {
+        border-bottom: none;
+    }
 }
 
-// Bottone di apertura di un itinerario
-
-.itinerary_expand_button {
-    width: 100%;
-    background-color: $mip-light-background;
-    color: $mip-text-color;
+.plan_header,
+.itinerary_header,
+.leg_header,
+.location_header,
+.stop_panel,
+.step_panel {
+    display: grid;
+    padding: $plan-cell-padding-y $plan-cell-padding-x;
+    column-gap: $plan-column-gap;
     text-align: start;
+    &:hover,
+    &:focus {
+        background-color: $plan-hover-background;
+    }
+}
+
+// Header piano
+
+.plan_header {
+    grid-template-columns: $plan-icon-col-width 1fr;
+    background-color: $mip-blue-color;
+    color: $mip-light-color;
+    border-radius: $mip-panel-border-radius 0 0 0;
+    img {
+        margin: auto;
+    }
+    &:hover,
+    &:focus {
+    background-color: $mip-dark-blue;
+    }
 }
 
 // Header per itinerario
-
 .itinerary_header {
-    @extend .plan_cell_base;
-    display: grid;
     grid-template-columns: $plan-icon-col-width 1fr auto;
-    column-gap: 1rem;
-    width: 100%;
-    background-color: $mip-light-background;
-    font-size: .8125rem;
-    
+    padding: $plan-cell-padding-y $plan-cell-padding-x;
+
     .details {
         text-align: end;
-    }
-
-    .duration,
-    .title {
-        font-size: .9375rem;
-    }
-
-    .duration {
-        color: $mip-blue-color;
-    }
-    .distance{
-        font-weight: 300;
     }
 
     .cta {
@@ -123,6 +117,25 @@ $plan-time-col-width: 3rem;
         text-align: left;
     }
 
+    &:hover, &:focus {
+        background-color: $plan-hover-background;
+    }
+}
+
+// Icona
+.path_icon {
+    width: 1.5rem;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Pannello messaggi (usato solo per errori
+
+.plan_msg_panel {
+    color: $mip-error-color;
+    text-align: center;
+    font-weight: bold;
 }
 
 .pictogram {
@@ -151,7 +164,7 @@ $plan-time-col-width: 3rem;
 
     .separator {
         margin-right: .5rem;
-        font-size: 1rem;
+        font-size: .875rem;
     }
 }
 
@@ -160,40 +173,15 @@ $plan-time-col-width: 3rem;
 .leg_expand_button {
     width: 100%;
     background-color: $mip-light-background;
-    color: $mip-text-color;
     text-align: start;
 }
 
-.leg_panel {
-    overflow: hidden;
-    width: 100%;
-}
-
 .leg_header {
-    @extend .plan_cell_base;
-    display: grid;
-    grid-template-columns: $plan-icon-col-width 1fr $plan-icon-col-width;
-
-    .title {
-        font-size: .9375rem;
-    }
-
-    .duration {
-        font-weight: 300;
-    }
-}
-
-.transit_leg_description {
-    @extend .plan_cell_base;
-
-    display: grid;
     grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr $plan-icon-col-width;
 
     .title {
-        display: flex;
-        font-size: .9375rem;
+        grid-column: 2/4;
     }
-
     .plate {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -205,24 +193,22 @@ $plan-time-col-width: 3rem;
     }
 }
 
-.itinerary_location {
-    @extend .plan_cell_base;
-    font-size: 1rem;
+.location_header{
     font-weight: 600;
     text-transform: capitalize;
 }
 
 .step_panel {
-    @extend .plan_cell_base;
     display: grid;
-    grid-template-columns: $plan-icon-col-width auto 1fr;
-    padding-left: $plan-icon-col-width;
-    border: none;
-    font-size: .9375rem;
-    width: 100%;
+    grid-template-columns: $plan-icon-col-width max-content 1fr;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    min-height: 1em;
+    align-items: center;
+    
     .instruction {
         grid-column:  2 / -1;
-        padding-bottom: 1rem;
+        //padding-bottom: 1rem;
     }
     .emphasis {
         color: $mip-dark-blue-color;
@@ -241,17 +227,17 @@ $plan-time-col-width: 3rem;
 }
 
 .stop_panel {
-    @extend .plan_cell_base;
     display: grid;
     grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr;
+    align-items: center;
     border: 0;
     padding-top: 0;
     padding-bottom: 0;
     border-radius: 0;
-    font-size: .9375rem;
 
     .time {
         grid-column:  2 / 2;
+        justify-self: center;
     }
 
     .stop_name {
@@ -302,3 +288,16 @@ $plan-time-col-width: 3rem;
         border-radius: .35em;
     }
 }
+
+// Utility
+
+.panel_open {
+    border-bottom: none;
+}
+
+.icon {
+    grid-column:  1 / 1;
+    justify-self: center;
+    height: 1rem;
+}
+

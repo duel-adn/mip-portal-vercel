@@ -22,7 +22,7 @@
             "Icon": "walk",
             "Description": "a piedi"
         },
-        "Car": {
+        "Vehicle": {
             "Icon": "vehicle",
             "Description": "in macchina"
         },
@@ -55,6 +55,9 @@
             "Description": "in funivia"
         }
     },
+
+    "OpenPanel": "mostra i dettagli",
+    "ClosePanel": "nasconde i dettagli",
     "Details": "Dettagli",
     "StartTime": "Partenza",
     "Now": "Ora",
@@ -77,6 +80,46 @@
     "ItineraryWalkData": "A piedi {{distance}} ({{time}})",
     "FromLocation": "da {{name}}",
     "ToLocation": "fino a {{name}}",
+    "Instruction": {
+        "1": "prima",
+        "2": "seconda",
+        "3": "terza",
+        "4": "quarta",
+        "5": "quinta",
+        "6": "sesta",
+        "7": "settima",
+        "8": "ottava",
+        "9": "nona",
+        "10": "decima",
+        "Left": "sinistra",
+        "Right": "destra",
+        "NORTH": "nord",
+        "NORTHEAST": "nordest",
+        "NORTHWEST": "nordovest",
+        "SOUTH": "sud",
+        "SOUTHEAST": "sudest",
+        "SOUTHWEST": "sudovest",
+        "EAST": "est",
+        "WEST": "ovest",
+        "DepartStreet": "parti da {{streetName}}",
+        "DepartTowards": "vai verso {{absoluteDirection}}",
+        "Continue": "continua diritto",
+        "ContinueStreet": "continua dritto su {{streetName}}",
+        "Turn": "gira a {{direction}}",
+        "TurnStreet": "gira a {{direction}} su {{streetName}}",
+        "SlightTurn": "gira leggermente a {{direction}}",
+        "SlightTurnStreet": "gira leggermente a {{direction}} su {{streetName}}",
+        "HardTurn": "gira a {{direction}}",
+        "HardTurnStreet": "gira a {{direction}} su {{streetName}}",
+        "UTurn": "esegui un'inversione a U verso {{direction}}",
+        "UTurnStreet": "esegui un'inversione a U verso {{direction}} su {{streetName}}",
+        "RoundAbout": "percorri la rotonda", 
+        "RoundAboutExit": "alla rotonda prendi la {{exit}} uscita", 
+        "RoundAboutStreet": "percorri la rotonda {{streetName}}" ,
+        "RoundAboutStreetExit": "su {{streetName}} prendi la {{exit}} uscita",
+        "Elevator": "prendi l'ascensore",
+        "ElevatorStreet": "prendi l'ascensore su {{streetName}}"
+    },
     "PositionError": {
         "ReverseGeocodeError": "Errore durante l'aquisizione dell'indirizzo",
         "ReverseGeocodeNoLocation": "Il punto selezionato non corrisponde a una località nota",
@@ -85,6 +128,35 @@
         "PositionNotAvailable": "La posizione non è disponibile",
         "PositionTimeout": "La ricerca della posizione sta richiedendo troppo tempo",
         "PositionUnknownError": "Errore durante l'acquisizione della posizione"
+    },
+    "PlannerError": {
+        "PLAN_OK": "Nessun errore",
+        "SYSTEM_ERROR": "Errore di sistema",
+        "GRAPH_UNAVAILABLE": "I dati per la ricerca non sono disponibili",
+        "OUTSIDE_BOUNDS": "Le località si trovano al di fuori dell'area coperta dal servizio",
+        "PATH_NOT_FOUND": "Non è stato possibile trovare un percorso con le caratteristiche selezionate",
+        "NO_TRANSIT_TIMES": "Le informazioni sugli orari dei servizi di trasporto non sono disponibili",
+        "REQUEST_TIMEOUT": "Il server non ha risposto",
+        "BOGUS_PARAMETER": "Uno dei parametri inviati non è valido",
+        "GEOCODE_FROM_NOT_FOUND": "La località di partenza non è stata trovata",
+        "GEOCODE_TO_NOT_FOUND": "La località di arrivo non è stata trovata",
+        "TOO_CLOSE": "Le località richieste sono troppo vicine",
+        "LOCATION_NOT_ACCESSIBLE": "Una o entrambe le località non sono accessibili",
+        "GEOCODE_FROM_AMBIGUOUS": "La località di partenza è specificata in modo ambiguo",
+        "GEOCODE_TO_AMBIGUOUS": "La località di arrivo è specificata in modo ambiguo",
+        "UNDERSPECIFIED_TRIANGLE": "Errore interno: triangolo non specificato",
+        "TRIANGLE_NOT_AFFINE": "Errore interno: il triangolo specificato non è affine",
+        "TRIANGLE_OPTIMIZE_TYPE_NOT_SET": "Errore interno: il tipo di ottimizzazione del triangolo non è impostata",
+        "TRIANGLE_VALUES_NOT_SET": "Errore interno: i valori del triangolo non sono impostati",
+        "DL_UNKNOWN_ERROR": "Errore sconosciuto",
+        "DL_INVALID_LEGS_RESPONSE": "Risposta non valida dal server - Non sono presenti tratte nel percorso",
+        "DL_INVALID_LEG_RESPONSE": "Risposta non valida dal server - Tratta non valida",
+        "DL_INVALID_STEPS_RESPONSE": "Risposta non valida dal server - Istruzioni non valide",
+        "DL_INVALID_STEP_RESPONSE": "Risposta non valida dal server - Istruzione non valida",
+        "DL_NO_PLAN_RESPONSE": "Risposta non valida dal server - Nessun piano",
+        "DL_INVALID_PLACE_RESPONSE": "Risposta non valida dal server - località non valida",
+        "DL_INVALID_ERROR_RESPONSE": "Risposta non valida dal server - formato del messaggio di errore",
+        "DL_INVALID_ITINERARY_RESPONSE": "Risposta non valida dal server - itinerario non valido",
+        "DL_INVALID_ITINERARIES_RESPONSE": "Risposta non valida dal server - itinerari non validi"    
     }
-
 }
