@@ -80,8 +80,8 @@ function MIPPathController({ children, query, url }) {
         setPlanning(false)
     }
     useEffect(() => {
-        if (plan?.mbr && map) {
-            map?.fitBounds(plan.mbr)
+        if (plan?.plan?.mbr && map) {
+            map?.fitBounds(plan.plan.mbr)
         }
     }, [plan])
     const context = {

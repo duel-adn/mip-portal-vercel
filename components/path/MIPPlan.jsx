@@ -11,7 +11,7 @@
 */
 
 import styles from "./MIPPlan.module.scss"
-import { useContext } from "react"
+import { Fragment, useContext } from "react"
 import { Disclosure } from "@headlessui/react"
 import useTranslation from 'next-translate/useTranslation'
 
@@ -107,6 +107,7 @@ function MIPItinerariesPanel({ plan }) {
                     <Disclosure.Button>
                         <MIPItineraryDescriptionPanel itinerary={itn} />
                     </Disclosure.Button>
+                    {open &&
                     <Disclosure.Panel id={itn.id} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
                         <Disclosure.Button aria-label={t("OpenPanel")}>
                             <MIPPlanDescriptionPanel plan={plan} />
@@ -120,6 +121,7 @@ function MIPItinerariesPanel({ plan }) {
                             <div className={styles.location_header}>{plan?.endLocation?.name}</div>
                         </div>
                     </Disclosure.Panel>
+                    }
                 </>}
             </Disclosure>
         )}
@@ -176,7 +178,7 @@ function MIPItineraryPictogram({ pictogram }) {
     const { t } = useTranslation(I18NNamespace.PLANNER)
     return ( pictogram ?
         <div className={styles.pictogram}>
-            {pictogram && pictogram.map((pict, idx) => <>
+            {pictogram && pictogram.map((pict, idx) => <Fragment key={idx}>
                 <img src={`/path-icons/${t("LegMode." + pict.mode + ".Icon")}.svg`} alt={t("LegMode." + pict.mode + ".Description")} />
                 {pict.name &&
                     <div className={styles.plate} style={{
@@ -189,7 +191,7 @@ function MIPItineraryPictogram({ pictogram }) {
                 {idx != pictogram.length - 1 &&
                     <div className={styles.separator}>&gt;</div>
                 }
-            </>)}
+            </Fragment>)}
         </div>
         : null
     )
