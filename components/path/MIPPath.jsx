@@ -21,7 +21,7 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
 import { mipConcatenate } from '../../lib/MIPUtility'
-import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, mipParseOtpLocation, otp2MipMode } from '../../lib/MIPPlannerAPI';
+import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, mipParseOtpLocation, otp2MipMode, mipOTPParseBicycleOptions } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
 import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPi18N"
 import { useDateTime } from "../../lib/MIPHooks"
@@ -45,7 +45,7 @@ function MIPPathController({ children, query, url }) {
     const [planMode, setPlanMode] = useState(initialMode)
     const [planDateOption, setPlanDateOption] = useState(MIPDateOption.START_NOW)
     const [planDate, setPlanDate, updatePlanDate, updatePlanTime] = useDateTime(Date.now() + 5 * 60000)
-    const [bikeOptions, setBikeOptions] = useState(MIPBikeOptions.safe)
+    const [bikeOptions, setBikeOptions] = useState(mipOTPParseBicycleOptions(query))
     const [map, setMap] = useState(null)
     const [selectedItinerary, setSelectedItinerary] = useState(null)
     const swapLocations = () => {
