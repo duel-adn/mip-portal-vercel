@@ -10,7 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
-import { translateLocalDateTime } from "../../lib/MIPi18N"
+import { translateLocalDateTime } from "../../lib/MIPI18N"
 
 /***
  * Ritorna i dati sul trasporto pubblico
