@@ -143,7 +143,7 @@ function PlanItineraryLayer({ itinerary }) {
       <Polyline key={leg.id} positions={leg.rawGeometry}
         pathOptions={
           {
-            color: leg.description?.route?.borderColor ?? '#222',
+            color: leg.routeColor ?? '#222',
             weight: 6
           }
         }
@@ -155,7 +155,6 @@ function PlanItineraryLayer({ itinerary }) {
     )
   )
 }
-
 
 export default function MIPPathMap() {
   const {
@@ -186,7 +185,7 @@ export default function MIPPathMap() {
           />
         </LayersControl.Overlay>
       </LayersControl>
-      {plan?.itineraries && plan.itineraries.map(it =>
+      {plan?.plan?.itineraries && plan.plan.itineraries.map(it =>
         <PlanItineraryLayer key={it.id} itinerary={it} />
       )}
       {startLocation &&

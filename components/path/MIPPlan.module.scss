@@ -84,10 +84,6 @@ $plan-hover-background: #ddd;
     padding: $plan-cell-padding-y $plan-cell-padding-x;
     column-gap: $plan-column-gap;
     text-align: start;
-    &:hover,
-    &:focus {
-        background-color: $plan-hover-background;
-    }
 }
 
 // Header piano
@@ -97,12 +93,14 @@ $plan-hover-background: #ddd;
     background-color: $mip-blue-color;
     color: $mip-light-color;
     border-radius: $mip-panel-border-radius 0 0 0;
+
     img {
         margin: auto;
     }
+
     &:hover,
     &:focus {
-    background-color: $mip-dark-blue;
+        background-color: $mip-dark-blue;
     }
 }
 
@@ -153,6 +151,7 @@ $plan-hover-background: #ddd;
     font-size: .75rem;
     color: darkgray;
     line-height: 1.5rem;
+    
     img {
         width: 1rem;
         height: 1rem;
@@ -182,14 +181,21 @@ $plan-hover-background: #ddd;
     width: 100%;
     background-color: $mip-light-background;
     text-align: start;
+    &:hover,
+    &:focus {
+        background-color: $plan-hover-background;
+    }
 }
 
 .leg_header {
     grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr $plan-icon-col-width;
+    grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr auto;
+    min-width: 12rem;
 
     .title {
         grid-column: 2/4;
     }
+
     .plate {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -216,16 +222,18 @@ $plan-hover-background: #ddd;
     
     .instruction {
         grid-column:  2 / -1;
-        //padding-bottom: 1rem;
     }
+
     .emphasis {
         color: $mip-dark-blue-color;
         font-weight: 600;
     }
+
     .distance {
         grid-column:  2 / 2;
         color: $mip-gray-text-color;
     }
+
     .filler {
         grid-column:  3 / -1;
         width: 100%;
@@ -287,6 +295,7 @@ $plan-hover-background: #ddd;
         gap: .5rem;
         margin-top: 1em;
     }
+
     button {
         background-color: $mip-blue-background;
         color: $mip-light-color;
@@ -309,3 +318,6 @@ $plan-hover-background: #ddd;
     height: 1rem;
 }
 
+.map_panel {
+    padding: .5rem 0;
+}

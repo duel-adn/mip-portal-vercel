@@ -207,7 +207,7 @@ function MIPLegPanel({ leg }) {
         <Disclosure>
             {({ open }) => <>
                 <Disclosure.Button className={mipConcatenate(styles.leg_expand_button, open ? styles.panel_open : null)}>
-                    <MIPLegDescriptionPanel leg={leg} open={open} />
+                    <MIPLegDescriptionPanel leg={leg} open={open} expandable />
                 </Disclosure.Button>
                 <Disclosure.Panel>
                     {leg.steps && leg.steps.map((step, idx) =>
@@ -234,25 +234,39 @@ function MIPLegPanel({ leg }) {
  * Pannello di descrizione di una leg
  * @param {Object} leg la leg da descrivere 
  * @param {Boolean} open true se il pannello è aperto
+ * @param {Boolean} expandable true se il pannello può essere espanso
  * @returns elemento React
  */
-function MIPLegDescriptionPanel({ leg, open }) {
+function MIPLegDescriptionPanel({ leg, open, expandable }) {
     const { t, lang } = useTranslation(I18NNamespace.COMMON)
     return (
-        <div className={styles.leg_header}>
+        <div className={mipConcatenate(styles.leg_header, expandable ? null : styles.map_panel)}>
             {leg.isTransit ?
                 <MIPTransitLegHeader leg={leg} />
                 :
                 <MIPLegHeader leg={leg} />
             }
-            {open ?
+            {expandable && (open ?
                 <img className={styles.path_icon}
                     src="/path-icons/close-panel.svg" aria-hidden={true} alt={t("Open")} />
                 :
                 <img className={styles.path_icon}
                     src="/path-icons/open-panel.svg" aria-hidden={true} alt={t("Closed")} />
-            }
+            )}
         </div>
+    )
+}
+
+function MIPLegDescription({leg}) {
+    const { t } = useTranslation(I18NNamespace.COMMON)
+    return (
+        <div className={styles.leg_header} style={{padding: ".5rem 0"}}>
+            {leg.isTransit ?
+                <MIPTransitLegHeader leg={leg} />
+                :
+                <MIPLegHeader leg={leg} />
+            }
+    </div>
     )
 }
 
