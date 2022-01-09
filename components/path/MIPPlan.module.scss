@@ -15,8 +15,8 @@
 $plan-cell-padding-x: 1rem;
 $plan-cell-padding-y: 1rem;
 $plan-column-gap: .5rem;
-$plan-icon-col-width: 2rem;
-$plan-time-col-width: 4em;
+$plan-icon-col-width: 1.5rem;
+$plan-time-col-width: 4.5em;
 $plan-font-size: .875rem;
 $plan-border-color: $mip-light-border-color; 
 $plan-hover-background: #ddd;
@@ -258,6 +258,7 @@ $plan-hover-background: #ddd;
         grid-column:  3 / -1;
         position: relative;
         min-height: 2rem;
+        height: 100%;
         line-height: 2rem;
         border-left: 4px solid darkgrey;
         margin-left: 4px;

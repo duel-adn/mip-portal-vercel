@@ -11,7 +11,7 @@
 */
 import styles from './MIPPath.module.scss'
 
-import { createContext, useContext, useState, useRef, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import Router from 'next/router'
 
 import { RadioGroup } from '@headlessui/react'
