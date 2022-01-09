@@ -16,7 +16,7 @@ import { Disclosure } from "@headlessui/react"
 import useTranslation from 'next-translate/useTranslation'
 
 import { mipConcatenate } from "../../lib/MIPUtility"
-import { I18NNamespace, translateDistance, translateDuration, translateUnixDateTime, translateUnixTime } from "../../lib/MIPi18N"
+import { I18NNamespace, translateDistance, translateDuration, translateUnixDateTime, translateUnixTime } from "../../lib/MIPI18N"
 
 import MIPPath from "./MIPPath"
 import { MIPErrorCode } from "../../lib/MIPErrorHandling"

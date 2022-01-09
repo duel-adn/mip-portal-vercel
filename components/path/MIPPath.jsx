@@ -23,7 +23,7 @@ import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 import { mipConcatenate } from '../../lib/MIPUtility'
 import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, mipParseOtpLocation, otp2MipMode, mipOTPParseBicycleOptions } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
-import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPi18N"
+import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPI18N"
 import { useDateTime } from "../../lib/MIPHooks"
 
 const initialContext = {
