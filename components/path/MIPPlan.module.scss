@@ -27,7 +27,8 @@ $plan-hover-background: #ddd;
 .plan_panel {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     color: $mip-text-color;
     font-size: $plan-font-size;
     border: 1px solid $plan-border-color;
@@ -35,6 +36,11 @@ $plan-hover-background: #ddd;
     & > * {
         width: 100%;
         background-color: $mip-light-background;
+        border-bottom: 1px solid $plan-border-color;
+    }
+
+    &:last-child {
+        border-bottom: none;
     }
 }
 
@@ -142,11 +148,11 @@ $plan-hover-background: #ddd;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
     font-size: .75rem;
     color: darkgray;
-    line-height: 1.6rem;
+    line-height: 1.5rem;
     img {
         width: 1rem;
         height: 1rem;

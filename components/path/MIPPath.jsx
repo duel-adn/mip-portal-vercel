@@ -20,10 +20,10 @@ import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
-import { mipCreateId, mipConcatenate } from '../../lib/MIPUtility'
-import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, otp2MipMode } from '../../lib/MIPPlannerAPI';
+import { mipConcatenate } from '../../lib/MIPUtility'
+import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, mipParseOtpLocation, otp2MipMode } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
-import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPI18N"
+import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPi18N"
 import { useDateTime } from "../../lib/MIPHooks"
 
 const initialContext = {
@@ -32,32 +32,11 @@ const initialContext = {
 
 const MIPPlannerContext = createContext(initialContext)
 
-function parseLocation(loc) {
-    if (typeof loc !== 'string') {
-        return null
-    }
-    const components = loc.split("::")
-    if (components.length === 2) {
-        const name = decodeURI(components[0])
-        const coords = components[1].split(",")
-        if (coords.length === 2) {
-            const id = mipCreateId()
-            return {
-                id: id,
-                value: id,
-                label: name,
-                name: name,
-                coordinates: { lng: Number(coords[1]), lat: Number(coords[0]) }
-            }
-        }
-    }
-    return null
-}
-
 function MIPPathController({ children, query, url }) {
-    const { lang } = useTranslation("planner")
-    const initialStartLocation = parseLocation(query?.fromPlace)
-    const initialEndLocation = parseLocation(query?.toPlace)
+    const { t, lang } = useTranslation("planner")
+    const unnamedLocation = t("UnnamedLocation")
+    const initialStartLocation = mipParseOtpLocation(query?.fromPlace, unnamedLocation)
+    const initialEndLocation = mipParseOtpLocation(query?.toPlace, unnamedLocation)
     const initialMode = otp2MipMode(query?.mode)
     const [plan, setPlan] = useState(null)
     const [planning, setPlanning] = useState(false)
@@ -82,16 +61,16 @@ function MIPPathController({ children, query, url }) {
             if (url) {
                 Router.push({
                     pathname: url,
-                    query: mipPathSearchQuery(lang, startLocation.label, startLocation.coordinates,
+                    query: mipPathSearchQuery(lang, planMode, 
+                        startLocation.label, startLocation.coordinates,
                         endLocation.label, endLocation.coordinates,
-                        planMode, planMode == MIPPlanMode.TRANSIT ? planDate : null,
-                        bikeOptions, true)
+                        planDateOption, planDate, bikeOptions)
                 })
             } else {
-                const newPlan = await mipPathSearch(lang, startLocation.label, startLocation.coordinates,
+                const newPlan = await mipPathSearch(lang, planMode, 
+                    startLocation.label, startLocation.coordinates,
                     endLocation.label, endLocation.coordinates,
-                    planMode, planMode == MIPPlanMode.TRANSIT ? planDate : null,
-                    bikeOptions, true)
+                    planDateOption, planDate, bikeOptions)
                 console.log(newPlan)
                 setPlan(newPlan)
             }
@@ -157,7 +136,7 @@ function MIPPathDataForm({ className, title, responsive }) {
             <div className={styles.path_data_panel}>
                 <MIPAddressAutocompleteInput id="start-position"
                     label={t("StartLabel")}
-                    icon="icons/path-start.svg"
+                    icon="/icons/path-start.svg"
                     searchString={startLocation?.label}
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} value={startLocation} />
@@ -165,7 +144,7 @@ function MIPPathDataForm({ className, title, responsive }) {
                 <MIPForms.IconButton className={styles.swapLocations} icon="/icons/path-swap.svg" onClick={swapLocations} label="scambia" />
                 <MIPAddressAutocompleteInput id="start-position"
                     label={t("EndLabel")}
-                    icon="icons/path-dest.svg"
+                    icon="/icons/path-dest.svg"
                     searchString={endLocation?.label}
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setEndLocation} value={endLocation} />
