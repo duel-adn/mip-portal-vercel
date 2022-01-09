@@ -24,6 +24,7 @@ $plan-hover-background: #ddd;
 // Utility
 
 // Contenitore del piano
+
 .plan_panel {
     width: 100%;
     height: 100%;
@@ -31,7 +32,8 @@ $plan-hover-background: #ddd;
     overflow-y: auto;
     color: $mip-text-color;
     font-size: $plan-font-size;
-    border: 1px solid $plan-border-color;
+    border-left: 1px solid $plan-border-color;
+    border-bottom: 1px solid $plan-border-color;
 
     & > * {
         width: 100%;
@@ -39,7 +41,7 @@ $plan-hover-background: #ddd;
         border-bottom: 1px solid $plan-border-color;
     }
 
-    &:last-child {
+    & > :last-child {
         border-bottom: none;
     }
 }
@@ -64,13 +66,9 @@ $plan-hover-background: #ddd;
     overflow-x: hidden;
     overflow-y: scroll;
     border-left: 1px solid $plan-border-color;
-    border-bottom: 1px solid $plan-border-color;
 
     & > * {
         border-bottom: 1px solid $plan-border-color;
-    }
-    & :last-child {
-        border-bottom: none;
     }
 }
 
