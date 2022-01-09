@@ -56,37 +56,6 @@ $input-row: 2;
         border-left: 1px dashed $mip-light-color;
     }
 
-    .submit_button {
-        grid-column: 2/2;
-        width: 80%;
-        margin: auto;
-        height: 3rem;
-        margin: 1.5rem auto .75rem auto;
-        padding: .3em 1em;
-        font-size: .875rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        background-color: $mip-light-background;
-        color: $mip-blue-color;
-        border-radius: .3rem;
-        &:hover,
-        &:focus {
-            text-decoration: underline;
-        }
-    }
-
-    .loading_indicator {
-        grid-row: $input-row;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-        height: 3rem;
-        margin: 1.5rem auto .75rem auto;
-        background-color: $mip-light-background;
-    }
-
     .path_options {
         grid-column: 1 / -1;
 
@@ -146,9 +115,10 @@ $input-row: 2;
         grid-column: 1 / -1;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        //justify-content: space-between;
         align-items: center;
         
+        label,
         input,
         select {
             margin-top: .5rem;
@@ -156,13 +126,44 @@ $input-row: 2;
             background-color: $mip-blue-background;
             color: $mip-light-color;
             border: 0;
-            border-bottom: 1px solid $mip-light-color;
             font-size: 1rem;
         }
-        input {
+        input, select {
             flex-grow: 1;
+            border-bottom: 1px solid $mip-light-color;
         }
     }
+
+    .loading_indicator,
+    .submit_button {
+        grid-column: 2/2;
+        width: 70%;
+        margin: auto;
+        height: 3rem;
+        margin: 1.5rem auto .75rem auto;
+        padding: .3em 1em;
+        background-color: $mip-light-background;
+        color: $mip-blue-color;
+        border-radius: .3rem;
+    }
+
+    .submit_button {
+        font-size: .875rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    .loading_indicator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
 
 // Layout per tablet
@@ -170,6 +171,23 @@ $input-row: 2;
 @media screen and (min-width: $mip-break-mobile) and (max-width: $mip-break-tablet){
     
     .path_data_dialog.responsive {
+        .path_data_panel {
+            display: flex;
+            margin-bottom: 0;
+        }
+        .input_separator {
+            display: none;
+        }
+        .swapLocations {
+            margin: auto 1rem;
+            transform: rotate(-90deg);
+        }
+        .submit_button {
+            width: auto;
+        }
+    }
+
+    .p-ath_data_dialog.responsive {
         display: grid;
         grid-gap: 1em;
         grid-template-columns: auto 1fr 1fr auto;
@@ -193,10 +211,6 @@ $input-row: 2;
         
         .input_separator {
             display: none;
-        }
-
-        .swap_button {
-            margin-bottom: 0;
         }
 
         .input {

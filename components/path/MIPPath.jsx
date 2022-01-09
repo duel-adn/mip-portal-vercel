@@ -11,7 +11,7 @@
 */
 import styles from './MIPPath.module.scss'
 
-import { createContext, useContext, useState, useRef, useEffect } from 'react';
+import { createContext, useContext, useState, useRef, useEffect } from 'react'
 import Router from 'next/router'
 
 import { RadioGroup } from '@headlessui/react'
@@ -20,9 +20,11 @@ import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation'
 import MIPAddressAutocompleteInput from './MIPAddressAutocompleteInput'
 
-import { mipCreateId, mipConcatenate } from '../../lib/MIPUtility';
+import { mipCreateId, mipConcatenate } from '../../lib/MIPUtility'
 import { MIPPlanMode, MIPDateOption, MIPBikeOptions, mipPathSearch, mipPathSearchQuery, otp2MipMode } from '../../lib/MIPPlannerAPI';
 import MIPForms from '../forms/MIPForms';
+import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPI18N"
+import { useDateTime } from "../../lib/MIPHooks"
 
 const initialContext = {
     plan: null
@@ -63,7 +65,7 @@ function MIPPathController({ children, query, url }) {
     const [endLocation, setEndLocation] = useState(initialEndLocation)
     const [planMode, setPlanMode] = useState(initialMode)
     const [planDateOption, setPlanDateOption] = useState(MIPDateOption.START_NOW)
-    const [planDate, setPlanDate] = useState(Date.now() + 5 * 60000)
+    const [planDate, setPlanDate, updatePlanDate, updatePlanTime] = useDateTime(Date.now() + 5 * 60000)
     const [bikeOptions, setBikeOptions] = useState(MIPBikeOptions.safe)
     const [map, setMap] = useState(null)
     const [selectedItinerary, setSelectedItinerary] = useState(null)
@@ -109,7 +111,7 @@ function MIPPathController({ children, query, url }) {
         endLocation, setEndLocation,
         planMode, setPlanMode,
         planDateOption, setPlanDateOption,
-        planDate, setPlanDate,
+        planDate, updatePlanDate, updatePlanTime,
         bikeOptions, setBikeOptions,
         selectedItinerary, setSelectedItinerary,
         swapLocations, recalcPathPlan,
@@ -160,90 +162,33 @@ function MIPPathDataForm({ className, title, responsive }) {
                     placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setStartLocation} value={startLocation} />
                 <div className={styles.input_separator} />
-                <MIPForms.IconButton icon="/icons/path-swap.svg" onClick={swapLocations} label="scambia" />
+                <MIPForms.IconButton className={styles.swapLocations} icon="/icons/path-swap.svg" onClick={swapLocations} label="scambia" />
                 <MIPAddressAutocompleteInput id="start-position"
                     label={t("EndLabel")}
                     icon="icons/path-dest.svg"
                     searchString={endLocation?.label}
                     placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
                     onChange={setEndLocation} value={endLocation} />
-                <MIPPathOptions planMode={planMode} setPlanMode={setPlanMode} />
-                <MIPTransitOptions mode={planMode} />
+            </div>
+            <div className={styles.path_data_panel}>
+                <MIPPathOptions />
+            </div>
+            <div className={styles.path_data_panel}>
+                <MIPTransitOptions />
+                <MIPBicycleOptions />
                 {planning ?
                     <MIPForms.Loading className={styles.loading_indicator} />
                     :
                     <input className={styles.submit_button} type="submit" value={t("Submit")} />
                 }
             </div>
-        </form>
+        </form >
     )
 }
 
-// toISOString riporta la data in GMT, quindi bisogna aggiustare la data passata
-// come argomento per "ingannarlo"
-function toISODate(d) {
-    return d ? new Date(d - 60000 * d.getTimezoneOffset()).toISOString().slice(0, -8) : null
-}
-
-function mipISODate(d) {
-    const date = new Date(d)
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-}
-
-function AdditionalOptions() {
+function MIPPathOptions() {
     const { t } = useTranslation("planner")
-    const {
-        planMode,
-        planDateOption, setPlanDateOption,
-        planDate, setPlanDate,
-        bikeOptions, setBikeOptions,
-    } = useContext(MIPPlannerContext)
-    const datePickerRef = useRef(null)
-    useEffect(() => {
-        if (datePickerRef.current) {
-            datePickerRef.current.value = mipISODate(planDate)
-            console.log(datePickerRef.current.value)
-        }
-    }, [])
-    return (
-        <div className={styles.path_options}>
-            {planMode == MIPPlanMode.TRANSIT && <>
-                <div className={styles.additional_options}>
-                    <select value={planDateOption} onChange={e => setPlanDateOption(e.target.value)}>
-                        {Object.values(MIPDateOption).map(k =>
-                            <option key={k} value={k}>{t("DateOption." + k)}</option>
-                        )}
-                    </select>
-                </div>
-                {planDateOption !== MIPDateOption.START_NOW &&
-                    <div className={styles.additional_options}>
-                        <input ref={datePickerRef} id="start-date-picker" type="date"
-                            onChange={e => setPlanDate
-                                (new Date(e.target.value))}
-                        />
-                        <input id="start-time-picker" type="time"
-                            onChange={e => setPlanDate
-                                (new Date(e.target.value))}
-                        />
-                    </div>
-                }
-            </>}
-            {planMode == MIPPlanMode.BICYCLE &&
-                <div className={styles.additional_options}>
-                    <label htmlFor="bike-option-selector">{t("BikePathTypeTitle")}</label>
-                    <select value={bikeOptions} onChange={e => setBikeOptions(e.target.value)}>
-                        {Object.keys(MIPBikeOptions).map(opt =>
-                            <option key={opt} value={opt}>{t(`BikePathType.${opt}`)}</option>
-                        )}
-                    </select>
-                </div>
-            }
-        </div >
-    )
-}
-
-function MIPPathOptions({ planMode, setPlanMode }) {
-    const { t } = useTranslation("planner")
+    const { planMode, setPlanMode } = useContext(MIPPlannerContext)
     return (
         <RadioGroup className={styles.path_options} value={planMode}
             onChange={setPlanMode} >
@@ -271,7 +216,7 @@ function MIPTransitOptions() {
     const {
         planMode,
         planDateOption, setPlanDateOption,
-        planDate, setPlanDate,
+        planDate, updatePlanDate, updatePlanTime,
     } = useContext(MIPPlannerContext)
     return (planMode === MIPPlanMode.TRANSIT ? <>
         <div className={styles.additional_options}>
@@ -284,15 +229,35 @@ function MIPTransitOptions() {
         {planDateOption !== MIPDateOption.START_NOW &&
             <div className={styles.additional_options}>
                 <input id="start-time-picker" type="time"
-                    onChange={e => setPlanDate
-                        (new Date(e.target.value))}
+                    onChange={e => updatePlanTime(e.target.value)}
+                    value={toISOLocalTime(planDate)}
                 />
                 <input id="start-date-picker" type="date"
-                    onChange={e => setPlanDate(e.target.valueAsNumber)}
-                    value={new Date(planDate).toISOString().slice(0, 10)}
+                    onChange={e => updatePlanDate(e.target.valueAsNumber)}
+                    value={toISOLocalDate(planDate)}
                 />
             </div>}
     </> : null)
+}
+
+function MIPBicycleOptions() {
+    const { t } = useTranslation("planner")
+    const {
+        planMode,
+        bikeOptions, setBikeOptions,
+    } = useContext(MIPPlannerContext)
+    return planMode == MIPPlanMode.BICYCLE ?
+        <div className={styles.additional_options}>
+            <label htmlFor="bike-option-selector">{t("BikePathTypeTitle")}</label>
+            <select id="bike-option-selector"
+                value={bikeOptions}
+                onChange={e => setBikeOptions(e.target.value)}>
+                {Object.keys(MIPBikeOptions).map(opt =>
+                    <option key={opt} value={opt}>{t(`BikePathType.${opt}`)}</option>
+                )}
+            </select>
+        </div>
+        : null
 }
 
 const MIPPath = {
