@@ -92,6 +92,9 @@ function MIPPathController({ children, query, url }) {
             setPlanning(false)
         }
     }
+    const zoomToPoint = (latLon) => {
+        map?.flyTo(latLon, 16)
+    }
     useEffect(() => {
         if (plan?.plan?.mbr && map) {
             map?.fitBounds(plan.plan.mbr)
@@ -112,7 +115,7 @@ function MIPPathController({ children, query, url }) {
         bikeOptions, setBikeOptions,
         selectedItinerary, setSelectedItinerary,
         swapLocations, recalcPathPlan,
-        setMap
+        zoomToPoint, setMap
     }
     useEffect(() => {
         if (initialStartLocation && initialEndLocation) {

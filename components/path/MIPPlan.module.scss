@@ -19,31 +19,33 @@ $plan-icon-col-width: 1.5rem;
 $plan-time-col-width: 4.5em;
 $plan-font-size: .875rem;
 $plan-border-color: $mip-light-border-color; 
-$plan-hover-background: #ddd;
+$plan-hover-background: #eee;
 
 // Utility
 
-// Contenitore del piano
-
-.plan_panel {
+.plan_panel,
+.itinerary_panel {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
     color: $mip-text-color;
     font-size: $plan-font-size;
-    border-left: 1px solid $plan-border-color;
-    border-bottom: 1px solid $plan-border-color;
+    font-size: $plan-font-size;
+    color: $mip-text-color;
+}
 
+// Contenitore del piano
+.plan_panel {
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid $plan-border-color;
+    border: 1px solid $plan-border-color;
+    
     & > * {
         width: 100%;
         background-color: $mip-light-background;
         border-bottom: 1px solid $plan-border-color;
     }
 
-    & > :last-child {
-        border-bottom: none;
-    }
 }
 
 // Contenintore della descrizione di un itinerario
@@ -53,9 +55,8 @@ $plan-hover-background: #ddd;
     left: 90%;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
     overflow: hidden;
+
     &.open {
         left: 0%;
     }
@@ -156,17 +157,6 @@ $plan-hover-background: #ddd;
         margin-right: .5rem;
     }
 
-    .plate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 0 .5em;
-        margin-right: .5rem;
-        border: 1px solid darkgray;
-        border-radius: 2px;
-        line-height: 1.2rem;
-    }
-
     .separator {
         margin-right: .5rem;
         font-size: .875rem;
@@ -176,33 +166,45 @@ $plan-hover-background: #ddd;
 // Bottone apertura Leg
 
 .leg_expand_button {
-    width: 100%;
-    background-color: $mip-light-background;
-    text-align: start;
-    &:hover,
-    &:focus {
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: auto;
+    border-radius: .2rem;
+    background-color: transparent;
+    border: 1px solid $plan-border-color;
+
+    img {
+        margin: auto;
+    }
+    &:hover {   
         background-color: $plan-hover-background;
+    }
+    &:focus {
+        border: 1px solid $mip-text-color;
+    }
+    &.open {
+        transform: rotate(180deg);
     }
 }
 
 .leg_header {
-    grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr $plan-icon-col-width;
     grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr auto;
     min-width: 12rem;
 
     .title {
         grid-column: 2/4;
     }
+}
 
-    .plate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 0 .5em;
-        margin-right: .5rem;
-        border: 1px solid darkgray;
-        border-radius: 2px;
-    }
+.plate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 .5em;
+    margin-right: .5rem;
+    border: 1px solid darkgray;
+    border-radius: 2px;
 }
 
 .location_header{
@@ -210,21 +212,24 @@ $plan-hover-background: #ddd;
     text-transform: capitalize;
 }
 
+.stop_panel,
 .step_panel {
     display: grid;
     grid-template-columns: $plan-icon-col-width max-content 1fr;
+    align-items: center;
+
+    &:focus,
+    &:hover {
+        background-color: $plan-hover-background;
+    }
+}
+
+.step_panel {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    min-height: 1em;
-    align-items: center;
     
     .instruction {
         grid-column:  2 / -1;
-    }
-
-    .emphasis {
-        color: $mip-dark-blue-color;
-        font-weight: 600;
     }
 
     .distance {
@@ -238,37 +243,33 @@ $plan-hover-background: #ddd;
         height: 50%;
         border-bottom: 1px solid $mip-light-border-color;
     }
+
 }
 
 .stop_panel {
-    display: grid;
-    grid-template-columns: $plan-icon-col-width $plan-time-col-width  1fr;
-    align-items: center;
     border: 0;
     padding-top: 0;
     padding-bottom: 0;
-    border-radius: 0;
 
     .time {
         grid-column:  2 / 2;
-        justify-self: center;
     }
 
     .stop_name {
         grid-column:  3 / -1;
         position: relative;
-        min-height: 2rem;
-        height: 100%;
         line-height: 2rem;
         border-left: 4px solid darkgrey;
-        margin-left: 4px;
+        margin-left: 8px;
         padding-left: 10px;
+        background-color: transparent;
     }
 
     .stop_name::after {
-        content: url("data:image/svg+xml,<svg width='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='5' cy='5' r='5' fill='white' stroke='black'/></svg>");
+        content: ' ';
+        content: url("data:image/svg+xml,<svg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='5' fill='white' stroke='black'/></svg>");
         position: absolute;
-        left: -7px;
+        left: -8px;
         top: 0%;
     }
 }
@@ -276,7 +277,7 @@ $plan-hover-background: #ddd;
 .location_popup {
     padding: .25rem;
     font-size: .826rem;
-
+    
     .title {
         font-weight: 600;
         margin-bottom: .25rem;

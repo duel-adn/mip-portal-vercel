@@ -19,13 +19,19 @@ import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersCo
 import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
 import { mipReverseGeocode } from '../../lib/MIPPlannerAPI'
-import { Popover } from '@headlessui/react'
+
+const stopIcon = L.icon({
+  iconUrl: '/path-icons/map-stop.svg',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8],
+  popupAnchor: [0, -8],
+})
 
 const positionIcon = L.icon({
   iconUrl: '/path-icons/position.svg',
   iconSize: [30, 30],
   iconAnchor: [15, 15],
-  popupAnchor: [0, -20],
+  popupAnchor: [0, -15],
 })
 
 const departureIcon = L.icon({
@@ -143,7 +149,7 @@ function PlanItineraryLayer({ itinerary, selected, color }) {
       <Polyline key={leg.id} positions={leg.rawGeometry}
         pathOptions={
           {
-            color: selected ?  leg.routeColor ?? color : color,
+            color: selected ? leg.routeColor ?? color : color,
             opacity: selected ? 1 : .9,
             weight: 6
           }
@@ -154,6 +160,45 @@ function PlanItineraryLayer({ itinerary, selected, color }) {
         </Popup>
       </Polyline>
     )
+  )
+}
+
+function LegStopsLayer({ leg }) {
+  return leg.isTransit ?
+    <>
+      <StopMarker leg={leg} stop={leg.startLocation} />
+      {leg?.intermediateStops?.map(stop =>
+        <StopMarker key={stop.id} leg={leg} stop={stop} />
+      )}
+      <StopMarker leg={leg} stop={leg.endLocation} />
+    </>
+    : null
+}
+
+function StopMarker({ leg, stop }) {
+  return (
+    <Marker key={stop.id} position={stop.latLon} icon={stopIcon}>
+      <Popup>
+        <div className={styles.location_popup}>
+          <div className={styles.title}>
+            <span className={styles.plate} style={{
+              color: leg.routeTextColor,
+              backgroundColor: leg.routeColor,
+              borderColor: leg.borderColor
+            }}>{leg.transitRouteName}</span>
+            {leg.agencyUrl ?
+              <a href={leg.agencyUrl} target="_blank" rel="noopener noreferrer">
+                {" " + leg.agencyName}
+              </a>
+              :
+              <span>{leg.agencyName}</span>
+            }
+          </div>
+          <div>{leg.headsign}</div>
+          <div>{stop.name}</div>
+        </div>
+      </Popup>
+    </Marker>
   )
 }
 
@@ -186,13 +231,18 @@ export default function MIPPathMap() {
           />
         </LayersControl.Overlay>
       </LayersControl>
-      {selectedItinerary && 
-        <PlanItineraryLayer key={selectedItinerary.id} selected color={selectedItinerary.color} itinerary={selectedItinerary} />
+      {selectedItinerary &&
+        <>
+          <PlanItineraryLayer key={selectedItinerary.id} selected color={selectedItinerary.color} itinerary={selectedItinerary} />
+          {selectedItinerary?.legs?.map(leg =>
+            <LegStopsLayer key={leg.id} leg={leg} />
+          )}
+        </>
       }
       {!selectedItinerary && plan?.plan?.itineraries && plan.plan.itineraries.reverse().map(it =>
-          <PlanItineraryLayer key={it.id} itinerary={it}
-            color={it.color} />
-        )
+        <PlanItineraryLayer key={it.id} itinerary={it}
+          color={it.color} />
+      )
       }
       {startLocation &&
         <PathEndpointLayer title="Partenza" location={startLocation} icon={departureIcon}

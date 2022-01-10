@@ -91,7 +91,7 @@ function MIPItinerariesPanel({ plan }) {
         {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
             <MIPItineraryDescriptionPanel key={itn.is ?? idx} itinerary={itn} color={itn.color} onClick={() => setSelectedItinerary(itn)} />
         )}
-        <MIPItineraryDetailsPanel plan={plan} itinerary={selectedItinerary} open onClick={() => setSelectedItinerary(null)}/>
+        <MIPItineraryDetailsPanel plan={plan} itinerary={selectedItinerary} open onClick={() => setSelectedItinerary(null)} />
     </>)
 }
 
@@ -195,9 +195,7 @@ function MIPLegPanel({ leg }) {
     return (
         <Disclosure>
             {({ open }) => <>
-                <Disclosure.Button className={mipConcatenate(styles.leg_expand_button, open ? styles.panel_open : null)}>
-                    <MIPLegDescriptionPanel leg={leg} open={open} expandable />
-                </Disclosure.Button>
+                <MIPLegDescriptionPanel leg={leg} open={open} expandable />
                 <Disclosure.Panel>
                     {leg.steps && leg.steps.map((step, idx) =>
                         <MIPStepPanel key={step.id ?? idx} step={step} />
@@ -229,19 +227,18 @@ function MIPLegPanel({ leg }) {
 function MIPLegDescriptionPanel({ leg, open, expandable }) {
     const { t, lang } = useTranslation(I18NNamespace.COMMON)
     return (
-        <div className={mipConcatenate(styles.leg_header, expandable ? null : styles.map_panel)}>
+        <div className={mipConcatenate(styles.leg_header, expandable ? null : styles.map_panel, open ? styles.panel_open : null)}>
             {leg.isTransit ?
                 <MIPTransitLegHeader leg={leg} />
                 :
                 <MIPLegHeader leg={leg} />
             }
-            {expandable && (open ?
-                <img className={styles.path_icon}
-                    src="/path-icons/close-panel.svg" aria-hidden={true} alt={t("Open")} />
-                :
-                <img className={styles.path_icon}
-                    src="/path-icons/open-panel.svg" aria-hidden={true} alt={t("Closed")} />
-            )}
+            {expandable &&
+                <Disclosure.Button className={mipConcatenate(styles.leg_expand_button, open ? styles.open : null)}>
+                    <img className={styles.path_icon}
+                        src="/path-icons/open-panel.svg" aria-hidden={true} alt={t("Closed")} />
+                </Disclosure.Button>
+            }
         </div>
     )
 }
@@ -315,13 +312,14 @@ function MIPLegHeader({ leg }) {
  */
 function MIPStepPanel({ step }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const { zoomToPoint } = useContext(MIPPath.Context)
     const direction = step.instruction?.direction ? t(`Instruction.${step.instruction.direction}`) : null
     const absoluteDirection = step.instruction?.absoluteDirection ? t(`Instruction.${step.instruction.absoluteDirection}`) : null
     const exit = step.instruction?.exit ? t(`Instruction.${step.instruction.exit}`) : null
     const translation = step.instruction ? t(`Instruction.${step.instruction.instruction}`,
         { streetName: step.instruction?.streetName, direction, absoluteDirection, exit }) : null
     return (translation ?
-        <div className={styles.step_panel}>
+        <div className={styles.step_panel} onClick={() => zoomToPoint(step.latLon)}>
             <img className={styles.icon} src={`/path-icons/${step.icon}.svg`} />
             <div className={styles.instruction}>{translation}</div>
             <div className={styles.distance}>{translateDistance(lang, step.distance_m)}&nbsp;</div>
@@ -341,8 +339,9 @@ function MIPStepPanel({ step }) {
  */
 function MIPStopPanel({ leg, stop, icon }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const { zoomToPoint } = useContext(MIPPath.Context)
     return (
-        <div className={styles.stop_panel}>
+        <div className={styles.stop_panel} onClick={() => zoomToPoint(stop.latLon)}>
             {icon &&
                 <img className={styles.icon} src={`/path-icons/${icon}.svg`} aria-hidden={true} />
             }
