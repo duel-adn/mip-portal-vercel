@@ -89,7 +89,7 @@ function MIPItinerariesPanel({ plan }) {
     const itineraries = plan?.itineraries
     return (<>
         {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
-            <MIPItineraryDescriptionPanel itinerary={itn} color={itn.color} onClick={() => setSelectedItinerary(itn)} />
+            <MIPItineraryDescriptionPanel key={itn.is ?? idx} itinerary={itn} color={itn.color} onClick={() => setSelectedItinerary(itn)} />
         )}
         <MIPItineraryDetailsPanel plan={plan} itinerary={selectedItinerary} open onClick={() => setSelectedItinerary(null)}/>
     </>)
@@ -277,6 +277,7 @@ function MIPTransitLegHeader({ leg }) {
                         <span>{leg.agencyName}</span>
                     }
                 </div>
+                <div>{leg.routeShortName !== leg.transitRouteName ? leg.routeShortName : null}</div>
                 <div>{leg.headsign}</div>
                 <div>{t("FromLocation", { name: startName })}</div>
                 <div>{t("ToLocation", { name: endName })}</div>
