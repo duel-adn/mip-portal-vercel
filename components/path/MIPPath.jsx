@@ -26,12 +26,19 @@ import MIPForms from '../forms/MIPForms';
 import { toISOLocalDate, toISOLocalTime } from "../../lib/MIPI18N"
 import { useDateTime } from "../../lib/MIPHooks"
 
-const initialContext = {
-    plan: null
-}
+// Contesto del planner, usato dai componenti interni
 
-const MIPPlannerContext = createContext(initialContext)
+const MIPPlannerContext = createContext({ plan: null })
 
+/**
+ * Componente headless per il controllo dell'interfaccia del 
+ * trip planner
+ * 
+ * @param {[Object]} children componenti interni 
+ * @param {Object} query parametri nella url
+ * @param {String} url url della pagina da invocare per la pianificazione
+ * @returns 
+ */
 function MIPPathController({ children, query, url }) {
     const { t, lang } = useTranslation("planner")
     const unnamedLocation = t("UnnamedLocation")
@@ -54,36 +61,47 @@ function MIPPathController({ children, query, url }) {
         setEndLocation(temp)
     }
     const recalcPathPlan = async (lang) => {
-        setPlanning(true)
-        setPlan(null)
-        setSelectedItinerary(null)
-        try {
-            if (url) {
-                Router.push({
-                    pathname: url,
-                    query: mipPathSearchQuery(lang, planMode, 
+        if (!startLocation) {
+            toast.error(t("MissingStart"), { toastId: "no-start-error" })
+        } else if (!endLocation) {
+            toast.error(t("MissingEnd"), { toastId: "no-end-error" })
+        } else {
+            setPlanning(true)
+            setPlan(null)
+            setSelectedItinerary(null)
+            try {
+                if (url) {
+                    Router.push({
+                        pathname: url,
+                        query: mipPathSearchQuery(lang, planMode,
+                            startLocation.label, startLocation.coordinates,
+                            endLocation.label, endLocation.coordinates,
+                            planDateOption, planDate, bikeOptions)
+                    })
+                } else {
+                    const newPlan = await mipPathSearch(lang, planMode,
                         startLocation.label, startLocation.coordinates,
                         endLocation.label, endLocation.coordinates,
                         planDateOption, planDate, bikeOptions)
-                })
-            } else {
-                const newPlan = await mipPathSearch(lang, planMode, 
-                    startLocation.label, startLocation.coordinates,
-                    endLocation.label, endLocation.coordinates,
-                    planDateOption, planDate, bikeOptions)
-                console.log(newPlan)
-                setPlan(newPlan)
+                    console.log(newPlan)
+                    setPlan(newPlan)
+                }
+            } catch (exc) {
+                console.log(exc)
             }
-        } catch (exc) {
-            console.log(exc)
+            setPlanning(false)
         }
-        setPlanning(false)
     }
     useEffect(() => {
         if (plan?.plan?.mbr && map) {
             map?.fitBounds(plan.plan.mbr)
         }
     }, [plan])
+    useEffect(() => {
+        if (selectedItinerary) {
+            map?.fitBounds(selectedItinerary.mbr)
+        }
+    }, [selectedItinerary])
     const context = {
         plan, planning,
         startLocation, setStartLocation,
@@ -108,53 +126,32 @@ function MIPPathController({ children, query, url }) {
     )
 }
 
+/**
+ * Form per la richiesta dei dati per la pianificazione
+ * @param {String} className nome della classe da aggiungere nell'elemento esterno 
+ * @param {String} title titolo del dialogo 
+ * @param {Boolean} responsive se true il dialogo cambia forma sui tablet
+ * @returns elemento react
+ */
 function MIPPathDataForm({ className, title, responsive }) {
-    const {
-        startLocation, setStartLocation,
-        endLocation, setEndLocation,
-        planMode, setPlanMode,
-        planning, swapLocations, recalcPathPlan
-    } = useContext(MIPPlannerContext)
+    const { planning, recalcPathPlan } = useContext(MIPPlannerContext)
     const { t, lang } = useTranslation("planner")
     function onPathSearch(event) {
         event.preventDefault()
         event.stopPropagation()
-        if (!startLocation) {
-            toast.error(t("MissingStart"), { toastId: "no-start-error" })
-        } else if (!endLocation) {
-            toast.error(t("MissingEnd"), { toastId: "no-end-error" })
-        } else {
-            if (recalcPathPlan) {
-                recalcPathPlan(lang)
-            }
-        }
+        recalcPathPlan && recalcPathPlan(lang)
     }
     return (
         <form className={mipConcatenate(className, styles.path_data_dialog, responsive ? styles.responsive : undefined)}
             onSubmit={onPathSearch}>
             <MIPForms.IconTitle className={styles.title} icon="/icons/path-search.svg" title={title} />
+            <MIPPathLocations className={styles.path_data_panel} />
+            <MIPPathModeOptions className={styles.path_data_panel} />
             <div className={styles.path_data_panel}>
-                <MIPAddressAutocompleteInput id="start-position"
-                    label={t("StartLabel")}
-                    icon="/icons/path-start.svg"
-                    searchString={startLocation?.label}
-                    placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
-                    onChange={setStartLocation} value={startLocation} />
-                <div className={styles.input_separator} />
-                <MIPForms.IconButton className={styles.swapLocations} icon="/icons/path-swap.svg" onClick={swapLocations} label="scambia" />
-                <MIPAddressAutocompleteInput id="start-position"
-                    label={t("EndLabel")}
-                    icon="/icons/path-dest.svg"
-                    searchString={endLocation?.label}
-                    placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
-                    onChange={setEndLocation} value={endLocation} />
+                <MIPTransitOptions className={styles.additional_options}/>
+                <MIPBicycleOptions className={styles.additional_options} />
             </div>
             <div className={styles.path_data_panel}>
-                <MIPPathOptions />
-            </div>
-            <div className={styles.path_data_panel}>
-                <MIPTransitOptions />
-                <MIPBicycleOptions />
                 {planning ?
                     <MIPForms.Loading className={styles.loading_indicator} />
                     :
@@ -165,32 +162,79 @@ function MIPPathDataForm({ className, title, responsive }) {
     )
 }
 
-function MIPPathOptions() {
+/**
+ * Elemento per la richiesta del punto di partenza e arrivo
+ * 
+ * @param {String} className nome della classe da aggiungere nell'elemento esterno 
+ * @returns elemento React
+ */
+function MIPPathLocations({ className }) {
     const { t } = useTranslation("planner")
-    const { planMode, setPlanMode } = useContext(MIPPlannerContext)
+    const {
+        startLocation, setStartLocation,
+        endLocation, setEndLocation,
+        swapLocations
+    } = useContext(MIPPlannerContext)
     return (
-        <RadioGroup className={styles.path_options} value={planMode}
-            onChange={setPlanMode} >
-            <RadioGroup.Label className={styles.label}>{t("PlanType")}</RadioGroup.Label>
-            <div className={styles.radio_group}>
-                {Object.values(MIPPlanMode).map(value =>
-                    <RadioGroup.Option key={value}
-                        value={value}
-                        className={({ active, checked }) => mipConcatenate(styles.option,
-                            active ? styles.active : '',
-                            checked ? styles.checked : '')
-                        }>
-                        <img className={styles.icon} aria-hidden="true"
-                            src={`/path-icons/mode-${value.toLowerCase()}.svg`} alt={t(`ModeLabel.${value}`)} />
-                        <RadioGroup.Label className={styles.radio_label}>{t(`ModeLabel.${value}`)}</RadioGroup.Label>
-                    </RadioGroup.Option>
-                )}
-            </div>
-        </RadioGroup>
+        <div className={className}>
+            <MIPAddressAutocompleteInput id="start-position"
+                label={t("StartLabel")}
+                icon="/icons/path-start.svg"
+                searchString={startLocation?.label}
+                placeholder={t("StartPlaceholder")} loadingMsg={t("Loading")}
+                onChange={setStartLocation} value={startLocation} />
+            <div className={styles.input_separator} />
+            <MIPForms.IconButton className={styles.swapLocations} icon="/icons/path-swap.svg" onClick={swapLocations} label="scambia" />
+            <MIPAddressAutocompleteInput id="start-position"
+                label={t("EndLabel")}
+                icon="/icons/path-dest.svg"
+                searchString={endLocation?.label}
+                placeholder={t("EndPlaceholder")} loadingMsg={t("Loading")}
+                onChange={setEndLocation} value={endLocation} />
+        </div>
     )
 }
 
-function MIPTransitOptions() {
+/**
+ * Elemento per la richiesta della modalità di trasporto
+ * 
+ * @param {String} className nome della classe da aggiungere nell'elemento esterno 
+ * @returns elemento React
+ */
+function MIPPathModeOptions({ className }) {
+    const { t } = useTranslation("planner")
+    const { planMode, setPlanMode } = useContext(MIPPlannerContext)
+    return (
+        <div className={className}>
+            <RadioGroup className={styles.path_options} value={planMode}
+                onChange={setPlanMode} >
+                <RadioGroup.Label className={styles.label}>{t("PlanType")}</RadioGroup.Label>
+                <div className={styles.radio_group}>
+                    {Object.values(MIPPlanMode).map(value =>
+                        <RadioGroup.Option key={value}
+                            value={value}
+                            className={({ active, checked }) => mipConcatenate(styles.option,
+                                active ? styles.active : '',
+                                checked ? styles.checked : '')
+                            }>
+                            <img className={styles.icon} aria-hidden="true"
+                                src={`/path-icons/mode-${value.toLowerCase()}.svg`} alt={t(`ModeLabel.${value}`)} />
+                            <RadioGroup.Label className={styles.radio_label}>{t(`ModeLabel.${value}`)}</RadioGroup.Label>
+                        </RadioGroup.Option>
+                    )}
+                </div>
+            </RadioGroup>
+        </div>
+    )
+}
+
+/**
+ * Richiesta di parametri addizionali per la modalità transit
+ * 
+ * @param {String} className nome della classe da aggiungere nell'elemento esterno 
+ * @returns elemento React
+ */
+function MIPTransitOptions({ className }) {
     const { t } = useTranslation("planner")
     const {
         planMode,
@@ -198,7 +242,7 @@ function MIPTransitOptions() {
         planDate, updatePlanDate, updatePlanTime,
     } = useContext(MIPPlannerContext)
     return (planMode === MIPPlanMode.TRANSIT ? <>
-        <div className={styles.additional_options}>
+        <div className={className}>
             <select id="plan-date" value={planDateOption} onChange={e => setPlanDateOption(e.target.value)}>
                 {Object.values(MIPDateOption).map(k =>
                     <option key={k} value={k}>{t("DateOption." + k)}</option>
@@ -206,7 +250,7 @@ function MIPTransitOptions() {
             </select>
         </div>
         {planDateOption !== MIPDateOption.START_NOW &&
-            <div className={styles.additional_options}>
+            <div className={className}>
                 <input id="start-time-picker" type="time"
                     onChange={e => updatePlanTime(e.target.value)}
                     value={toISOLocalTime(planDate)}
@@ -219,14 +263,20 @@ function MIPTransitOptions() {
     </> : null)
 }
 
-function MIPBicycleOptions() {
+/**
+ * Richiesta di parametri addizionali per la modalità bike
+ * 
+ * @param {String} className nome della classe da aggiungere nell'elemento esterno 
+ * @returns elemento React
+ */
+function MIPBicycleOptions({ className }) {
     const { t } = useTranslation("planner")
     const {
         planMode,
         bikeOptions, setBikeOptions,
     } = useContext(MIPPlannerContext)
     return planMode == MIPPlanMode.BICYCLE ?
-        <div className={styles.additional_options}>
+        <div className={className}>
             <label htmlFor="bike-option-selector">{t("BikePathTypeTitle")}</label>
             <select id="bike-option-selector"
                 value={bikeOptions}

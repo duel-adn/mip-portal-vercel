@@ -1,4 +1,4 @@
-/**
+/**}
     (C) Duel srl 2021.
 
     Componenti per la presentazione del risultato del calcolo del percorso
@@ -21,32 +21,22 @@ import { I18NNamespace, translateDistance, translateDuration, translateUnixDateT
 import MIPPath from "./MIPPath"
 import { MIPErrorCode } from "../../lib/MIPErrorHandling"
 
-const PlanColors = ["#0061B2", "#DA3463", "#00B431", "#F9C900"]
-
 /**
  * Pannelllo con i risultati di una pianificazione
  * 
- * @param {Object} plan piano calcolato dal server 
+ * @param {String} className nome della classe da aggiungere all'elemento esterno
  * @param {Boolean} displayHeader true se bisogna mostrare i dati riassuntivi del piano
  * @returns il componente React con i risultati del piano
  */
-function MIPPlanPanel({ displayHeader }) {
-    const {
-        plan
-    } = useContext(MIPPath.Context)
-    console.log('plan')
-    console.log(plan)
+function MIPPlanPanel({ className, displayHeader }) {
+    const { plan } = useContext(MIPPath.Context)
     return (
-        <div className={styles.plan_panel}>
-            {plan?.error &&
-                <MIPPlanMessages plan={plan} />
+        <div className={mipConcatenate(className, styles.plan_panel)}>
+            <MIPPlanMessages className={styles.plan_msg_panel} plan={plan} />
+            {displayHeader &&
+                <MIPPlanDescriptionPanel className={styles.plan_header} plan={plan?.plan} />
             }
-            {displayHeader && plan &&
-                <MIPPlanDescriptionPanel plan={plan?.plan} />
-            }
-            {plan &&
-                <MIPItinerariesPanel plan={plan?.plan} />
-            }
+            <MIPItinerariesPanel plan={plan?.plan} />
         </div>
     )
 }
@@ -57,17 +47,13 @@ function MIPPlanPanel({ displayHeader }) {
  * @param {Object} plan piano calcolato dal server 
  * @returns un elemento React con i messaggi di errore
  */
-function MIPPlanMessages({ plan }) {
+function MIPPlanMessages({ className, plan }) {
     const { t } = useTranslation(I18NNamespace.ERROR)
-    return (
-        <>
-            {plan?.error &&
-                <div className={styles.plan_msg_panel}>
-                    {t(plan.error.mipErrorCode ?? MIPErrorCode.MIP_INV_SRV_RESP)}
-                </div>
-            }
-        </>
-    )
+    return plan?.error ?
+        <div className={className}>
+            {t(plan.error.mipErrorCode ?? MIPErrorCode.MIP_INV_SRV_RESP)}
+        </div>
+        : null
 }
 
 /**
@@ -77,10 +63,10 @@ function MIPPlanMessages({ plan }) {
  * 
  * @returns il componente React con òa descrizione del piano
  */
-function MIPPlanDescriptionPanel({ plan }) {
+function MIPPlanDescriptionPanel({ className, plan, onClick }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
-    return (
-        <div className={styles.plan_header}>
+    return plan ?
+        <div className={className} onClick={onClick}>
             <img src="/path-icons/plan-close.svg" alt="chiudi" />
             <div>
                 <div>{t("From")} <b>{plan?.startLocation?.name ?? t("UnnamedLocation")}</b></div>
@@ -88,7 +74,7 @@ function MIPPlanDescriptionPanel({ plan }) {
                 <div>{t("StartTime")} <b>{translateUnixDateTime(lang, plan?.startTime ?? Date.now())}</b></div>
             </div>
         </div>
-    )
+        : null
 }
 
 /**
@@ -98,33 +84,14 @@ function MIPPlanDescriptionPanel({ plan }) {
  * @returns un elemento React con i dati degli itinerari
  */
 function MIPItinerariesPanel({ plan }) {
-    const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const { t } = useTranslation(I18NNamespace.PLANNER)
+    const { selectedItinerary, setSelectedItinerary } = useContext(MIPPath.Context)
     const itineraries = plan?.itineraries
     return (<>
         {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
-            <Disclosure key={itn?.id ?? idx}>
-                {({ open }) => <>
-                    <Disclosure.Button>
-                        <MIPItineraryDescriptionPanel itinerary={itn} />
-                    </Disclosure.Button>
-                    {open &&
-                    <Disclosure.Panel id={itn.id} className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
-                        <Disclosure.Button aria-label={t("OpenPanel")}>
-                            <MIPPlanDescriptionPanel plan={plan} />
-                        </Disclosure.Button>
-                        <div className={styles.itinerary_details}>
-                            <MIPItineraryDescriptionPanel open={open} itinerary={itn} />
-                            <div className={styles.location_header}>{plan?.startLocation?.name}</div>
-                            {itn.legs?.length > 0 && itn.legs.map((leg, idx) =>
-                                <MIPLegPanel key={leg?.id ?? idx} leg={leg} />
-                            )}
-                            <div className={styles.location_header}>{plan?.endLocation?.name}</div>
-                        </div>
-                    </Disclosure.Panel>
-                    }
-                </>}
-            </Disclosure>
+            <MIPItineraryDescriptionPanel itinerary={itn} color={itn.color} onClick={() => setSelectedItinerary(itn)} />
         )}
+        <MIPItineraryDetailsPanel plan={plan} itinerary={selectedItinerary} open onClick={() => setSelectedItinerary(null)}/>
     </>)
 }
 
@@ -132,15 +99,19 @@ function MIPItinerariesPanel({ plan }) {
  * Pannello usato per mostrare i dati riassuntivi di un itinerario
  * 
  * @param {Boolean} open flag che dice se il pannello è aperto
- * @param {Object} itinerary itinerario da mostrare
+ * @param {Object} itinerary itinerario da mostrare}
  * @returns elemento React
  */
-function MIPItineraryDescriptionPanel({ itinerary, open }) {
+function MIPItineraryDescriptionPanel({ itinerary, open, color, onClick }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
-    const iconUrl = `/path-icons/${itinerary.mode?.toLowerCase()}.svg`
-    return (
-        <div className={styles.itinerary_header}>
-            <img className={styles.path_icon} src={iconUrl} alt={t(`ModeLabel.${itinerary.mode}`)} />
+    return itinerary ?
+        <div className={styles.itinerary_header}
+            style={color ? { borderLeft: `6px solid ${color}` } : null}
+            onClick={onClick}>
+
+            <img className={styles.path_icon}
+                src={`/path-icons/${itinerary?.mode?.toLowerCase()}.svg`}
+                alt={t(`ModeLabel.${itinerary.mode}`)} />
             <div>
                 {itinerary.startTime &&
                     <div className={styles.title}>{t("DepartureTime", { time: translateUnixDateTime(lang, itinerary.startTime) })}</div>
@@ -166,7 +137,23 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
                 <div className={styles.cta}>{t("Details")}</div>
             }
         </div>
-    )
+        : null
+}
+
+function MIPItineraryDetailsPanel({ plan, itinerary, open, onClick }) {
+    return itinerary ?
+        <div className={mipConcatenate(styles.itinerary_panel, open ? styles.open : null)}>
+            <MIPPlanDescriptionPanel className={styles.plan_header} plan={plan} onClick={onClick} />
+            <div className={styles.itinerary_details}>
+                <MIPItineraryDescriptionPanel open itinerary={itinerary} />
+                <div className={styles.location_header}>{plan?.startLocation?.name}</div>
+                {itinerary.legs?.length > 0 && itinerary.legs.map((leg, idx) =>
+                    <MIPLegPanel key={leg?.id ?? idx} leg={leg} />
+                )}
+                <div className={styles.location_header}>{plan?.endLocation?.name}</div>
+            </div>
+        </div>
+        : null
 }
 
 /**
@@ -176,7 +163,7 @@ function MIPItineraryDescriptionPanel({ itinerary, open }) {
  */
 function MIPItineraryPictogram({ pictogram }) {
     const { t } = useTranslation(I18NNamespace.PLANNER)
-    return ( pictogram ?
+    return (pictogram ?
         <div className={styles.pictogram}>
             {pictogram && pictogram.map((pict, idx) => <Fragment key={idx}>
                 <img src={`/path-icons/${t("LegMode." + pict.mode + ".Icon")}.svg`} alt={t("LegMode." + pict.mode + ".Description")} />
@@ -216,15 +203,15 @@ function MIPLegPanel({ leg }) {
                         <MIPStepPanel key={step.id ?? idx} step={step} />
                     )}
                     <div>
-                    {leg.isTransit &&
-                        <MIPStopPanel leg={leg} stop={leg.startLocation} icon="step-in" />
-                    }
-                    {leg.intermediateStops && leg.intermediateStops.map((stop, idx) =>
-                        <MIPStopPanel key={stop.id ?? idx} leg={leg} stop={stop} />
-                    )}
-                    {leg.isTransit &&
-                       <MIPStopPanel leg={leg} stop={leg.endLocation} icon="step-out" />
-                    }
+                        {leg.isTransit &&
+                            <MIPStopPanel leg={leg} stop={leg.startLocation} icon="step-in" />
+                        }
+                        {leg.intermediateStops && leg.intermediateStops.map((stop, idx) =>
+                            <MIPStopPanel key={stop.id ?? idx} leg={leg} stop={stop} />
+                        )}
+                        {leg.isTransit &&
+                            <MIPStopPanel leg={leg} stop={leg.endLocation} icon="step-out" />
+                        }
                     </div>
                 </Disclosure.Panel>
             </>}
@@ -256,19 +243,6 @@ function MIPLegDescriptionPanel({ leg, open, expandable }) {
                     src="/path-icons/open-panel.svg" aria-hidden={true} alt={t("Closed")} />
             )}
         </div>
-    )
-}
-
-function MIPLegDescription({leg}) {
-    const { t } = useTranslation(I18NNamespace.COMMON)
-    return (
-        <div className={styles.leg_header} style={{padding: ".5rem 0"}}>
-            {leg.isTransit ?
-                <MIPTransitLegHeader leg={leg} />
-                :
-                <MIPLegHeader leg={leg} />
-            }
-    </div>
     )
 }
 
@@ -343,16 +317,16 @@ function MIPStepPanel({ step }) {
     const direction = step.instruction?.direction ? t(`Instruction.${step.instruction.direction}`) : null
     const absoluteDirection = step.instruction?.absoluteDirection ? t(`Instruction.${step.instruction.absoluteDirection}`) : null
     const exit = step.instruction?.exit ? t(`Instruction.${step.instruction.exit}`) : null
-    const translation = step.instruction ? t(`Instruction.${step.instruction.instruction}`, 
+    const translation = step.instruction ? t(`Instruction.${step.instruction.instruction}`,
         { streetName: step.instruction?.streetName, direction, absoluteDirection, exit }) : null
-    return (translation ? 
+    return (translation ?
         <div className={styles.step_panel}>
             <img className={styles.icon} src={`/path-icons/${step.icon}.svg`} />
             <div className={styles.instruction}>{translation}</div>
             <div className={styles.distance}>{translateDistance(lang, step.distance_m)}&nbsp;</div>
             <div className={styles.filler} />
         </div>
-        :null
+        : null
     )
 }
 

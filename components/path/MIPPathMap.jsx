@@ -137,13 +137,14 @@ function LocationMarker({ title, icon, setStartLocation, setEndLocation }) {
   )
 }
 
-function PlanItineraryLayer({ itinerary }) {
+function PlanItineraryLayer({ itinerary, selected, color }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
       <Polyline key={leg.id} positions={leg.rawGeometry}
         pathOptions={
           {
-            color: leg.routeColor ?? '#222',
+            color: selected ?  leg.routeColor ?? color : color,
+            opacity: selected ? 1 : .9,
             weight: 6
           }
         }
@@ -160,7 +161,7 @@ export default function MIPPathMap() {
   const {
     plan, setMap,
     startLocation, setStartLocation,
-    endLocation, setEndLocation
+    endLocation, setEndLocation, selectedItinerary
   } = useContext(MIPPath.Context)
   return (
     <MapContainer
@@ -185,9 +186,14 @@ export default function MIPPathMap() {
           />
         </LayersControl.Overlay>
       </LayersControl>
-      {plan?.plan?.itineraries && plan.plan.itineraries.map(it =>
-        <PlanItineraryLayer key={it.id} itinerary={it} />
-      )}
+      {selectedItinerary && 
+        <PlanItineraryLayer key={selectedItinerary.id} selected color={selectedItinerary.color} itinerary={selectedItinerary} />
+      }
+      {!selectedItinerary && plan?.plan?.itineraries && plan.plan.itineraries.reverse().map(it =>
+          <PlanItineraryLayer key={it.id} itinerary={it}
+            color={it.color} />
+        )
+      }
       {startLocation &&
         <PathEndpointLayer title="Partenza" location={startLocation} icon={departureIcon}
           setLocation={setStartLocation} />
