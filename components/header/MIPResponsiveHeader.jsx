@@ -147,7 +147,7 @@ export default function MIPPageHeader(props) {
     const breadcrumbClass = `mip-bg-light ${styles.breadcrumb}`
     const className = `${props.className || ''} ${styles.page_header}`
     return (
-        <header className={className} title="Page title">
+        <header className={className}>
             <div className="mip-md-none mip-bg-dark">
                 <div className="mip-page-section ">
                     <MIPSecondaryHeader className="mip-bg-dark" />
