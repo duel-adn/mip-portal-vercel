@@ -20,7 +20,7 @@
     }
 
     .title {
-        font-size: .875rem;
+        font-size: 1rem;
         font-weight: 600;
     }
 
@@ -28,9 +28,9 @@
         padding: .75rem 0;
         height: fit-content;
         margin-bottom: .75rem;
-        font-size: .75rem;
-        line-height: 1.125rem;
-        color: $mip-gray-text-color;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        color: $mip-text-color;
         text-overflow: ellipsis;
         overflow: hidden;
         a {

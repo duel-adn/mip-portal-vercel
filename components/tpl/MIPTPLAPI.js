@@ -63,5 +63,5 @@ export async function mipFetchPublicTransportArticle(locale, newsId, maxNews) {
     } catch (exc) {
         console.log(exc)
     }
-    return []
+    return {}
 }

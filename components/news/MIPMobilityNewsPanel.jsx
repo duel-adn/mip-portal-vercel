@@ -12,6 +12,7 @@
 
 import Link from 'next/link'
 import styles from './MIPNews.module.scss'
+import useTranslation from 'next-translate/useTranslation'
 import MIPInformationPanel from "../forms/MIPInformationPanel"
 
 function showDate(text) {
@@ -19,6 +20,7 @@ function showDate(text) {
     return theDate.toLocaleDateString('it') || ''
 }
 export default function MIPMobilityNewsPanel(props) {
+    const {t } = useTranslation("common")
     return (
         <MIPInformationPanel className={props.className} title={props.title}>
             {props.newsData && props.newsData.map(data =>
@@ -28,7 +30,7 @@ export default function MIPMobilityNewsPanel(props) {
                     <div className={styles.content} dangerouslySetInnerHTML={{__html: data.description}}></div>
                     <div className={styles.footer}>
                         <div>{data.validitystart + (data.validityend ? ` - ${data.validityend}` : '')}</div>
-                        {/* <Link href="/article"><a>Leggi tutto</a></Link> */}
+                        <Link href={`/mobility/${data.id}`}><a>{t("ReadAll")}</a></Link>
                     </div>
                 </div>
             )}

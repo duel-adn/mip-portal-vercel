@@ -120,6 +120,11 @@ $plan-hover-background: #eee;
         text-align: left;
     }
 
+    .cta:hover,
+    .cta:focus {
+        text-decoration: underline;
+    }
+
     &:hover, &:focus {
         background-color: $plan-hover-background;
     }

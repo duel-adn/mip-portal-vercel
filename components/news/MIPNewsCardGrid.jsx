@@ -23,7 +23,7 @@ function MIPSimpleNewsCard({news}) {
             <div className={styles.content} dangerouslySetInnerHTML={{__html: news.description}}></div>
             <div className={styles.toolbar}>
             <div>{news.validitystart + (news.validityend ? ` - ${news.validityend}` : '')}</div>
-                <Link href={`/tpl/${news.id}`}><a>{t("ReadAll")}</a></Link>
+                <Link href={`${news.id}`}><a>{t("ReadAll")}</a></Link>
             </div>
         </div>
     )
@@ -44,7 +44,7 @@ function MIPNewsCard({news, hideImages}) {
             <div className={styles.footer}>
             <div>{news.validitystart + (news.validityend ? ` - ${news.validityend}` : '')}</div>
 
-                <Link href={`/tpl/${news.id}`}><a>{t("ReadAll")}</a></Link>
+                <Link href={`${news.id}`}><a>{t("ReadAll")}</a></Link>
             </div>
         </div>
     )

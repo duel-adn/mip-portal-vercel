@@ -49,5 +49,6 @@
     "PlannerPage": "Journey planner",
     "Otherwise": "otherwise",
     "GoHome": "Visit the home page",
-    "ImageAlt": "Young woman with binoculars"
+    "NotFoundAlt": "Young woman with binoculars",
+    "ArticleNotFound": "Article not found"
 }

@@ -21,7 +21,7 @@ export default function MIP404Panel(props) {
 
     return (
         <div className={className}>
-            <img src='/images/not-found.svg' alt="donna con binocolo"/>
+            <img src='/images/not-found.svg' alt={t("NotFoundAlt")}/>
             <div className={styles.container}>
                 <h2>{t("SorryNotFound")}</h2>
                 <p>{t("PageSuggestion")}</p>

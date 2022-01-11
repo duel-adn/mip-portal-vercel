@@ -19,7 +19,7 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPInformationPanel from "../forms/MIPInformationPanel"
 
 export default function MIPPublicTransportPanel({className, title, publicTransportData}) {
-    const {t, lang} = useTranslation("common")
+    const {t } = useTranslation("common")
     return (
         <MIPInformationPanel className={className} title={title}>
             {publicTransportData && publicTransportData.map(data =>

@@ -10,6 +10,7 @@
     | 2021/08/10 | Duel   | Prima versione                      |
 */
 
+@import 'react-toastify/scss/minimal';
 @import 'variables';
 @import 'reset';
 @import 'typography';
@@ -22,4 +23,4 @@
 @import 'article-layout';
 @import 'layout';
 @import 'utility';
-@import 'temp-styles'
+@import 'temp-styles';

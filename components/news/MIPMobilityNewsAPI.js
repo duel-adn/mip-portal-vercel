@@ -36,3 +36,25 @@ export async function mipFetchMobilityNewsData({locale}) {
     }
     return []
 }
+
+export async function mipFetchMobilityNewsArticle(locale, id, maxNews) {
+    let news = {}
+    const intId = parseInt(id)
+    try {
+        const allNews = await mipFetchMobilityNewsData(locale)
+        const newsWithType=allNews.map(n => ({
+            ...n,
+            type: "News"
+        }))
+        const reqNews = newsWithType.filter(n => n.id === intId)
+        const others = newsWithType.filter(n => n.id !== intId).slice(0, maxNews)
+        news = {
+            article: reqNews[0],
+            others: others
+        }
+    } catch (exc) {
+        console.log(exc)
+    }
+    return news
+}
+

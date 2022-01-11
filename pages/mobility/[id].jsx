@@ -15,26 +15,23 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPPage from '../../components/page/MIPPage'
 import MIPNewsCardGrid from '../../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel from '../../components/weather/MIPWeatherPanel'
-import MIPBanner from '../../components/page/MIPBanner'
 import { mipFetchWeatherData } from '../../components/weather/MIPWeatherAPI'
-import { mipFetchPublicTransportArticle } from '../../components/tpl/MIPTPLAPI'
+import { mipFetchMobilityNewsArticle } from '../../components/news/MIPMobilityNewsAPI'
 
-export default function Home({ publicTransportData, weatherData }) {
+export default function Home({ news, weatherData }) {
   const { t } = useTranslation("common")
-  const article = publicTransportData?.article
+  const article = news?.article
   const title = article?.title ?? t("ArticleNotFound")
   const content = article?.description ?? t("ArticleNotFound")
-  const others = publicTransportData?.others
+  const others = news?.others
   return (
     <MIPPage.Page className="mip-article-page"
       pageTitle={title}
       breadcrumb={t("GoBack")}>
-      {/* <MIPBanner.Banner className="banner"
-        height="300px" imageUrl="/news-images/article-full.jpg" /> */}
       <header className="article-title">
         <h2>{title}</h2>
         <div>
-          <span className="mip-tag mip-bg-dark-blue">{article?.type}</span>
+          <span className="mip-tag mip-bg-blue">{article?.type}</span>
           {/* <span className="mip-share-cta">Condividi articolo</span> */}
         </div>
       </header>
@@ -54,15 +51,15 @@ export default function Home({ publicTransportData, weatherData }) {
 
 export async function getServerSideProps(context) {
   const weatherData = mipFetchWeatherData(context)
-  const publicTransportData = mipFetchPublicTransportArticle(context.locale, context.query?.id, 4)
+  const news = mipFetchMobilityNewsArticle(context.locale, context.query?.id, 4)
   const pageData = await Promise.all([
     weatherData,
-    publicTransportData,
+    news,
   ]).then(values => (
     values[1]?.article ? {
       props: {
         weatherData: values[0],
-        publicTransportData: values[1],
+        news: values[1],
       }
     } : { notFound: true }
   ))

@@ -49,5 +49,6 @@
     "PassesPage": "Informazioni sui colli alpini",
     "Otherwise": "oppure",
     "GoHome": "Vai alla home page",
-    "ImageAlt": "Giovane donna con binocolo"
+    "NotFoundAlt": "Giovane donna con binocolo",
+    "ArticleNotFound": "Articolo mon trovato"
 }

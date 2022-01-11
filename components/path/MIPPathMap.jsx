@@ -239,7 +239,7 @@ export default function MIPPathMap() {
           )}
         </>
       }
-      {!selectedItinerary && plan?.plan?.itineraries && plan.plan.itineraries.reverse().map(it =>
+      {!selectedItinerary && plan?.plan?.itineraries && plan.plan.itineraries.map(it =>
         <PlanItineraryLayer key={it.id} itinerary={it}
           color={it.color} />
       )
