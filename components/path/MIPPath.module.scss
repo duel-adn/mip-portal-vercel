@@ -12,10 +12,6 @@
 @import '../../styles/variables';
 @import '../../styles/mixin';
 
-$title-row: 1;
-$option-row: 1;
-$input-row: 2;
-
 // Stili per richiesta dati per calcolo percorso
 
 .path_data_dialog {
@@ -177,11 +173,12 @@ $input-row: 2;
         }
         .loading_indicator,
         .submit_button {
+            height: 2.4rem;
             grid-row: 3 / 3;
             grid-column: 2 / 2;
-            width: auto;
+            min-width: auto;
             margin-top: auto;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             margin-right: 1.5rem;
         }
     }

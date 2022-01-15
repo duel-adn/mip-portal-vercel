@@ -21,7 +21,7 @@ import { mipConcatenate } from '../../lib/MIPUtility';
  * @param {String} className nome della classe del div esterno
  * @returns il componente React 
  */
-function MIPPager({className}) {
+function MIPPager({ className }) {
     const finalClassName = `${className || ''} ${styles.mip_pager}`;
     return (
         <div className={finalClassName}>
@@ -40,13 +40,13 @@ function MIPPager({className}) {
  * @param {String} className nome della classe del div esterno
  * @returns il componente React 
  */
-function MIPLoading({className}) {
+function MIPLoading({ className }) {
     return (
         <div className={className}>
             <div className={styles.mip_loading_panel}>
-            <div className={styles.blue}></div>
-            <div className={styles.gray}></div>
-            <div className={styles.red}></div>
+                <div className={styles.blue}></div>
+                <div className={styles.gray}></div>
+                <div className={styles.red}></div>
             </div>
         </div>
     )
@@ -59,27 +59,27 @@ function MIPLoading({className}) {
  * @param {Array} items elementi della legenda 
  * @returns il componente React
  */
-function MIPLegend({className, title, items}) {
+function MIPLegend({ className, title, items }) {
     const finalClassName = `${className || ''} ${styles.traffic_legend}`;
     return (
         <div className={finalClassName}>
             <div className={styles.title}>{title}</div>
             <div className={styles.container}>
 
-                { items && items.map(item => 
-                <div key={item.title} className={styles.item}
-                    style={{ backgroundImage: `url(/map-icons/${item.icon}.svg)` }}>
-                    {item.title}
-                </div>
+                {items && items.map(item =>
+                    <div key={item.title} className={styles.item}
+                        style={{ backgroundImage: `url(/map-icons/${item.icon}.svg)` }}>
+                        {item.title}
+                    </div>
                 )}
             </div>
         </div>
     )
 }
 
-function MIPIconButtton({className, icon, label, onClick}) {
+function MIPIconButtton({ className, icon, label, onClick }) {
     return (
-        <button type="button"className={mipConcatenate(className, styles.icon_btn)} 
+        <button type="button" className={mipConcatenate(className, styles.icon_btn)}
             aria-label={label}
             onClick={onClick}>
             <img className={styles.icon} src={icon} alt={label} aria-hidden={true} />
@@ -87,19 +87,24 @@ function MIPIconButtton({className, icon, label, onClick}) {
     )
 }
 
-function MIPIconTitle({className, icon, title, subtitle, url}) {
-    return (title ? 
-        <div className={mipConcatenate(className, styles.form_title)}>
-            {icon && <img className={styles.icon} src={icon} aria-hidden={true} alt={title} /> }
-            <h3 className={styles.title}>{title}</h3>
-            {subtitle && 
-                url ? 
-                <Link href={url}>
-                    <a>{subtitle}</a>
-                </Link> : <p>{subtitle}</p>
+function MIPIconTitle({ className, icon, title, subtitle, url }) {
+    return (title ?
+        <div className={className}>
+            <div className={styles.icon_title}>
+                {icon && <img className={styles.icon} src={icon} aria-hidden={true} alt={title} />}
+                <h3 className={styles.title}>{title}</h3>
+            </div>
+            {subtitle &&
+                <div className={styles.icon_subtitle}>
+                    {url ?
+                        <Link href={url}>
+                            <a>{subtitle} &gt;</a>
+                        </Link> : <p>{subtitle}</p>
+                    }
+                </div>
             }
         </div>
-    : null)
+        : null)
 }
 
 export default {

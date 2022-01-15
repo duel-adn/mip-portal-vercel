@@ -15,25 +15,34 @@
 
 // Pannello generico per informazioni in formato lista 
 
-.form_title {
+.icon_title {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: .5rem;
-    height: 2.4rem;
     align-items: center;
-    margin-bottom: .7rem;
 
     .title {
-        font-size: 1.25rem;
         font-weight: bold;
+        font-size: 1.25rem;
         line-height: 2.4rem;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .icon {
         width: 1rem;
         height: 1rem;
     }
+}
+
+.icon_subtitle {
+    font-weight: bold;
+    font-size: .9375rem;
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 
 .icon_btn {

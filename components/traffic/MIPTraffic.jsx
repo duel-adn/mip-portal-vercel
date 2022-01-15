@@ -54,12 +54,8 @@ function MIPTrafficPanel({ className, headerClass, listClass, searchable, search
 
     return (
         <div className={finalClassName}>
-            <div className={finalHeaderClass}>
-                <h3 className={styles.title}>{title}</h3>
-                {subtitle &&
-                    <h4 className={styles.subtitle}>{subtitle}</h4>
-                }
-            </div>
+            <MIPForms.IconTitle className={finalHeaderClass} icon="/icons/traffic.svg"
+                title={title} subtitle={subtitle} url="/traffic/" />
             <MIPTrafficEventCardList className={finalListClass} compact={compact}
                 searchable={searchable} searchPlaceholder={searchPlaceholder}
                 trafficEventData={trafficEventData}
@@ -75,11 +71,11 @@ function MIPTrafficPanel({ className, headerClass, listClass, searchable, search
  * @param {Object} un oggetto con i dati dell'evento
  * @returns 
  */
-function MIPTrafficEventCard({ className, compact, event }) {
+function MIPTrafficEventCard({ id, className, compact, event }) {
     const finalClassName = mipConcatenate(className, styles.traffic_event_card)
     const isCompact = compact === undefined ? false : compact
     return ((typeof event === undefined) || (event === null) ? null :
-        <div className={finalClassName} style={{ 'backgroundImage': `url(/traffic-icons/ico-${event.style}.svg)`}}>
+        <div id={id} className={finalClassName} style={{ 'backgroundImage': `url(/traffic-icons/ico-${event.style}.svg)` }}>
             <h5 className={styles.card_title}>{event.road}</h5>
             <div className={styles.container}>
                 {isCompact ?
@@ -161,9 +157,9 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
             <div className={styles.list_container}>
                 <ul >
                     {filteredEvents && filteredEvents.map && filteredEvents.map(event =>
-                        <li key={event.id} className={mipConcatenate(styles.list_item, event.id === selectedEvent?.id ? styles.event_selected : null)} 
+                        <li key={event.id} className={mipConcatenate(styles.list_item, event.id === selectedEvent?.id ? styles.event_selected : null)}
                             onClick={() => setSelectedEvent(event)}>
-                            <MIPTrafficEventCard compact={compact} event={event}/>
+                            <MIPTrafficEventCard id={`te-card-${event.id}`} compact={compact} event={event} />
                         </li>
                     )}
                 </ul>
