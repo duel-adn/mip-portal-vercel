@@ -93,7 +93,7 @@ function MIPPathController({ children, query, url }) {
         }
     }
     const zoomToPoint = (latLon) => {
-        map?.flyTo(latLon, 16)
+        map?.setView(latLon, 16)
     }
     useEffect(() => {
         if (plan?.plan?.mbr && map) {
@@ -149,18 +149,14 @@ function MIPPathDataForm({ className, title, responsive }) {
             onSubmit={onPathSearch}>
             <MIPForms.IconTitle className={styles.title} icon="/icons/path-search.svg" title={title} />
             <MIPPathLocations className={styles.path_data_panel} />
-            <MIPPathModeOptions className={styles.path_data_panel} />
-            <div className={styles.path_data_panel}>
-                <MIPTransitOptions className={styles.additional_options}/>
-                <MIPBicycleOptions className={styles.additional_options} />
-            </div>
-            <div className={styles.path_data_panel}>
-                {planning ?
-                    <MIPForms.Loading className={styles.loading_indicator} />
-                    :
-                    <input className={styles.submit_button} type="submit" value={t("Submit")} />
-                }
-            </div>
+            <MIPPathModeOptions className={styles.mode_options} />
+            <MIPTransitOptions className={styles.additional_options} />
+            <MIPBicycleOptions className={styles.additional_options} />
+            {planning ?
+                <MIPForms.Loading className={styles.loading_indicator} />
+                :
+                <input className={styles.submit_button} type="submit" value={t("Submit")} />
+            }
         </form >
     )
 }
@@ -208,26 +204,24 @@ function MIPPathModeOptions({ className }) {
     const { t } = useTranslation("planner")
     const { planMode, setPlanMode } = useContext(MIPPlannerContext)
     return (
-        <div className={className}>
-            <RadioGroup className={styles.path_options} value={planMode}
-                onChange={setPlanMode} >
-                <RadioGroup.Label className={styles.label}>{t("PlanType")}</RadioGroup.Label>
-                <div className={styles.radio_group}>
-                    {Object.values(MIPPlanMode).map(value =>
-                        <RadioGroup.Option key={value}
-                            value={value}
-                            className={({ active, checked }) => mipConcatenate(styles.option,
-                                active ? styles.active : '',
-                                checked ? styles.checked : '')
-                            }>
-                            <img className={styles.icon} aria-hidden="true"
-                                src={`/path-icons/mode-${value.toLowerCase()}.svg`} alt={t(`ModeLabel.${value}`)} />
-                            <RadioGroup.Label className={styles.radio_label}>{t(`ModeLabel.${value}`)}</RadioGroup.Label>
-                        </RadioGroup.Option>
-                    )}
-                </div>
-            </RadioGroup>
-        </div>
+        <RadioGroup className={styles.className} value={planMode}
+            onChange={setPlanMode} >
+            <RadioGroup.Label className={styles.mode_label}>{t("PlanType")}</RadioGroup.Label>
+            <div className={styles.radio_group}>
+                {Object.values(MIPPlanMode).map(value =>
+                    <RadioGroup.Option key={value}
+                        value={value}
+                        className={({ active, checked }) => mipConcatenate(styles.option,
+                            active ? styles.active : '',
+                            checked ? styles.checked : '')
+                        }>
+                        <img className={styles.icon} aria-hidden="true"
+                            src={`/path-icons/mode-${value.toLowerCase()}.svg`} alt={t(`ModeLabel.${value}`)} />
+                        <RadioGroup.Label className={styles.radio_label}>{t(`ModeLabel.${value}`)}</RadioGroup.Label>
+                    </RadioGroup.Option>
+                )}
+            </div>
+        </RadioGroup>
     )
 }
 
@@ -246,23 +240,24 @@ function MIPTransitOptions({ className }) {
     } = useContext(MIPPlannerContext)
     return (planMode === MIPPlanMode.TRANSIT ? <>
         <div className={className}>
-            <select id="plan-date" value={planDateOption} onChange={e => setPlanDateOption(e.target.value)}>
+            <select id="plan-date" className={styles.option_select}
+                value={planDateOption} onChange={e => setPlanDateOption(e.target.value)}>
                 {Object.values(MIPDateOption).map(k =>
                     <option key={k} value={k}>{t("DateOption." + k)}</option>
                 )}
             </select>
+            {planDateOption !== MIPDateOption.START_NOW &&
+                <div className={styles.additional_option_group}>
+                    <input id="start-time-picker" type="time"
+                        onChange={e => updatePlanTime(e.target.value)}
+                        value={toISOLocalTime(planDate)}
+                    />
+                    <input id="start-date-picker" type="date"
+                        onChange={e => updatePlanDate(e.target.valueAsNumber)}
+                        value={toISOLocalDate(planDate)}
+                    />
+                </div>}
         </div>
-        {planDateOption !== MIPDateOption.START_NOW &&
-            <div className={className}>
-                <input id="start-time-picker" type="time"
-                    onChange={e => updatePlanTime(e.target.value)}
-                    value={toISOLocalTime(planDate)}
-                />
-                <input id="start-date-picker" type="date"
-                    onChange={e => updatePlanDate(e.target.valueAsNumber)}
-                    value={toISOLocalDate(planDate)}
-                />
-            </div>}
     </> : null)
 }
 

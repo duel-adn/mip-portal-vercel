@@ -19,6 +19,8 @@ $input-row: 2;
 // Stili per richiesta dati per calcolo percorso
 
 .path_data_dialog {
+    display: flex;
+    flex-direction: column;
     padding: 1rem 1rem;
     background-color: $mip-blue-background;
     color: $mip-light-color;
@@ -43,17 +45,13 @@ $input-row: 2;
         border-left: 1px dashed $mip-light-color;
     }
 
-    .path_options {
-        grid-column: 1 / -1;
-
-        .label {
-            line-height: 3rem;
-            margin-bottom: .7rem;
-            text-transform: uppercase;
-            font-size: .875rem;
-            font-weight: bold;
-        }    
-    }
+    .mode_label {
+        line-height: 3rem;
+        margin-bottom: .7rem;
+        text-transform: uppercase;
+        font-size: .875rem;
+        font-weight: bold;
+    }    
 
     .radio_group {
         display: grid;
@@ -99,7 +97,6 @@ $input-row: 2;
     }
 
     .additional_options {
-        grid-column: 1 / -1;
         display: flex;
         flex-wrap: wrap;
         //justify-content: space-between;
@@ -116,15 +113,14 @@ $input-row: 2;
             font-size: 1rem;
         }
         input, select {
-            flex-grow: 1;
+            border-radius: 0;
             border-bottom: 1px solid $mip-light-color;
         }
     }
 
     .loading_indicator,
     .submit_button {
-        grid-column: 2/2;
-        width: 70%;
+        min-width: 50%;
         margin: auto;
         height: 3rem;
         margin: 1.5rem auto .75rem auto;
@@ -151,6 +147,9 @@ $input-row: 2;
         justify-content: center;
     }
 
+    .additional_option_group {
+        display: flex;
+    }
 }
 
 // Layout per tablet
@@ -158,19 +157,32 @@ $input-row: 2;
 @media screen and (min-width: $mip-break-mobile) and (max-width: $mip-break-tablet){
     
     .path_data_dialog.responsive {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
         .path_data_panel {
             display: flex;
-            margin-bottom: 0;
+            grid-column: 1 / -1;
+            margin-bottom: .5rem;
         }
         .input_separator {
             display: none;
+        }
+        .additional_options {
+            margin-top: .5rem;
         }
         .swapLocations {
             margin: auto 1rem;
             transform: rotate(-90deg);
         }
+        .loading_indicator,
         .submit_button {
+            grid-row: 3 / 3;
+            grid-column: 2 / 2;
             width: auto;
+            margin-top: auto;
+            margin-bottom: 1rem;
+            margin-right: 1.5rem;
         }
     }
 }
