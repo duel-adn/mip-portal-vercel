@@ -21,11 +21,11 @@
     "WeatherConditions": "Condizioni meteo",
     "ArpaPiemonte": "In collaborazione con Arpa Piemonte",
     "WeatherCondError": "Condizioni meteo non disponibili. Attendere qualche minuto e riprovare.",
-    "PassesTitle": "I colli alpini in piemonte",
+    "PassesTitle": "I colli alpini in Piemonte",
     "PassesTitleShort": "Colli alpini",
     "DiscoverPasses": "Scopri informazioni su colli e trafori",
     "PassSearch": "Seleziona un colle",
-    "PassesSubitle": "L’apertura dei principali colli alpini piemontesi",
+    "PassesSubtitle": "L’apertura dei principali colli alpini piemontesi",
     "TrainsTimetableTitle": "Orario dei treni",
     "TrainsTimetableSubitle": "Consulta gli orari della rete ferroviaria del Piemonte",
     "FlightScheduleTitle": "Orario dei voli",
@@ -50,5 +50,5 @@
     "Otherwise": "oppure",
     "GoHome": "Vai alla home page",
     "NotFoundAlt": "Giovane donna con binocolo",
-    "ArticleNotFound": "Articolo mon trovato"
+    "ArticleNotFound": "Articolo non trovato"
 }
