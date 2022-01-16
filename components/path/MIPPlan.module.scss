@@ -141,8 +141,11 @@ $plan-hover-background: #eee;
 // Pannello messaggi (usato solo per errori
 
 .plan_msg_panel {
+    padding: $plan-cell-padding-y $plan-cell-padding-x;
+
     color: $mip-error-color;
-    text-align: center;
+    font-size: 1rem;
+    text-align: left;
     font-weight: bold;
 }
 
