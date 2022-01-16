@@ -20,7 +20,7 @@ const serviceData = [
     {
         id: 1,
         title: "PassesTitle",
-        subtitle: "PassesSubitle",
+        subtitle: "PassesSubtitle",
         icon: "/icons/colli-alpini.svg",
         url: "/passes",
         external: false

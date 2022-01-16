@@ -110,7 +110,7 @@ export default function MIPAddressAutocompleteInput({ id, icon, placeholder, val
         toastId.current = toast(t("UserPosition"), { autoClose: false });
         mipGetUserPosition(lang, position => {
             if (position.error) {
-                const message = t("PositionError." + position.error.errorCode)
+                const message = t("error:" + position.error.mipErrorCode)
                 toast.update(toastId.current, { type: toast.TYPE.ERROR, render: message, autoClose: 5000 })
             } else {
                 toast.dismiss(toastId.current)
