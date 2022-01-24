@@ -15,24 +15,26 @@ import useTranslation from 'next-translate/useTranslation'
 import MIPPage from '../../components/page/MIPPage'
 import MIPNewsCardGrid from '../../components/news/MIPNewsCardGrid'
 import MIPWeatherPanel from '../../components/weather/MIPWeatherPanel'
-import MIPBanner from '../../components/page/MIPBanner'
 import { mipFetchWeatherData } from '../../components/weather/MIPWeatherAPI'
 import { mipFetchPublicTransportArticle } from '../../components/tpl/MIPTPLAPI'
 
 export default function Home({ publicTransportData, weatherData }) {
   const { t } = useTranslation("common")
   const article = publicTransportData?.article
-  const title = article?.title ?? t("ArticleNotFound")
+  const title = t("PTNewsTitle")
+  const newsTitle = article?.title ?? t("ArticleNotFound")
   const content = article?.description ?? t("ArticleNotFound")
   const others = publicTransportData?.others
   return (
     <MIPPage.Page className="mip-article-page"
       pageTitle={title}
+      title={title}
+      titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
       {/* <MIPBanner.Banner className="banner"
         height="300px" imageUrl="/news-images/article-full.jpg" /> */}
       <header className="article-title">
-        <h2>{title}</h2>
+        <h2>{newsTitle}</h2>
         <div>
           <span className="mip-tag mip-bg-dark-blue">{article?.type}</span>
           {/* <span className="mip-share-cta">Condividi articolo</span> */}

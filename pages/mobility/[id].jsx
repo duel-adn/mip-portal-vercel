@@ -18,18 +18,21 @@ import MIPWeatherPanel from '../../components/weather/MIPWeatherPanel'
 import { mipFetchWeatherData } from '../../components/weather/MIPWeatherAPI'
 import { mipFetchMobilityNewsArticle } from '../../components/news/MIPMobilityNewsAPI'
 
-export default function Home({ news, weatherData }) {
+export default function MobilityDetails({ news, weatherData }) {
   const { t } = useTranslation("common")
   const article = news?.article
-  const title = article?.title ?? t("ArticleNotFound")
+  const title = t("MobilityNewsTitle")
+  const newsTitle = article?.title ?? t("ArticleNotFound")
   const content = article?.description ?? t("ArticleNotFound")
   const others = news?.others
   return (
     <MIPPage.Page className="mip-article-page"
       pageTitle={title}
+      title={title}
+      titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
       <header className="article-title">
-        <h2>{title}</h2>
+        <h2>{newsTitle}</h2>
         <div>
           <span className="mip-tag mip-bg-blue">{article?.type}</span>
           {/* <span className="mip-share-cta">Condividi articolo</span> */}
