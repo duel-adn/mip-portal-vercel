@@ -23,21 +23,39 @@ const initialContext = {
     map: null
 }
 
+function createEventId(event) {
+    return `traffic-${event.id}`
+}
 const MIPTrafficContext = createContext(initialContext)
+
+const createEventInfo = (event, openPopup) => ({ event, openPopup })
 
 function MIPTrafficControlller({eventData, children}) {
     const [trafficEventData, setTrafficEventData] = useState(eventData)
     const [map, setMap] = useState(null)
-    const [selectedEvent, setSelectedEvent] = useState(null)
+    const [selectedEventInfo, setSelectedEventInfo] = useState(createEventInfo(null, false))
+    const eventPopupRef = useRef()
     useEffect(() => {
-        if (selectedEvent?.id && map) {
-            map.panTo([selectedEvent.lat, selectedEvent.lng])
+        if (selectedEventInfo?.event && map) {
+            if (selectedEventInfo?.openPopup) {
+                const element = document.getElementById(createEventId(selectedEventInfo.event))
+                element?.scrollIntoView(false)
+                eventPopupRef.current?.openOn(map)
+            } else {
+                map.closePopup()
+                map.panTo([selectedEventInfo.event.lat, selectedEventInfo.event.lng])
+            }
         }
-    }, [selectedEvent])
+    })
+    const selectEvent = (event, openPopup) => {
+        console.log(event)
+        setSelectedEventInfo(createEventInfo(event, openPopup))
+    }
     const context = {
         trafficEventData,
         map, setMap,
-        setSelectedEvent, selectedEvent
+        selectedEventInfo, selectEvent,
+        eventPopupRef
     }
     return (
         <MIPTrafficContext.Provider value={context}>
@@ -141,7 +159,7 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
     const onInputChange = mipDebounce((event) => setFilterText(event.target.value.toLowerCase()))
     const onInputKey = (event) => event.key === 'Escape' && clearInput()
     const clearInput = () => { inputElementRef.current.value = ''; setFilterText(''); inputElementRef.current.focus() }
-    const { selectedEvent, setSelectedEvent } = useContext(MIPTrafficContext)
+    const { selectedEventInfo, selectEvent } = useContext(MIPTrafficContext)
     return (
         <div className={finalClassName}>
             {searchable &&
@@ -157,9 +175,9 @@ function MIPTrafficEventCardList({ className, searchable, searchPlaceholder, com
             <div className={styles.list_container}>
                 <ul >
                     {filteredEvents && filteredEvents.map && filteredEvents.map(event =>
-                        <li key={event.id} className={mipConcatenate(styles.list_item, event.id === selectedEvent?.id ? styles.event_selected : null)}
-                            onClick={() => setSelectedEvent(event)}>
-                            <MIPTrafficEventCard id={`te-card-${event.id}`} compact={compact} event={event} />
+                        <li key={event.id} className={mipConcatenate(styles.list_item, event.id === selectedEventInfo?.event?.id ? styles.event_selected : null)}
+                            onClick={() => selectEvent(event, false)}>
+                            <MIPTrafficEventCard id={createEventId(event)} compact={compact} event={event} />
                         </li>
                     )}
                 </ul>
