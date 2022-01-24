@@ -28,7 +28,7 @@ const serviceData = [
     {
         id: 2,
         title: "TrainsTimetableTitle",
-        subtitle: "TrainsTimetableSubitle",
+        subtitle: "TrainsTimetableSubtitle",
         icon: "/icons/train-timetable.svg",
         url: "http://www.viaggiatreno.it/viaggiatrenonew/index.jsp?idreg=3",
         external: true
@@ -36,7 +36,7 @@ const serviceData = [
     {
         id: 3,
         title: "FlightScheduleTitle",
-        subtitle: "FlightScheduleSubitle",
+        subtitle: "FlightScheduleSubtitle",
         icon: "/icons/flight-timetable.svg",
         url: "https://www.aeroportoditorino.it/it",
         external: true
