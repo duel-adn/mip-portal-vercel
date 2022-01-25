@@ -26,7 +26,7 @@ export default function Planner({query}) {
       titleClassName="mip-bg-blue"
       breadcrumb={t("GoBack")}>
       <MIPPath.Controller title={t("PlanTitle")} query={query}>
-        <section className="path-results">
+        <section className="mip-path-results">
           <MIPPath.DataForm className="mip-tl-rounded-corners"/>
           <MIPPlan.Panel />
         </section>
