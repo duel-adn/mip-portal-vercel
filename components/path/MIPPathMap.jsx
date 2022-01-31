@@ -212,7 +212,7 @@ export default function MIPPathMap() {
     <MapContainer
       tap={false}
       center={[45.052237, 7.515388]} zoom={9}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       whenCreated={setMap}
       style={{ flex: "1 1 100%" }}
     >

@@ -60,7 +60,7 @@ export default function MIPPassMap({passData}) {
         return (
     <MapContainer 
       center={[45.052237, 7.515388]} zoom={8} 
-      scrollWheelZoom={false} 
+      scrollWheelZoom={true} 
       style={{flex: "1 1 100%"}}
       tap={false}
     >

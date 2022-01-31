@@ -52,7 +52,7 @@ export default function MIPTrafficMap() {
     <MapContainer
       tap={false}
       center={[45.052237, 7.515388]} zoom={9}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       style={{ flex: "1 1 100%" }}
       whenCreated={setMap}
     >
