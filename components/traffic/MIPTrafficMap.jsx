@@ -55,6 +55,7 @@ export default function MIPTrafficMap() {
       scrollWheelZoom={true}
       style={{ flex: "1 1 100%" }}
       whenCreated={setMap}
+      preferCanvas= {true}
     >
       <TileLayer
         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
