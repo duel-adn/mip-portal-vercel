@@ -58,7 +58,7 @@ export default function MIPTrafficMap() {
     >
       <TileLayer
         attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}map.5t.torino.it/light-new/{z}/{x}/{y}"
+        url="https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWlwNXQiLCJhIjoiY2t6M3cxdnNpMDN1eDJ2dXNuanh4c2c2biJ9.SE5K4iqgAcbFKHFSH0Q6tw"
       />
       {
         trafficEventData && trafficEventData.map(evt =>
