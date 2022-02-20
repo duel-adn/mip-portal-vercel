@@ -223,7 +223,7 @@ $plan-hover-background: #eee;
 .stop_panel,
 .step_panel {
     display: grid;
-    grid-template-columns: $plan-icon-col-width max-content 1fr;
+    grid-template-columns: $plan-icon-col-width $plan-time-col-width 1fr;
     align-items: center;
 
     &:focus,
@@ -261,6 +261,7 @@ $plan-hover-background: #eee;
 
     .time {
         grid-column:  2 / 2;
+        text-align: end;
     }
 
     .stop_name {
