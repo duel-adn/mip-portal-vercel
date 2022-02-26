@@ -54,6 +54,7 @@ function MIPPathController({ children, query, url }) {
     const [planDate, setPlanDate, updatePlanDate, updatePlanTime] = useDateTime(Date.now() + 5 * 60000)
     const [bikeOptions, setBikeOptions] = useState(mipOTPParseBicycleOptions(query))
     const [map, setMap] = useState(null)
+    const [focusedItinerary, setFocusedItinerary] = useState(null)
     const [selectedItinerary, setSelectedItinerary] = useState(null)
     const swapLocations = () => {
         const temp = startLocation
@@ -69,6 +70,7 @@ function MIPPathController({ children, query, url }) {
             setPlanning(true)
             setPlan(null)
             setSelectedItinerary(null)
+            setFocusedItinerary(null)
             try {
                 if (url) {
                     Router.push({
@@ -98,7 +100,10 @@ function MIPPathController({ children, query, url }) {
     useEffect(() => {
         if (plan?.plan?.mbr && map) {
             map?.fitBounds(plan.plan.mbr)
+            if (plan?.plan?.itineraries?.length) {
+                setFocusedItinerary(plan.plan.itineraries[0])
         }
+}
     }, [plan])
     useEffect(() => {
         if (selectedItinerary) {
@@ -114,6 +119,7 @@ function MIPPathController({ children, query, url }) {
         planDate, updatePlanDate, updatePlanTime,
         bikeOptions, setBikeOptions,
         selectedItinerary, setSelectedItinerary,
+        focusedItinerary, setFocusedItinerary,
         swapLocations, recalcPathPlan,
         zoomToPoint, setMap
     }

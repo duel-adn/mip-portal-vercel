@@ -15,10 +15,10 @@ import styles from "./MIPPlan.module.scss"
 
 import { useContext, useEffect, useMemo, useRef, useState } from "react"
 
-import { MapContainer, Marker, Popup, TileLayer, GeoJSON, WMSTileLayer, LayersControl, Polyline, useMapEvents } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, Pane, WMSTileLayer, LayersControl, Polyline, useMapEvents } from 'react-leaflet'
 import MIPPath from "./MIPPath"
 import MIPPlan from './MIPPlan'
-import { mipReverseGeocode } from '../../lib/MIPPlannerAPI'
+import { MIPLegColor, mipReverseGeocode } from '../../lib/MIPPlannerAPI'
 
 const stopIcon = L.icon({
   iconUrl: '/path-icons/map-stop.svg',
@@ -146,7 +146,7 @@ function LocationMarker({ title, icon, setStartLocation, setEndLocation }) {
 function PlanItineraryLayer({ itinerary, selected, color }) {
   return (
     itinerary?.legs && itinerary.legs.map(leg =>
-      <Polyline key={leg.id} positions={leg.rawGeometry}
+      <Polyline key={leg.id} positions={leg.rawGeometry} pa
         pathOptions={
           {
             color: selected ? leg.routeColor ?? color : color,
@@ -206,7 +206,7 @@ export default function MIPPathMap() {
   const {
     plan, setMap,
     startLocation, setStartLocation,
-    endLocation, setEndLocation, selectedItinerary
+    endLocation, setEndLocation, selectedItinerary, focusedItinerary
   } = useContext(MIPPath.Context)
   return (
     <MapContainer
@@ -232,16 +232,23 @@ export default function MIPPathMap() {
         </LayersControl.Overlay>
       </LayersControl>
       {selectedItinerary &&
-        <>
+        <Pane name="selected-itinerary" style={{ zIndex: 499 }}>
           <PlanItineraryLayer key={selectedItinerary.id} selected color={selectedItinerary.color} itinerary={selectedItinerary} />
           {selectedItinerary?.legs?.map(leg =>
             <LegStopsLayer key={leg.id} leg={leg} />
           )}
-        </>
+        </Pane>
+      }
+      {!selectedItinerary && focusedItinerary &&
+        <Pane name="focused-itinerary" style={{ zIndex: 498 }}>
+         <PlanItineraryLayer key={focusedItinerary.id} color={MIPLegColor.SelectedPath} itinerary={focusedItinerary} />
+        </Pane>
       }
       {!selectedItinerary && plan?.plan?.itineraries && plan.plan.itineraries.map(it =>
+        (it.id !== focusedItinerary?.id) ?
         <PlanItineraryLayer key={it.id} itinerary={it}
-          color={it.color} />
+          color={focusedItinerary?.id === it.id ? MIPLegColor.SelectedPath : MIPLegColor.OtherPath} />
+          :null
       )
       }
       {startLocation &&

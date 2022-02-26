@@ -19,6 +19,7 @@ import { mipConcatenate } from "../../lib/MIPUtility"
 import { I18NNamespace, translateDistance, translateDuration, translateUnixDateTime, translateUnixTime } from "../../lib/MIPI18N"
 
 import MIPPath from "./MIPPath"
+import { MIPLegColor } from '../../lib/MIPPlannerAPI'
 import { MIPErrorCode } from "../../lib/MIPErrorHandling"
 
 /**
@@ -84,12 +85,20 @@ function MIPPlanDescriptionPanel({ className, plan, onClick }) {
  * @returns un elemento React con i dati degli itinerari
  */
 function MIPItinerariesPanel({ plan }) {
-    const { t } = useTranslation(I18NNamespace.PLANNER)
+    const { focusedItinerary, setFocusedItinerary } = useContext(MIPPath.Context)
     const { selectedItinerary, setSelectedItinerary } = useContext(MIPPath.Context)
     const itineraries = plan?.itineraries
+    const selectItinerary = (it) => {
+        if (focusedItinerary?.id === it.id) {
+            setSelectedItinerary(it)
+        } else {
+            setFocusedItinerary(it)
+        }
+    }
     return (<>
         {(itineraries?.length > 0) && itineraries.map((itn, idx) =>
-            <MIPItineraryDescriptionPanel key={itn.is ?? idx} itinerary={itn} color={itn.color} onClick={() => setSelectedItinerary(itn)} />
+            <MIPItineraryDescriptionPanel key={itn.is ?? idx} itinerary={itn} 
+                color={focusedItinerary?.id === itn.id ?  MIPLegColor.SelectedPath : MIPLegColor.OtherPath} onClick={() => selectItinerary(itn)} />
         )}
         <MIPItineraryDetailsPanel plan={plan} itinerary={selectedItinerary} open onClick={() => setSelectedItinerary(null)} />
     </>)
@@ -104,6 +113,12 @@ function MIPItinerariesPanel({ plan }) {
  */
 function MIPItineraryDescriptionPanel({ itinerary, open, color, onClick }) {
     const { t, lang } = useTranslation(I18NNamespace.PLANNER)
+    const { focusedItinerary, setFocusedItinerary } = useContext(MIPPath.Context)
+    const { selectedItinerary, setSelectedItinerary } = useContext(MIPPath.Context)
+    const selectItinerary= (it) => {
+        setFocusedItinerary(it)
+        setSelectedItinerary(it)
+    }
     return itinerary ?
         <div className={styles.itinerary_header}
             style={color ? { borderLeft: `6px solid ${color}` } : null}
@@ -134,7 +149,7 @@ function MIPItineraryDescriptionPanel({ itinerary, open, color, onClick }) {
                 <div>{translateDistance(lang, itinerary.distance_m)}</div>
             </div>
             {!open &&
-                <div className={styles.cta}>{t("Details")}</div>
+                <button className={styles.cta} onClick={() => selectItinerary(itinerary)}>{t("Details")}</button>
             }
         </div>
         : null
