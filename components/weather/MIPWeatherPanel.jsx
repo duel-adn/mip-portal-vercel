@@ -33,7 +33,7 @@ export default function MIPWeatherPanel(props) {
         <div className={`${props.className || ""} ${styles.weather_panel}`}>
             <div className={styles.title_container}>
                 <h4>{t("WeatherConditions")}</h4>
-                <p>{t("ArpaPiemonte")}</p>
+                <a href="https://www.arpa.piemonte.it/rischi_naturali/snippets_arpa/meteo/" rel="noopener noreferrer">{t("ArpaPiemonte")}</a>
             </div>
             {props.weatherData?.length === 0 ?
                 <div className={styles.card_list_container}>{t("WeatherCondError")}</div>
